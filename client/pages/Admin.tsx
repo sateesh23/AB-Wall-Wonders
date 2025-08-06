@@ -46,6 +46,9 @@ interface ProjectForm {
 
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Get Sanity Studio URL from environment or use default
+  const sanityStudioUrl = import.meta.env.VITE_SANITY_STUDIO_URL || 'https://g5scqowd.sanity.studio/';
   const [projects, setProjects] = useState<ProjectData[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'overview' | 'projects' | 'settings'>('overview');
@@ -383,7 +386,7 @@ export default function Admin() {
                   </Button>
                   <Button
                     variant="outline"
-                    onClick={() => window.open('https://g5scqowd.sanity.studio/', '_blank')}
+                    onClick={() => window.open(sanityStudioUrl, '_blank')}
                     className="h-20 flex flex-col space-y-2"
                   >
                     <Settings className="w-6 h-6" />
@@ -653,7 +656,7 @@ export default function Admin() {
                     <h3 className="font-medium">Sanity Studio</h3>
                     <p className="text-sm text-gray-600">Access your content management system</p>
                   </div>
-                  <Button onClick={() => window.open('https://g5scqowd.sanity.studio/', '_blank')}>
+                  <Button onClick={() => window.open(sanityStudioUrl, '_blank')}>
                     Open Studio
                   </Button>
                 </div>
