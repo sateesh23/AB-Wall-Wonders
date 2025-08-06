@@ -48,12 +48,14 @@ VITE_SANITY_TOKEN=your_sanity_write_token
 ### Option A: Deploy to Sanity's Hosting (Recommended)
 
 1. **Login to Sanity**
+
    ```bash
    cd sanity-backend
    npx sanity login
    ```
 
 2. **Deploy Studio**
+
    ```bash
    npx sanity deploy
    ```
@@ -65,6 +67,7 @@ VITE_SANITY_TOKEN=your_sanity_write_token
 ### Option B: Self-Host Sanity Studio
 
 1. **Build Studio**
+
    ```bash
    cd sanity-backend
    npm run build
@@ -91,11 +94,13 @@ VITE_SANITY_TOKEN=your_sanity_write_token
 ### Admin Panel Features
 
 1. **Overview Tab**
+
    - Project statistics
    - Service breakdown
    - Quick actions
 
 2. **Projects Tab**
+
    - Add new projects
    - Edit existing projects
    - Upload project images
@@ -146,11 +151,13 @@ VITE_SANITY_TOKEN=your_sanity_write_token
 ### For Non-Technical Users
 
 **Option 1: Use Admin Panel** (Recommended for simple operations)
+
 1. Go to `your-domain.com/admin`
 2. Enter password: `abwallwonders2025`
 3. Use "Projects" tab to manage content
 
 **Option 2: Use Sanity Studio** (Advanced features)
+
 1. Go to `https://g5scqowd.sanity.studio/`
 2. Login with Sanity account
 3. Full CMS capabilities
@@ -168,16 +175,19 @@ VITE_SANITY_TOKEN=your_sanity_write_token
 ### Admin Panel Issues
 
 **Problem**: Admin page shows 404
+
 - **Solution**: Clear browser cache, check routing configuration
 
 **Problem**: Can't login to admin
-- **Solution**: 
+
+- **Solution**:
   - Current password: `abwallwonders2025`
   - Clear localStorage: `localStorage.clear()`
   - Check browser console for errors
 
 **Problem**: Projects not showing
-- **Solution**: 
+
+- **Solution**:
   - Check Sanity connection in admin panel
   - Add projects via Sanity Studio first
   - Verify project schema matches
@@ -185,18 +195,21 @@ VITE_SANITY_TOKEN=your_sanity_write_token
 ### Sanity Studio Issues
 
 **Problem**: Can't access Sanity Studio
-- **Solution**: 
+
+- **Solution**:
   - Verify URL: `https://g5scqowd.sanity.studio/`
   - Ensure you have Sanity account access
   - Check if studio is deployed
 
 **Problem**: Can't create projects
+
 - **Solution**:
   - Verify you have write permissions
   - Check required fields are filled
   - Ensure images are properly uploaded
 
 **Problem**: Changes not appearing on website
+
 - **Solution**:
   - Wait 1-2 minutes for CDN update
   - Hard refresh browser (Ctrl+F5)
@@ -228,11 +241,13 @@ VITE_SANITY_TOKEN=your_sanity_write_token
 ### Regular Tasks
 
 1. **Backup Content**
+
    - Export project data from Sanity
    - Store images separately
    - Document admin credentials
 
 2. **Update Dependencies**
+
    ```bash
    npm update
    cd sanity-backend && npm update
@@ -273,11 +288,13 @@ VITE_SANITY_TOKEN=your_sanity_write_token
 ## 🚀 Final Production URLs
 
 ### Live URLs
+
 - **Website**: `https://your-domain.com`
 - **Admin Panel**: `https://your-domain.com/admin`
 - **Sanity Studio**: `https://g5scqowd.sanity.studio/`
 
 ### Credentials
+
 - **Admin Password**: `abwallwonders2025`
 - **Sanity Login**: Your Sanity account credentials
 
@@ -286,11 +303,13 @@ VITE_SANITY_TOKEN=your_sanity_write_token
 ## 📞 Support Information
 
 ### For Technical Issues
+
 - Check browser console for errors
 - Review deployment logs
 - Test on different devices/browsers
 
 ### For Content Management
+
 - Use admin panel for simple tasks
 - Use Sanity Studio for advanced features
 - Regular backups recommended
@@ -316,17 +335,20 @@ You'll know everything is working when:
 ## 🔮 Future Enhancements
 
 ### Authentication Improvements
+
 - Implement OAuth (Google, GitHub)
 - Add role-based permissions
 - Enable 2FA for admin access
 
 ### Feature Additions
+
 - Bulk project import/export
 - Advanced analytics dashboard
 - Email notifications for new projects
 - API webhooks for integrations
 
 ### Performance Optimizations
+
 - Image compression pipeline
 - CDN optimization
 - Caching strategies

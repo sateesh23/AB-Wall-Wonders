@@ -24,7 +24,7 @@ const queryClient = new QueryClient();
 // Layout component that conditionally renders Header and Footer
 const Layout = () => {
   const location = useLocation();
-  const isAdminPage = location.pathname === '/admin';
+  const isAdminPage = location.pathname === "/admin";
 
   return (
     <div className="relative z-10">

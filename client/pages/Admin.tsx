@@ -49,7 +49,8 @@ export default function Admin() {
 
   // Get Sanity Studio URL from environment or use default
   const sanityStudioUrl =
-    import.meta.env.VITE_SANITY_STUDIO_URL || "https://ab-wall-wonders.sanity.studio/";
+    import.meta.env.VITE_SANITY_STUDIO_URL ||
+    "https://ab-wall-wonders.sanity.studio/";
   const [projects, setProjects] = useState<ProjectData[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<
