@@ -1,116 +1,143 @@
-# 🎯 AB Wall Wonders - Admin Panel Guide
+# 🔐 AB Wall Wonders - Admin Dashboard Guide
 
-## 🔗 **Admin Access Link**
-**Website**: http://localhost:8080/admin  
-**Password**: `abwallwonders2024`
+## 🔗 **Admin Access**
+- **Website**: https://ab-wall-wonders.vercel.app/admin  
+- **Password**: `abwallwonders2025`
+- **Sanity Studio**: https://g5scqowd.sanity.studio/
 
 ---
 
-## 📋 **How to Add Projects (Simple Steps)**
+## 📋 **Admin Dashboard Features**
 
 ### **Step 1: Login**
-1. Go to: http://localhost:8080/admin
-2. Enter password: `abwallwonders2024`
+1. Go to: `/admin` route on your website
+2. Enter password: `abwallwonders2025`
 3. Click "Access Admin Panel"
 
-### **Step 2: Add New Project**
-1. Click **"Projects"** tab
-2. Click **"Add New Project"** button
-3. Fill in all the details:
+### **Step 2: Dashboard Overview**
+- **Project Statistics**: Total, featured, and completed projects
+- **Service Breakdown**: Wallpapers, blinds, and flooring counts
+- **Quick Actions**: Add projects, view website, access Sanity Studio
 
-#### **Required Information:**
-- **Project Name**: e.g., "3D wall papers in bedroom"
-- **Customer Name**: e.g., "3d wall papers"  
-- **Location**: e.g., "Bobbili"
-- **Service Category**: Choose from dropdown (Wallpapers/Blinds/Flooring)
-- **Description**: Describe the project work done
-- **Project Image**: Upload main project photo
-- **Completion Date**: When the project was finished
+### **Step 3: Project Management**
 
-#### **Optional Information:**
-- **Subcategory**: e.g., "3d wall papers"
-- **Featured Project**: Check if you want it on homepage
-- **Status**: Usually "Completed"
+#### ➕ **Adding New Projects**
+1. Click **"Add New Project"** button
+2. Fill in required fields:
+   - Project Name (e.g., "Modern Bedroom Wallpaper")
+   - Customer Name (e.g., "Rajesh Kumar")
+   - Location (e.g., "Vijayawada, Benz Circle")
+   - Service Category (Wallpapers/Blinds/Flooring)
+   - Subcategory (e.g., "3D Wallpaper")
+   - Description (detailed project info)
+   - Completion Date
+3. Upload project image
+4. Mark as "Featured" if needed
+5. Click **"Create Project"**
 
-### **Step 3: Save Project**
-1. Click **"Create Project"**
-2. Wait for green success message
-3. Project appears on website instantly!
-
----
-
-## 🎯 **Managing Existing Projects**
-
-### **Edit Project:**
-1. Find project in the list
-2. Click **"Edit"** button (pencil icon)
-3. Change any details
+#### ✏️ **Editing Projects**
+1. Click edit icon next to any project
+2. Modify any field
+3. Upload new image if needed
 4. Click **"Update Project"**
 
-### **Delete Project:**
-1. Find project in the list  
-2. Click **"Delete"** button (trash icon)
-3. Confirm deletion
-4. Project removed from website
-
-### **Make Project Featured:**
-- Check **"Featured Project"** box to show on homepage
-- Uncheck to remove from homepage
+#### 🗑️ **Deleting Projects**
+1. Click delete icon next to project
+2. Confirm deletion
+3. Project removed from both admin and website
 
 ---
 
-## 📊 **Dashboard Overview**
+## 🎛️ **Content Management System**
 
-The dashboard shows:
-- **Total Projects**: How many projects you've added
-- **Featured Projects**: How many show on homepage  
-- **Service Breakdown**: Projects by type (Wallpapers/Blinds/Flooring)
-- **Status Indicator**: Shows connection to system
+### **Sanity.io Integration**
+- **Admin Dashboard**: Local project management
+- **Sanity Studio**: Professional CMS for advanced editing
+- **Dual Storage**: Automatic sync between local and Sanity.io
+- **Image Hosting**: Sanity CDN for optimized image delivery
 
----
-
-## 💡 **Tips for Best Results**
-
-### **Photos:**
-- Upload high-quality project photos
-- Show the finished work clearly
-- Use good lighting for best appearance
-
-### **Descriptions:**
-- Describe what work was done
-- Mention special features or challenges
-- Keep it professional and informative
-
-### **Featured Projects:**
-- Mark your best work as "Featured"
-- Featured projects appear on homepage
-- Attracts more customer attention
+### **Accessing Sanity Studio**
+1. Click **"Sanity Studio"** button in admin dashboard
+2. Opens: https://g5scqowd.sanity.studio/
+3. Login with your Sanity account
+4. Manage content with professional CMS interface
 
 ---
 
-## 🌟 **What Happens After Adding Projects**
+## 📊 **Dashboard Sections**
 
-1. **Instant Display**: Projects appear on website immediately
-2. **Homepage**: Featured projects show on main page
-3. **Projects Page**: All projects display with filtering
-4. **Professional Look**: Clean, organized project gallery
+### **📈 Overview Tab**
+- Project statistics and metrics
+- Service breakdown charts
+- Quick action buttons
+- Business performance indicators
+
+### **📁 Projects Tab**
+- Complete project management
+- Add/Edit/Delete functionality
+- Project status tracking
+- Image upload and management
+
+### **⚙️ Settings Tab**
+- Sanity Studio access
+- Website preview links
+- Contact information display
+- System status indicators
 
 ---
 
-## 🆘 **If You Need Help**
+## 🔧 **Technical Information**
 
-- **Status Shows "Offline"**: Contact technical support
-- **Can't Upload Images**: Check image file size (under 5MB)
-- **Forgot Password**: Contact administrator
-- **Technical Issues**: Get support from developer
+### **Data Storage**
+- **Primary**: Sanity.io cloud CMS
+- **Backup**: Local browser storage
+- **Images**: Sanity CDN with automatic optimization
+- **Sync**: Real-time between admin and CMS
+
+### **Security**
+- **Password Protection**: `abwallwonders2025`
+- **Session Management**: Browser localStorage
+- **CMS Access**: Sanity.io authentication
+- **Data Backup**: Automatic cloud sync
+
+### **Features**
+- ✅ **Real-time Updates**: Changes appear immediately on website
+- ✅ **Image Optimization**: Automatic compression and CDN delivery
+- ✅ **Mobile Responsive**: Admin panel works on all devices
+- ✅ **Offline Capable**: Local storage fallback when offline
 
 ---
 
-## 🎉 **You're All Set!**
+## 📞 **Support & Contact**
 
-Your admin panel is ready to use. Just:
-1. **Login** with the link and password
-2. **Add projects** with photos and details  
-3. **Watch them appear** on your website instantly!
+### **Admin Issues**
+- **Password Problems**: Contact development team
+- **Technical Support**: Repository issues or email
+- **Content Updates**: Use admin dashboard or Sanity Studio
 
-**No technical knowledge needed** - just fill in the forms and upload photos! 🚀
+### **Business Contact**
+- **Phone**: +91 86887 23648
+- **Email**: abwallwonders@gmail.com
+- **WhatsApp**: Available through website
+
+---
+
+## 🔄 **Regular Maintenance**
+
+### **Weekly Tasks**
+- [ ] Add new completed projects
+- [ ] Update project images
+- [ ] Review featured projects
+- [ ] Check contact form submissions
+
+### **Monthly Tasks**
+- [ ] Backup project data
+- [ ] Review website analytics
+- [ ] Update service information
+- [ ] Check broken links or images
+
+---
+
+**🏡 AB Wall Wonders Admin Portal - Manage Your Business Content Efficiently**
+
+*For technical support or questions about the admin dashboard, contact the development team.*
