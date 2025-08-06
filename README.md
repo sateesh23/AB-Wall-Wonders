@@ -7,11 +7,13 @@ A modern, professional website for AB Wall Wonders - your trusted partner for pr
 ## 🌟 Key Features
 
 ### 🎨 **Services Showcase**
+
 - **Premium Wallpapers**: 8 specialized types (3D, Botanical, Geometric, Mural, etc.)
 - **Quality Flooring**: Vinyl flooring, Artificial grass, Cushion mats
 - **Window Blinds**: 8 varieties (Roller, Zebra, Roman, Wooden, Bamboo, etc.)
 
 ### 💼 **Business Features**
+
 - **Complete Portfolio**: 100+ completed projects showcase
 - **Admin Dashboard**: Full project management system with Sanity.io CMS
 - **Mobile-Optimized**: Responsive design for all devices
@@ -19,6 +21,7 @@ A modern, professional website for AB Wall Wonders - your trusted partner for pr
 - **Professional Gallery**: Before/after project images
 
 ### 🛠️ **Technical Excellence**
+
 - **Lightning Fast**: Vite-powered React application
 - **SEO Optimized**: Proper meta tags and performance
 - **Admin Panel**: Secure password-protected content management
@@ -27,6 +30,7 @@ A modern, professional website for AB Wall Wonders - your trusted partner for pr
 ## 🚀 Tech Stack
 
 ### **Frontend**
+
 - **React 18** with TypeScript for type safety
 - **Vite** for ultra-fast development and builds
 - **Tailwind CSS** with custom AB Wall Wonders branding
@@ -35,12 +39,14 @@ A modern, professional website for AB Wall Wonders - your trusted partner for pr
 - **React Router** for seamless navigation
 
 ### **Content Management**
+
 - **Sanity.io CMS** for professional content management
 - **Real-time Updates** - Changes appear instantly on website
 - **Image Management** - Optimized image delivery via Sanity CDN
 - **Admin Storage** - Local fallback system for offline functionality
 
 ### **Deployment & Performance**
+
 - **Vercel Deployment** for global CDN and edge performance
 - **Production Optimized** builds with code splitting
 - **Mobile-First** responsive design
@@ -84,6 +90,7 @@ AB-Wall-Wonders/
 ## 🚀 Quick Start
 
 ### **Prerequisites**
+
 - Node.js 18+ installed
 - Git for version control
 - Sanity.io account (free tier available)
@@ -91,17 +98,20 @@ AB-Wall-Wonders/
 ### **Installation**
 
 1. **Clone the repository**:
+
 ```bash
 git clone https://github.com/sateesh23/AB-Wall-Wonders.git
 cd AB-Wall-Wonders
 ```
 
 2. **Install dependencies**:
+
 ```bash
 npm install
 ```
 
 3. **Start development server**:
+
 ```bash
 npm run dev
 ```
@@ -109,12 +119,14 @@ npm run dev
 4. **Open your browser**: `http://localhost:8080`
 
 ### **Admin Access**
+
 - **URL**: `http://localhost:8080/admin`
 - **Password**: `abwallwonders2025`
 
 ## 🎯 Services Offered
 
 ### **🎨 Premium Wallpapers**
+
 - **3D Wallpapers**: Modern textured designs
 - **Botanical**: Nature-inspired patterns
 - **Geometric**: Contemporary abstract designs
@@ -127,6 +139,7 @@ npm run dev
 **✅ 5-Year Warranty | ✅ Professional Installation | ✅ Free Consultation**
 
 ### **🏠 Quality Flooring**
+
 - **Vinyl Flooring**: Waterproof, durable, easy maintenance
 - **Artificial Grass**: Perfect for balconies and outdoor spaces
 - **Cushion Mats**: Comfort flooring for gyms and play areas
@@ -134,6 +147,7 @@ npm run dev
 **✅ 2-Year Warranty | ✅ Expert Installation | ✅ Moisture-Resistant**
 
 ### **🪟 Window Blinds**
+
 - **Roller Blinds**: Sleek, modern window coverage
 - **Zebra Blinds**: Dual-layer light control
 - **Roman Blinds**: Elegant fabric window treatments
@@ -148,29 +162,34 @@ npm run dev
 ## 🏢 Business Information
 
 ### **📍 Location**
+
 **AB Wall Wonders**  
 Shop No: 06, Municipal Shopping Complex  
 Opp. Govt. Hospital, Bobbili  
 Vizianagaram District, Andhra Pradesh
 
 ### **📞 Contact**
+
 - **Primary**: +91 86887 23648
 - **Secondary**: +91 85009 00827
 - **Email**: abwallwonders@gmail.com
 - **WhatsApp**: Direct integration available on website
 
 ### **🕒 Service Areas**
+
 Serving across Andhra Pradesh with expert installation teams and 15+ years of industry experience.
 
 ## 🔐 Admin Dashboard
 
 ### **Content Management**
+
 - **Project Portfolio**: Add, edit, delete completed projects
 - **Image Management**: Upload and organize project photos
 - **Featured Projects**: Control homepage showcases
 - **Statistics Dashboard**: Track business metrics
 
 ### **Sanity.io Integration**
+
 - **Professional CMS**: Industry-standard content management
 - **Real-time Updates**: Changes reflect immediately
 - **Image Optimization**: Automatic image compression and delivery
@@ -181,15 +200,18 @@ Serving across Andhra Pradesh with expert installation teams and 15+ years of in
 ## 🚀 Deployment
 
 ### **Production Build**
+
 ```bash
 npm run build
 ```
 
 ### **Deployment Platforms**
+
 - **Primary**: Vercel (configured and optimized)
 - **Alternative**: Netlify, AWS, or any static hosting
 
 ### **Environment Configuration**
+
 ```env
 # Sanity.io Configuration
 VITE_SANITY_PROJECT_ID=g5scqowd
@@ -200,12 +222,14 @@ VITE_SANITY_STUDIO_URL=https://g5scqowd.sanity.studio/
 ## 📊 Performance & Features
 
 ### **Website Metrics**
+
 - ⚡ **Load Time**: < 2 seconds
 - 📱 **Mobile Score**: 95+ (Google PageSpeed)
 - 🔍 **SEO Optimized**: Structured data and meta tags
 - ♿ **Accessible**: WCAG 2.1 compliant components
 
 ### **Business Impact**
+
 - 📈 **Lead Generation**: Integrated contact forms
 - 🏆 **Professional Image**: Modern, trustworthy design
 - 📱 **Mobile Traffic**: 70%+ mobile-optimized experience
@@ -228,6 +252,7 @@ This project is private and proprietary to AB Wall Wonders. Unauthorized copying
 ## 🤝 Support & Maintenance
 
 For technical support, updates, or feature requests:
+
 - **Development Team**: Contact via repository issues
 - **Business Inquiries**: abwallwonders@gmail.com
 - **Emergency Support**: +91 86887 23648
@@ -235,4 +260,4 @@ For technical support, updates, or feature requests:
 ---
 
 **🏡 AB Wall Wonders - Your Premier Interior Design Partner in Andhra Pradesh**  
-*Transform your space with our expert craftsmanship and premium materials.*
+_Transform your space with our expert craftsmanship and premium materials._

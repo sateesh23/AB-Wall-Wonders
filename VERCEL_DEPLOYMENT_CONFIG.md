@@ -3,6 +3,7 @@
 ## EXACT Vercel Project Settings
 
 ### Project Configuration
+
 - **Framework Preset**: `Vite`
 - **Root Directory**: `./` (leave empty/default)
 - **Build Command**: `npm run build`
@@ -11,6 +12,7 @@
 - **Node.js Version**: `18.x`
 
 ### Environment Variables (CRITICAL - EXACT NAMES)
+
 Add these in Vercel Dashboard → Settings → Environment Variables:
 
 ```env
@@ -25,12 +27,14 @@ VITE_SANITY_TOKEN=your_sanity_write_token_here
 ```
 
 ### Build & Output Settings
+
 - ✅ **Build Command**: `npm run build`
 - ✅ **Output Directory**: `dist`
 - ✅ **Install Command**: `npm install`
 - ✅ **Development Command**: `npm run dev`
 
 ### Function Configuration (Automatic)
+
 - **Runtime**: Node.js 18.x
 - **Memory**: 1024 MB
 - **Max Duration**: 30 seconds
@@ -39,6 +43,7 @@ VITE_SANITY_TOKEN=your_sanity_write_token_here
 ## Deployment Verification Checklist
 
 ### ✅ Pre-Deployment
+
 - [ ] GitHub repository is properly connected
 - [ ] All environment variables added with EXACT names
 - [ ] Build command set to `npm run build`
@@ -46,6 +51,7 @@ VITE_SANITY_TOKEN=your_sanity_write_token_here
 - [ ] Sanity.io project configured
 
 ### ✅ Post-Deployment
+
 - [ ] Build logs show successful completion
 - [ ] Website loads at your Vercel URL
 - [ ] Admin page accessible: `https://your-domain.vercel.app/admin`
@@ -56,41 +62,52 @@ VITE_SANITY_TOKEN=your_sanity_write_token_here
 ## Common Issues & Solutions
 
 ### Issue 1: Build Fails
+
 **Error**: `Command "npm run build" exited with 1`
-**Solution**: 
+**Solution**:
+
 1. Check environment variables are set correctly
 2. Ensure Sanity project ID is valid
 3. Verify all dependencies are installed
 
 ### Issue 2: Admin Page 404
+
 **Error**: `404 - Not Found` on `/admin` route
-**Solution**: 
+**Solution**:
+
 1. Check React Router configuration in `App.tsx`
 2. Verify admin route is properly defined
 3. Ensure build includes all pages
 
 ### Issue 3: Sanity Studio Not Loading
+
 **Error**: Can't access Sanity Studio
 **Solution**:
+
 1. Verify Sanity project is deployed: `npm run deploy` in `sanity-backend/`
 2. Check project ID matches in configuration
 3. Ensure you have access to the Sanity project
 
 ### Issue 4: Images Not Loading
+
 **Error**: Project images showing placeholder
 **Solution**:
+
 1. Check Sanity CDN configuration
 2. Verify image upload functionality in admin
 3. Ensure CORS settings allow image requests
 
 ### Issue 5: Admin Authentication Failed
+
 **Error**: Password not working on production
 **Solution**:
+
 1. Clear browser localStorage
 2. Check password is exactly: `abwallwonders2025`
 3. Verify admin auth component is built correctly
 
 ## Expected Build Output
+
 ```
 ✓ 2385 modules transformed.
 rendering chunks...
@@ -102,9 +119,10 @@ dist/assets/index-[hash].js                   1,067.53 kB │ gzip: 288.42 kB
 ```
 
 ## Test URLs After Deployment
+
 - **Website**: `https://ab-wall-wonders.vercel.app`
 - **Admin Portal**: `https://ab-wall-wonders.vercel.app/admin`
-- **Services**: 
+- **Services**:
   - `https://ab-wall-wonders.vercel.app/services/wallpapers`
   - `https://ab-wall-wonders.vercel.app/services/blinds`
   - `https://ab-wall-wonders.vercel.app/services/flooring`
@@ -114,12 +132,14 @@ dist/assets/index-[hash].js                   1,067.53 kB │ gzip: 288.42 kB
 ## Performance Optimization
 
 ### **Automatic Optimizations**
+
 - ✅ **Code Splitting**: Automatic route-based chunks
 - ✅ **Image Optimization**: Sanity CDN handles compression
 - ✅ **CSS Optimization**: Tailwind purging removes unused styles
 - ✅ **Bundle Analysis**: Vite optimizes dependencies
 
 ### **CDN & Caching**
+
 - ✅ **Global CDN**: Vercel Edge Network
 - ✅ **Asset Caching**: Automatic browser caching headers
 - ✅ **Image CDN**: Sanity.io optimized image delivery
@@ -128,12 +148,14 @@ dist/assets/index-[hash].js                   1,067.53 kB │ gzip: 288.42 kB
 ## Monitoring & Analytics
 
 ### **Vercel Analytics**
+
 - **Page Views**: Track visitor engagement
 - **Performance Metrics**: Core Web Vitals monitoring
 - **Error Tracking**: Runtime error detection
 - **Deployment History**: Track all deployments
 
 ### **Business Metrics**
+
 - **Admin Usage**: Track content management activity
 - **Contact Forms**: Monitor lead generation
 - **Service Pages**: Track service interest
@@ -142,11 +164,13 @@ dist/assets/index-[hash].js                   1,067.53 kB │ gzip: 288.42 kB
 ## Security Configuration
 
 ### **HTTPS/SSL**
+
 - ✅ **Automatic SSL**: Vercel provides free SSL certificates
 - ✅ **Force HTTPS**: All traffic redirected to secure connections
 - ✅ **Security Headers**: HSTS, CSP, and other security headers
 
 ### **Admin Security**
+
 - ✅ **Password Protection**: `abwallwonders2025`
 - ✅ **Session Management**: Browser localStorage
 - ✅ **Sanity Auth**: Separate CMS authentication
@@ -155,11 +179,13 @@ dist/assets/index-[hash].js                   1,067.53 kB │ gzip: 288.42 kB
 ## Support & Maintenance
 
 ### **Automatic Updates**
+
 - **GitHub Integration**: Automatic deployments on push
 - **Dependency Updates**: Regular security updates
 - **Performance Monitoring**: Automatic optimization suggestions
 
 ### **Manual Maintenance**
+
 - **Content Updates**: Via admin dashboard or Sanity Studio
 - **Image Management**: Through Sanity.io CMS
 - **Analytics Review**: Monthly performance reports
