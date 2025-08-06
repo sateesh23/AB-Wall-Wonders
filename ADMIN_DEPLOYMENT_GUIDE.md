@@ -3,16 +3,19 @@
 ## Recent Changes Made
 
 ### 1. Updated Admin Password
+
 - **Old Password**: `abwallwonders2024`
 - **New Password**: `abwallwonders2025`
 - **File Modified**: `client/components/ui/admin-auth.tsx`
 
 ### 2. Removed Demo Access Display
+
 - Removed the blue box showing demo password
 - Cleaner admin login interface
 - **File Modified**: `client/components/ui/admin-auth.tsx`
 
 ### 3. Fixed Sanity Studio URLs for Production
+
 - **Old**: `http://localhost:3333` (development only)
 - **New**: `https://g5scqowd.sanity.studio/` (production ready)
 - **Environment Variable**: `VITE_SANITY_STUDIO_URL` (optional)
@@ -21,11 +24,13 @@
 ## Admin Page Access
 
 ### Local Development
+
 1. Navigate to: `http://localhost:8080/admin`
 2. Enter password: `abwallwonders2025`
 3. Access granted to admin dashboard
 
 ### Production (Vercel)
+
 1. Navigate to: `https://your-domain.vercel.app/admin`
 2. Enter password: `abwallwonders2025`
 3. Access granted to admin dashboard
@@ -33,11 +38,13 @@
 ## Sanity Studio Integration
 
 ### Current Setup
+
 - **Project ID**: `g5scqowd`
 - **Studio URL**: `https://g5scqowd.sanity.studio/`
 - **Dataset**: `production`
 
 ### Admin Features
+
 1. **Project Management**: Create, edit, delete projects
 2. **Sanity Studio Access**: Direct links to CMS
 3. **Statistics Dashboard**: Project counts and metrics
@@ -62,15 +69,18 @@ VITE_SANITY_TOKEN=your_sanity_token_for_write_operations
 ## Troubleshooting
 
 ### Admin Page Not Loading
+
 - Check if `/admin` route is properly configured
 - Verify React Router setup in `App.tsx`
 
 ### Sanity Studio Not Opening
+
 - Verify the studio URL: `https://g5scqowd.sanity.studio/`
 - Check if Sanity project is deployed
 - Ensure you have access to the Sanity project
 
 ### Password Not Working
+
 - Current password is: `abwallwonders2025`
 - Clear browser localStorage if issues persist
 - Check console for authentication errors
@@ -78,17 +88,20 @@ VITE_SANITY_TOKEN=your_sanity_token_for_write_operations
 ## Admin Functionality
 
 ### Overview Tab
+
 - Project statistics and metrics
 - Quick action buttons
 - Service breakdown charts
 
 ### Projects Tab
+
 - Create new projects
 - Edit existing projects
 - Delete projects
 - Image upload support
 
 ### Settings Tab
+
 - Sanity Studio access
 - Website preview links
 - Contact information display
