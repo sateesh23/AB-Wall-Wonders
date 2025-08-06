@@ -381,9 +381,9 @@ export default function Admin() {
                     <Eye className="w-6 h-6" />
                     <span>View Website</span>
                   </Button>
-                  <Button 
+                  <Button
                     variant="outline"
-                    onClick={() => window.open('http://localhost:3333', '_blank')}
+                    onClick={() => window.open('https://g5scqowd.sanity.studio/', '_blank')}
                     className="h-20 flex flex-col space-y-2"
                   >
                     <Settings className="w-6 h-6" />
@@ -653,7 +653,7 @@ export default function Admin() {
                     <h3 className="font-medium">Sanity Studio</h3>
                     <p className="text-sm text-gray-600">Access your content management system</p>
                   </div>
-                  <Button onClick={() => window.open('http://localhost:3333', '_blank')}>
+                  <Button onClick={() => window.open('https://g5scqowd.sanity.studio/', '_blank')}>
                     Open Studio
                   </Button>
                 </div>
