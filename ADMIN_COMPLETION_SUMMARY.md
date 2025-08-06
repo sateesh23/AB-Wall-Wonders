@@ -86,7 +86,7 @@ npx sanity deploy   # Deploy to https://g5scqowd.sanity.studio/
 
 - **Admin Panel URL**: `https://your-domain.com/admin`
 - **Admin Password**: `abwallwonders2025`
-- **Sanity Studio URL**: `https://g5scqowd.sanity.studio/`
+- **Sanity Studio URL**: `https://ab-wall-wonders.sanity.studio/`
 - **Sanity Login**: Your Sanity account credentials
 
 ---
