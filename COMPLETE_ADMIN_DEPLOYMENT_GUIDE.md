@@ -59,7 +59,7 @@ VITE_SANITY_TOKEN=your_sanity_write_token
    ```
 
 3. **Access Studio**
-   - URL: `https://g5scqowd.sanity.studio/`
+   - URL: `https://ab-wall-wonders.sanity.studio/`
    - Login with your Sanity account
 
 ### Option B: Self-Host Sanity Studio
