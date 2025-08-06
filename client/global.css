@@ -1,0 +1,279 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  /* Line clamp utilities for text truncation */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+}
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    /* Base colors adapted for AB Wall Wonders */
+    --background: 45 20% 98%;
+    --foreground: 150 20% 15%;
+
+    --card: 45 25% 97%;
+    --card-foreground: 150 20% 15%;
+
+    --popover: 45 25% 97%;
+    --popover-foreground: 150 20% 15%;
+
+    --primary: 150 35% 25%;
+    --primary-foreground: 45 30% 98%;
+
+    --secondary: 150 15% 92%;
+    --secondary-foreground: 150 25% 20%;
+
+    --muted: 150 12% 94%;
+    --muted-foreground: 150 8% 45%;
+
+    --accent: 25 40% 88%;
+    --accent-foreground: 150 25% 20%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 150 20% 88%;
+    --input: 150 20% 88%;
+    --ring: 150 35% 25%;
+
+    --radius: 0.75rem;
+
+    /* Hero component brand colors */
+    --brand: 150 35% 25%;
+    --brand-foreground: 150 40% 35%;
+
+    /* AB Wall Wonders Brand Colors */
+    --sage-50: 150 25% 97%;
+    --sage-100: 150 20% 92%;
+    --sage-200: 150 18% 85%;
+    --sage-300: 150 16% 75%;
+    --sage-400: 150 14% 60%;
+    --sage-500: 150 20% 45%;
+    --sage-600: 150 25% 35%;
+    --sage-700: 150 30% 25%;
+    --sage-800: 150 35% 18%;
+    --sage-900: 150 40% 12%;
+
+    --cream-50: 45 50% 98%;
+    --cream-100: 45 45% 95%;
+    --cream-200: 45 40% 90%;
+    --cream-300: 45 35% 85%;
+    --cream-400: 45 30% 80%;
+    --cream-500: 45 25% 75%;
+
+    --earth-50: 25 25% 96%;
+    --earth-100: 25 20% 92%;
+    --earth-200: 25 18% 85%;
+    --earth-300: 25 16% 75%;
+    --earth-400: 25 14% 65%;
+    --earth-500: 25 16% 55%;
+    --earth-600: 25 20% 45%;
+    --earth-700: 25 25% 35%;
+    --earth-800: 25 30% 25%;
+    --earth-900: 25 35% 18%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode colors for AB Wall Wonders */
+    --background: 150 15% 8%;
+    --foreground: 45 25% 92%;
+
+    --card: 150 12% 12%;
+    --card-foreground: 45 25% 92%;
+
+    --popover: 150 12% 12%;
+    --popover-foreground: 45 25% 92%;
+
+    --primary: 150 25% 75%;
+    --primary-foreground: 150 30% 15%;
+
+    --secondary: 150 10% 18%;
+    --secondary-foreground: 45 20% 88%;
+
+    --muted: 150 8% 16%;
+    --muted-foreground: 150 6% 65%;
+
+    --accent: 25 25% 22%;
+    --accent-foreground: 45 20% 88%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 150 8% 22%;
+    --input: 150 8% 22%;
+    --ring: 150 25% 75%;
+
+    /* Hero component brand colors - dark mode */
+    --brand: 150 25% 75%;
+    --brand-foreground: 150 20% 65%;
+
+    /* Dark mode brand colors */
+    --sage-50: 150 8% 16%;
+    --sage-100: 150 10% 20%;
+    --sage-200: 150 12% 25%;
+    --sage-300: 150 14% 35%;
+    --sage-400: 150 16% 45%;
+    --sage-500: 150 20% 55%;
+    --sage-600: 150 22% 65%;
+    --sage-700: 150 25% 75%;
+    --sage-800: 150 28% 82%;
+    --sage-900: 150 30% 88%;
+
+    --cream-50: 45 20% 18%;
+    --cream-100: 45 22% 22%;
+    --cream-200: 45 25% 28%;
+    --cream-300: 45 28% 35%;
+    --cream-400: 45 30% 45%;
+    --cream-500: 45 35% 60%;
+
+    --earth-50: 25 15% 16%;
+    --earth-100: 25 18% 20%;
+    --earth-200: 25 20% 25%;
+    --earth-300: 25 22% 35%;
+    --earth-400: 25 25% 45%;
+    --earth-500: 25 28% 55%;
+    --earth-600: 25 30% 65%;
+    --earth-700: 25 32% 75%;
+    --earth-800: 25 35% 82%;
+    --earth-900: 25 38% 88%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-b from-foreground via-foreground/90 to-muted-foreground;
+  }
+
+  /* Line clamp utilities */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Smooth scrolling for testimonials */
+  .snap-x {
+    scroll-snap-type: x mandatory;
+  }
+
+  .snap-center {
+    scroll-snap-align: center;
+  }
+
+  /* Custom scrollbar for testimonials */
+  .testimonial-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .testimonial-scroll::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+  }
+
+  /* Optimized marquee animations */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes marquee-vertical {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee var(--duration, 30s) linear infinite;
+    will-change: transform;
+  }
+
+  .animate-marquee-vertical {
+    animation: marquee-vertical var(--duration, 30s) linear infinite;
+    will-change: transform;
+  }
+
+  .testimonial-scroll::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 3px;
+  }
+
+  .testimonial-scroll::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.8);
+  }
+
+  /* Fix for Framer Motion scroll offset calculations */
+  [data-framer-motion-scroll-container] {
+    position: relative !important;
+  }
+}
