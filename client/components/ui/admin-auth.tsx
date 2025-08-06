@@ -15,7 +15,7 @@ export function AdminAuth({ onAuthenticated }: AdminAuthProps) {
   const [loading, setLoading] = useState(false);
 
   // Simple password - in production, use proper authentication
-  const ADMIN_PASSWORD = 'abwallwonders2024';
+  const ADMIN_PASSWORD = 'abwallwonders2025';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -90,14 +90,6 @@ export function AdminAuth({ onAuthenticated }: AdminAuthProps) {
             </Button>
           </form>
           
-          <div className="mt-6 text-center">
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-              <p className="text-sm text-blue-800 font-medium">Demo Access</p>
-              <p className="text-xs text-blue-600 mt-1">
-                Password: <code className="bg-blue-100 px-1 rounded">abwallwonders2024</code>
-              </p>
-            </div>
-          </div>
         </CardContent>
       </Card>
     </div>
