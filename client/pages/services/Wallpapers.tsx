@@ -25,7 +25,8 @@ import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
 const wallpaperTypes = [
   {
     name: "Embossing Wallpapers",
-    description: "Textured finish with premium feel and sophisticated appearance",
+    description:
+      "Textured finish with premium feel and sophisticated appearance",
     features: ["Raised textures", "Luxury appearance", "Durable finish"],
     badge: "Premium Quality",
     perfect: "Master bedrooms and formal areas",
@@ -33,8 +34,13 @@ const wallpaperTypes = [
   },
   {
     name: "3D Wallpapers",
-    description: "Creates stunning depth and visual interest with textured patterns",
-    features: ["Modern geometric designs", "Depth illusion effects", "Premium materials"],
+    description:
+      "Creates stunning depth and visual interest with textured patterns",
+    features: [
+      "Modern geometric designs",
+      "Depth illusion effects",
+      "Premium materials",
+    ],
     badge: "Most Popular",
     perfect: "Living rooms and feature walls",
     image: "/images/services/wallpapers/types/3d-wallpaper.jpg",
@@ -42,7 +48,11 @@ const wallpaperTypes = [
   {
     name: "Mural Wallpapers",
     description: "Custom artwork creating stunning statement walls",
-    features: ["Completely customizable", "Artist-designed", "Unique to your space"],
+    features: [
+      "Completely customizable",
+      "Artist-designed",
+      "Unique to your space",
+    ],
     badge: "Custom Design",
     perfect: "Feature walls and dining areas",
     image: "/images/services/wallpapers/types/mural-wallpaper.jpg",
@@ -65,8 +75,13 @@ const wallpaperTypes = [
   },
   {
     name: "Botanical Wallpapers",
-    description: "Nature-inspired designs bringing tranquility and freshness indoors",
-    features: ["Eco-friendly materials", "Calming color palettes", "Various plant motifs"],
+    description:
+      "Nature-inspired designs bringing tranquility and freshness indoors",
+    features: [
+      "Eco-friendly materials",
+      "Calming color palettes",
+      "Various plant motifs",
+    ],
     badge: "Nature Inspired",
     perfect: "Bedrooms and study rooms",
     image: "/images/services/wallpapers/types/botanical-wallpaper.jpg",
@@ -74,7 +89,11 @@ const wallpaperTypes = [
   {
     name: "Striped Wallpapers",
     description: "Classic stripes for elegant and versatile interior design",
-    features: ["Vertical & horizontal options", "Space enhancing", "Timeless design"],
+    features: [
+      "Vertical & horizontal options",
+      "Space enhancing",
+      "Timeless design",
+    ],
     badge: "Versatile Design",
     perfect: "Any room and decor style",
     image: "/images/services/wallpapers/types/striped-wallpaper.jpg",
@@ -127,8 +146,6 @@ const addOns = [
 // Real project data should be added here when available
 const beforeAfterProjects: any[] = [];
 
-
-
 export default function Wallpapers() {
   const [selectedProject, setSelectedProject] = useState(0);
   const [showBefore, setShowBefore] = useState(true);
@@ -142,18 +159,17 @@ export default function Wallpapers() {
     <div
       className="min-h-screen"
       style={{
-        backgroundImage: 'url(/herooo.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'scroll',
-        width: '100%',
-        height: '100%'
+        backgroundImage: "url(/herooo.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "scroll",
+        width: "100%",
+        height: "100%",
       }}
     >
       {/* Hero Section - Full Screen */}
       <section className="relative min-h-screen flex items-center bg-transparent overflow-hidden">
-
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
             {/* Content - Centered */}
@@ -173,7 +189,8 @@ export default function Wallpapers() {
                     </span>
                   </h1>
                   <p className="text-2xl lg:text-3xl font-semibold text-muted-foreground leading-relaxed max-w-4xl mx-auto">
-                    Discover designer wallpaper solutions with expert installation and a 5-year warranty.
+                    Discover designer wallpaper solutions with expert
+                    installation and a 5-year warranty.
                   </p>
                 </div>
               </div>
@@ -351,7 +368,8 @@ export default function Wallpapers() {
               🎯 Our Hassle-Free Installation Process
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              From consultation to completion, we make wallpaper installation simple and stress-free
+              From consultation to completion, we make wallpaper installation
+              simple and stress-free
             </p>
           </div>
 
@@ -363,9 +381,12 @@ export default function Wallpapers() {
                   1
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold text-foreground">Free On-Site Visit</h3>
+                  <h3 className="text-xl font-bold text-foreground">
+                    Free On-Site Visit
+                  </h3>
                   <p className="text-sm text-muted-foreground">
-                    We assess your wall size, condition, and discuss your design preferences
+                    We assess your wall size, condition, and discuss your design
+                    preferences
                   </p>
                 </div>
                 <div className="flex justify-center">
@@ -384,9 +405,12 @@ export default function Wallpapers() {
                   2
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold text-foreground">Design Finalization</h3>
+                  <h3 className="text-xl font-bold text-foreground">
+                    Design Finalization
+                  </h3>
                   <p className="text-sm text-muted-foreground">
-                    Choose patterns, get physical samples, and finalize your perfect design
+                    Choose patterns, get physical samples, and finalize your
+                    perfect design
                   </p>
                 </div>
                 <div className="flex justify-center">
@@ -405,9 +429,12 @@ export default function Wallpapers() {
                   3
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold text-foreground">Expert Installation</h3>
+                  <h3 className="text-xl font-bold text-foreground">
+                    Expert Installation
+                  </h3>
                   <p className="text-sm text-muted-foreground">
-                    Clean, dust-free, quick fitting by our experienced professionals
+                    Clean, dust-free, quick fitting by our experienced
+                    professionals
                   </p>
                 </div>
                 <div className="flex justify-center">
@@ -426,9 +453,12 @@ export default function Wallpapers() {
                   4
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold text-foreground">Post-Service Care</h3>
+                  <h3 className="text-xl font-bold text-foreground">
+                    Post-Service Care
+                  </h3>
                   <p className="text-sm text-muted-foreground">
-                    Free support, maintenance tips, and warranty coverage included
+                    Free support, maintenance tips, and warranty coverage
+                    included
                   </p>
                 </div>
                 <div className="flex justify-center">
@@ -451,7 +481,8 @@ export default function Wallpapers() {
               Why Choose AB Wall Wonders?
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Trusted by 100+ customers across Andhra Pradesh for premium wallpaper solutions
+              Trusted by 100+ customers across Andhra Pradesh for premium
+              wallpaper solutions
             </p>
           </div>
 
@@ -462,9 +493,12 @@ export default function Wallpapers() {
               <div className="w-20 h-20 bg-gradient-to-br from-primary to-brand-sage-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Shield className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground mb-3">5-Year Warranty</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-3">
+                5-Year Warranty
+              </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Complete protection on all installations with comprehensive warranty coverage
+                Complete protection on all installations with comprehensive
+                warranty coverage
               </p>
             </div>
 
@@ -473,9 +507,12 @@ export default function Wallpapers() {
               <div className="w-20 h-20 bg-gradient-to-br from-primary to-brand-sage-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground mb-3">📊 20+ Projects Done</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-3">
+                📊 50+ Projects Done
+              </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Successfully completed projects across residential and commercial spaces
+                Successfully completed projects across residential and
+                commercial spaces
               </p>
             </div>
 
@@ -484,9 +521,12 @@ export default function Wallpapers() {
               <div className="w-20 h-20 bg-gradient-to-br from-primary to-brand-sage-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Award className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground mb-3">👨‍🔧 Experienced Installers</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-3">
+                👨‍🔧 Experienced Installers
+              </h3>
               <p className="text-muted-foreground leading-relaxed">
-                2+ years of expertise with trained professionals for perfect installation
+                2+ years of expertise with trained professionals for perfect
+                installation
               </p>
             </div>
 
@@ -495,15 +535,17 @@ export default function Wallpapers() {
               <div className="w-20 h-20 bg-gradient-to-br from-primary to-brand-sage-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Phone className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground mb-3">Free Consultation</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-3">
+                Free Consultation
+              </h3>
               <p className="text-muted-foreground leading-relaxed">
-                No-cost design consultation and measurement service at your location
+                No-cost design consultation and measurement service at your
+                location
               </p>
             </div>
           </div>
         </div>
       </section>
-
 
       {/* FAQ Section */}
       <section className="py-20 bg-background">
@@ -521,26 +563,34 @@ export default function Wallpapers() {
             {[
               {
                 question: "How long does wallpaper installation take?",
-                answer: "Most rooms can be completed in 1-2 days depending on size and complexity. We work efficiently while maintaining high quality standards, and our team ensures minimal disruption to your daily routine."
+                answer:
+                  "Most rooms can be completed in 1-2 days depending on size and complexity. We work efficiently while maintaining high quality standards, and our team ensures minimal disruption to your daily routine.",
               },
               {
                 question: "What's included in the 5-year warranty?",
-                answer: "Our warranty covers peeling, bubbling, fading, and installation defects. We provide free repairs or replacement if any issues arise due to material or installation problems within 5 years."
+                answer:
+                  "Our warranty covers peeling, bubbling, fading, and installation defects. We provide free repairs or replacement if any issues arise due to material or installation problems within 5 years.",
               },
               {
                 question: "Can I see samples before making a decision?",
-                answer: "Absolutely! We provide physical samples for all wallpaper types and can bring them to your location during our free consultation. This helps you see exactly how they'll look in your lighting conditions."
+                answer:
+                  "Absolutely! We provide physical samples for all wallpaper types and can bring them to your location during our free consultation. This helps you see exactly how they'll look in your lighting conditions.",
               },
               {
                 question: "Do you handle wall preparation?",
-                answer: "Yes, we handle complete wall preparation including cleaning, smoothing, priming, and any necessary repairs. Our team ensures your walls are perfectly prepared for a flawless wallpaper application."
+                answer:
+                  "Yes, we handle complete wall preparation including cleaning, smoothing, priming, and any necessary repairs. Our team ensures your walls are perfectly prepared for a flawless wallpaper application.",
               },
               {
                 question: "What areas do you serve?",
-                answer: "We serve all major cities across Andhra Pradesh including Visakhapatnam, Vijayawada, Guntur, Tirupati, and surrounding areas. Contact us to confirm service availability in your location."
-              }
+                answer:
+                  "We serve all major cities across Andhra Pradesh including Visakhapatnam, Vijayawada, Guntur, Tirupati, and surrounding areas. Contact us to confirm service availability in your location.",
+              },
             ].map((faq, index) => (
-              <div key={index} className="bg-white rounded-2xl shadow-lg border border-primary/10 overflow-hidden">
+              <div
+                key={index}
+                className="bg-white rounded-2xl shadow-lg border border-primary/10 overflow-hidden"
+              >
                 <button
                   onClick={() => toggleFAQ(index)}
                   className="w-full p-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
@@ -608,7 +658,8 @@ export default function Wallpapers() {
                     Premium Wallpapers
                   </h3>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
-                    Transform your walls with our premium wallpaper collection, expert installation, and comprehensive design consultation.
+                    Transform your walls with our premium wallpaper collection,
+                    expert installation, and comprehensive design consultation.
                   </p>
 
                   {/* Dual CTA Buttons */}
@@ -659,7 +710,9 @@ export default function Wallpapers() {
                     Custom Blinds
                   </h3>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
-                    Smart window solutions with expert installation, home automation integration, and comprehensive 2-year warranty coverage.
+                    Smart window solutions with expert installation, home
+                    automation integration, and comprehensive 2-year warranty
+                    coverage.
                   </p>
 
                   {/* Dual CTA Buttons */}
@@ -710,7 +763,8 @@ export default function Wallpapers() {
                     Premium Flooring
                   </h3>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
-                    Durable flooring solutions with expert installation, premium materials, and extended 2-year warranty protection.
+                    Durable flooring solutions with expert installation, premium
+                    materials, and extended 2-year warranty protection.
                   </p>
 
                   {/* Dual CTA Buttons */}
@@ -756,8 +810,9 @@ export default function Wallpapers() {
                     Ready to Transform Your Walls?
                   </h2>
                   <p className="text-base opacity-95 leading-relaxed max-w-2xl mx-auto">
-                    Get a free consultation and see samples of our premium wallpapers.
-                    Our experts will help you choose the perfect design for your space.
+                    Get a free consultation and see samples of our premium
+                    wallpapers. Our experts will help you choose the perfect
+                    design for your space.
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -812,8 +867,6 @@ export default function Wallpapers() {
           </div>
         </div>
       </section>
-
-
 
       {/* Mobile Floating CTAs */}
       <MobileFloatingCTAs />
