@@ -239,7 +239,7 @@ export class AdminStorage {
     
     // Cleanup unused images
     const referencedImages = filteredProjects.flatMap(p => [p.thumbnail, p.image, ...(p.images || [])])
-      .filter(Boolean)
+      .filter(Boolean) as string[]
     ImageStorage.cleanup(referencedImages)
     
     return true
