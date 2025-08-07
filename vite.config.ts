@@ -7,9 +7,21 @@ export default defineConfig({
   server: {
     host: "::",
     port: 8080,
+    strictPort: true,
+    middlewareMode: false,
+    fs: {
+      strict: true,
+      allow: ['..']
+    }
   },
   build: {
     outDir: "dist",
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
   },
   plugins: [react()],
   resolve: {
@@ -17,8 +29,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./client"),
       "@shared": path.resolve(__dirname, "./shared"),
     },
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
   define: {
     global: "globalThis",
   },
+  optimizeDeps: {
+    include: ['@sanity/client', '@sanity/image-url'],
+    exclude: []
+  }
 });
