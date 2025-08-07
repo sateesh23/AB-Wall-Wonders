@@ -1,7 +1,7 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { MapPin, Calendar, Wrench } from 'lucide-react';
-import type { ProjectData } from '@/data/projects-data';
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { MapPin, Calendar, Wrench } from "lucide-react";
+import type { ProjectData } from "@/data/projects-data";
 
 interface DynamicProjectsGridProps {
   projects: ProjectData[];
@@ -10,34 +10,44 @@ interface DynamicProjectsGridProps {
 export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'wallpapers': return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'blinds': return 'bg-green-100 text-green-800 border-green-200';
-      case 'flooring': return 'bg-purple-100 text-purple-800 border-purple-200';
-      case 'mixed': return 'bg-orange-100 text-orange-800 border-orange-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      case "wallpapers":
+        return "bg-blue-100 text-blue-800 border-blue-200";
+      case "blinds":
+        return "bg-green-100 text-green-800 border-green-200";
+      case "flooring":
+        return "bg-purple-100 text-purple-800 border-purple-200";
+      case "mixed":
+        return "bg-orange-100 text-orange-800 border-orange-200";
+      default:
+        return "bg-gray-100 text-gray-800 border-gray-200";
     }
   };
 
   const getCategoryLabel = (category: string) => {
     switch (category) {
-      case 'wallpapers': return 'Wallpapers';
-      case 'blinds': return 'Window Blinds';
-      case 'flooring': return 'Flooring';
-      case 'mixed': return 'Mixed Services';
-      default: return category;
+      case "wallpapers":
+        return "Wallpapers";
+      case "blinds":
+        return "Window Blinds";
+      case "flooring":
+        return "Flooring";
+      case "mixed":
+        return "Mixed Services";
+      default:
+        return category;
     }
   };
 
   const formatDate = (dateString: string) => {
     try {
       const date = new Date(dateString);
-      return date.toLocaleDateString('en-IN', { 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric' 
+      return date.toLocaleDateString("en-IN", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
       });
     } catch (error) {
-      return 'Recently';
+      return "Recently";
     }
   };
 
@@ -61,19 +71,27 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
           {/* Project Image */}
           <div className="relative overflow-hidden">
             <img
-              src={project.thumbnail || project.image || '/images/services/wallpapers-hero.svg'}
+              src={
+                project.thumbnail ||
+                project.image ||
+                "/images/services/wallpapers-hero.svg"
+              }
               alt={`${project.serviceName || project.service || project.title} at ${project.location}`}
               className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                target.src = '/images/services/wallpapers-hero.svg';
+                target.src = "/images/services/wallpapers-hero.svg";
               }}
             />
-            
+
             {/* Category Badge Overlay */}
             <div className="absolute top-3 left-3">
-              <Badge className={`${getCategoryColor(project.category || project.service || 'mixed')} font-medium text-xs`}>
-                {getCategoryLabel(project.category || project.service || 'mixed')}
+              <Badge
+                className={`${getCategoryColor(project.category || project.service || "mixed")} font-medium text-xs`}
+              >
+                {getCategoryLabel(
+                  project.category || project.service || "mixed",
+                )}
               </Badge>
             </div>
 
@@ -81,7 +99,11 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
             <div className="absolute top-3 right-3">
               <Badge className="bg-black/70 text-white font-medium text-xs">
                 <Calendar className="w-3 h-3 mr-1" />
-                {formatDate(project.completedDate || project.date || new Date().toISOString())}
+                {formatDate(
+                  project.completedDate ||
+                    project.date ||
+                    new Date().toISOString(),
+                )}
               </Badge>
             </div>
           </div>
@@ -90,15 +112,19 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
             <div className="space-y-3">
               {/* Project Title */}
               <h3 className="text-lg lg:text-xl font-bold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
-                {project.title || `${project.serviceName || 'Service'} Project`}
+                {project.title || `${project.serviceName || "Service"} Project`}
               </h3>
 
               {/* Customer Name */}
               <p className="text-sm font-medium text-primary">
-                {project.customerName || 'Customer'}
-                {project.businessName && project.businessName !== (project.customerName || '') && (
-                  <span className="text-muted-foreground"> • {project.businessName}</span>
-                )}
+                {project.customerName || "Customer"}
+                {project.businessName &&
+                  project.businessName !== (project.customerName || "") && (
+                    <span className="text-muted-foreground">
+                      {" "}
+                      • {project.businessName}
+                    </span>
+                  )}
               </p>
 
               {/* Location */}
@@ -110,16 +136,17 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
               {/* Service Type */}
               <div className="flex items-center text-sm text-muted-foreground">
                 <Wrench className="w-4 h-4 mr-1 flex-shrink-0" />
-                <span className="line-clamp-1">{project.serviceName || project.service || 'Service'}</span>
+                <span className="line-clamp-1">
+                  {project.serviceName || project.service || "Service"}
+                </span>
               </div>
 
               {/* Description */}
               {project.description && (
                 <p className="text-sm text-muted-foreground line-clamp-2">
-                  {typeof project.description === 'string' 
-                    ? project.description.replace(/<[^>]*>/g, '') // Remove HTML tags
-                    : 'Professional installation with quality materials.'
-                  }
+                  {typeof project.description === "string"
+                    ? project.description.replace(/<[^>]*>/g, "") // Remove HTML tags
+                    : "Professional installation with quality materials."}
                 </p>
               )}
 
