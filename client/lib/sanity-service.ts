@@ -234,7 +234,7 @@ export class SanityService {
 
         return result
       } catch (error) {
-        console.warn('❌ Sanity creation failed, using admin storage fallback:', error.message)
+        console.warn('❌ Sanity creation failed, using admin storage fallback:', error instanceof Error ? error.message : String(error))
         // Fall through to admin storage
       }
     }
