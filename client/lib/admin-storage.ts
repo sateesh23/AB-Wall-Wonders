@@ -300,7 +300,7 @@ export class AdminStorage {
     localStorage.removeItem(ADMIN_PROJECTS_KEY)
     // Clear all images
     const keys = Object.keys(localStorage)
-    keys.filter(key => key.startsWith(ImageStorage.IMAGE_PREFIX))
+    keys.filter(key => key.startsWith('image_'))
          .forEach(key => localStorage.removeItem(key))
   }
 }

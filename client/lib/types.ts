@@ -1,5 +1,18 @@
-// Re-export Prisma types for client-side usage
-export type { Project, Category } from '@prisma/client';
+// Project and Category types
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+  status: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  description: string;
+}
 
 // API Response types
 export interface ApiResponse<T> {

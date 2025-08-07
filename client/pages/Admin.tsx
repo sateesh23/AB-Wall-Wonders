@@ -140,7 +140,7 @@ export default function Admin() {
 
       if (editingProject) {
         // Update existing project
-        await SanityService.updateProject(editingProject.id, projectData);
+        await SanityService.updateProject(String(editingProject.id), projectData);
         showSuccessMessage("Project updated successfully! ✨");
       } else {
         // Create new project

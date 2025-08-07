@@ -346,8 +346,9 @@ export default function Flooring() {
                     alt="Premium Flooring"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     onError={(e) => {
-                      console.error('Failed to load flooring image:', e.target.src);
-                      e.target.src = '/placeholder.svg';
+                      const img = e.target as HTMLImageElement;
+                      console.error('Failed to load flooring image:', img.src);
+                      img.src = '/placeholder.svg';
                     }}
                     onLoad={() => {
                       console.log('Flooring image loaded successfully');
