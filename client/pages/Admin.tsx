@@ -154,7 +154,7 @@ export default function Admin() {
       resetForm();
     } catch (error) {
       console.error("Error saving project:", error);
-      alert(`Failed to save project: ${error.message}`);
+      alert(`Failed to save project: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setLoading(false);
     }
