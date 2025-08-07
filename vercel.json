@@ -12,7 +12,8 @@
   "env": {
     "VITE_SANITY_PROJECT_ID": "g5scqowd",
     "VITE_SANITY_DATASET": "production",
-    "VITE_SANITY_API_VERSION": "2023-01-01"
+    "VITE_SANITY_API_VERSION": "2023-01-01",
+    "VITE_SANITY_TOKEN": "skOCpiFNencxICrIPz68EgT4fv2TatPJfYGS0luCjTTnGf2JniiANd9q5Lb5hORw3JsQJsVShNItkSicSVxoWRJuBOjSu9JWVyxD27E4GnJYm0CLxrjIuXbvptAOsutR5UMNBwXzEG5QVXJEptrWCZc4fMlX2wVGyERyxBnVwxY5P3tVrZQI"
   },
   "buildCommand": "npm run build",
   "installCommand": "npm install",
