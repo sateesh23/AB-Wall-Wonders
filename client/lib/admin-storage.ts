@@ -103,7 +103,7 @@ export class AdminStorage {
   // Get recent projects
   static getRecentProjects(limit: number = 6): ProjectData[] {
     return this.getAllProjects()
-      .sort((a, b) => new Date(b.completedDate).getTime() - new Date(a.completedDate).getTime())
+      .sort((a, b) => new Date(b.completedDate || '').getTime() - new Date(a.completedDate || '').getTime())
       .slice(0, limit)
   }
 
