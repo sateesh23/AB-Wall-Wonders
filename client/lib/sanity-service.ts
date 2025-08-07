@@ -162,7 +162,7 @@ export class SanityService {
     } catch (error: any) {
       return {
         connected: false,
-        error: error.message,
+        error: error instanceof Error ? error.message : String(error),
         isDemo: false,
         projectCount: adminStats.totalProjects
       }
@@ -302,7 +302,7 @@ export class SanityService {
 
         return result
       } catch (error) {
-        console.warn('❌ Sanity update failed, using admin storage fallback:', error.message)
+        console.warn('❌ Sanity update failed, using admin storage fallback:', error instanceof Error ? error.message : String(error))
         // Fall through to admin storage
       }
     }
@@ -318,7 +318,7 @@ export class SanityService {
       return { _id: result.id, ...result }
     } catch (error) {
       console.error('❌ Error updating project in admin storage:', error)
-      throw new Error(`Failed to update project: ${error.message}`)
+      throw new Error(`Failed to update project: ${error instanceof Error ? error.message : String(error)}`)
     }
   }
 
@@ -337,7 +337,7 @@ export class SanityService {
         this.connectionTested = false
         return
       } catch (error) {
-        console.warn('❌ Sanity deletion failed, using admin storage fallback:', error.message)
+        console.warn('❌ Sanity deletion failed, using admin storage fallback:', error instanceof Error ? error.message : String(error))
         // Fall through to admin storage
       }
     }
@@ -352,7 +352,7 @@ export class SanityService {
       console.log('✅ Project deleted successfully from admin storage')
     } catch (error) {
       console.error('❌ Error deleting project from admin storage:', error)
-      throw new Error(`Failed to delete project: ${error.message}`)
+      throw new Error(`Failed to delete project: ${error instanceof Error ? error.message : String(error)}`)
     }
   }
 
