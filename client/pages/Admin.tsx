@@ -41,7 +41,7 @@ interface ProjectForm {
   isFeatured: boolean;
   completedDate: string;
   status: "completed" | "in-progress" | "planning";
-  imageFile: File | null;
+  imageFile: File | undefined;
 }
 
 export default function Admin() {
