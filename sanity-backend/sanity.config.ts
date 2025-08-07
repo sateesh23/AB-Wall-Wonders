@@ -7,8 +7,8 @@ export default defineConfig({
   name: 'ab-wall-wonders',
   title: 'AB Wall Wonders CMS',
 
-  projectId: 'g5scqowd', // AB Wall Wonders CMS project ID
-  dataset: 'production',
+  projectId: process.env.VITE_SANITY_PROJECT_ID || 'g5scqowd',
+  dataset: process.env.VITE_SANITY_DATASET || 'production',
 
   plugins: [structureTool(), visionTool()],
 

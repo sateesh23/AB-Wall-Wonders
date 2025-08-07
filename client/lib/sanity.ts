@@ -7,12 +7,11 @@ const isDevelopment = import.meta.env.DEV
 
 // Create Sanity client with enhanced configuration
 export const client = createClient({
-  projectId: 'g5scqowd', // AB Wall Wonders CMS project ID
-  dataset: 'production',
+  projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
+  dataset: import.meta.env.VITE_SANITY_DATASET,
   useCdn: !isDevelopment, // Use CDN in production, direct API in development
-  apiVersion: '2023-01-01',
-  // Add token for write operations (if available)
-  token: import.meta.env.VITE_SANITY_TOKEN, // Optional: for write operations
+  apiVersion: import.meta.env.VITE_SANITY_API_VERSION,
+  token: import.meta.env.VITE_SANITY_TOKEN,
   perspective: 'published', // Only fetch published content
   stega: false, // Disable Visual Editing features for better performance
 })
