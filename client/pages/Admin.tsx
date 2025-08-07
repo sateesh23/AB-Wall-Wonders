@@ -72,7 +72,7 @@ export default function Admin() {
     isFeatured: false,
     completedDate: "",
     status: "completed",
-    imageFile: null,
+    imageFile: undefined,
   });
 
   useEffect(() => {
@@ -171,7 +171,7 @@ export default function Admin() {
       isFeatured: false,
       completedDate: "",
       status: "completed",
-      imageFile: null,
+      imageFile: undefined,
     });
     setShowForm(false);
     setEditingProject(null);
@@ -189,7 +189,7 @@ export default function Admin() {
       isFeatured: project.isFeatured || false,
       completedDate: project.completedDate || "",
       status: (project.status as any) || "completed",
-      imageFile: null,
+      imageFile: undefined,
     });
     setShowForm(true);
   };
