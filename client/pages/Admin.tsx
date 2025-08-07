@@ -41,7 +41,7 @@ interface ProjectForm {
   isFeatured: boolean;
   completedDate: string;
   status: "completed" | "in-progress" | "planning";
-  imageFile: File | null;
+  imageFile: File | undefined;
 }
 
 export default function Admin() {
@@ -72,7 +72,7 @@ export default function Admin() {
     isFeatured: false,
     completedDate: "",
     status: "completed",
-    imageFile: null,
+    imageFile: undefined,
   });
 
   useEffect(() => {
@@ -140,7 +140,10 @@ export default function Admin() {
 
       if (editingProject) {
         // Update existing project
-        await SanityService.updateProject(String(editingProject.id), projectData);
+        await SanityService.updateProject(
+          String(editingProject.id),
+          projectData,
+        );
         showSuccessMessage("Project updated successfully! ✨");
       } else {
         // Create new project
@@ -154,7 +157,9 @@ export default function Admin() {
       resetForm();
     } catch (error) {
       console.error("Error saving project:", error);
-      alert(`Failed to save project: ${error.message}`);
+      alert(
+        `Failed to save project: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
     } finally {
       setLoading(false);
     }
@@ -171,7 +176,7 @@ export default function Admin() {
       isFeatured: false,
       completedDate: "",
       status: "completed",
-      imageFile: null,
+      imageFile: undefined,
     });
     setShowForm(false);
     setEditingProject(null);
@@ -189,7 +194,7 @@ export default function Admin() {
       isFeatured: project.isFeatured || false,
       completedDate: project.completedDate || "",
       status: (project.status as any) || "completed",
-      imageFile: null,
+      imageFile: undefined,
     });
     setShowForm(true);
   };
@@ -209,7 +214,9 @@ export default function Admin() {
         await loadProjects();
       } catch (error) {
         console.error("Error deleting project:", error);
-        alert(`Failed to delete project: ${error.message}`);
+        alert(
+          `Failed to delete project: ${error instanceof Error ? error.message : "Unknown error"}`,
+        );
       } finally {
         setLoading(false);
       }
@@ -698,7 +705,7 @@ export default function Admin() {
                             <Button
                               size="sm"
                               variant="outline"
-                              onClick={() => handleDelete(project.id)}
+                              onClick={() => handleDelete(String(project.id))}
                               className="text-red-600 hover:text-red-700"
                             >
                               <Trash2 className="w-4 h-4" />
