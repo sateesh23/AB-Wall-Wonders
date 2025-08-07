@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Calendar, Wrench } from 'lucide-react';
@@ -56,14 +55,14 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       {projects.slice(0, 6).map((project) => (
         <Card
-          key={project.id}
+          key={project.id || project._id || Math.random()}
           className="group hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border-primary/10 hover:border-primary/20"
         >
           {/* Project Image */}
           <div className="relative overflow-hidden">
             <img
               src={project.thumbnail || project.image || '/images/services/wallpapers-hero.svg'}
-              alt={`${project.serviceName} at ${project.location}`}
+              alt={`${project.serviceName || project.service || project.title} at ${project.location}`}
               className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -73,8 +72,8 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
             
             {/* Category Badge Overlay */}
             <div className="absolute top-3 left-3">
-              <Badge className={`${getCategoryColor(project.category)} font-medium text-xs`}>
-                {getCategoryLabel(project.category)}
+              <Badge className={`${getCategoryColor(project.category || project.service || 'mixed')} font-medium text-xs`}>
+                {getCategoryLabel(project.category || project.service || 'mixed')}
               </Badge>
             </div>
 
@@ -82,7 +81,7 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
             <div className="absolute top-3 right-3">
               <Badge className="bg-black/70 text-white font-medium text-xs">
                 <Calendar className="w-3 h-3 mr-1" />
-                {formatDate(project.completedDate || project.date || '')}
+                {formatDate(project.completedDate || project.date || new Date().toISOString())}
               </Badge>
             </div>
           </div>
@@ -91,13 +90,13 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
             <div className="space-y-3">
               {/* Project Title */}
               <h3 className="text-lg lg:text-xl font-bold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
-                {project.title || `${project.serviceName} Project`}
+                {project.title || `${project.serviceName || 'Service'} Project`}
               </h3>
 
               {/* Customer Name */}
               <p className="text-sm font-medium text-primary">
-                {project.customerName}
-                {project.businessName && project.businessName !== project.customerName && (
+                {project.customerName || 'Customer'}
+                {project.businessName && project.businessName !== (project.customerName || '') && (
                   <span className="text-muted-foreground"> • {project.businessName}</span>
                 )}
               </p>
@@ -111,7 +110,7 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
               {/* Service Type */}
               <div className="flex items-center text-sm text-muted-foreground">
                 <Wrench className="w-4 h-4 mr-1 flex-shrink-0" />
-                <span className="line-clamp-1">{project.serviceName}</span>
+                <span className="line-clamp-1">{project.serviceName || project.service || 'Service'}</span>
               </div>
 
               {/* Description */}
@@ -125,7 +124,7 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
               )}
 
               {/* Featured Badge */}
-              {project.featured && (
+              {(project.featured || project.isFeatured) && (
                 <div className="pt-2">
                   <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200 font-medium text-xs">
                     ⭐ Featured Project
