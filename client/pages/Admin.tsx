@@ -140,7 +140,10 @@ export default function Admin() {
 
       if (editingProject) {
         // Update existing project
-        await SanityService.updateProject(String(editingProject.id), projectData);
+        await SanityService.updateProject(
+          String(editingProject.id),
+          projectData,
+        );
         showSuccessMessage("Project updated successfully! ✨");
       } else {
         // Create new project
@@ -154,7 +157,9 @@ export default function Admin() {
       resetForm();
     } catch (error) {
       console.error("Error saving project:", error);
-      alert(`Failed to save project: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      alert(
+        `Failed to save project: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
     } finally {
       setLoading(false);
     }
@@ -209,7 +214,9 @@ export default function Admin() {
         await loadProjects();
       } catch (error) {
         console.error("Error deleting project:", error);
-        alert(`Failed to delete project: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        alert(
+          `Failed to delete project: ${error instanceof Error ? error.message : "Unknown error"}`,
+        );
       } finally {
         setLoading(false);
       }
