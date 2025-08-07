@@ -473,7 +473,7 @@ export default function Wallpapers() {
               <div className="w-20 h-20 bg-gradient-to-br from-primary to-brand-sage-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground mb-3">📊 20+ Projects Done</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-3">📊 50+ Projects Done</h3>
               <p className="text-muted-foreground leading-relaxed">
                 Successfully completed projects across residential and commercial spaces
               </p>
