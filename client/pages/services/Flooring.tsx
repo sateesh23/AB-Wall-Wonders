@@ -15,7 +15,7 @@ import {
   ArrowRight,
   Users,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
 
 const flooringTypes = [
