@@ -247,7 +247,7 @@ export class SanityService {
       return { _id: result.id, ...result }
     } catch (error) {
       console.error('❌ Error creating project in admin storage:', error)
-      throw new Error(`Failed to create project: ${error.message}`)
+      throw new Error(`Failed to create project: ${error instanceof Error ? error.message : String(error)}`)
     }
   }
 
