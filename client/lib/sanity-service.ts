@@ -53,7 +53,7 @@ export class SanityService {
       })
 
       console.log(`✅ Loaded ${sanityProjects.length} from Sanity + ${adminProjects.length} from admin storage`)
-      return combined.sort((a, b) => new Date(b.completedDate).getTime() - new Date(a.completedDate).getTime())
+      return combined.sort((a, b) => new Date(b.completedDate || '').getTime() - new Date(a.completedDate || '').getTime())
     } catch (error) {
       console.error('❌ Error fetching projects from Sanity:', error)
       console.log(`📄 Using admin storage (${adminProjects.length} projects)`)
