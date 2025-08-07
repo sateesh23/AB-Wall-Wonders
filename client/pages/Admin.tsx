@@ -209,7 +209,7 @@ export default function Admin() {
         await loadProjects();
       } catch (error) {
         console.error("Error deleting project:", error);
-        alert(`Failed to delete project: ${error.message}`);
+        alert(`Failed to delete project: ${error instanceof Error ? error.message : 'Unknown error'}`);
       } finally {
         setLoading(false);
       }
