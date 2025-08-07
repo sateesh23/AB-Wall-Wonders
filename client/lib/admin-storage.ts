@@ -85,9 +85,9 @@ export class AdminStorage {
       // Convert stored image IDs to URLs
       return projectList.map((project: ProjectData) => ({
         ...project,
-        thumbnail: ImageStorage.getImageUrl(project.thumbnail),
-        image: ImageStorage.getImageUrl(project.image),
-        images: project.images?.map(img => ImageStorage.getImageUrl(img)) || []
+        thumbnail: ImageStorage.getImageUrl(project.thumbnail || ''),
+        image: ImageStorage.getImageUrl(project.image || ''),
+        images: project.images?.map(img => ImageStorage.getImageUrl(img || '')) || []
       }))
     } catch (error) {
       console.error('Error loading admin projects:', error)
