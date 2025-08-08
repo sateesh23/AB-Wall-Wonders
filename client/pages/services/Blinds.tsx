@@ -2,7 +2,6 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { FastImage } from "@/components/ui/fast-image";
 
 import {
   Home,
@@ -10,14 +9,12 @@ import {
   MessageCircle,
   CheckCircle,
   Shield,
-  Award,
-  Clock,
-  Eye,
-  Smartphone,
+  Settings,
   Sun,
   Zap,
   ArrowRight,
   Users,
+  Eye,
 } from "lucide-react";
 import { useState } from "react";
 import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
@@ -25,39 +22,48 @@ import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
 const blindTypes = [
   {
     name: "Roller Blinds",
-    description: "Sleek and modern roller blinds perfect for any window",
-    features: ["Easy operation", "Light control", "Privacy protection", "Multiple fabrics"],
+    description:
+      "Sleek and modern roller blinds perfect for any window in your home",
+    features: [
+      "Easy Operation",
+      "Light Control",
+      "Privacy Protection",
+      "2-year warranty",
+    ],
     badge: "Most Popular",
     perfect: "Living rooms, bedrooms, offices",
     image: "/images/services/blinds/types/roller-blinds.jpg",
     applications: ["Residential", "Commercial", "Healthcare"],
   },
   {
-    name: "Venetian Blinds",
-    description: "Classic horizontal slat blinds for precise light control",
-    features: ["Adjustable slats", "Durable aluminum", "Easy cleaning", "Various colors"],
-    badge: "Classic Choice",
-    perfect: "Kitchens, bathrooms, offices",
-    image: "/images/services/blinds/types/venetian-blinds.jpg",
-    applications: ["Homes", "Offices", "Schools"],
+    name: "Wooden Blinds",
+    description:
+      "Premium wooden blinds that add natural elegance to any space",
+    features: [
+      "Natural Wood",
+      "Adjustable Slats",
+      "Durable Finish",
+      "Custom Staining",
+    ],
+    badge: "Eco-Friendly",
+    perfect: "Traditional homes, offices, dining rooms",
+    image: "/images/services/blinds/types/wooden-blinds.jpg",
+    applications: ["Homes", "Restaurants", "Hotels"],
   },
   {
-    name: "Vertical Blinds",
-    description: "Ideal for large windows and sliding doors",
-    features: ["Wide coverage", "Easy maintenance", "Light filtering", "Motorized options"],
-    badge: "Large Windows",
-    perfect: "Patio doors, large windows",
-    image: "/images/services/blinds/types/vertical-blinds.jpg",
-    applications: ["Commercial", "Residential", "Hotels"],
-  },
-  {
-    name: "Smart Blinds",
-    description: "Automated blinds with smartphone and voice control",
-    features: ["Remote control", "Voice commands", "Scheduled operation", "Energy saving"],
-    badge: "Smart Home",
-    perfect: "Modern homes, smart buildings",
-    image: "/images/services/blinds/types/smart-blinds.jpg",
-    applications: ["Smart Homes", "Luxury Hotels", "Modern Offices"],
+    name: "Zebra Blinds",
+    description:
+      "Modern zebra blinds offering versatile light control and privacy options",
+    features: [
+      "Dual Function",
+      "Light Filtering",
+      "Easy Adjustment",
+      "Contemporary Look",
+    ],
+    badge: "Modern Choice",
+    perfect: "Modern homes, offices, study rooms",
+    image: "/images/services/blinds/types/zebra-blinds.jpg",
+    applications: ["Corporate", "Residential", "Studios"],
   },
 ];
 
@@ -70,7 +76,7 @@ export default function Blinds() {
       <section className="relative overflow-hidden bg-gradient-to-br from-sage-700 via-sage-600 to-sage-800 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-sage-700/90 to-transparent"></div>
-        
+
         <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             <div className="flex-1 text-center lg:text-left">
@@ -78,7 +84,7 @@ export default function Blinds() {
                 <Home className="mr-2 h-4 w-4" />
                 Custom Blinds & Window Treatments
               </div>
-              
+
               <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
                 Premium
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cream-200 to-sage-200">
@@ -86,10 +92,10 @@ export default function Blinds() {
                 </span>
                 Collection
               </h1>
-              
+
               <p className="mt-6 text-xl leading-8 text-sage-100 max-w-2xl mx-auto lg:mx-0">
-                Enhance your space with our custom-made blinds. From roller to smart blinds, 
-                perfect fit and professional installation guaranteed.
+                Transform your windows with our custom-made roller, wooden, and zebra blinds. 
+                Professional installation with lifetime warranty.
               </p>
 
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -115,12 +121,12 @@ export default function Blinds() {
                   <div className="text-sage-200">Blinds Installed</div>
                 </div>
                 <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cream-200">Custom</div>
-                  <div className="text-sage-200">Made to Measure</div>
+                  <div className="text-3xl font-bold text-cream-200">15+</div>
+                  <div className="text-sage-200">Years Experience</div>
                 </div>
                 <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cream-200">2 Year</div>
-                  <div className="text-sage-200">Warranty</div>
+                  <div className="text-3xl font-bold text-cream-200">100%</div>
+                  <div className="text-sage-200">Satisfaction Rate</div>
                 </div>
               </div>
             </div>
@@ -133,7 +139,9 @@ export default function Blinds() {
                     src="/images/services/blinds-hero.svg"
                     alt="Premium Blinds Collection"
                     className="w-full h-auto rounded-2xl shadow-2xl"
-                    onLoad={() => setImagesLoaded(prev => ({ ...prev, hero: true }))}
+                    onLoad={() =>
+                      setImagesLoaded((prev) => ({ ...prev, hero: true }))
+                    }
                   />
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-sage-900/20 to-transparent"></div>
                 </div>
@@ -151,19 +159,26 @@ export default function Blinds() {
               Our Blinds Collection
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
-              From traditional to smart, find the perfect blinds for your windows
+              Choose from our premium range of blinds options, each designed
+              for specific light control and privacy needs
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blindTypes.map((type, index) => (
-              <Card key={index} className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-gradient-to-b from-white to-sage-50">
+              <Card
+                key={index}
+                className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-gradient-to-b from-white to-sage-50"
+              >
                 <div className="aspect-[4/3] relative overflow-hidden">
-                  <FastImage
+                  <img
                     src={type.image}
                     alt={type.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    fallback="/placeholder.svg"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/placeholder.svg";
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   {type.badge && (
@@ -187,10 +202,15 @@ export default function Blinds() {
                   </p>
 
                   <div className="space-y-3 mb-6">
-                    <div className="text-sm font-medium text-sage-700">Key Features:</div>
-                    <div className="grid grid-cols-1 gap-2">
+                    <div className="text-sm font-medium text-sage-700">
+                      Key Features:
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
                       {type.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-sage-600">
+                        <div
+                          key={idx}
+                          className="flex items-center text-sm text-sage-600"
+                        >
                           <CheckCircle className="h-4 w-4 text-sage-500 mr-2 flex-shrink-0" />
                           {feature}
                         </div>
@@ -199,15 +219,22 @@ export default function Blinds() {
                   </div>
 
                   <div className="mb-6">
-                    <div className="text-sm font-medium text-sage-700 mb-2">Perfect for:</div>
+                    <div className="text-sm font-medium text-sage-700 mb-2">
+                      Perfect for:
+                    </div>
                     <p className="text-sm text-sage-600">{type.perfect}</p>
                   </div>
 
                   <div className="mb-6">
-                    <div className="text-sm font-medium text-sage-700 mb-2">Applications:</div>
+                    <div className="text-sm font-medium text-sage-700 mb-2">
+                      Applications:
+                    </div>
                     <div className="flex flex-wrap gap-2">
                       {type.applications.map((app, idx) => (
-                        <span key={idx} className="inline-flex items-center rounded-md bg-sage-100 px-2 py-1 text-xs font-medium text-sage-700">
+                        <span
+                          key={idx}
+                          className="inline-flex items-center rounded-md bg-sage-100 px-2 py-1 text-xs font-medium text-sage-700"
+                        >
                           {app}
                         </span>
                       ))}
@@ -243,7 +270,8 @@ export default function Blinds() {
               Why Choose Our Blinds?
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
-              Quality materials, precise measurements, and expert installation
+              Quality materials, expert installation, and unmatched customer
+              service
             </p>
           </div>
 
@@ -255,14 +283,16 @@ export default function Blinds() {
                 icon: Shield,
               },
               {
-                name: "Professional Installation",
-                description: "Expert fitting ensuring smooth operation and longevity",
-                icon: Award,
+                name: "Smart Home Integration",
+                description:
+                  "Motorized options with smartphone and voice control",
+                icon: Settings,
               },
               {
-                name: "Smart Home Integration",
-                description: "Motorized options with smartphone and voice control",
-                icon: Smartphone,
+                name: "Quick Installation",
+                description:
+                  "Professional installation with minimal disruption",
+                icon: Zap,
               },
               {
                 name: "UV Protection",
@@ -275,9 +305,9 @@ export default function Blinds() {
                 icon: Zap,
               },
               {
-                name: "Quick Turnaround",
-                description: "Fast manufacturing and installation within 7-10 days",
-                icon: Clock,
+                name: "Easy Maintenance",
+                description: "Simple cleaning and long-lasting performance",
+                icon: CheckCircle,
               },
             ].map((feature, index) => {
               const IconComponent = feature.icon;
@@ -310,7 +340,8 @@ export default function Blinds() {
               Complete Your Space
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
-              Enhance your blinds with our premium wallpapers and flooring solutions
+              Enhance your blinds with our premium wallpapers and flooring
+              solutions
             </p>
           </div>
 
@@ -321,12 +352,19 @@ export default function Blinds() {
             >
               <div className="aspect-[4/3] relative overflow-hidden">
                 <img
-                  src="/images/services/wallpapers-hero.svg"
+                  src="/images/wallpaperr.png"
                   alt="Premium Wallpapers"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
+                    console.error(
+                      "Failed to load wallpaper image:",
+                      target.src,
+                    );
                     target.src = "/placeholder.svg";
+                  }}
+                  onLoad={() => {
+                    console.log("Wallpaper image loaded successfully");
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -342,11 +380,12 @@ export default function Blinds() {
                   Premium Wallpapers
                 </h3>
                 <p className="text-white/90 text-sm mb-4">
-                  Designer wallpapers that complement your window treatments perfectly
+                  Designer wallpapers that complement your window treatments
+                  perfectly
                 </p>
                 <div className="flex items-center text-white/80 text-sm">
                   <Users className="h-4 w-4 mr-2" />
-                  1000+ Designs Available
+                  500+ Happy Customers
                 </div>
               </div>
             </Link>
@@ -357,12 +396,16 @@ export default function Blinds() {
             >
               <div className="aspect-[4/3] relative overflow-hidden">
                 <img
-                  src="/images/services/flooring-hero.svg"
+                  src="/images/flooringg.png"
                   alt="Premium Flooring"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
+                    console.error("Failed to load flooring image:", target.src);
                     target.src = "/placeholder.svg";
+                  }}
+                  onLoad={() => {
+                    console.log("Flooring image loaded successfully");
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -378,11 +421,11 @@ export default function Blinds() {
                   Premium Flooring
                 </h3>
                 <p className="text-white/90 text-sm mb-4">
-                  Waterproof vinyl flooring and artificial grass solutions
+                  Waterproof vinyl flooring for the perfect foundation
                 </p>
                 <div className="flex items-center text-white/80 text-sm">
                   <Users className="h-4 w-4 mr-2" />
-                  500+ Installations
+                  Premium Installation
                 </div>
               </div>
             </Link>
@@ -401,38 +444,45 @@ export default function Blinds() {
                   Ready for Perfect Blinds?
                 </h2>
                 <p className="text-xl text-green-100 mb-12 max-w-3xl mx-auto">
-                  Book a free home consultation for precise measurements and expert advice. Custom-made blinds with professional installation.
+                  Get a free consultation and quote for your blinds project.
+                  Professional installation with warranty included.
                 </p>
-                
+
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <a
                     href="tel:+44123456789"
                     className="inline-flex items-center justify-center rounded-lg bg-white text-green-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-green-50 transition-all duration-300 transform hover:scale-105"
                   >
                     <Phone className="mr-2 h-5 w-5" />
-                    Book Free Consultation
+                    Call Now for Free Quote
                   </a>
                   <a
                     href="https://wa.me/44123456789"
                     className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
                   >
                     <MessageCircle className="mr-2 h-5 w-5" />
-                    WhatsApp Quote
+                    WhatsApp Us
                   </a>
                 </div>
 
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-100 mb-2">Free</div>
-                    <div className="text-green-200">Home Measurement</div>
+                    <div className="text-3xl font-bold text-green-100 mb-2">
+                      Free
+                    </div>
+                    <div className="text-green-200">Consultation & Quote</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-100 mb-2">7-10</div>
-                    <div className="text-green-200">Days Delivery</div>
+                    <div className="text-3xl font-bold text-green-100 mb-2">
+                      Same Day
+                    </div>
+                    <div className="text-green-200">Site Visit Available</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-100 mb-2">2 Year</div>
-                    <div className="text-green-200">Full Warranty</div>
+                    <div className="text-3xl font-bold text-green-100 mb-2">
+                      2 Year
+                    </div>
+                    <div className="text-green-200">Warranty Included</div>
                   </div>
                 </div>
               </div>
