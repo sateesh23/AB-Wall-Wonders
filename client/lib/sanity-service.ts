@@ -28,11 +28,21 @@ export class SanityService {
     this.connectionError = result.error || null;
 
     if (result.success) {
-      console.log("✅ Sanity connection successful!");
+      console.log("✅ Sanity connection successful!", {
+        projectId: result.projectId,
+        dataset: result.dataset,
+        environment: result.environment,
+        hasToken: result.hasToken
+      });
     } else {
-      console.log(
-        "⚠️ No Sanity data available. Projects will be empty until added through admin panel.",
-      );
+      console.log("⚠️ Sanity connection issue:", {
+        error: result.error,
+        projectId: result.projectId,
+        dataset: result.dataset,
+        environment: result.environment,
+        hasToken: result.hasToken
+      });
+      console.log("📄 Using admin storage fallback for projects.");
     }
 
     return this.isConnected;
@@ -51,8 +61,10 @@ export class SanityService {
     }
 
     try {
+      console.log("🔍 Fetching projects from Sanity...");
       const projects: SanityProject[] = await client.fetch(projectsQuery);
       const sanityProjects = projects.map(this.convertToProjectData);
+      console.log(`📊 Found ${sanityProjects.length} projects in Sanity`);
 
       // Combine Sanity and admin projects (remove duplicates by title)
       const combined = [...sanityProjects];
@@ -63,7 +75,7 @@ export class SanityService {
       });
 
       console.log(
-        `✅ Loaded ${sanityProjects.length} from Sanity + ${adminProjects.length} from admin storage`,
+        `✅ Combined: ${sanityProjects.length} from Sanity + ${adminProjects.length} from admin storage = ${combined.length} total`,
       );
       return combined.sort(
         (a, b) =>
@@ -72,7 +84,10 @@ export class SanityService {
       );
     } catch (error) {
       console.error("❌ Error fetching projects from Sanity:", error);
-      console.log(`📄 Using admin storage (${adminProjects.length} projects)`);
+      if (error instanceof Error) {
+        console.error("📝 Error details:", error.message);
+      }
+      console.log(`📄 Fallback to admin storage (${adminProjects.length} projects)`);
       return adminProjects;
     }
   }
@@ -259,19 +274,20 @@ export class SanityService {
           }),
         };
 
-        console.log("📝 Creating project in Sanity...");
+        console.log("📝 Creating project in Sanity...", { title: projectData.title });
         const result = await client.create(doc);
-        console.log("✅ Project created successfully in Sanity:", result._id);
+        console.log("✅ Project created successfully in Sanity:", { id: result._id, title: projectData.title });
 
         // Reset connection cache to force refresh
         this.connectionTested = false;
 
         return result;
       } catch (error) {
-        console.warn(
-          "❌ Sanity creation failed, using admin storage fallback:",
-          error instanceof Error ? error.message : String(error),
-        );
+        console.warn("❌ Sanity creation failed:", {
+          error: error instanceof Error ? error.message : String(error),
+          projectTitle: projectData.title,
+          fallback: "admin storage"
+        });
         // Fall through to admin storage
       }
     }

@@ -106,6 +106,7 @@ export const testSanityConnection = async (): Promise<{
   projectId?: string
   dataset?: string
   environment?: string
+  hasToken?: boolean
 }> => {
   const config = client.config()
 
@@ -116,7 +117,20 @@ export const testSanityConnection = async (): Promise<{
       error: 'Sanity project not configured',
       projectId: config.projectId,
       dataset: config.dataset,
-      environment: isDevelopment ? 'development' : 'production'
+      environment: isDevelopment ? 'development' : 'production',
+      hasToken: !!config.token
+    }
+  }
+
+  // Check for token
+  if (!config.token) {
+    return {
+      success: false,
+      error: 'Sanity token missing - read-only mode',
+      projectId: config.projectId,
+      dataset: config.dataset,
+      environment: isDevelopment ? 'development' : 'production',
+      hasToken: false
     }
   }
 
@@ -139,7 +153,8 @@ export const testSanityConnection = async (): Promise<{
       success: true,
       projectId: config.projectId,
       dataset: config.dataset,
-      environment: isDevelopment ? 'development' : 'production'
+      environment: isDevelopment ? 'development' : 'production',
+      hasToken: !!config.token
     }
   } catch (error: any) {
     // Don't log network errors as they're expected in some environments
@@ -157,7 +172,8 @@ export const testSanityConnection = async (): Promise<{
       error: isNetworkError ? 'Network unavailable' : (error.message || 'Connection failed'),
       projectId: config.projectId,
       dataset: config.dataset,
-      environment: isDevelopment ? 'development' : 'production'
+      environment: isDevelopment ? 'development' : 'production',
+      hasToken: !!config.token
     }
   }
 }
