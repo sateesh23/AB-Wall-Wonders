@@ -35,7 +35,7 @@ VITE_SANITY_STUDIO_URL=https://your-project.sanity.studio/
 VITE_SANITY_PROJECT_ID=g5scqowd
 VITE_SANITY_DATASET=production
 VITE_SANITY_API_VERSION=2023-05-03
-VITE_SANITY_TOKEN=your-actual-token-here
+VITE_SANITY_TOKEN=skPOnO6AN2F3J6kHPE4UVjLxQsct4GL6uSd3fSkTA4Tz3817r77xqss49A05skqrL9MYxsGffgjhyPHbOQwxryv8ugJqNs5hGdcRV2A5HAbJgHj0eQYlZ6BcvQwg2wCaG87JLNuyCoA3ulL5OPcD6nHRx4lzkxo3nxQURDUH0JrT8tvoG4Uy
 VITE_SANITY_STUDIO_URL=https://ab-wall-wonders.sanity.studio/
 ```
 
@@ -53,7 +53,7 @@ VITE_SANITY_STUDIO_URL=https://ab-wall-wonders.sanity.studio/
 VITE_SANITY_PROJECT_ID=g5scqowd
 VITE_SANITY_DATASET=production
 VITE_SANITY_API_VERSION=2023-05-03
-VITE_SANITY_TOKEN=your-actual-token-here
+VITE_SANITY_TOKEN=skPOnO6AN2F3J6kHPE4UVjLxQsct4GL6uSd3fSkTA4Tz3817r77xqss49A05skqrL9MYxsGffgjhyPHbOQwxryv8ugJqNs5hGdcRV2A5HAbJgHj0eQYlZ6BcvQwg2wCaG87JLNuyCoA3ulL5OPcD6nHRx4lzkxo3nxQURDUH0JrT8tvoG4Uy
 VITE_SANITY_STUDIO_URL=https://ab-wall-wonders.sanity.studio/
 ```
 
