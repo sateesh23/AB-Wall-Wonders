@@ -75,6 +75,7 @@ For other platforms (Netlify, Railway, etc.), add the same environment variables
 ### Testing Connection
 
 The admin panel includes a Sanity Status indicator that shows:
+
 - ✅ Connected (green) - Everything working
 - ⚠️ Issues (yellow) - Using fallback storage
 - ❌ Error (red) - Configuration problem
@@ -82,6 +83,7 @@ The admin panel includes a Sanity Status indicator that shows:
 ### Debug Mode
 
 Check browser console for detailed logs about:
+
 - Sanity connection status
 - Project fetching attempts
 - Error messages and fallback behavior
