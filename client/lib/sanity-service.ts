@@ -77,7 +77,7 @@ export class SanityService {
       });
 
       console.log(
-        `�� Combined: ${sanityProjects.length} from Sanity + ${adminProjects.length} from admin storage = ${combined.length} total`,
+        `✅ Combined: ${sanityProjects.length} from Sanity + ${adminProjects.length} from admin storage = ${combined.length} total`,
       );
       return combined.sort(
         (a, b) =>
@@ -162,7 +162,8 @@ export class SanityService {
     }
 
     try {
-      const projects: SanityProject[] = await client.fetch(projectsQuery);
+      // Use publicClient for public read access
+      const projects: SanityProject[] = await publicClient.fetch(projectsQuery);
 
       if (projects.length === 0) {
         return [];
