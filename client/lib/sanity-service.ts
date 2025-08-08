@@ -88,6 +88,13 @@ export class SanityService {
       console.error("❌ Error fetching projects from Sanity:", error);
       if (error instanceof Error) {
         console.error("📝 Error details:", error.message);
+        // Check if it's a permission/authentication error
+        if (error.message.includes('Authentication') || error.message.includes('permission')) {
+          console.warn("🔒 Sanity authentication issue - check token permissions");
+        }
+        if (error.message.includes('CORS') || error.message.includes('fetch')) {
+          console.warn("🌐 Network/CORS issue - check domain allowlist in Sanity");
+        }
       }
       console.log(`📄 Fallback to admin storage (${adminProjects.length} projects)`);
       return adminProjects;
