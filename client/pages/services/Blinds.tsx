@@ -17,6 +17,7 @@ import {
   Sun,
   Zap,
   ArrowRight,
+  Users,
 } from "lucide-react";
 import { useState } from "react";
 import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
@@ -96,15 +97,15 @@ export default function Blinds() {
                   to="/projects"
                   className="inline-flex items-center justify-center rounded-lg bg-white text-sage-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-sage-50 transition-all duration-300 transform hover:scale-105"
                 >
-                  View Projects
+                  See All Services
                   <Eye className="ml-2 h-5 w-5" />
                 </Link>
                 <a
-                  href="tel:+44123456789"
-                  className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
+                  href="https://wa.me/44123456789"
+                  className="inline-flex items-center justify-center rounded-lg bg-green-600 text-white px-8 py-4 text-lg font-semibold hover:bg-green-700 transition-all duration-300 shadow-lg"
                 >
-                  <Phone className="mr-2 h-5 w-5" />
-                  Get Measured
+                  <MessageCircle className="mr-2 h-5 w-5" />
+                  WhatsApp Us
                 </a>
               </div>
 
@@ -234,7 +235,7 @@ export default function Blinds() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Why Choose Our Blinds Section */}
       <section className="py-20 bg-gradient-to-b from-sage-50 to-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -301,47 +302,139 @@ export default function Blinds() {
         </div>
       </section>
 
-      {/* Contact CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-sage-700 via-sage-600 to-sage-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold mb-6">
-              Ready for Perfect Blinds?
+      {/* Cross-sell Services Section */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-sage-800 mb-4">
+              Complete Your Space
             </h2>
-            <p className="text-xl text-sage-100 mb-12 max-w-3xl mx-auto">
-              Book a free home consultation for precise measurements and expert advice. Custom-made blinds with professional installation.
+            <p className="text-xl text-sage-600 max-w-3xl mx-auto">
+              Enhance your blinds with our premium wallpapers and flooring solutions
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a
-                href="tel:+44123456789"
-                className="inline-flex items-center justify-center rounded-lg bg-white text-sage-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-sage-50 transition-all duration-300 transform hover:scale-105"
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                Book Free Consultation
-              </a>
-              <a
-                href="https://wa.me/44123456789"
-                className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
-              >
-                <MessageCircle className="mr-2 h-5 w-5" />
-                WhatsApp Quote
-              </a>
-            </div>
+          </div>
 
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cream-200 mb-2">Free</div>
-                <div className="text-sage-200">Home Measurement</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Link
+              to="/services/wallpapers"
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+            >
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <img
+                  src="/images/services/wallpapers-hero.svg"
+                  alt="Premium Wallpapers"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "/placeholder.svg";
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  5-Year Warranty
+                </div>
+                <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <ArrowRight className="h-8 w-8" />
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cream-200 mb-2">7-10</div>
-                <div className="text-sage-200">Days Delivery</div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6">
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  Premium Wallpapers
+                </h3>
+                <p className="text-white/90 text-sm mb-4">
+                  Designer wallpapers that complement your window treatments perfectly
+                </p>
+                <div className="flex items-center text-white/80 text-sm">
+                  <Users className="h-4 w-4 mr-2" />
+                  1000+ Designs Available
+                </div>
               </div>
+            </Link>
+
+            <Link
+              to="/services/flooring"
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+            >
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <img
+                  src="/images/services/flooring-hero.svg"
+                  alt="Premium Flooring"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "/placeholder.svg";
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  15-Year Warranty
+                </div>
+                <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <ArrowRight className="h-8 w-8" />
+                </div>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6">
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  Premium Flooring
+                </h3>
+                <p className="text-white/90 text-sm mb-4">
+                  Waterproof vinyl flooring and artificial grass solutions
+                </p>
+                <div className="flex items-center text-white/80 text-sm">
+                  <Users className="h-4 w-4 mr-2" />
+                  500+ Installations
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA Section */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-600 via-green-500 to-green-700 rounded-3xl transform rotate-1"></div>
+            <div className="relative bg-gradient-to-br from-green-600 via-green-500 to-green-700 rounded-3xl p-12 text-white">
               <div className="text-center">
-                <div className="text-3xl font-bold text-cream-200 mb-2">2 Year</div>
-                <div className="text-sage-200">Full Warranty</div>
+                <h2 className="text-4xl font-bold mb-6">
+                  Ready for Perfect Blinds?
+                </h2>
+                <p className="text-xl text-green-100 mb-12 max-w-3xl mx-auto">
+                  Book a free home consultation for precise measurements and expert advice. Custom-made blinds with professional installation.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                  <a
+                    href="tel:+44123456789"
+                    className="inline-flex items-center justify-center rounded-lg bg-white text-green-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-green-50 transition-all duration-300 transform hover:scale-105"
+                  >
+                    <Phone className="mr-2 h-5 w-5" />
+                    Book Free Consultation
+                  </a>
+                  <a
+                    href="https://wa.me/44123456789"
+                    className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
+                  >
+                    <MessageCircle className="mr-2 h-5 w-5" />
+                    WhatsApp Quote
+                  </a>
+                </div>
+
+                <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-green-100 mb-2">Free</div>
+                    <div className="text-green-200">Home Measurement</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-green-100 mb-2">7-10</div>
+                    <div className="text-green-200">Days Delivery</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-green-100 mb-2">2 Year</div>
+                    <div className="text-green-200">Full Warranty</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
