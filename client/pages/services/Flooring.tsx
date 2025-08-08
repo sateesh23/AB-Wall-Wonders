@@ -93,7 +93,9 @@ export default function Flooring() {
             </h1>
 
             <p className="mt-6 text-xl leading-8 text-sage-600 max-w-3xl mx-auto mb-8">
-              Discover sleek, durable, and timeless interior flooring options that bring character and comfort to every room. Guaranteed to last with a 2-year warranty.
+              Discover sleek, durable, and timeless interior flooring options
+              that bring character and comfort to every room. Guaranteed to last
+              with a 2-year warranty.
             </p>
 
             {/* Service Labels */}
@@ -280,7 +282,8 @@ export default function Flooring() {
             {[
               {
                 name: "Scratch-Resistant",
-                description: "Advanced surface protection against daily wear and scratches",
+                description:
+                  "Advanced surface protection against daily wear and scratches",
                 icon: Shield,
               },
               {
@@ -307,7 +310,8 @@ export default function Flooring() {
               },
               {
                 name: "Installed in 48 Hours",
-                description: "Quick professional installation with minimal disruption",
+                description:
+                  "Quick professional installation with minimal disruption",
                 icon: Clock,
               },
             ].map((feature, index) => {

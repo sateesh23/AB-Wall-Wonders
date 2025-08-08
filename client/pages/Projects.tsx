@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { CTACard } from "@/components/ui/cta-card";
 import { ProjectsSection } from "@/components/ui/projects-section";
 
-
 import {
   Phone,
   MessageCircle,
@@ -94,9 +93,9 @@ export default function Projects() {
               Our Project Portfolio
             </h1>
             <p className="text-xl md:text-2xl text-primary/70 max-w-2xl mx-auto">
-              Professional Wallpapers, Blinds & Flooring Services across Andhra Pradesh
+              Professional Wallpapers, Blinds & Flooring Services across Andhra
+              Pradesh
             </p>
-
 
             {/* Trust Badges */}
             <div className="flex flex-wrap justify-center gap-4 py-6">
@@ -155,8 +154,6 @@ export default function Projects() {
             </p>
           </div>
 
-
-
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             <Button
@@ -210,16 +207,18 @@ export default function Projects() {
           )}
 
           {/* No Results Message */}
-          {!loading && !error && filteredProjects.length === 0 && projects.length > 0 && (
-            <div className="text-center py-12">
-              <p className="text-xl text-muted-foreground">
-                No projects found in this category.
-              </p>
-            </div>
-          )}
+          {!loading &&
+            !error &&
+            filteredProjects.length === 0 &&
+            projects.length > 0 && (
+              <div className="text-center py-12">
+                <p className="text-xl text-muted-foreground">
+                  No projects found in this category.
+                </p>
+              </div>
+            )}
         </div>
       </section>
-
 
       {/* Bottom CTA Section */}
       <CTACard

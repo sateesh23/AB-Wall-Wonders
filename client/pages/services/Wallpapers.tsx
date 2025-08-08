@@ -26,8 +26,14 @@ import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
 const wallpaperTypes = [
   {
     name: "3D Wallpapers",
-    description: "Premium 3D textured wallpapers that create stunning visual depth and dimension",
-    features: ["3D Visual Effects", "Texture Feel", "Premium Quality", "5-year warranty"],
+    description:
+      "Premium 3D textured wallpapers that create stunning visual depth and dimension",
+    features: [
+      "3D Visual Effects",
+      "Texture Feel",
+      "Premium Quality",
+      "5-year warranty",
+    ],
     badge: "Most Popular",
     perfect: "Living rooms, feature walls, offices",
     image: "/images/services/wallpapers/types/3d-wallpaper.jpg",
@@ -35,8 +41,14 @@ const wallpaperTypes = [
   },
   {
     name: "Botanical Wallpapers",
-    description: "Natural botanical designs that bring the beauty of nature indoors",
-    features: ["Natural Designs", "Eco-Friendly", "Fade Resistant", "5-year warranty"],
+    description:
+      "Natural botanical designs that bring the beauty of nature indoors",
+    features: [
+      "Natural Designs",
+      "Eco-Friendly",
+      "Fade Resistant",
+      "5-year warranty",
+    ],
     badge: "Eco-Friendly",
     perfect: "Bedrooms, dining rooms, spas",
     image: "/images/services/wallpapers/types/botanical-wallpaper.jpg",
@@ -44,8 +56,14 @@ const wallpaperTypes = [
   },
   {
     name: "Embossing Wallpapers",
-    description: "Textured finish with premium feel and sophisticated appearance",
-    features: ["Raised Textures", "Luxury Feel", "Durable Finish", "5-year warranty"],
+    description:
+      "Textured finish with premium feel and sophisticated appearance",
+    features: [
+      "Raised Textures",
+      "Luxury Feel",
+      "Durable Finish",
+      "5-year warranty",
+    ],
     badge: "Premium Quality",
     perfect: "Living rooms, bedrooms, offices",
     image: "/images/services/wallpapers/types/embossing-wallpaper.jpg",
@@ -53,8 +71,14 @@ const wallpaperTypes = [
   },
   {
     name: "Geometric Wallpapers",
-    description: "Modern geometric patterns perfect for contemporary and minimalist spaces",
-    features: ["Contemporary Design", "Pattern Precision", "Washable Surface", "5-year warranty"],
+    description:
+      "Modern geometric patterns perfect for contemporary and minimalist spaces",
+    features: [
+      "Contemporary Design",
+      "Pattern Precision",
+      "Washable Surface",
+      "5-year warranty",
+    ],
     badge: "Modern Choice",
     perfect: "Modern homes, offices, studios",
     image: "/images/services/wallpapers/types/geometric-wallpaper.jpg",
@@ -62,8 +86,14 @@ const wallpaperTypes = [
   },
   {
     name: "Modern Wallpapers",
-    description: "Sleek contemporary designs that complement modern interior aesthetics",
-    features: ["Minimalist Style", "Clean Lines", "Easy Application", "5-year warranty"],
+    description:
+      "Sleek contemporary designs that complement modern interior aesthetics",
+    features: [
+      "Minimalist Style",
+      "Clean Lines",
+      "Easy Application",
+      "5-year warranty",
+    ],
     badge: "Contemporary",
     perfect: "Modern apartments, offices, studios",
     image: "/images/services/wallpapers/types/modern-wallpaper.jpg",
@@ -71,8 +101,14 @@ const wallpaperTypes = [
   },
   {
     name: "Mural Wallpapers",
-    description: "Large-scale artistic murals that transform entire walls into stunning focal points",
-    features: ["Custom Artwork", "Large Format", "Photo Quality", "5-year warranty"],
+    description:
+      "Large-scale artistic murals that transform entire walls into stunning focal points",
+    features: [
+      "Custom Artwork",
+      "Large Format",
+      "Photo Quality",
+      "5-year warranty",
+    ],
     badge: "Artistic",
     perfect: "Feature walls, lobbies, creative spaces",
     image: "/images/services/wallpapers/types/mural-wallpaper.jpg",
@@ -80,8 +116,14 @@ const wallpaperTypes = [
   },
   {
     name: "Striped Wallpapers",
-    description: "Classic striped patterns that add elegance and visual height to any room",
-    features: ["Classic Patterns", "Visual Height", "Timeless Appeal", "5-year warranty"],
+    description:
+      "Classic striped patterns that add elegance and visual height to any room",
+    features: [
+      "Classic Patterns",
+      "Visual Height",
+      "Timeless Appeal",
+      "5-year warranty",
+    ],
     badge: "Classic",
     perfect: "Traditional homes, dining rooms, studies",
     image: "/images/services/wallpapers/types/striped-wallpaper.jpg",
@@ -89,8 +131,14 @@ const wallpaperTypes = [
   },
   {
     name: "Traditional Wallpapers",
-    description: "Timeless patterns and designs that bring classic elegance to your space",
-    features: ["Heritage Designs", "Premium Materials", "Classic Appeal", "5-year warranty"],
+    description:
+      "Timeless patterns and designs that bring classic elegance to your space",
+    features: [
+      "Heritage Designs",
+      "Premium Materials",
+      "Classic Appeal",
+      "5-year warranty",
+    ],
     badge: "Heritage",
     perfect: "Traditional homes, formal dining, studies",
     image: "/images/services/wallpapers/types/traditional-wallpaper.jpg",
@@ -122,7 +170,9 @@ export default function Wallpapers() {
             </h1>
 
             <p className="mt-6 text-xl leading-8 text-sage-600 max-w-3xl mx-auto mb-8">
-              Transform plain walls into bold expressions with our curated wallpaper collections. Enjoy worry-free beauty with a 5-year warranty.
+              Transform plain walls into bold expressions with our curated
+              wallpaper collections. Enjoy worry-free beauty with a 5-year
+              warranty.
             </p>
 
             {/* Service Labels */}
@@ -309,12 +359,14 @@ export default function Wallpapers() {
             {[
               {
                 name: "Designer Patterns",
-                description: "Curated collection of premium designer wallpaper patterns",
+                description:
+                  "Curated collection of premium designer wallpaper patterns",
                 icon: Brush,
               },
               {
                 name: "Moisture-Resistant",
-                description: "Advanced moisture protection for long-lasting beauty",
+                description:
+                  "Advanced moisture protection for long-lasting beauty",
                 icon: Droplets,
               },
               {
@@ -324,17 +376,20 @@ export default function Wallpapers() {
               },
               {
                 name: "Washable Surface",
-                description: "Easy-to-clean surfaces that maintain their appearance",
+                description:
+                  "Easy-to-clean surfaces that maintain their appearance",
                 icon: Sparkles,
               },
               {
                 name: "5-Year Warranty Coverage",
-                description: "Comprehensive warranty protection for peace of mind",
+                description:
+                  "Comprehensive warranty protection for peace of mind",
                 icon: Trophy,
               },
               {
                 name: "Expert Installation",
-                description: "Professional installation ensuring perfect alignment",
+                description:
+                  "Professional installation ensuring perfect alignment",
                 icon: Award,
               },
             ].map((feature, index) => {

@@ -27,7 +27,12 @@ const blindTypes = [
   {
     name: "Bamboo Outdoor Blinds",
     description: "Natural bamboo blinds perfect for outdoor spaces and patios",
-    features: ["Weather Resistant", "Natural Material", "UV Protection", "2-year warranty"],
+    features: [
+      "Weather Resistant",
+      "Natural Material",
+      "UV Protection",
+      "2-year warranty",
+    ],
     badge: "Outdoor Specialist",
     perfect: "Patios, balconies, outdoor dining",
     image: "/images/services/blinds/types/bamboo-outdoor-blinds.jpg",
@@ -35,8 +40,14 @@ const blindTypes = [
   },
   {
     name: "Cellular Shades",
-    description: "Energy-efficient cellular shades that provide excellent insulation",
-    features: ["Energy Efficient", "Insulation", "Light Filtering", "2-year warranty"],
+    description:
+      "Energy-efficient cellular shades that provide excellent insulation",
+    features: [
+      "Energy Efficient",
+      "Insulation",
+      "Light Filtering",
+      "2-year warranty",
+    ],
     badge: "Energy Saver",
     perfect: "Bedrooms, offices, energy-conscious homes",
     image: "/images/services/blinds/types/cellular-shades.jpg",
@@ -44,7 +55,8 @@ const blindTypes = [
   },
   {
     name: "Customized Blinds",
-    description: "Fully customized blinds tailored to your specific requirements",
+    description:
+      "Fully customized blinds tailored to your specific requirements",
     features: ["Custom Design", "Perfect Fit", "Any Size", "2-year warranty"],
     badge: "Most Popular",
     perfect: "Unique windows, special requirements",
@@ -53,8 +65,14 @@ const blindTypes = [
   },
   {
     name: "PVC Exterior Blinds",
-    description: "Durable PVC blinds designed for exterior use and weather protection",
-    features: ["Weather Proof", "Easy Maintenance", "Long Lasting", "2-year warranty"],
+    description:
+      "Durable PVC blinds designed for exterior use and weather protection",
+    features: [
+      "Weather Proof",
+      "Easy Maintenance",
+      "Long Lasting",
+      "2-year warranty",
+    ],
     badge: "Weather Resistant",
     perfect: "Exterior windows, harsh weather areas",
     image: "/images/services/blinds/types/pvc-exterior-blinds.jpg",
@@ -62,8 +80,14 @@ const blindTypes = [
   },
   {
     name: "Roller Blinds",
-    description: "Sleek and modern roller blinds perfect for any window in your home",
-    features: ["Easy Operation", "Light Control", "Privacy Protection", "2-year warranty"],
+    description:
+      "Sleek and modern roller blinds perfect for any window in your home",
+    features: [
+      "Easy Operation",
+      "Light Control",
+      "Privacy Protection",
+      "2-year warranty",
+    ],
     badge: "Classic Choice",
     perfect: "Living rooms, bedrooms, offices",
     image: "/images/services/blinds/types/roller-blinds.jpg",
@@ -71,8 +95,14 @@ const blindTypes = [
   },
   {
     name: "Roman Blinds",
-    description: "Elegant Roman blinds that add sophisticated charm to any space",
-    features: ["Elegant Design", "Soft Fabrics", "Luxurious Look", "2-year warranty"],
+    description:
+      "Elegant Roman blinds that add sophisticated charm to any space",
+    features: [
+      "Elegant Design",
+      "Soft Fabrics",
+      "Luxurious Look",
+      "2-year warranty",
+    ],
     badge: "Luxury",
     perfect: "Formal spaces, living rooms, bedrooms",
     image: "/images/services/blinds/types/roman-blinds.jpg",
@@ -81,7 +111,12 @@ const blindTypes = [
   {
     name: "Wooden Blinds",
     description: "Premium wooden blinds that add natural elegance to any space",
-    features: ["Natural Wood", "Adjustable Slats", "Durable Finish", "2-year warranty"],
+    features: [
+      "Natural Wood",
+      "Adjustable Slats",
+      "Durable Finish",
+      "2-year warranty",
+    ],
     badge: "Eco-Friendly",
     perfect: "Traditional homes, offices, dining rooms",
     image: "/images/services/blinds/types/wooden-blinds.jpg",
@@ -89,8 +124,14 @@ const blindTypes = [
   },
   {
     name: "Zebra Blinds",
-    description: "Modern zebra blinds offering versatile light control and privacy options",
-    features: ["Dual Function", "Light Filtering", "Easy Adjustment", "2-year warranty"],
+    description:
+      "Modern zebra blinds offering versatile light control and privacy options",
+    features: [
+      "Dual Function",
+      "Light Filtering",
+      "Easy Adjustment",
+      "2-year warranty",
+    ],
     badge: "Modern Choice",
     perfect: "Modern homes, offices, study rooms",
     image: "/images/services/blinds/types/zebra-blinds.jpg",
@@ -122,7 +163,9 @@ export default function Blinds() {
             </h1>
 
             <p className="mt-6 text-xl leading-8 text-sage-600 max-w-3xl mx-auto mb-8">
-              Effortlessly control light and enhance aesthetics with our premium blinds. Designed for elegance and built to last – backed by a 2-year warranty.
+              Effortlessly control light and enhance aesthetics with our premium
+              blinds. Designed for elegance and built to last – backed by a
+              2-year warranty.
             </p>
 
             {/* Service Labels */}
@@ -186,8 +229,8 @@ export default function Blinds() {
               Our Blinds Collection
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
-              Choose from our premium range of blinds options, each designed
-              for specific light control and privacy needs
+              Choose from our premium range of blinds options, each designed for
+              specific light control and privacy needs
             </p>
           </div>
 
@@ -309,22 +352,26 @@ export default function Blinds() {
             {[
               {
                 name: "Made to Measure",
-                description: "Precisely fitted to your windows for perfect coverage",
+                description:
+                  "Precisely fitted to your windows for perfect coverage",
                 icon: Target,
               },
               {
                 name: "50+ Color Options",
-                description: "Wide range of colors and materials to match your decor",
+                description:
+                  "Wide range of colors and materials to match your decor",
                 icon: Palette,
               },
               {
                 name: "Professional Fitting",
-                description: "Expert installation ensuring smooth operation and longevity",
+                description:
+                  "Expert installation ensuring smooth operation and longevity",
                 icon: Wrench,
               },
               {
                 name: "UV Protection",
-                description: "Advanced fabrics that protect furniture from sun damage",
+                description:
+                  "Advanced fabrics that protect furniture from sun damage",
                 icon: Sun,
               },
               {
@@ -334,7 +381,8 @@ export default function Blinds() {
               },
               {
                 name: "Quick Installation",
-                description: "Professional installation with minimal disruption",
+                description:
+                  "Professional installation with minimal disruption",
                 icon: Zap,
               },
             ].map((feature, index) => {
