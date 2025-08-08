@@ -1,5 +1,6 @@
 import {
   client,
+  publicClient,
   projectsQuery,
   featuredProjectsQuery,
   recentProjectsQuery,
@@ -32,7 +33,7 @@ export class SanityService {
         projectId: result.projectId,
         dataset: result.dataset,
         environment: result.environment,
-        hasToken: result.hasToken
+        hasToken: result.hasToken,
       });
     } else {
       console.log("⚠️ Sanity connection issue:", {
@@ -40,7 +41,7 @@ export class SanityService {
         projectId: result.projectId,
         dataset: result.dataset,
         environment: result.environment,
-        hasToken: result.hasToken
+        hasToken: result.hasToken,
       });
       console.log("📄 Using admin storage fallback for projects.");
     }
@@ -62,7 +63,8 @@ export class SanityService {
 
     try {
       console.log("🔍 Fetching projects from Sanity...");
-      const projects: SanityProject[] = await client.fetch(projectsQuery);
+      // Use publicClient for read operations to ensure public access
+      const projects: SanityProject[] = await publicClient.fetch(projectsQuery);
       const sanityProjects = projects.map(this.convertToProjectData);
       console.log(`📊 Found ${sanityProjects.length} projects in Sanity`);
 
@@ -86,8 +88,24 @@ export class SanityService {
       console.error("❌ Error fetching projects from Sanity:", error);
       if (error instanceof Error) {
         console.error("📝 Error details:", error.message);
+        // Check if it's a permission/authentication error
+        if (
+          error.message.includes("Authentication") ||
+          error.message.includes("permission")
+        ) {
+          console.warn(
+            "🔒 Sanity authentication issue - check token permissions",
+          );
+        }
+        if (error.message.includes("CORS") || error.message.includes("fetch")) {
+          console.warn(
+            "🌐 Network/CORS issue - check domain allowlist in Sanity",
+          );
+        }
       }
-      console.log(`📄 Fallback to admin storage (${adminProjects.length} projects)`);
+      console.log(
+        `📄 Fallback to admin storage (${adminProjects.length} projects)`,
+      );
       return adminProjects;
     }
   }
@@ -160,7 +178,8 @@ export class SanityService {
     }
 
     try {
-      const projects: SanityProject[] = await client.fetch(projectsQuery);
+      // Use publicClient for public read access
+      const projects: SanityProject[] = await publicClient.fetch(projectsQuery);
 
       if (projects.length === 0) {
         return [];
@@ -194,7 +213,10 @@ export class SanityService {
     }
 
     try {
-      const sanityCount = await client.fetch('count(*[_type == "project"])');
+      // Use publicClient to test public access
+      const sanityCount = await publicClient.fetch(
+        'count(*[_type == "project"])',
+      );
       const totalCount = sanityCount + adminStats.totalProjects;
       return {
         connected: true,
@@ -274,9 +296,14 @@ export class SanityService {
           }),
         };
 
-        console.log("📝 Creating project in Sanity...", { title: projectData.title });
+        console.log("📝 Creating project in Sanity...", {
+          title: projectData.title,
+        });
         const result = await client.create(doc);
-        console.log("✅ Project created successfully in Sanity:", { id: result._id, title: projectData.title });
+        console.log("✅ Project created successfully in Sanity:", {
+          id: result._id,
+          title: projectData.title,
+        });
 
         // Reset connection cache to force refresh
         this.connectionTested = false;
@@ -286,7 +313,7 @@ export class SanityService {
         console.warn("❌ Sanity creation failed:", {
           error: error instanceof Error ? error.message : String(error),
           projectTitle: projectData.title,
-          fallback: "admin storage"
+          fallback: "admin storage",
         });
         // Fall through to admin storage
       }
