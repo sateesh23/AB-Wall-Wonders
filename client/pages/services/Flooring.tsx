@@ -18,7 +18,7 @@ import {
   Wrench,
   Clock,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
 
 const flooringTypes = [
@@ -72,11 +72,16 @@ const flooringTypes = [
 export default function Flooring() {
   const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-white text-sage-800">
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+        <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-20 sm:px-6 lg:px-8 lg:pt-20 lg:pb-28">
           <div className="text-center">
             <div className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200 mb-6">
               <Droplets className="mr-2 h-4 w-4" />
@@ -92,7 +97,7 @@ export default function Flooring() {
             </p>
 
             {/* Service Labels */}
-            <div className="flex flex-wrap gap-3 justify-center mb-10">
+            <div className="flex flex-wrap gap-3 justify-center mb-8">
               <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
                 <CheckCircle className="mr-2 h-4 w-4" />
                 Scratch-Resistant
@@ -111,7 +116,20 @@ export default function Flooring() {
               </span>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            {/* Stats moved above CTA buttons */}
+            <div className="grid grid-cols-2 gap-8 max-w-md mx-auto mb-8">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-green-700">100+</div>
+                <div className="text-sage-600">Happy Families</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-green-700">2 Years</div>
+                <div className="text-sage-600">Of Establishment</div>
+              </div>
+            </div>
+
+            {/* CTA Buttons - side by side on mobile */}
+            <div className="flex flex-row gap-4 justify-center">
               <a
                 href="https://wa.me/44123456789"
                 className="inline-flex items-center justify-center rounded-full bg-green-700 text-white px-6 py-3 text-base font-semibold shadow-lg hover:bg-green-800 transition-all duration-300 transform hover:scale-105"
@@ -126,17 +144,6 @@ export default function Flooring() {
                 <Eye className="mr-2 h-4 w-4" />
                 Explore All Services
               </Link>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-md mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-700">100+</div>
-                <div className="text-sage-600">Happy Families</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-700">2 Years</div>
-                <div className="text-sage-600">Of Establishment</div>
-              </div>
             </div>
           </div>
         </div>
@@ -177,9 +184,6 @@ export default function Flooring() {
                       {type.badge}
                     </Badge>
                   )}
-                  <div className="absolute top-4 right-4 bg-green-700 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    2-Year Warranty
-                  </div>
                   <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                       <ArrowRight className="h-6 w-6 text-white" />
@@ -235,19 +239,22 @@ export default function Flooring() {
                     </div>
                   </div>
 
+                  {/* Updated card buttons */}
                   <div className="flex gap-3">
-                    <Link
-                      to="/projects"
+                    <a
+                      href="https://wa.me/44123456789"
                       className="flex-1 inline-flex items-center justify-center rounded-full bg-green-700 text-white px-4 py-2 text-sm font-semibold hover:bg-green-800 transition-colors"
                     >
-                      View Projects
-                    </Link>
-                    <a
-                      href="tel:+44123456789"
+                      <MessageCircle className="mr-2 h-4 w-4" />
+                      WhatsApp Us
+                    </a>
+                    <Link
+                      to="/projects"
                       className="inline-flex items-center justify-center rounded-full border border-green-700 bg-white text-green-700 px-4 py-2 text-sm font-semibold hover:bg-green-50 transition-colors"
                     >
-                      <Phone className="h-4 w-4" />
-                    </a>
+                      <Eye className="mr-2 h-4 w-4" />
+                      See Projects
+                    </Link>
                   </div>
                 </CardContent>
               </Card>
@@ -355,9 +362,6 @@ export default function Flooring() {
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute top-4 right-4 bg-green-700 text-white px-3 py-1 rounded-full text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  5-Year Warranty
-                </div>
                 <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <ArrowRight className="h-8 w-8" />
                 </div>
@@ -392,9 +396,6 @@ export default function Flooring() {
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute top-4 right-4 bg-green-700 text-white px-3 py-1 rounded-full text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  2-Year Warranty
-                </div>
                 <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <ArrowRight className="h-8 w-8" />
                 </div>
