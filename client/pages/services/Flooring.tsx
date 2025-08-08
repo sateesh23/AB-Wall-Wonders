@@ -14,8 +14,11 @@ import {
   Zap,
   ArrowRight,
   Users,
+  Eye,
+  Wrench,
+  Clock,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
 
 const flooringTypes = [
@@ -27,7 +30,7 @@ const flooringTypes = [
       "100% Waterproof",
       "Scratch resistant",
       "Easy installation",
-      "15-year warranty",
+      "2-year warranty",
     ],
     badge: "Most Popular",
     perfect: "Bathrooms, kitchens, living rooms",
@@ -42,7 +45,7 @@ const flooringTypes = [
       "UV resistant",
       "No watering needed",
       "Pet-friendly",
-      "All-weather durability",
+      "2-year warranty",
     ],
     badge: "Eco-Friendly",
     perfect: "Gardens, balconies, play areas",
@@ -57,7 +60,7 @@ const flooringTypes = [
       "Shock absorption",
       "Anti-fatigue",
       "Chemical resistant",
-      "Non-slip backing",
+      "2-year warranty",
     ],
     badge: "Safety First",
     perfect: "Commercial kitchens and work areas",
@@ -69,83 +72,80 @@ const flooringTypes = [
 export default function Flooring() {
   const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sage-50 via-white to-cream-50">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-sage-700 via-sage-600 to-sage-800 text-white">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-sage-700/90 to-transparent"></div>
+      <section className="relative overflow-hidden bg-white text-sage-800">
+        <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-32 sm:px-6 lg:px-8 lg:pt-20 lg:pb-40">
+          <div className="text-center">
+            <div className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200 mb-6">
+              <Droplets className="mr-2 h-4 w-4" />
+              Interior Flooring
+            </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="flex-1 text-center lg:text-left">
-              <div className="inline-flex items-center rounded-full bg-sage-600/20 backdrop-blur-sm px-4 py-2 text-sm font-medium text-sage-100 border border-sage-500/30 mb-6">
-                <Droplets className="mr-2 h-4 w-4" />
-                Waterproof & Durable Solutions
+            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl mb-6 text-green-700">
+              Elevate Your Space from the Ground Up
+            </h1>
+
+            <p className="mt-6 text-xl leading-8 text-sage-600 max-w-3xl mx-auto mb-8">
+              Discover sleek, durable, and timeless interior flooring options
+              that bring character and comfort to every room. Guaranteed to last
+              with a 2-year warranty.
+            </p>
+
+            {/* Service Labels */}
+            <div className="flex flex-wrap gap-3 justify-center mb-8">
+              <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
+                <CheckCircle className="mr-2 h-4 w-4" />
+                Scratch-Resistant
+              </span>
+              <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
+                <Leaf className="mr-2 h-4 w-4" />
+                Eco-Friendly Materials
+              </span>
+              <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
+                <Wrench className="mr-2 h-4 w-4" />
+                Expert Installation
+              </span>
+              <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
+                <Clock className="mr-2 h-4 w-4" />
+                Installed in 48 Hours
+              </span>
+            </div>
+
+            {/* Stats moved above CTA buttons */}
+            <div className="grid grid-cols-2 gap-8 max-w-md mx-auto mb-8">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-green-700">100+</div>
+                <div className="text-sage-600">Happy Families</div>
               </div>
-
-              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-                Premium
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cream-200 to-sage-200">
-                  Flooring
-                </span>
-                Solutions
-              </h1>
-
-              <p className="mt-6 text-xl leading-8 text-sage-100 max-w-2xl mx-auto lg:mx-0">
-                Transform your space with our high-quality vinyl flooring,
-                artificial grass, and safety mats. Professional installation
-                with lifetime warranty.
-              </p>
-
-              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link
-                  to="/projects"
-                  className="inline-flex items-center justify-center rounded-lg bg-white text-sage-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-sage-50 transition-all duration-300 transform hover:scale-105"
-                >
-                  View Our Work
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-                <a
-                  href="tel:+44123456789"
-                  className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
-                >
-                  <Phone className="mr-2 h-5 w-5" />
-                  Get Quote
-                </a>
-              </div>
-
-              <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-md mx-auto lg:mx-0">
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cream-200">500+</div>
-                  <div className="text-sage-200">Projects Completed</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cream-200">15+</div>
-                  <div className="text-sage-200">Years Experience</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cream-200">100%</div>
-                  <div className="text-sage-200">Satisfaction Rate</div>
-                </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-green-700">2 Years</div>
+                <div className="text-sage-600">Of Establishment</div>
               </div>
             </div>
 
-            <div className="flex-1 relative">
-              <div className="relative mx-auto max-w-lg">
-                <div className="absolute -inset-4 bg-gradient-to-r from-sage-500 to-sage-400 rounded-2xl blur-2xl opacity-30 animate-pulse"></div>
-                <div className="relative">
-                  <img
-                    src="/images/services/flooring-hero.svg"
-                    alt="Premium Flooring Services"
-                    className="w-full h-auto rounded-2xl shadow-2xl"
-                    onLoad={() =>
-                      setImagesLoaded((prev) => ({ ...prev, hero: true }))
-                    }
-                  />
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-sage-900/20 to-transparent"></div>
-                </div>
-              </div>
+            {/* CTA Buttons - side by side on mobile */}
+            <div className="flex flex-row gap-4 justify-center">
+              <a
+                href="https://wa.me/44123456789"
+                className="inline-flex items-center justify-center rounded-full bg-green-700 text-white px-6 py-3 text-base font-semibold shadow-lg hover:bg-green-800 transition-all duration-300 transform hover:scale-105"
+              >
+                <MessageCircle className="mr-2 h-4 w-4" />
+                WhatsApp Us
+              </a>
+              <Link
+                to="/projects"
+                className="inline-flex items-center justify-center rounded-full border-2 border-green-700 bg-white text-green-700 px-6 py-3 text-base font-semibold hover:bg-green-50 transition-all duration-300"
+              >
+                <Eye className="mr-2 h-4 w-4" />
+                Explore All Services
+              </Link>
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@ export default function Flooring() {
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-sage-800 mb-4">
+            <h2 className="text-4xl font-bold text-green-700 mb-4">
               Our Flooring Solutions
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
@@ -168,7 +168,7 @@ export default function Flooring() {
             {flooringTypes.map((type, index) => (
               <Card
                 key={index}
-                className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-gradient-to-b from-white to-sage-50"
+                className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-sage-200 bg-white shadow-lg"
               >
                 <div className="aspect-[4/3] relative overflow-hidden">
                   <img
@@ -182,7 +182,7 @@ export default function Flooring() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   {type.badge && (
-                    <Badge className="absolute top-4 left-4 bg-sage-600 text-white border-0 shadow-lg">
+                    <Badge className="absolute top-4 left-4 bg-green-700 text-white border-0 shadow-lg">
                       {type.badge}
                     </Badge>
                   )}
@@ -193,7 +193,7 @@ export default function Flooring() {
                   </div>
                 </div>
 
-                <CardContent className="p-6">
+                <CardContent className="p-6 bg-white">
                   <h3 className="text-2xl font-bold text-sage-800 mb-3 group-hover:text-sage-600 transition-colors">
                     {type.name}
                   </h3>
@@ -211,7 +211,7 @@ export default function Flooring() {
                           key={idx}
                           className="flex items-center text-sm text-sage-600"
                         >
-                          <CheckCircle className="h-4 w-4 text-sage-500 mr-2 flex-shrink-0" />
+                          <CheckCircle className="h-4 w-4 text-green-600 mr-2 flex-shrink-0" />
                           {feature}
                         </div>
                       ))}
@@ -241,19 +241,22 @@ export default function Flooring() {
                     </div>
                   </div>
 
+                  {/* Updated card buttons */}
                   <div className="flex gap-3">
+                    <a
+                      href="https://wa.me/44123456789"
+                      className="flex-1 inline-flex items-center justify-center rounded-full bg-green-700 text-white px-4 py-2 text-sm font-semibold hover:bg-green-800 transition-colors"
+                    >
+                      <MessageCircle className="mr-2 h-4 w-4" />
+                      WhatsApp Us
+                    </a>
                     <Link
                       to="/projects"
-                      className="flex-1 inline-flex items-center justify-center rounded-lg bg-sage-600 text-white px-4 py-3 text-sm font-semibold hover:bg-sage-700 transition-colors"
+                      className="inline-flex items-center justify-center rounded-full border border-green-700 bg-white text-green-700 px-4 py-2 text-sm font-semibold hover:bg-green-50 transition-colors"
                     >
-                      View Projects
+                      <Eye className="mr-2 h-4 w-4" />
+                      See Projects
                     </Link>
-                    <a
-                      href="tel:+44123456789"
-                      className="inline-flex items-center justify-center rounded-lg border border-sage-300 bg-white text-sage-700 px-4 py-3 text-sm font-semibold hover:bg-sage-50 transition-colors"
-                    >
-                      <Phone className="h-4 w-4" />
-                    </a>
                   </div>
                 </CardContent>
               </Card>
@@ -263,10 +266,10 @@ export default function Flooring() {
       </section>
 
       {/* Why Choose Our Flooring Section */}
-      <section className="py-20 bg-gradient-to-b from-sage-50 to-white">
+      <section className="py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-sage-800 mb-4">
+            <h2 className="text-4xl font-bold text-green-700 mb-4">
               Why Choose Our Flooring?
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
@@ -278,47 +281,49 @@ export default function Flooring() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                name: "Waterproof Technology",
-                description: "Advanced protection against moisture and spills",
-                icon: Droplets,
+                name: "Scratch-Resistant",
+                description:
+                  "Advanced surface protection against daily wear and scratches",
+                icon: Shield,
               },
               {
                 name: "Eco-Friendly Materials",
                 description:
-                  "Sustainable and environmentally conscious options",
+                  "Sustainable and environmentally conscious flooring options",
                 icon: Leaf,
               },
               {
-                name: "Quick Installation",
+                name: "Expert Installation",
                 description:
-                  "Professional installation with minimal disruption",
-                icon: Zap,
+                  "Professional installation by certified flooring specialists",
+                icon: Wrench,
               },
               {
-                name: "Durable Construction",
-                description: "Built to withstand daily wear and heavy traffic",
-                icon: Layers,
-              },
-              {
-                name: "Water Resistant",
+                name: "Waterproof Technology",
                 description: "Advanced protection against moisture and spills",
-                icon: Shield,
+                icon: Droplets,
               },
               {
                 name: "Easy Maintenance",
                 description: "Simple cleaning and long-lasting performance",
                 icon: CheckCircle,
               },
+              {
+                name: "Installed in 48 Hours",
+                description:
+                  "Quick professional installation with minimal disruption",
+                icon: Clock,
+              },
             ].map((feature, index) => {
               const IconComponent = feature.icon;
               return (
                 <div key={index} className="relative group">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-sage-600 to-sage-400 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                  <div className="relative bg-white rounded-2xl p-8 border border-sage-100 hover:border-sage-200 transition-all duration-300">
-                    <div className="w-12 h-12 bg-sage-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-sage-600 group-hover:text-white transition-all duration-300">
-                      <IconComponent className="h-6 w-6 text-sage-600 group-hover:text-white transition-colors duration-300" />
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-green-600 to-green-400 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                  <div className="relative bg-white rounded-2xl p-8 border border-sage-100 hover:border-green-200 transition-all duration-300 shadow-lg">
+                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-700 group-hover:text-white transition-all duration-300">
+                      <IconComponent className="h-6 w-6 text-green-700 group-hover:text-white transition-colors duration-300" />
                     </div>
-                    <h3 className="text-xl font-bold text-sage-800 mb-3 group-hover:text-sage-600 transition-colors">
+                    <h3 className="text-xl font-bold text-sage-800 mb-3 group-hover:text-green-700 transition-colors">
                       {feature.name}
                     </h3>
                     <p className="text-sage-600 leading-relaxed">
@@ -336,7 +341,7 @@ export default function Flooring() {
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-sage-800 mb-4">
+            <h2 className="text-4xl font-bold text-green-700 mb-4">
               Complete Your Space
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
@@ -357,27 +362,17 @@ export default function Flooring() {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    console.error(
-                      "Failed to load wallpaper image:",
-                      target.src,
-                    );
                     target.src = "/placeholder.svg";
-                  }}
-                  onLoad={() => {
-                    console.log("Wallpaper image loaded successfully");
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  5-Year Warranty
-                </div>
                 <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <ArrowRight className="h-8 w-8" />
                 </div>
               </div>
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6">
                 <h3 className="text-2xl font-bold text-white mb-2">
-                  Premium Wallpapers
+                  Wallpapers
                 </h3>
                 <p className="text-white/90 text-sm mb-4">
                   Designer wallpapers that complement your new flooring
@@ -385,7 +380,7 @@ export default function Flooring() {
                 </p>
                 <div className="flex items-center text-white/80 text-sm">
                   <Users className="h-4 w-4 mr-2" />
-                  500+ Happy Customers
+                  Premium Quality
                 </div>
               </div>
             </Link>
@@ -401,31 +396,24 @@ export default function Flooring() {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    console.error("Failed to load blinds image:", target.src);
                     target.src = "/placeholder.svg";
-                  }}
-                  onLoad={() => {
-                    console.log("Blinds image loaded successfully");
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  2-Year Warranty
-                </div>
                 <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <ArrowRight className="h-8 w-8" />
                 </div>
               </div>
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6">
                 <h3 className="text-2xl font-bold text-white mb-2">
-                  Custom Blinds
+                  Window Blinds
                 </h3>
                 <p className="text-white/90 text-sm mb-4">
                   Precision-made blinds for the perfect finishing touch
                 </p>
                 <div className="flex items-center text-white/80 text-sm">
                   <Users className="h-4 w-4 mr-2" />
-                  Premium Installation
+                  Custom Made
                 </div>
               </div>
             </Link>
@@ -434,53 +422,36 @@ export default function Flooring() {
       </section>
 
       {/* Contact CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-sage-700 via-sage-600 to-sage-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold mb-6">
-              Ready to Transform Your Space?
-            </h2>
-            <p className="text-xl text-sage-100 mb-12 max-w-3xl mx-auto">
-              Get a free consultation and quote for your flooring project.
-              Professional installation with warranty included.
-            </p>
+      <section className="py-20 relative overflow-hidden bg-gray-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-700 via-green-600 to-green-800 rounded-3xl transform rotate-1"></div>
+            <div className="relative bg-gradient-to-br from-green-700 via-green-600 to-green-800 rounded-3xl p-12 text-white">
+              <div className="text-center">
+                <h2 className="text-4xl font-bold mb-6 text-white">
+                  Lets make you'r home feels Brand new
+                </h2>
+                <p className="text-xl text-green-100 mb-12 max-w-3xl mx-auto">
+                  Get a free consultation and quote for your flooring project.
+                  Professional installation with 2-year warranty included.
+                </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a
-                href="tel:+44123456789"
-                className="inline-flex items-center justify-center rounded-lg bg-white text-sage-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-sage-50 transition-all duration-300 transform hover:scale-105"
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                Call Now for Free Quote
-              </a>
-              <a
-                href="https://wa.me/44123456789"
-                className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
-              >
-                <MessageCircle className="mr-2 h-5 w-5" />
-                WhatsApp Us
-              </a>
-            </div>
-
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cream-200 mb-2">
-                  Free
+                <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                  <a
+                    href="https://wa.me/44123456789"
+                    className="inline-flex items-center justify-center rounded-full bg-white text-green-700 px-6 py-3 text-base font-semibold shadow-lg hover:bg-green-50 transition-all duration-300 transform hover:scale-105"
+                  >
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    Whatsapp Us
+                  </a>
+                  <a
+                    href="tel:+44123456789"
+                    className="inline-flex items-center justify-center rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-6 py-3 text-base font-semibold hover:bg-white/20 transition-all duration-300"
+                  >
+                    <Phone className="mr-2 h-4 w-4" />
+                    Our services
+                  </a>
                 </div>
-                <div className="text-sage-200">Consultation & Quote</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cream-200 mb-2">
-                  Same Day
-                </div>
-                <div className="text-sage-200">Site Visit Available</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cream-200 mb-2">
-                  15 Year
-                </div>
-                <div className="text-sage-200">Warranty Included</div>
               </div>
             </div>
           </div>

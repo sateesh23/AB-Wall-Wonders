@@ -2,7 +2,6 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { FastImage } from "@/components/ui/fast-image";
 
 import {
   Home,
@@ -10,133 +9,213 @@ import {
   MessageCircle,
   CheckCircle,
   Shield,
-  Award,
-  Clock,
-  Eye,
-  Smartphone,
+  Settings,
   Sun,
   Zap,
   ArrowRight,
+  Users,
+  Eye,
+  Target,
+  Palette,
+  Wrench,
+  Scissors,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
 
 const blindTypes = [
   {
-    name: "Roller Blinds",
-    description: "Sleek and modern roller blinds perfect for any window",
-    features: ["Easy operation", "Light control", "Privacy protection", "Multiple fabrics"],
+    name: "Bamboo Outdoor Blinds",
+    description: "Natural bamboo blinds perfect for outdoor spaces and patios",
+    features: [
+      "Weather Resistant",
+      "Natural Material",
+      "UV Protection",
+      "2-year warranty",
+    ],
+    badge: "Outdoor Specialist",
+    perfect: "Patios, balconies, outdoor dining",
+    image: "/images/services/blinds/types/bamboo-outdoor-blinds.jpg",
+    applications: ["Outdoor", "Patios", "Balconies"],
+  },
+  {
+    name: "Cellular Shades",
+    description:
+      "Energy-efficient cellular shades that provide excellent insulation",
+    features: [
+      "Energy Efficient",
+      "Insulation",
+      "Light Filtering",
+      "2-year warranty",
+    ],
+    badge: "Energy Saver",
+    perfect: "Bedrooms, offices, energy-conscious homes",
+    image: "/images/services/blinds/types/cellular-shades.jpg",
+    applications: ["Residential", "Energy Saving", "Comfort"],
+  },
+  {
+    name: "Customized Blinds",
+    description:
+      "Fully customized blinds tailored to your specific requirements",
+    features: ["Custom Design", "Perfect Fit", "Any Size", "2-year warranty"],
     badge: "Most Popular",
+    perfect: "Unique windows, special requirements",
+    image: "/images/services/blinds/types/customized-blinds.jpg",
+    applications: ["Custom Projects", "Special Sizes", "Unique Designs"],
+  },
+  {
+    name: "PVC Exterior Blinds",
+    description:
+      "Durable PVC blinds designed for exterior use and weather protection",
+    features: [
+      "Weather Proof",
+      "Easy Maintenance",
+      "Long Lasting",
+      "2-year warranty",
+    ],
+    badge: "Weather Resistant",
+    perfect: "Exterior windows, harsh weather areas",
+    image: "/images/services/blinds/types/pvc-exterior-blinds.jpg",
+    applications: ["Exterior", "Commercial", "Weather Protection"],
+  },
+  {
+    name: "Roller Blinds",
+    description:
+      "Sleek and modern roller blinds perfect for any window in your home",
+    features: [
+      "Easy Operation",
+      "Light Control",
+      "Privacy Protection",
+      "2-year warranty",
+    ],
+    badge: "Classic Choice",
     perfect: "Living rooms, bedrooms, offices",
     image: "/images/services/blinds/types/roller-blinds.jpg",
     applications: ["Residential", "Commercial", "Healthcare"],
   },
   {
-    name: "Venetian Blinds",
-    description: "Classic horizontal slat blinds for precise light control",
-    features: ["Adjustable slats", "Durable aluminum", "Easy cleaning", "Various colors"],
-    badge: "Classic Choice",
-    perfect: "Kitchens, bathrooms, offices",
-    image: "/images/services/blinds/types/venetian-blinds.jpg",
-    applications: ["Homes", "Offices", "Schools"],
+    name: "Roman Blinds",
+    description:
+      "Elegant Roman blinds that add sophisticated charm to any space",
+    features: [
+      "Elegant Design",
+      "Soft Fabrics",
+      "Luxurious Look",
+      "2-year warranty",
+    ],
+    badge: "Luxury",
+    perfect: "Formal spaces, living rooms, bedrooms",
+    image: "/images/services/blinds/types/roman-blinds.jpg",
+    applications: ["Luxury Homes", "Hotels", "Formal Spaces"],
   },
   {
-    name: "Vertical Blinds",
-    description: "Ideal for large windows and sliding doors",
-    features: ["Wide coverage", "Easy maintenance", "Light filtering", "Motorized options"],
-    badge: "Large Windows",
-    perfect: "Patio doors, large windows",
-    image: "/images/services/blinds/types/vertical-blinds.jpg",
-    applications: ["Commercial", "Residential", "Hotels"],
+    name: "Wooden Blinds",
+    description: "Premium wooden blinds that add natural elegance to any space",
+    features: [
+      "Natural Wood",
+      "Adjustable Slats",
+      "Durable Finish",
+      "2-year warranty",
+    ],
+    badge: "Eco-Friendly",
+    perfect: "Traditional homes, offices, dining rooms",
+    image: "/images/services/blinds/types/wooden-blinds.jpg",
+    applications: ["Homes", "Restaurants", "Hotels"],
   },
   {
-    name: "Smart Blinds",
-    description: "Automated blinds with smartphone and voice control",
-    features: ["Remote control", "Voice commands", "Scheduled operation", "Energy saving"],
-    badge: "Smart Home",
-    perfect: "Modern homes, smart buildings",
-    image: "/images/services/blinds/types/smart-blinds.jpg",
-    applications: ["Smart Homes", "Luxury Hotels", "Modern Offices"],
+    name: "Zebra Blinds",
+    description:
+      "Modern zebra blinds offering versatile light control and privacy options",
+    features: [
+      "Dual Function",
+      "Light Filtering",
+      "Easy Adjustment",
+      "2-year warranty",
+    ],
+    badge: "Modern Choice",
+    perfect: "Modern homes, offices, study rooms",
+    image: "/images/services/blinds/types/zebra-blinds.jpg",
+    applications: ["Corporate", "Residential", "Studios"],
   },
 ];
 
 export default function Blinds() {
   const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sage-50 via-white to-cream-50">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-sage-700 via-sage-600 to-sage-800 text-white">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-sage-700/90 to-transparent"></div>
-        
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="flex-1 text-center lg:text-left">
-              <div className="inline-flex items-center rounded-full bg-sage-600/20 backdrop-blur-sm px-4 py-2 text-sm font-medium text-sage-100 border border-sage-500/30 mb-6">
-                <Home className="mr-2 h-4 w-4" />
-                Custom Blinds & Window Treatments
-              </div>
-              
-              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-                Premium
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cream-200 to-sage-200">
-                  Blinds
-                </span>
-                Collection
-              </h1>
-              
-              <p className="mt-6 text-xl leading-8 text-sage-100 max-w-2xl mx-auto lg:mx-0">
-                Enhance your space with our custom-made blinds. From roller to smart blinds, 
-                perfect fit and professional installation guaranteed.
-              </p>
+      <section className="relative overflow-hidden bg-white text-sage-800">
+        <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-32 sm:px-6 lg:px-8 lg:pt-20 lg:pb-40">
+          <div className="text-center">
+            <div className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200 mb-6">
+              <Home className="mr-2 h-4 w-4" />
+              Window Blinds
+            </div>
 
-              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link
-                  to="/projects"
-                  className="inline-flex items-center justify-center rounded-lg bg-white text-sage-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-sage-50 transition-all duration-300 transform hover:scale-105"
-                >
-                  View Projects
-                  <Eye className="ml-2 h-5 w-5" />
-                </Link>
-                <a
-                  href="tel:+44123456789"
-                  className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
-                >
-                  <Phone className="mr-2 h-5 w-5" />
-                  Get Measured
-                </a>
-              </div>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl mb-6 text-green-700">
+              Style Meets Privacy with Custom Window Blinds
+            </h1>
 
-              <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-md mx-auto lg:mx-0">
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cream-200">1000+</div>
-                  <div className="text-sage-200">Blinds Installed</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cream-200">Custom</div>
-                  <div className="text-sage-200">Made to Measure</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cream-200">2 Year</div>
-                  <div className="text-sage-200">Warranty</div>
-                </div>
+            <p className="mt-6 text-xl leading-8 text-sage-600 max-w-3xl mx-auto mb-8">
+              Effortlessly control light and enhance aesthetics with our premium
+              blinds. Designed for elegance and built to last – backed by a
+              2-year warranty.
+            </p>
+
+            {/* Service Labels */}
+            <div className="flex flex-wrap gap-3 justify-center mb-8">
+              <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
+                <Target className="mr-2 h-4 w-4" />
+                Made to Measure
+              </span>
+              <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
+                <Sun className="mr-2 h-4 w-4" />
+                Light & UV Control
+              </span>
+              <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
+                <Scissors className="mr-2 h-4 w-4" />
+                Easy to Clean
+              </span>
+              <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
+                <Wrench className="mr-2 h-4 w-4" />
+                Professional Fitting
+              </span>
+            </div>
+
+            {/* Stats moved above CTA buttons */}
+            <div className="grid grid-cols-2 gap-8 max-w-md mx-auto mb-8">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-green-700">100+</div>
+                <div className="text-sage-600">Happy Families</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-green-700">2 Years</div>
+                <div className="text-sage-600">Of Establishment</div>
               </div>
             </div>
 
-            <div className="flex-1 relative">
-              <div className="relative mx-auto max-w-lg">
-                <div className="absolute -inset-4 bg-gradient-to-r from-sage-500 to-sage-400 rounded-2xl blur-2xl opacity-30 animate-pulse"></div>
-                <div className="relative">
-                  <img
-                    src="/images/services/blinds-hero.svg"
-                    alt="Premium Blinds Collection"
-                    className="w-full h-auto rounded-2xl shadow-2xl"
-                    onLoad={() => setImagesLoaded(prev => ({ ...prev, hero: true }))}
-                  />
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-sage-900/20 to-transparent"></div>
-                </div>
-              </div>
+            {/* CTA Buttons - side by side on mobile */}
+            <div className="flex flex-row gap-4 justify-center">
+              <a
+                href="https://wa.me/44123456789"
+                className="inline-flex items-center justify-center rounded-full bg-green-700 text-white px-6 py-3 text-base font-semibold shadow-lg hover:bg-green-800 transition-all duration-300 transform hover:scale-105"
+              >
+                <MessageCircle className="mr-2 h-4 w-4" />
+                WhatsApp Us
+              </a>
+              <Link
+                to="/projects"
+                className="inline-flex items-center justify-center rounded-full border-2 border-green-700 bg-white text-green-700 px-6 py-3 text-base font-semibold hover:bg-green-50 transition-all duration-300"
+              >
+                <Eye className="mr-2 h-4 w-4" />
+                Explore All Services
+              </Link>
             </div>
           </div>
         </div>
@@ -146,27 +225,34 @@ export default function Blinds() {
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-sage-800 mb-4">
+            <h2 className="text-4xl font-bold text-green-700 mb-4">
               Our Blinds Collection
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
-              From traditional to smart, find the perfect blinds for your windows
+              Choose from our premium range of blinds options, each designed for
+              specific light control and privacy needs
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blindTypes.map((type, index) => (
-              <Card key={index} className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-gradient-to-b from-white to-sage-50">
+              <Card
+                key={index}
+                className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-sage-200 bg-white shadow-lg"
+              >
                 <div className="aspect-[4/3] relative overflow-hidden">
-                  <FastImage
+                  <img
                     src={type.image}
                     alt={type.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    fallback="/placeholder.svg"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/placeholder.svg";
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   {type.badge && (
-                    <Badge className="absolute top-4 left-4 bg-sage-600 text-white border-0 shadow-lg">
+                    <Badge className="absolute top-4 left-4 bg-green-700 text-white border-0 shadow-lg">
                       {type.badge}
                     </Badge>
                   )}
@@ -177,7 +263,7 @@ export default function Blinds() {
                   </div>
                 </div>
 
-                <CardContent className="p-6">
+                <CardContent className="p-6 bg-white">
                   <h3 className="text-2xl font-bold text-sage-800 mb-3 group-hover:text-sage-600 transition-colors">
                     {type.name}
                   </h3>
@@ -186,11 +272,16 @@ export default function Blinds() {
                   </p>
 
                   <div className="space-y-3 mb-6">
-                    <div className="text-sm font-medium text-sage-700">Key Features:</div>
-                    <div className="grid grid-cols-1 gap-2">
+                    <div className="text-sm font-medium text-sage-700">
+                      Key Features:
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
                       {type.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-sage-600">
-                          <CheckCircle className="h-4 w-4 text-sage-500 mr-2 flex-shrink-0" />
+                        <div
+                          key={idx}
+                          className="flex items-center text-sm text-sage-600"
+                        >
+                          <CheckCircle className="h-4 w-4 text-green-600 mr-2 flex-shrink-0" />
                           {feature}
                         </div>
                       ))}
@@ -198,34 +289,44 @@ export default function Blinds() {
                   </div>
 
                   <div className="mb-6">
-                    <div className="text-sm font-medium text-sage-700 mb-2">Perfect for:</div>
+                    <div className="text-sm font-medium text-sage-700 mb-2">
+                      Perfect for:
+                    </div>
                     <p className="text-sm text-sage-600">{type.perfect}</p>
                   </div>
 
                   <div className="mb-6">
-                    <div className="text-sm font-medium text-sage-700 mb-2">Applications:</div>
+                    <div className="text-sm font-medium text-sage-700 mb-2">
+                      Applications:
+                    </div>
                     <div className="flex flex-wrap gap-2">
                       {type.applications.map((app, idx) => (
-                        <span key={idx} className="inline-flex items-center rounded-md bg-sage-100 px-2 py-1 text-xs font-medium text-sage-700">
+                        <span
+                          key={idx}
+                          className="inline-flex items-center rounded-md bg-sage-100 px-2 py-1 text-xs font-medium text-sage-700"
+                        >
                           {app}
                         </span>
                       ))}
                     </div>
                   </div>
 
+                  {/* Updated card buttons */}
                   <div className="flex gap-3">
+                    <a
+                      href="https://wa.me/44123456789"
+                      className="flex-1 inline-flex items-center justify-center rounded-full bg-green-700 text-white px-4 py-2 text-sm font-semibold hover:bg-green-800 transition-colors"
+                    >
+                      <MessageCircle className="mr-2 h-4 w-4" />
+                      WhatsApp Us
+                    </a>
                     <Link
                       to="/projects"
-                      className="flex-1 inline-flex items-center justify-center rounded-lg bg-sage-600 text-white px-4 py-3 text-sm font-semibold hover:bg-sage-700 transition-colors"
+                      className="inline-flex items-center justify-center rounded-full border border-green-700 bg-white text-green-700 px-4 py-2 text-sm font-semibold hover:bg-green-50 transition-colors"
                     >
-                      View Projects
+                      <Eye className="mr-2 h-4 w-4" />
+                      See Projects
                     </Link>
-                    <a
-                      href="tel:+44123456789"
-                      className="inline-flex items-center justify-center rounded-lg border border-sage-300 bg-white text-sage-700 px-4 py-3 text-sm font-semibold hover:bg-sage-50 transition-colors"
-                    >
-                      <Phone className="h-4 w-4" />
-                    </a>
                   </div>
                 </CardContent>
               </Card>
@@ -234,60 +335,66 @@ export default function Blinds() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-gradient-to-b from-sage-50 to-white">
+      {/* Why Choose Our Blinds Section */}
+      <section className="py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-sage-800 mb-4">
+            <h2 className="text-4xl font-bold text-green-700 mb-4">
               Why Choose Our Blinds?
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
-              Quality materials, precise measurements, and expert installation
+              Quality materials, expert installation, and unmatched customer
+              service
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                name: "Custom Made to Measure",
-                description: "Precisely fitted to your windows for perfect coverage",
-                icon: Shield,
+                name: "Made to Measure",
+                description:
+                  "Precisely fitted to your windows for perfect coverage",
+                icon: Target,
               },
               {
-                name: "Professional Installation",
-                description: "Expert fitting ensuring smooth operation and longevity",
-                icon: Award,
+                name: "50+ Color Options",
+                description:
+                  "Wide range of colors and materials to match your decor",
+                icon: Palette,
               },
               {
-                name: "Smart Home Integration",
-                description: "Motorized options with smartphone and voice control",
-                icon: Smartphone,
+                name: "Professional Fitting",
+                description:
+                  "Expert installation ensuring smooth operation and longevity",
+                icon: Wrench,
               },
               {
                 name: "UV Protection",
-                description: "Advanced fabrics that protect furniture from sun damage",
+                description:
+                  "Advanced fabrics that protect furniture from sun damage",
                 icon: Sun,
               },
               {
-                name: "Energy Efficient",
-                description: "Insulating properties help reduce heating and cooling costs",
-                icon: Zap,
+                name: "Easy to Clean",
+                description: "Simple maintenance for long-lasting performance",
+                icon: CheckCircle,
               },
               {
-                name: "Quick Turnaround",
-                description: "Fast manufacturing and installation within 7-10 days",
-                icon: Clock,
+                name: "Quick Installation",
+                description:
+                  "Professional installation with minimal disruption",
+                icon: Zap,
               },
             ].map((feature, index) => {
               const IconComponent = feature.icon;
               return (
                 <div key={index} className="relative group">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-sage-600 to-sage-400 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                  <div className="relative bg-white rounded-2xl p-8 border border-sage-100 hover:border-sage-200 transition-all duration-300">
-                    <div className="w-12 h-12 bg-sage-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-sage-600 group-hover:text-white transition-all duration-300">
-                      <IconComponent className="h-6 w-6 text-sage-600 group-hover:text-white transition-colors duration-300" />
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-green-600 to-green-400 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                  <div className="relative bg-white rounded-2xl p-8 border border-sage-100 hover:border-green-200 transition-all duration-300 shadow-lg">
+                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-700 group-hover:text-white transition-all duration-300">
+                      <IconComponent className="h-6 w-6 text-green-700 group-hover:text-white transition-colors duration-300" />
                     </div>
-                    <h3 className="text-xl font-bold text-sage-800 mb-3 group-hover:text-sage-600 transition-colors">
+                    <h3 className="text-xl font-bold text-sage-800 mb-3 group-hover:text-green-700 transition-colors">
                       {feature.name}
                     </h3>
                     <p className="text-sage-600 leading-relaxed">
@@ -301,47 +408,121 @@ export default function Blinds() {
         </div>
       </section>
 
-      {/* Contact CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-sage-700 via-sage-600 to-sage-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold mb-6">
-              Ready for Perfect Blinds?
+      {/* Cross-sell Services Section */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-green-700 mb-4">
+              Complete Your Space
             </h2>
-            <p className="text-xl text-sage-100 mb-12 max-w-3xl mx-auto">
-              Book a free home consultation for precise measurements and expert advice. Custom-made blinds with professional installation.
+            <p className="text-xl text-sage-600 max-w-3xl mx-auto">
+              Enhance your blinds with our premium wallpapers and flooring
+              solutions
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a
-                href="tel:+44123456789"
-                className="inline-flex items-center justify-center rounded-lg bg-white text-sage-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-sage-50 transition-all duration-300 transform hover:scale-105"
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                Book Free Consultation
-              </a>
-              <a
-                href="https://wa.me/44123456789"
-                className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
-              >
-                <MessageCircle className="mr-2 h-5 w-5" />
-                WhatsApp Quote
-              </a>
-            </div>
+          </div>
 
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cream-200 mb-2">Free</div>
-                <div className="text-sage-200">Home Measurement</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Link
+              to="/services/wallpapers"
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+            >
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <img
+                  src="/images/wallpaperr.png"
+                  alt="Premium Wallpapers"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "/placeholder.svg";
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <ArrowRight className="h-8 w-8" />
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cream-200 mb-2">7-10</div>
-                <div className="text-sage-200">Days Delivery</div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6">
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  Wallpapers
+                </h3>
+                <p className="text-white/90 text-sm mb-4">
+                  Designer wallpapers that complement your window treatments
+                  perfectly
+                </p>
+                <div className="flex items-center text-white/80 text-sm">
+                  <Users className="h-4 w-4 mr-2" />
+                  Premium Quality
+                </div>
               </div>
+            </Link>
+
+            <Link
+              to="/services/flooring"
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+            >
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <img
+                  src="/images/flooringg.png"
+                  alt="Premium Flooring"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "/placeholder.svg";
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <ArrowRight className="h-8 w-8" />
+                </div>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6">
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  Interior Flooring
+                </h3>
+                <p className="text-white/90 text-sm mb-4">
+                  Waterproof vinyl flooring for the perfect foundation
+                </p>
+                <div className="flex items-center text-white/80 text-sm">
+                  <Users className="h-4 w-4 mr-2" />
+                  Expert Installation
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA Section */}
+      <section className="py-20 relative overflow-hidden bg-gray-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-700 via-green-600 to-green-800 rounded-3xl transform rotate-1"></div>
+            <div className="relative bg-gradient-to-br from-green-700 via-green-600 to-green-800 rounded-3xl p-12 text-white">
               <div className="text-center">
-                <div className="text-3xl font-bold text-cream-200 mb-2">2 Year</div>
-                <div className="text-sage-200">Full Warranty</div>
+                <h2 className="text-4xl font-bold mb-6 text-white">
+                  Lets make you'r home feels Brand new
+                </h2>
+                <p className="text-xl text-green-100 mb-12 max-w-3xl mx-auto">
+                  Get a free consultation and quote for your blinds project.
+                  Professional installation with 2-year warranty included.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                  <a
+                    href="https://wa.me/44123456789"
+                    className="inline-flex items-center justify-center rounded-full bg-white text-green-700 px-6 py-3 text-base font-semibold shadow-lg hover:bg-green-50 transition-all duration-300 transform hover:scale-105"
+                  >
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    Whatsapp Us
+                  </a>
+                  <a
+                    href="tel:+44123456789"
+                    className="inline-flex items-center justify-center rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-6 py-3 text-base font-semibold hover:bg-white/20 transition-all duration-300"
+                  >
+                    <Phone className="mr-2 h-4 w-4" />
+                    Our services
+                  </a>
+                </div>
               </div>
             </div>
           </div>
