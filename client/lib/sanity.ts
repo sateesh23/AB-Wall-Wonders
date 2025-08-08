@@ -149,9 +149,9 @@ export const testSanityConnection = async (): Promise<{
     const controller = new AbortController()
     const timeoutId = setTimeout(() => controller.abort(), 5000) // 5 second timeout
 
-    // Test basic connection with timeout
+    // Test public client connection first (for public access)
     await Promise.race([
-      client.fetch('count(*)'),
+      publicClient.fetch('count(*[_type == "project"])'),
       new Promise((_, reject) =>
         setTimeout(() => reject(new Error('Connection timeout')), 5000)
       )
