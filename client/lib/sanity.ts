@@ -9,10 +9,10 @@ const isDevelopment = import.meta.env.DEV
 export const client = createClient({
   projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
   dataset: import.meta.env.VITE_SANITY_DATASET,
-  useCdn: !isDevelopment, // Use CDN in production, direct API in development
+  useCdn: true, // Use CDN for better performance and public access
   apiVersion: import.meta.env.VITE_SANITY_API_VERSION,
   token: import.meta.env.VITE_SANITY_TOKEN,
-  perspective: 'published', // Only fetch published content
+  // Remove perspective restriction to allow access to all content
   stega: false, // Disable Visual Editing features for better performance
 })
 
