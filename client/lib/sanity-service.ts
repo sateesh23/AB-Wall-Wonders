@@ -63,7 +63,8 @@ export class SanityService {
 
     try {
       console.log("🔍 Fetching projects from Sanity...");
-      const projects: SanityProject[] = await client.fetch(projectsQuery);
+      // Use publicClient for read operations to ensure public access
+      const projects: SanityProject[] = await publicClient.fetch(projectsQuery);
       const sanityProjects = projects.map(this.convertToProjectData);
       console.log(`📊 Found ${sanityProjects.length} projects in Sanity`);
 
