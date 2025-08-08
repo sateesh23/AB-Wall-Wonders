@@ -81,7 +81,7 @@ export default function Flooring() {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-white text-sage-800">
-        <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-20 sm:px-6 lg:px-8 lg:pt-20 lg:pb-28">
+        <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-32 sm:px-6 lg:px-8 lg:pt-20 lg:pb-40">
           <div className="text-center">
             <div className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200 mb-6">
               <Droplets className="mr-2 h-4 w-4" />
