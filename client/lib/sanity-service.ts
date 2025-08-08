@@ -1,5 +1,6 @@
 import {
   client,
+  publicClient,
   projectsQuery,
   featuredProjectsQuery,
   recentProjectsQuery,
