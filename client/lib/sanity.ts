@@ -16,6 +16,16 @@ export const client = createClient({
   stega: false, // Disable Visual Editing features for better performance
 })
 
+// Create a public client without token for read-only operations
+export const publicClient = createClient({
+  projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
+  dataset: import.meta.env.VITE_SANITY_DATASET,
+  useCdn: true, // Use CDN for better performance
+  apiVersion: import.meta.env.VITE_SANITY_API_VERSION,
+  // No token - public read access only
+  stega: false,
+})
+
 // Helper function for generating Image URLs with error handling
 const builder = imageUrlBuilder(client)
 
