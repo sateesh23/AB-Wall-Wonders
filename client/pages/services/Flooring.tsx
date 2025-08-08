@@ -14,6 +14,7 @@ import {
   Zap,
   ArrowRight,
   Users,
+  Eye,
 } from "lucide-react";
 import { useState } from "react";
 import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
@@ -103,15 +104,15 @@ export default function Flooring() {
                   to="/projects"
                   className="inline-flex items-center justify-center rounded-lg bg-white text-sage-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-sage-50 transition-all duration-300 transform hover:scale-105"
                 >
-                  View Our Work
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  See All Services
+                  <Eye className="ml-2 h-5 w-5" />
                 </Link>
                 <a
-                  href="tel:+44123456789"
-                  className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
+                  href="https://wa.me/44123456789"
+                  className="inline-flex items-center justify-center rounded-lg bg-green-600 text-white px-8 py-4 text-lg font-semibold hover:bg-green-700 transition-all duration-300 shadow-lg"
                 >
-                  <Phone className="mr-2 h-5 w-5" />
-                  Get Quote
+                  <MessageCircle className="mr-2 h-5 w-5" />
+                  WhatsApp Us
                 </a>
               </div>
 
@@ -434,53 +435,57 @@ export default function Flooring() {
       </section>
 
       {/* Contact CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-sage-700 via-sage-600 to-sage-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold mb-6">
-              Ready to Transform Your Space?
-            </h2>
-            <p className="text-xl text-sage-100 mb-12 max-w-3xl mx-auto">
-              Get a free consultation and quote for your flooring project.
-              Professional installation with warranty included.
-            </p>
+      <section className="py-20 relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-600 via-green-500 to-green-700 rounded-3xl transform rotate-1"></div>
+            <div className="relative bg-gradient-to-br from-green-600 via-green-500 to-green-700 rounded-3xl p-12 text-white">
+              <div className="text-center">
+                <h2 className="text-4xl font-bold mb-6">
+                  Ready to Transform Your Space?
+                </h2>
+                <p className="text-xl text-green-100 mb-12 max-w-3xl mx-auto">
+                  Get a free consultation and quote for your flooring project.
+                  Professional installation with warranty included.
+                </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a
-                href="tel:+44123456789"
-                className="inline-flex items-center justify-center rounded-lg bg-white text-sage-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-sage-50 transition-all duration-300 transform hover:scale-105"
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                Call Now for Free Quote
-              </a>
-              <a
-                href="https://wa.me/44123456789"
-                className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
-              >
-                <MessageCircle className="mr-2 h-5 w-5" />
-                WhatsApp Us
-              </a>
-            </div>
+                <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                  <a
+                    href="tel:+44123456789"
+                    className="inline-flex items-center justify-center rounded-lg bg-white text-green-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-green-50 transition-all duration-300 transform hover:scale-105"
+                  >
+                    <Phone className="mr-2 h-5 w-5" />
+                    Call Now for Free Quote
+                  </a>
+                  <a
+                    href="https://wa.me/44123456789"
+                    className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
+                  >
+                    <MessageCircle className="mr-2 h-5 w-5" />
+                    WhatsApp Us
+                  </a>
+                </div>
 
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cream-200 mb-2">
-                  Free
+                <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-green-100 mb-2">
+                      Free
+                    </div>
+                    <div className="text-green-200">Consultation & Quote</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-green-100 mb-2">
+                      Same Day
+                    </div>
+                    <div className="text-green-200">Site Visit Available</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-green-100 mb-2">
+                      15 Year
+                    </div>
+                    <div className="text-green-200">Warranty Included</div>
+                  </div>
                 </div>
-                <div className="text-sage-200">Consultation & Quote</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cream-200 mb-2">
-                  Same Day
-                </div>
-                <div className="text-sage-200">Site Visit Available</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cream-200 mb-2">
-                  15 Year
-                </div>
-                <div className="text-sage-200">Warranty Included</div>
               </div>
             </div>
           </div>
