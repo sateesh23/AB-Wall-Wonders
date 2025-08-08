@@ -18,6 +18,7 @@ import {
   Target,
   Palette,
   Wrench,
+  Scissors,
 } from "lucide-react";
 import { useState } from "react";
 import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
@@ -101,91 +102,69 @@ export default function Blinds() {
   const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sage-50 via-white to-cream-50">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-sage-700 via-sage-600 to-sage-800 text-white">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-sage-700/90 to-transparent"></div>
-
+      <section className="relative overflow-hidden bg-white text-sage-800">
         <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="flex-1 text-center lg:text-left">
-              <div className="inline-flex items-center rounded-full bg-sage-600/20 backdrop-blur-sm px-4 py-2 text-sm font-medium text-sage-100 border border-sage-500/30 mb-6">
-                <Home className="mr-2 h-4 w-4" />
-                🪟 Window Blinds
-              </div>
-
-              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl mb-6">
-                Style Meets Privacy with Custom Window Blinds
-              </h1>
-
-              <p className="mt-6 text-xl leading-8 text-sage-100 max-w-2xl mx-auto lg:mx-0 mb-8">
-                Effortlessly control light and enhance aesthetics with our premium blinds. Designed for elegance and built to last – backed by a 2-year warranty.
-              </p>
-
-              {/* Service Labels */}
-              <div className="flex flex-wrap gap-3 justify-center lg:justify-start mb-10">
-                <span className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 text-sm font-medium text-white border border-white/20">
-                  🎯 Made to Measure
-                </span>
-                <span className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 text-sm font-medium text-white border border-white/20">
-                  ☀️ Light & UV Control
-                </span>
-                <span className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 text-sm font-medium text-white border border-white/20">
-                  🧽 Easy to Clean
-                </span>
-                <span className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 text-sm font-medium text-white border border-white/20">
-                  🛠️ Professional Fitting
-                </span>
-              </div>
-
-              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <a
-                  href="tel:+44123456789"
-                  className="inline-flex items-center justify-center rounded-lg bg-green-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:bg-green-800 transition-all duration-300 transform hover:scale-105"
-                >
-                  <Eye className="mr-2 h-5 w-5" />
-                  Explore Blind Styles
-                </a>
-                <a
-                  href="https://wa.me/44123456789"
-                  className="inline-flex items-center justify-center rounded-lg border-2 border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
-                >
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  Book a Free Consultation
-                </a>
-              </div>
-
-              <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-md mx-auto lg:mx-0">
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cream-200">1000+</div>
-                  <div className="text-sage-200">Blinds Installed</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cream-200">15+</div>
-                  <div className="text-sage-200">Years Experience</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cream-200">2 Year</div>
-                  <div className="text-sage-200">Warranty</div>
-                </div>
-              </div>
+          <div className="text-center">
+            <div className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200 mb-6">
+              <Home className="mr-2 h-4 w-4" />
+              Window Blinds
             </div>
 
-            <div className="flex-1 relative">
-              <div className="relative mx-auto max-w-lg">
-                <div className="absolute -inset-4 bg-gradient-to-r from-sage-500 to-sage-400 rounded-2xl blur-2xl opacity-30 animate-pulse"></div>
-                <div className="relative">
-                  <img
-                    src="/images/services/blinds-hero.svg"
-                    alt="Premium Blinds Collection"
-                    className="w-full h-auto rounded-2xl shadow-2xl"
-                    onLoad={() =>
-                      setImagesLoaded((prev) => ({ ...prev, hero: true }))
-                    }
-                  />
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-sage-900/20 to-transparent"></div>
-                </div>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl mb-6 text-green-700">
+              Style Meets Privacy with Custom Window Blinds
+            </h1>
+
+            <p className="mt-6 text-xl leading-8 text-sage-600 max-w-3xl mx-auto mb-8">
+              Effortlessly control light and enhance aesthetics with our premium blinds. Designed for elegance and built to last – backed by a 2-year warranty.
+            </p>
+
+            {/* Service Labels */}
+            <div className="flex flex-wrap gap-3 justify-center mb-10">
+              <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
+                <Target className="mr-2 h-4 w-4" />
+                Made to Measure
+              </span>
+              <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
+                <Sun className="mr-2 h-4 w-4" />
+                Light & UV Control
+              </span>
+              <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
+                <Scissors className="mr-2 h-4 w-4" />
+                Easy to Clean
+              </span>
+              <span className="inline-flex items-center rounded-full bg-sage-100 px-4 py-2 text-sm font-medium text-sage-700 border border-sage-200">
+                <Wrench className="mr-2 h-4 w-4" />
+                Professional Fitting
+              </span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <a
+                href="https://wa.me/44123456789"
+                className="inline-flex items-center justify-center rounded-full bg-green-700 text-white px-6 py-3 text-base font-semibold shadow-lg hover:bg-green-800 transition-all duration-300 transform hover:scale-105"
+              >
+                <MessageCircle className="mr-2 h-4 w-4" />
+                WhatsApp Us
+              </a>
+              <Link
+                to="/projects"
+                className="inline-flex items-center justify-center rounded-full border-2 border-green-700 bg-white text-green-700 px-6 py-3 text-base font-semibold hover:bg-green-50 transition-all duration-300"
+              >
+                <Eye className="mr-2 h-4 w-4" />
+                Explore All Services
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-md mx-auto">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-green-700">100+</div>
+                <div className="text-sage-600">Happy Families</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-green-700">2 Years</div>
+                <div className="text-sage-600">Of Establishment</div>
               </div>
             </div>
           </div>
@@ -196,7 +175,7 @@ export default function Blinds() {
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-sage-800 mb-4">
+            <h2 className="text-4xl font-bold text-green-700 mb-4">
               Our Blinds Collection
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
@@ -288,13 +267,13 @@ export default function Blinds() {
                   <div className="flex gap-3">
                     <Link
                       to="/projects"
-                      className="flex-1 inline-flex items-center justify-center rounded-lg bg-green-700 text-white px-4 py-3 text-sm font-semibold hover:bg-green-800 transition-colors"
+                      className="flex-1 inline-flex items-center justify-center rounded-full bg-green-700 text-white px-4 py-2 text-sm font-semibold hover:bg-green-800 transition-colors"
                     >
                       View Projects
                     </Link>
                     <a
                       href="tel:+44123456789"
-                      className="inline-flex items-center justify-center rounded-lg border border-green-700 bg-white text-green-700 px-4 py-3 text-sm font-semibold hover:bg-green-50 transition-colors"
+                      className="inline-flex items-center justify-center rounded-full border border-green-700 bg-white text-green-700 px-4 py-2 text-sm font-semibold hover:bg-green-50 transition-colors"
                     >
                       <Phone className="h-4 w-4" />
                     </a>
@@ -307,10 +286,10 @@ export default function Blinds() {
       </section>
 
       {/* Why Choose Our Blinds Section */}
-      <section className="py-20 bg-gradient-to-b from-sage-50 to-white">
+      <section className="py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-sage-800 mb-4">
+            <h2 className="text-4xl font-bold text-green-700 mb-4">
               Why Choose Our Blinds?
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
@@ -378,7 +357,7 @@ export default function Blinds() {
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-sage-800 mb-4">
+            <h2 className="text-4xl font-bold text-green-700 mb-4">
               Complete Your Space
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
@@ -420,7 +399,7 @@ export default function Blinds() {
                 </p>
                 <div className="flex items-center text-white/80 text-sm">
                   <Users className="h-4 w-4 mr-2" />
-                  1000+ Designs Available
+                  Premium Quality
                 </div>
               </div>
             </Link>
@@ -456,7 +435,7 @@ export default function Blinds() {
                 </p>
                 <div className="flex items-center text-white/80 text-sm">
                   <Users className="h-4 w-4 mr-2" />
-                  Premium Installation
+                  Expert Installation
                 </div>
               </div>
             </Link>
@@ -465,13 +444,13 @@ export default function Blinds() {
       </section>
 
       {/* Contact CTA Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl relative">
             <div className="absolute inset-0 bg-gradient-to-br from-green-700 via-green-600 to-green-800 rounded-3xl transform rotate-1"></div>
             <div className="relative bg-gradient-to-br from-green-700 via-green-600 to-green-800 rounded-3xl p-12 text-white">
               <div className="text-center">
-                <h2 className="text-4xl font-bold mb-6">
+                <h2 className="text-4xl font-bold mb-6 text-white">
                   Lets make you'r home feels Brand new
                 </h2>
                 <p className="text-xl text-green-100 mb-12 max-w-3xl mx-auto">
@@ -482,39 +461,18 @@ export default function Blinds() {
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <a
                     href="https://wa.me/44123456789"
-                    className="inline-flex items-center justify-center rounded-lg bg-white text-green-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-green-50 transition-all duration-300 transform hover:scale-105"
+                    className="inline-flex items-center justify-center rounded-full bg-white text-green-700 px-6 py-3 text-base font-semibold shadow-lg hover:bg-green-50 transition-all duration-300 transform hover:scale-105"
                   >
-                    <MessageCircle className="mr-2 h-5 w-5" />
+                    <MessageCircle className="mr-2 h-4 w-4" />
                     Whatsapp Us
                   </a>
                   <a
                     href="tel:+44123456789"
-                    className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
+                    className="inline-flex items-center justify-center rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-6 py-3 text-base font-semibold hover:bg-white/20 transition-all duration-300"
                   >
-                    <Phone className="mr-2 h-5 w-5" />
+                    <Phone className="mr-2 h-4 w-4" />
                     Our services
                   </a>
-                </div>
-
-                <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-green-100 mb-2">
-                      Free
-                    </div>
-                    <div className="text-green-200">Consultation & Quote</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-green-100 mb-2">
-                      Same Day
-                    </div>
-                    <div className="text-green-200">Site Visit Available</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-green-100 mb-2">
-                      2 Year
-                    </div>
-                    <div className="text-green-200">Warranty Included</div>
-                  </div>
                 </div>
               </div>
             </div>
