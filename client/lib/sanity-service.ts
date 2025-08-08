@@ -77,7 +77,7 @@ export class SanityService {
       });
 
       console.log(
-        `✅ Combined: ${sanityProjects.length} from Sanity + ${adminProjects.length} from admin storage = ${combined.length} total`,
+        `�� Combined: ${sanityProjects.length} from Sanity + ${adminProjects.length} from admin storage = ${combined.length} total`,
       );
       return combined.sort(
         (a, b) =>
@@ -196,7 +196,8 @@ export class SanityService {
     }
 
     try {
-      const sanityCount = await client.fetch('count(*[_type == "project"])');
+      // Use publicClient to test public access
+      const sanityCount = await publicClient.fetch('count(*[_type == "project"])');
       const totalCount = sanityCount + adminStats.totalProjects;
       return {
         connected: true,
