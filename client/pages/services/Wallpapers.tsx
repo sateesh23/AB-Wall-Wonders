@@ -2,7 +2,6 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { FastImage } from "@/components/ui/fast-image";
 
 import {
   Palette,
@@ -11,43 +10,60 @@ import {
   CheckCircle,
   Shield,
   Award,
-  Clock,
-  Eye,
+  Brush,
+  Zap,
   ArrowRight,
-  Plus,
   Users,
+  Eye,
 } from "lucide-react";
 import { useState } from "react";
 import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
 
 const wallpaperTypes = [
   {
-    name: "Embossing Wallpapers",
+    name: "3D Wallpapers",
     description:
-      "Textured finish with premium feel and sophisticated appearance",
-    features: ["Raised textures", "Luxury appearance", "Durable finish"],
-    badge: "Premium Quality",
-    perfect: "Living rooms, bedrooms, offices",
-    image: "/images/services/wallpapers/embossing.jpg",
+      "Premium 3D textured wallpapers that create stunning visual depth and dimension",
+    features: [
+      "3D Visual Effects",
+      "Texture Feel",
+      "Premium Quality",
+      "5-year warranty",
+    ],
+    badge: "Most Popular",
+    perfect: "Living rooms, feature walls, offices",
+    image: "/images/services/wallpapers/types/3d-wallpaper.jpg",
     applications: ["Residential", "Commercial", "Hotels"],
   },
   {
-    name: "Printed Wallpapers",
-    description: "High-resolution designs with vibrant colors and patterns",
-    features: ["Custom designs", "Fade resistant", "Easy application"],
-    badge: "Most Popular",
-    perfect: "Feature walls, children's rooms",
-    image: "/images/services/wallpapers/printed.jpg",
-    applications: ["Homes", "Restaurants", "Retail"],
+    name: "Botanical Wallpapers",
+    description:
+      "Natural botanical designs that bring the beauty of nature indoors",
+    features: [
+      "Natural Designs",
+      "Eco-Friendly",
+      "Fade Resistant",
+      "Easy Application",
+    ],
+    badge: "Eco-Friendly",
+    perfect: "Bedrooms, dining rooms, spas",
+    image: "/images/services/wallpapers/types/botanical-wallpaper.jpg",
+    applications: ["Homes", "Restaurants", "Wellness"],
   },
   {
-    name: "Custom Wallpapers",
-    description: "Bespoke designs tailored to your unique requirements",
-    features: ["Personal designs", "Any size", "Professional installation"],
-    badge: "Bespoke",
-    perfect: "Statement walls, branding",
-    image: "/images/services/wallpapers/custom.jpg",
-    applications: ["Corporate", "Hospitality", "Residential"],
+    name: "Geometric Wallpapers",
+    description:
+      "Modern geometric patterns perfect for contemporary and minimalist spaces",
+    features: [
+      "Contemporary Design",
+      "Pattern Precision",
+      "Washable Surface",
+      "Professional Install",
+    ],
+    badge: "Modern Choice",
+    perfect: "Modern homes, offices, studios",
+    image: "/images/services/wallpapers/types/geometric-wallpaper.jpg",
+    applications: ["Corporate", "Residential", "Studios"],
   },
 ];
 
@@ -60,7 +76,7 @@ export default function Wallpapers() {
       <section className="relative overflow-hidden bg-gradient-to-br from-sage-700 via-sage-600 to-sage-800 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-sage-700/90 to-transparent"></div>
-        
+
         <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             <div className="flex-1 text-center lg:text-left">
@@ -68,7 +84,7 @@ export default function Wallpapers() {
                 <Palette className="mr-2 h-4 w-4" />
                 Designer Wallpapers & Installation
               </div>
-              
+
               <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
                 Premium
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cream-200 to-sage-200">
@@ -76,10 +92,10 @@ export default function Wallpapers() {
                 </span>
                 Collection
               </h1>
-              
+
               <p className="mt-6 text-xl leading-8 text-sage-100 max-w-2xl mx-auto lg:mx-0">
-                Transform your walls with our exquisite collection of embossed, printed, and custom wallpapers. 
-                Professional installation with 5-year warranty.
+                Transform your walls with our exquisite collection of 3D, botanical, and geometric wallpapers. 
+                Professional installation with lifetime warranty.
               </p>
 
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -109,8 +125,8 @@ export default function Wallpapers() {
                   <div className="text-sage-200">Years Experience</div>
                 </div>
                 <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cream-200">5 Year</div>
-                  <div className="text-sage-200">Warranty</div>
+                  <div className="text-3xl font-bold text-cream-200">100%</div>
+                  <div className="text-sage-200">Satisfaction Rate</div>
                 </div>
               </div>
             </div>
@@ -123,7 +139,9 @@ export default function Wallpapers() {
                     src="/images/services/wallpapers-hero.svg"
                     alt="Premium Wallpapers Collection"
                     className="w-full h-auto rounded-2xl shadow-2xl"
-                    onLoad={() => setImagesLoaded(prev => ({ ...prev, hero: true }))}
+                    onLoad={() =>
+                      setImagesLoaded((prev) => ({ ...prev, hero: true }))
+                    }
                   />
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-sage-900/20 to-transparent"></div>
                 </div>
@@ -141,19 +159,26 @@ export default function Wallpapers() {
               Our Wallpaper Collection
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
-              Discover our extensive range of premium wallpapers, from elegant embossed designs to vibrant prints
+              Choose from our premium range of wallpaper options, each designed
+              for specific aesthetics and environments
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {wallpaperTypes.map((type, index) => (
-              <Card key={index} className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-gradient-to-b from-white to-sage-50">
+              <Card
+                key={index}
+                className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-gradient-to-b from-white to-sage-50"
+              >
                 <div className="aspect-[4/3] relative overflow-hidden">
-                  <FastImage
+                  <img
                     src={type.image}
                     alt={type.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    fallback="/placeholder.svg"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/placeholder.svg";
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   {type.badge && (
@@ -177,10 +202,15 @@ export default function Wallpapers() {
                   </p>
 
                   <div className="space-y-3 mb-6">
-                    <div className="text-sm font-medium text-sage-700">Key Features:</div>
-                    <div className="grid grid-cols-1 gap-2">
+                    <div className="text-sm font-medium text-sage-700">
+                      Key Features:
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
                       {type.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-sage-600">
+                        <div
+                          key={idx}
+                          className="flex items-center text-sm text-sage-600"
+                        >
                           <CheckCircle className="h-4 w-4 text-sage-500 mr-2 flex-shrink-0" />
                           {feature}
                         </div>
@@ -189,15 +219,22 @@ export default function Wallpapers() {
                   </div>
 
                   <div className="mb-6">
-                    <div className="text-sm font-medium text-sage-700 mb-2">Perfect for:</div>
+                    <div className="text-sm font-medium text-sage-700 mb-2">
+                      Perfect for:
+                    </div>
                     <p className="text-sm text-sage-600">{type.perfect}</p>
                   </div>
 
                   <div className="mb-6">
-                    <div className="text-sm font-medium text-sage-700 mb-2">Applications:</div>
+                    <div className="text-sm font-medium text-sage-700 mb-2">
+                      Applications:
+                    </div>
                     <div className="flex flex-wrap gap-2">
                       {type.applications.map((app, idx) => (
-                        <span key={idx} className="inline-flex items-center rounded-md bg-sage-100 px-2 py-1 text-xs font-medium text-sage-700">
+                        <span
+                          key={idx}
+                          className="inline-flex items-center rounded-md bg-sage-100 px-2 py-1 text-xs font-medium text-sage-700"
+                        >
                           {app}
                         </span>
                       ))}
@@ -233,7 +270,8 @@ export default function Wallpapers() {
               Why Choose Our Wallpapers?
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
-              Premium materials, expert installation, and designs that last
+              Premium materials, expert installation, and unmatched design
+              quality
             </p>
           </div>
 
@@ -245,29 +283,31 @@ export default function Wallpapers() {
                 icon: Shield,
               },
               {
+                name: "Custom Design Service",
+                description:
+                  "Bespoke wallpaper designs tailored to your vision",
+                icon: Brush,
+              },
+              {
+                name: "Quick Installation",
+                description:
+                  "Professional installation with minimal disruption",
+                icon: Zap,
+              },
+              {
                 name: "Expert Installation",
                 description: "Professional installation ensuring perfect alignment",
                 icon: Award,
               },
               {
-                name: "Fast Turnaround",
-                description: "Quick and efficient service without compromising quality",
-                icon: Clock,
-              },
-              {
-                name: "Custom Design Service",
-                description: "Bespoke wallpaper designs tailored to your vision",
-                icon: Palette,
-              },
-              {
-                name: "Quality Guarantee",
-                description: "5-year warranty on all wallpaper installations",
-                icon: CheckCircle,
+                name: "Fade Resistant",
+                description: "Advanced UV protection for long-lasting colors",
+                icon: Shield,
               },
               {
                 name: "Easy Maintenance",
                 description: "Washable and easy-to-clean finishes for lasting beauty",
-                icon: Plus,
+                icon: CheckCircle,
               },
             ].map((feature, index) => {
               const IconComponent = feature.icon;
@@ -300,7 +340,8 @@ export default function Wallpapers() {
               Complete Your Space
             </h2>
             <p className="text-xl text-sage-600 max-w-3xl mx-auto">
-              Enhance your wallpapers with our premium flooring and custom blinds
+              Enhance your wallpapers with our premium flooring and custom
+              blinds
             </p>
           </div>
 
@@ -311,12 +352,19 @@ export default function Wallpapers() {
             >
               <div className="aspect-[4/3] relative overflow-hidden">
                 <img
-                  src="/images/services/flooring-hero.svg"
+                  src="/images/flooringg.png"
                   alt="Premium Flooring"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
+                    console.error(
+                      "Failed to load flooring image:",
+                      target.src,
+                    );
                     target.src = "/placeholder.svg";
+                  }}
+                  onLoad={() => {
+                    console.log("Flooring image loaded successfully");
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -332,11 +380,12 @@ export default function Wallpapers() {
                   Premium Flooring
                 </h3>
                 <p className="text-white/90 text-sm mb-4">
-                  Waterproof vinyl flooring and artificial grass solutions
+                  Waterproof vinyl flooring that complements your new wallpapers
+                  perfectly
                 </p>
                 <div className="flex items-center text-white/80 text-sm">
                   <Users className="h-4 w-4 mr-2" />
-                  500+ Installations
+                  500+ Happy Customers
                 </div>
               </div>
             </Link>
@@ -347,12 +396,16 @@ export default function Wallpapers() {
             >
               <div className="aspect-[4/3] relative overflow-hidden">
                 <img
-                  src="/images/services/blinds-hero.svg"
+                  src="/images/blindss.png"
                   alt="Custom Blinds"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
+                    console.error("Failed to load blinds image:", target.src);
                     target.src = "/placeholder.svg";
+                  }}
+                  onLoad={() => {
+                    console.log("Blinds image loaded successfully");
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -391,38 +444,45 @@ export default function Wallpapers() {
                   Ready to Transform Your Walls?
                 </h2>
                 <p className="text-xl text-green-100 mb-12 max-w-3xl mx-auto">
-                  Browse our extensive wallpaper collection or design your own. Professional consultation and installation included.
+                  Get a free consultation and quote for your wallpaper project.
+                  Professional installation with warranty included.
                 </p>
-                
+
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <a
                     href="tel:+44123456789"
                     className="inline-flex items-center justify-center rounded-lg bg-white text-green-700 px-8 py-4 text-lg font-semibold shadow-lg hover:bg-green-50 transition-all duration-300 transform hover:scale-105"
                   >
                     <Phone className="mr-2 h-5 w-5" />
-                    Book Consultation
+                    Call Now for Free Quote
                   </a>
                   <a
                     href="https://wa.me/44123456789"
                     className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-4 text-lg font-semibold hover:bg-white/20 transition-all duration-300"
                   >
                     <MessageCircle className="mr-2 h-5 w-5" />
-                    WhatsApp Designs
+                    WhatsApp Us
                   </a>
                 </div>
 
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-100 mb-2">Free</div>
-                    <div className="text-green-200">Design Consultation</div>
+                    <div className="text-3xl font-bold text-green-100 mb-2">
+                      Free
+                    </div>
+                    <div className="text-green-200">Consultation & Quote</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-100 mb-2">24hrs</div>
-                    <div className="text-green-200">Quick Response</div>
+                    <div className="text-3xl font-bold text-green-100 mb-2">
+                      Same Day
+                    </div>
+                    <div className="text-green-200">Site Visit Available</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-100 mb-2">5 Year</div>
-                    <div className="text-green-200">Installation Warranty</div>
+                    <div className="text-3xl font-bold text-green-100 mb-2">
+                      5 Year
+                    </div>
+                    <div className="text-green-200">Warranty Included</div>
                   </div>
                 </div>
               </div>
