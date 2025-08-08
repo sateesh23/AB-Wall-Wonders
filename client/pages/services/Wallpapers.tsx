@@ -17,7 +17,7 @@ import {
   Eye,
   Droplets,
   RotateCcw,
-  Soap,
+  Sparkles,
   Trophy,
 } from "lucide-react";
 import { useState } from "react";
