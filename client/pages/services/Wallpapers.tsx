@@ -340,7 +340,7 @@ export default function Wallpapers() {
               {
                 name: "Washable Surface",
                 description: "Easy-to-clean surfaces that maintain their appearance",
-                icon: Soap,
+                icon: Sparkles,
               },
               {
                 name: "5-Year Warranty Coverage",
