@@ -24,8 +24,8 @@ import {
   Mail,
   LogOut,
 } from "lucide-react";
-import { SanityService } from "@/lib/sanity-service";
-import { SanityStatus } from "@/components/ui/sanity-status";
+import { FirebaseAdminService } from "@/lib/firebase-admin";
+import { testFirebaseConnection } from "@/lib/firebase-service";
 import { AdminAuth } from "@/components/ui/admin-auth";
 import { ImageUpload } from "@/components/ui/image-upload";
 import { SuccessMessage } from "@/components/ui/success-message";
@@ -47,10 +47,8 @@ interface ProjectForm {
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Get Sanity Studio URL from environment or use default
-  const sanityStudioUrl =
-    import.meta.env.VITE_SANITY_STUDIO_URL ||
-    "https://ab-wall-wonders.sanity.studio/";
+  // Firebase configuration check
+  const [firebaseStatus, setFirebaseStatus] = useState<'loading' | 'connected' | 'error'>('loading');
   const [projects, setProjects] = useState<ProjectData[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<
@@ -82,6 +80,7 @@ export default function Admin() {
 
     if (isAuth) {
       loadProjects();
+      checkFirebaseStatus();
     }
   }, []);
 
@@ -98,12 +97,22 @@ export default function Admin() {
   const loadProjects = async () => {
     try {
       setLoading(true);
-      const data = await SanityService.getAllProjects();
-      setProjects(data);
+      // For now, use static data since Firebase isn't configured yet
+      const { projectsData } = await import('@/data/projects-data');
+      setProjects(projectsData);
     } catch (error) {
       console.error("Failed to load projects:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const checkFirebaseStatus = async () => {
+    try {
+      const result = await testFirebaseConnection();
+      setFirebaseStatus(result.success ? 'connected' : 'error');
+    } catch (error) {
+      setFirebaseStatus('error');
     }
   };
 
@@ -140,19 +149,18 @@ export default function Admin() {
 
       if (editingProject) {
         // Update existing project
-        await SanityService.updateProject(
+        await FirebaseAdminService.updateProject(
           String(editingProject.id),
           projectData,
         );
         showSuccessMessage("Project updated successfully! ✨");
       } else {
         // Create new project
-        await SanityService.createProject(projectData);
+        await FirebaseAdminService.createProject(projectData);
         showSuccessMessage("Project created successfully! 🎉");
       }
 
-      // Force refresh and reload projects from Sanity
-      SanityService.forceRefresh();
+      // Reload projects
       await loadProjects();
       resetForm();
     } catch (error) {
@@ -188,12 +196,12 @@ export default function Admin() {
       title: project.title || "",
       customerName: project.customerName || "",
       location: project.location || "",
-      service: (project.category as any) || "",
-      subcategory: project.serviceName?.split(" - ")[1] || "",
+      service: project.service || "",
+      subcategory: project.subcategory || "",
       description: project.description || "",
       isFeatured: project.isFeatured || false,
       completedDate: project.completedDate || "",
-      status: (project.status as any) || "completed",
+      status: project.status || "completed",
       imageFile: undefined,
     });
     setShowForm(true);
@@ -207,10 +215,9 @@ export default function Admin() {
     ) {
       try {
         setLoading(true);
-        await SanityService.deleteProject(projectId);
+        await FirebaseAdminService.deleteProject(projectId);
         showSuccessMessage("Project deleted successfully! 🗑️");
-        // Force refresh and reload projects from Sanity
-        SanityService.forceRefresh();
+        // Reload projects
         await loadProjects();
       } catch (error) {
         console.error("Error deleting project:", error);
@@ -226,10 +233,10 @@ export default function Admin() {
   const stats = {
     totalProjects: projects.length,
     featuredProjects: projects.filter((p) => p.isFeatured).length,
-    wallpaperProjects: projects.filter((p) => p.category === "wallpapers")
+    wallpaperProjects: projects.filter((p) => p.service === "wallpapers")
       .length,
-    blindsProjects: projects.filter((p) => p.category === "blinds").length,
-    flooringProjects: projects.filter((p) => p.category === "flooring").length,
+    blindsProjects: projects.filter((p) => p.service === "blinds").length,
+    flooringProjects: projects.filter((p) => p.service === "flooring").length,
     completedProjects: projects.filter((p) => p.status === "completed").length,
   };
 
@@ -266,7 +273,14 @@ export default function Admin() {
                 </div>
               </div>
               <div className="flex items-center space-x-4">
-                <SanityStatus />
+                <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  firebaseStatus === 'connected' ? 'bg-green-100 text-green-800' :
+                  firebaseStatus === 'error' ? 'bg-red-100 text-red-800' :
+                  'bg-yellow-100 text-yellow-800'
+                }`}>
+                  Firebase: {firebaseStatus === 'connected' ? 'Connected' :
+                           firebaseStatus === 'error' ? 'Not Configured' : 'Checking...'}
+                </div>
                 <Button
                   onClick={() => window.open("/", "_blank")}
                   variant="outline"
@@ -441,11 +455,11 @@ export default function Admin() {
                     </Button>
                     <Button
                       variant="outline"
-                      onClick={() => window.open(sanityStudioUrl, "_blank")}
+                      onClick={() => alert('Firebase Console: Configure your Firebase project in the environment variables')}
                       className="h-20 flex flex-col space-y-2"
                     >
                       <Settings className="w-6 h-6" />
-                      <span>Sanity Studio</span>
+                      <span>Firebase Console</span>
                     </Button>
                     <Button
                       variant="outline"
@@ -597,7 +611,7 @@ export default function Admin() {
                               imageFile: file,
                             }))
                           }
-                          currentImage={editingProject?.image}
+                          currentImage={editingProject?.imageURL}
                         />
                       </div>
 
@@ -684,7 +698,7 @@ export default function Admin() {
                                 </Badge>
                               )}
                               <Badge variant="outline">
-                                {project.category}
+                                {project.service}
                               </Badge>
                             </div>
                             <p className="text-sm text-gray-600 mt-1">
@@ -729,15 +743,15 @@ export default function Admin() {
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between p-4 border rounded-lg">
                     <div>
-                      <h3 className="font-medium">Sanity Studio</h3>
+                      <h3 className="font-medium">Firebase Console</h3>
                       <p className="text-sm text-gray-600">
-                        Access your content management system
+                        Manage your Firebase project and database
                       </p>
                     </div>
                     <Button
-                      onClick={() => window.open(sanityStudioUrl, "_blank")}
+                      onClick={() => window.open('https://console.firebase.google.com/', '_blank')}
                     >
-                      Open Studio
+                      Open Console
                     </Button>
                   </div>
 
