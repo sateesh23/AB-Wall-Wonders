@@ -1,11 +1,19 @@
-// Project and Category types
+// Firebase Project types
 export interface Project {
-  id: string;
+  id?: string;
   title: string;
+  customerName: string;
+  location: string;
+  service: "wallpapers" | "blinds" | "flooring";
+  subcategory?: string;
   description: string;
-  image: string;
-  category: string;
-  status: string;
+  imageURL: string;
+  imageURLs?: string[];
+  isFeatured: boolean;
+  completedDate: string;
+  status: "completed" | "in-progress" | "planning";
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Category {
