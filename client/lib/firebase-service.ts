@@ -283,10 +283,17 @@ export const updateProject = async (id: string, updates: Partial<FirebaseProject
   
   try {
     const docRef = doc(db, PROJECTS_COLLECTION, id);
-    await updateDoc(docRef, {
+    const updateData = {
       ...updates,
       updatedAt: new Date().toISOString(),
-    });
+    };
+
+    // Remove undefined values - Firebase doesn't accept them
+    const cleanedUpdateData = Object.fromEntries(
+      Object.entries(updateData).filter(([_, value]) => value !== undefined)
+    );
+
+    await updateDoc(docRef, cleanedUpdateData);
   } catch (error) {
     console.error('Error updating project:', error);
     throw new Error('Failed to update project');
