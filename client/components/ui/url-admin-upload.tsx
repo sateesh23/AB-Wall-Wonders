@@ -90,21 +90,39 @@ export const URLAdminUpload: React.FC<URLAdminUploadProps> = ({
     setError(null);
 
     try {
+      // Validate required fields
+      if (!formData.title.trim()) {
+        throw new Error('Project title is required');
+      }
+      if (!formData.customerName.trim()) {
+        throw new Error('Customer name is required');
+      }
+      if (!formData.location.trim()) {
+        throw new Error('Location is required');
+      }
+      if (!formData.description.trim()) {
+        throw new Error('Description is required');
+      }
+
+      console.log('🚀 Submitting form data:', formData);
+
       let result: string;
       if (editingProject) {
         await FirebaseAdminService.updateProject(editingProject.id, formData);
         result = editingProject.id;
+        console.log('✅ Project updated successfully');
       } else {
         result = await FirebaseAdminService.createProject(formData);
+        console.log('✅ Project created successfully with ID:', result);
       }
-      
+
       // Success callback
       if (onSuccess) {
         onSuccess(result);
       }
 
     } catch (error: any) {
-      console.error('Error saving project:', error);
+      console.error('❌ Error saving project:', error);
       setError(error.message || 'Failed to save project');
     } finally {
       setLoading(false);
