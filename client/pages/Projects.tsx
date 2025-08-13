@@ -34,8 +34,19 @@ export default function Projects() {
     const loadData = async () => {
       try {
         setLoading(true);
-        // Use static data
-        const allProjects = projectsData;
+
+        // Try to load from Firebase first
+        const { getAllProjects, isFirebaseConfigured } = await import('@/lib/firebase-service');
+
+        let allProjects = projectsData; // Default to static data
+
+        if (isFirebaseConfigured()) {
+          const firebaseProjects = await getAllProjects();
+          if (firebaseProjects.length > 0) {
+            allProjects = firebaseProjects;
+          }
+        }
+
         const uniqueCategories = Array.from(new Set(allProjects.map(p => p.service)));
 
         setProjects(allProjects);
@@ -43,6 +54,9 @@ export default function Projects() {
       } catch (err) {
         setError("Failed to load projects. Please try again later.");
         console.error("Error loading projects:", err);
+        // Fallback to static data on error
+        setProjects(projectsData);
+        setCategories(Array.from(new Set(projectsData.map(p => p.service))));
       } finally {
         setLoading(false);
       }
