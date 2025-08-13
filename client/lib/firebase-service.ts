@@ -22,8 +22,9 @@ export interface FirebaseProject {
   service: "wallpapers" | "blinds" | "flooring";
   subcategory?: string;
   description: string;
-  imageURL: string; // Main image URL
-  imageURLs?: string[]; // Additional image URLs
+  beforeImageURL: string; // Before image URL
+  afterImageURL: string; // After image URL
+  additionalImageURLs?: string[]; // Additional image URLs
   isFeatured: boolean;
   completedDate: string;
   status: "completed" | "in-progress" | "planning";
