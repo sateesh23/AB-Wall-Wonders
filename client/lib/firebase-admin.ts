@@ -19,8 +19,9 @@ export interface CreateProjectData {
   isFeatured: boolean
   completedDate: string
   status: 'completed' | 'in-progress' | 'planning'
-  imageURL?: string // Main image URL
-  imageURLs?: string[] // Additional image URLs
+  beforeImageURL?: string // Before image URL
+  afterImageURL?: string // After image URL
+  additionalImageURLs?: string[] // Additional image URLs
 }
 
 export class FirebaseAdminService {
