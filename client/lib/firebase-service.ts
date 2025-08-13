@@ -115,10 +115,15 @@ export const createProject = async (projectData: Omit<FirebaseProject, 'id' | 'c
       updatedAt: now,
     };
 
-    console.log('💾 Saving to Firebase:', dataToSave);
+    // Remove undefined values - Firebase doesn't accept them
+    const cleanedData = Object.fromEntries(
+      Object.entries(dataToSave).filter(([_, value]) => value !== undefined)
+    );
+
+    console.log('💾 Saving to Firebase:', cleanedData);
     console.log('📁 Collection:', PROJECTS_COLLECTION);
 
-    const docRef = await addDoc(collection(db, PROJECTS_COLLECTION), dataToSave);
+    const docRef = await addDoc(collection(db, PROJECTS_COLLECTION), cleanedData);
     console.log('✅ Document created with ID:', docRef.id);
     return docRef.id;
   } catch (error: any) {
