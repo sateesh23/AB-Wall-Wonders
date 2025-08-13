@@ -67,8 +67,20 @@ export const URLAdminUpload: React.FC<URLAdminUploadProps> = ({
   };
 
   const testImageURL = (url: string) => {
-    if (url) {
+    if (url && url.trim() !== '') {
       window.open(url, '_blank');
+    }
+  };
+
+  const validateURL = (url: string): boolean => {
+    if (!url || url.trim() === '') return true; // Empty is OK
+
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      // Also allow relative URLs
+      return url.startsWith('/');
     }
   };
 
