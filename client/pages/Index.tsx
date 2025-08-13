@@ -225,13 +225,37 @@ export default function Index() {
                 key={index}
                 className="group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 hover:-translate-y-1 relative"
               >
-                <CardContent className="p-6 lg:p-8">
-                  <div className="space-y-6">
-                    {/* Service Icon */}
-                    <div className="h-14 w-14 bg-gradient-to-br from-primary/10 to-primary/20 rounded-xl flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/30 transition-all duration-300">
-                      <service.icon className="h-7 w-7 text-primary" />
+                {/* Service Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute top-4 right-4">
+                    <div className="h-10 w-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <service.icon className="h-5 w-5 text-white" />
                     </div>
+                  </div>
+                  {/* Warranty Badge */}
+                  <div className="absolute bottom-4 left-4">
+                    {service.title === "Premium Wallpapers" && (
+                      <Badge className="bg-emerald-500 text-white border-0 px-3 py-1">
+                        5-Year Warranty
+                      </Badge>
+                    )}
+                    {(service.title === "Window Blinds" ||
+                      service.title === "Luxury Flooring") && (
+                      <Badge className="bg-blue-500 text-white border-0 px-3 py-1">
+                        2-Year Warranty
+                      </Badge>
+                    )}
+                  </div>
+                </div>
 
+                <CardContent className="p-6">
+                  <div className="space-y-4">
                     {/* Service Title & Description */}
                     <div>
                       <h3 className="text-xl font-bold text-primary mb-2">
@@ -244,23 +268,6 @@ export default function Index() {
                         {service.benefit}
                       </p>
                     </div>
-
-                    {/* Warranty Badges */}
-                    {service.title === "Premium Wallpapers" && (
-                      <div className="flex justify-center">
-                        <Badge className="bg-emerald-100 text-emerald-800 border-emerald-200 hover:bg-emerald-100 px-3 py-1">
-                          5-Year Warranty
-                        </Badge>
-                      </div>
-                    )}
-                    {(service.title === "Window Blinds" ||
-                      service.title === "Luxury Flooring") && (
-                      <div className="flex justify-center">
-                        <Badge className="bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-100 px-3 py-1">
-                          2-Year Warranty
-                        </Badge>
-                      </div>
-                    )}
 
                     {/* Features */}
                     <div className="space-y-2">
@@ -275,19 +282,20 @@ export default function Index() {
                     </div>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col gap-3 pt-2">
+                    <div className="space-y-3 pt-2">
                       <Button
-                        className="w-full bg-primary hover:bg-primary/90"
+                        className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-xl transition-all duration-300"
                         asChild
                       >
                         <Link to={service.href}>
-                          <Eye className="mr-2 h-4 w-4" />
-                          View Options
+                          <Eye className="mr-2 h-5 w-5" />
+                          Explore Service
                         </Link>
                       </Button>
+
                       <Button
                         variant="outline"
-                        className="w-full border-primary text-primary hover:bg-primary hover:text-white"
+                        className="w-full border-primary/30 text-primary hover:bg-primary/10 font-medium py-3 rounded-xl transition-all duration-300"
                         asChild
                       >
                         <a
@@ -295,7 +303,7 @@ export default function Index() {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <MessageCircle className="mr-2 h-4 w-4" />
+                          <MessageCircle className="mr-2 h-5 w-5" />
                           WhatsApp Now
                         </a>
                       </Button>
