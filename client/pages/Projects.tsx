@@ -13,9 +13,8 @@ import {
   Loader2,
   Database,
 } from "lucide-react";
-import { SanityService } from "@/lib/sanity-service";
 import type { ProjectData } from "@/lib/types";
-import { SanityStatus } from "@/components/ui/sanity-status";
+import { projectsData } from "@/data/projects-data";
 import { EmptyState } from "@/components/ui/empty-state";
 
 export default function Projects() {
