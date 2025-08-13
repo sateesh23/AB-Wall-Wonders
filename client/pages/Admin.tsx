@@ -665,6 +665,9 @@ export default function Admin() {
                   </div>
                 </CardContent>
               </Card>
+
+              {/* Firebase Debug Component */}
+              <FirebaseDebug />
             </div>
           )}
         </div>
