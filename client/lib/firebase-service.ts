@@ -17,7 +17,7 @@ import {
   getDownloadURL, 
   deleteObject 
 } from 'firebase/storage';
-import { db, storage } from './firebase';
+import { db, storage, isFirebaseConfigured } from './firebase';
 
 // Types for Firebase
 export interface FirebaseProject {
