@@ -240,12 +240,30 @@ export const testFirebaseConnection = async (): Promise<{
   projectId?: string;
   environment?: string;
 }> => {
+  if (!isFirebaseConfigured()) {
+    return {
+      success: false,
+      error: 'Firebase not configured',
+      projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || 'not-set',
+      environment: import.meta.env.DEV ? 'development' : 'production',
+    };
+  }
+
+  if (!db) {
+    return {
+      success: false,
+      error: 'Firebase database not initialized',
+      projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+      environment: import.meta.env.DEV ? 'development' : 'production',
+    };
+  }
+
   try {
     // Try to fetch a small amount of data to test connection
     const querySnapshot = await getDocs(
       query(collection(db, PROJECTS_COLLECTION), limit(1))
     );
-    
+
     return {
       success: true,
       projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
@@ -253,7 +271,7 @@ export const testFirebaseConnection = async (): Promise<{
     };
   } catch (error: any) {
     console.warn('Firebase connection issue:', error.message);
-    
+
     return {
       success: false,
       error: error.message || 'Connection failed',
