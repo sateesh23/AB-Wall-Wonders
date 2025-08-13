@@ -18,10 +18,40 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadProjects = () => {
+    const loadProjects = async () => {
       try {
+        // Try to load from Firebase first
+        const { getAllProjects, getFeaturedProjects, isFirebaseConfigured } = await import('@/lib/firebase-service');
+
         let data: ProjectData[];
 
+        if (isFirebaseConfigured()) {
+          // Use Firebase data if available
+          if (showFeatured) {
+            const firebaseFeatured = await getFeaturedProjects();
+            data = firebaseFeatured.length > 0 ? firebaseFeatured : featuredProjects;
+          } else {
+            const firebaseProjects = await getAllProjects();
+            data = firebaseProjects.length > 0 ? firebaseProjects : projectsData;
+          }
+        } else {
+          // Fallback to static data
+          if (showFeatured) {
+            data = featuredProjects;
+          } else {
+            data = projectsData;
+          }
+        }
+
+        if (limit) {
+          data = data.slice(0, limit);
+        }
+
+        setProjects(data);
+      } catch (error) {
+        console.error('Failed to load projects:', error);
+        // Fallback to static data on error
+        let data: ProjectData[];
         if (showFeatured) {
           data = featuredProjects;
         } else {
@@ -33,8 +63,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         }
 
         setProjects(data);
-      } catch (error) {
-        console.error('Failed to load projects:', error);
       } finally {
         setLoading(false);
       }
