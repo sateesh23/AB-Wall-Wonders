@@ -18,21 +18,21 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadProjects = async () => {
+    const loadProjects = () => {
       try {
-        let projectsData: ProjectData[];
-        
+        let data: ProjectData[];
+
         if (showFeatured) {
-          projectsData = await SanityService.getFeaturedProjects();
+          data = featuredProjects;
         } else {
-          projectsData = await SanityService.getAllProjects();
+          data = projectsData;
         }
 
         if (limit) {
-          projectsData = projectsData.slice(0, limit);
+          data = data.slice(0, limit);
         }
 
-        setProjects(projectsData);
+        setProjects(data);
       } catch (error) {
         console.error('Failed to load projects:', error);
       } finally {
