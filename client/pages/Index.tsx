@@ -93,11 +93,10 @@ export default function Index() {
 
         if (isFirebaseConfigured()) {
           const firebaseProjects = await getRecentProjects(6);
-          if (firebaseProjects.length > 0) {
-            console.log(`📊 Loaded ${firebaseProjects.length} recent projects from Firebase`);
-            setRecentProjects(firebaseProjects);
-            return;
-          }
+          console.log(`📊 Firebase returned ${firebaseProjects.length} projects`);
+          // Always use Firebase data when configured, even if empty
+          setRecentProjects(firebaseProjects);
+          return;
         }
 
         // Fallback to static data
