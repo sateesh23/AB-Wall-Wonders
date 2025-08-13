@@ -50,7 +50,7 @@ export class FirebaseAdminService {
         }
       }
 
-      const projectData: Omit<FirebaseProject, 'id' | 'createdAt' | 'updatedAt'> = {
+      const projectData: Partial<Omit<FirebaseProject, 'id' | 'createdAt' | 'updatedAt'>> = {
         title: data.title,
         customerName: data.customerName,
         location: data.location,
