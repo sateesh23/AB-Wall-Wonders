@@ -43,9 +43,9 @@ export default function Projects() {
 
         if (isFirebaseConfigured()) {
           const firebaseProjects = await getAllProjects();
-          if (firebaseProjects.length > 0) {
-            allProjects = firebaseProjects;
-          }
+          console.log(`📊 Firebase returned ${firebaseProjects.length} projects for Projects page`);
+          // Always use Firebase data when configured, even if empty
+          allProjects = firebaseProjects;
         }
 
         const uniqueCategories = Array.from(new Set(allProjects.map(p => p.service)));
