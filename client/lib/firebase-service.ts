@@ -24,7 +24,7 @@ export interface FirebaseProject {
   description: string;
   beforeImageURL: string; // Before image URL
   afterImageURL: string; // After image URL
-  additionalImageURLs?: string[]; // Additional image URLs
+  additionalImageURLs?: string[]; // Additional image URLs (optional)
   isFeatured: boolean;
   completedDate: string;
   status: "completed" | "in-progress" | "planning";
