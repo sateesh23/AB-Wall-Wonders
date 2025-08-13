@@ -36,7 +36,8 @@ export default function Projects() {
         setLoading(true);
 
         // Try to load from Firebase first
-        const { getAllProjects, isFirebaseConfigured } = await import('@/lib/firebase-service');
+        const { getAllProjects } = await import('@/lib/firebase-service');
+        const { isFirebaseConfigured } = await import('@/lib/firebase');
 
         let allProjects = projectsData; // Default to static data
 
