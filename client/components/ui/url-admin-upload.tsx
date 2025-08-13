@@ -32,8 +32,9 @@ export const URLAdminUpload: React.FC<URLAdminUploadProps> = ({
     isFeatured: editingProject?.isFeatured || false,
     completedDate: editingProject?.completedDate || new Date().toISOString().split('T')[0],
     status: editingProject?.status || 'completed',
-    imageURL: editingProject?.imageURL || '',
-    imageURLs: editingProject?.imageURLs || [],
+    beforeImageURL: editingProject?.beforeImageURL || '',
+    afterImageURL: editingProject?.afterImageURL || '',
+    additionalImageURLs: editingProject?.additionalImageURLs || [],
   });
 
   const [additionalImageURL, setAdditionalImageURL] = useState('');
