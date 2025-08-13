@@ -27,7 +27,7 @@ import {
 import { FirebaseAdminService } from "@/lib/firebase-admin";
 import { testFirebaseConnection } from "@/lib/firebase-service";
 import { AdminAuth } from "@/components/ui/admin-auth";
-import { ImageUpload } from "@/components/ui/image-upload";
+import { URLAdminUpload } from "@/components/ui/url-admin-upload";
 import { SuccessMessage } from "@/components/ui/success-message";
 import type { ProjectData } from "@/lib/types";
 
