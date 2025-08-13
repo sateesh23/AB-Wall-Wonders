@@ -37,9 +37,47 @@ const PROJECTS_COLLECTION = 'projects';
 
 // Validate image URL
 export const validateImageURL = (url: string): boolean => {
+  if (!url || url.trim() === '') return false;
+
+  // Allow placeholder
+  if (url === '/placeholder.svg') return true;
+
   try {
-    new URL(url);
-    return /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i.test(url);
+    const urlObj = new URL(url);
+
+    // Allow URLs with image extensions
+    if (/\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i.test(url)) {
+      return true;
+    }
+
+    // Allow URLs with query parameters (like Unsplash, CDN URLs)
+    if (urlObj.search && /\.(jpg|jpeg|png|gif|bmp|webp|svg)/i.test(urlObj.search)) {
+      return true;
+    }
+
+    // Allow common image hosting domains without extension requirement
+    const allowedDomains = [
+      'unsplash.com',
+      'images.unsplash.com',
+      'cdn.builder.io',
+      'imgur.com',
+      'i.imgur.com',
+      'postimages.org',
+      'imgbb.com',
+      'cloudinary.com',
+      'imagekit.io'
+    ];
+
+    if (allowedDomains.some(domain => urlObj.hostname.includes(domain))) {
+      return true;
+    }
+
+    // For relative URLs starting with /
+    if (url.startsWith('/')) {
+      return true;
+    }
+
+    return false;
   } catch {
     return false;
   }
