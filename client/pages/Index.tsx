@@ -86,16 +86,34 @@ export default function Index() {
     const loadRecentProjects = async () => {
       try {
         console.log("🔄 Loading recent projects for homepage...");
-        // Get the 6 most recent projects from Sanity
-        const projects = await SanityService.getRecentProjects(6);
-        console.log(
-          `📊 Loaded ${projects.length} recent projects for homepage`,
-        );
-        setRecentProjects(projects);
+
+        // Try to load from Firebase first
+        const { getRecentProjects, isFirebaseConfigured } = await import('@/lib/firebase-service');
+
+        if (isFirebaseConfigured()) {
+          const firebaseProjects = await getRecentProjects(6);
+          if (firebaseProjects.length > 0) {
+            console.log(`📊 Loaded ${firebaseProjects.length} recent projects from Firebase`);
+            setRecentProjects(firebaseProjects);
+            return;
+          }
+        }
+
+        // Fallback to static data
+        const { projectsData } = await import('@/data/projects-data');
+        const recentStatic = projectsData.slice(0, 6);
+        console.log(`📊 Using ${recentStatic.length} static projects for homepage`);
+        setRecentProjects(recentStatic);
       } catch (error) {
         console.error("Error loading recent projects:", error);
-        // No fallback - keep empty array to show "no projects" state
-        setRecentProjects([]);
+        // Fallback to static data on error
+        try {
+          const { projectsData } = await import('@/data/projects-data');
+          setRecentProjects(projectsData.slice(0, 6));
+        } catch (staticError) {
+          console.error("Failed to load static data:", staticError);
+          setRecentProjects([]);
+        }
       } finally {
         setProjectsLoading(false);
       }
