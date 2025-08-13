@@ -99,7 +99,8 @@ export default function Admin() {
       setLoading(true);
 
       // Try to load from Firebase first
-      const { getAllProjects, isFirebaseConfigured } = await import('@/lib/firebase-service');
+      const { getAllProjects } = await import('@/lib/firebase-service');
+      const { isFirebaseConfigured } = await import('@/lib/firebase');
 
       if (isFirebaseConfigured()) {
         const firebaseProjects = await getAllProjects();
