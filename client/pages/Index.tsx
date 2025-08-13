@@ -223,7 +223,7 @@ export default function Index() {
             {services.map((service, index) => (
               <Card
                 key={index}
-                className="group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 hover:-translate-y-1 relative"
+                className="group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 hover:-translate-y-1 relative overflow-hidden"
               >
                 {/* Service Image */}
                 <div className="relative h-48 overflow-hidden">
