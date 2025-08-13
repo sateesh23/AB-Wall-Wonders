@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CTACard } from "@/components/ui/cta-card";
-import { ProjectsSection } from "@/components/ui/projects-section";
+import { ProjectCard } from "@/components/ui/project-card";
 
 import {
   Phone,
