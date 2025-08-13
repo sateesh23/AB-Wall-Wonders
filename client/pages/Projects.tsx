@@ -213,10 +213,27 @@ export default function Projects() {
 
           {/* Projects Grid */}
           {!loading && !error && (
-            <ProjectsSection
-              showFeatured={false}
-              className="animate-in fade-in-50 duration-500"
-            />
+            <div className="animate-in fade-in-50 duration-500">
+              {filteredProjects.length === 0 ? (
+                <div className="text-center py-12">
+                  <EmptyState
+                    title="No Projects Found"
+                    description={`No ${selectedCategory === "all" ? "" : getCategoryLabel(selectedCategory).toLowerCase()} projects found.`}
+                    showAddButton={true}
+                  />
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredProjects.map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      className="h-full"
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           )}
 
           {/* No Results Message */}
