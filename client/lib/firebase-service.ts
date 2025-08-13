@@ -51,16 +51,20 @@ export const createProject = async (projectData: Omit<FirebaseProject, 'id' | 'c
     throw new Error('Firebase not configured. Please set up Firebase environment variables.');
   }
   
-  // Validate main image URL
-  if (!validateImageURL(projectData.imageURL)) {
-    throw new Error('Invalid main image URL. Please provide a valid image URL.');
+  // Validate before and after image URLs
+  if (!validateImageURL(projectData.beforeImageURL)) {
+    throw new Error('Invalid before image URL. Please provide a valid image URL.');
+  }
+
+  if (!validateImageURL(projectData.afterImageURL)) {
+    throw new Error('Invalid after image URL. Please provide a valid image URL.');
   }
 
   // Validate additional image URLs if provided
-  if (projectData.imageURLs) {
-    for (const url of projectData.imageURLs) {
+  if (projectData.additionalImageURLs) {
+    for (const url of projectData.additionalImageURLs) {
       if (!validateImageURL(url)) {
-        throw new Error(`Invalid image URL: ${url}`);
+        throw new Error(`Invalid additional image URL: ${url}`);
       }
     }
   }
