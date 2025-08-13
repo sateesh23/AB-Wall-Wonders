@@ -55,14 +55,21 @@ export class FirebaseAdminService {
         customerName: data.customerName,
         location: data.location,
         service: data.service,
-        subcategory: data.subcategory,
         description: data.description,
         beforeImageURL,
         afterImageURL,
-        additionalImageURLs: data.additionalImageURLs && data.additionalImageURLs.length > 0 ? data.additionalImageURLs : undefined,
         isFeatured: data.isFeatured,
         completedDate: data.completedDate,
         status: data.status,
+      }
+
+      // Only add optional fields if they have values
+      if (data.subcategory && data.subcategory.trim()) {
+        projectData.subcategory = data.subcategory;
+      }
+
+      if (data.additionalImageURLs && data.additionalImageURLs.length > 0) {
+        projectData.additionalImageURLs = data.additionalImageURLs;
       }
 
       console.log('🚀 Creating project with data:', projectData)
