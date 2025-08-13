@@ -97,11 +97,30 @@ export default function Admin() {
   const loadProjects = async () => {
     try {
       setLoading(true);
-      // For now, use static data since Firebase isn't configured yet
+
+      // Try to load from Firebase first
+      const { getAllProjects, isFirebaseConfigured } = await import('@/lib/firebase-service');
+
+      if (isFirebaseConfigured()) {
+        const firebaseProjects = await getAllProjects();
+        if (firebaseProjects.length > 0) {
+          setProjects(firebaseProjects);
+          return;
+        }
+      }
+
+      // Fallback to static data
       const { projectsData } = await import('@/data/projects-data');
       setProjects(projectsData);
     } catch (error) {
       console.error("Failed to load projects:", error);
+      // Fallback to static data on error
+      try {
+        const { projectsData } = await import('@/data/projects-data');
+        setProjects(projectsData);
+      } catch (staticError) {
+        console.error("Failed to load static data:", staticError);
+      }
     } finally {
       setLoading(false);
     }
