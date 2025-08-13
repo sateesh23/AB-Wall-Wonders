@@ -34,12 +34,12 @@ export default function Projects() {
     const loadData = async () => {
       try {
         setLoading(true);
-        const [projectsData, categoriesData] = await Promise.all([
-          SanityService.getAllProjects(),
-          SanityService.getProjectCategories(),
-        ]);
-        setProjects(projectsData);
-        setCategories(categoriesData);
+        // Use static data
+        const allProjects = projectsData;
+        const uniqueCategories = Array.from(new Set(allProjects.map(p => p.service)));
+
+        setProjects(allProjects);
+        setCategories(uniqueCategories);
       } catch (err) {
         setError("Failed to load projects. Please try again later.");
         console.error("Error loading projects:", err);
