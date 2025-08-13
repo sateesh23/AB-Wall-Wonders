@@ -36,6 +36,7 @@ const services = [
     title: "Premium Wallpapers",
     description: "Stunning 3D, Botanical & Geometric styles",
     benefit: "Transform any space with designer collections",
+    image: "/images/wallpaperr.png",
     features: [
       "Designer Collections",
       "Custom Patterns",
@@ -48,6 +49,7 @@ const services = [
     title: "Window Blinds",
     description: "Smart motorized & manual options available",
     benefit: "Perfect light control and privacy solutions",
+    image: "/images/blindss.png",
     features: ["Motorized Options", "Custom Sizing", "Energy Efficient"],
     href: "/services/blinds",
   },
@@ -56,6 +58,7 @@ const services = [
     title: "Luxury Flooring",
     description: "Waterproof, durable & beautiful finishes",
     benefit: "Premium flooring that withstands daily use",
+    image: "/images/flooringg.png",
     features: [
       "Hardwood & Laminate",
       "Waterproof Options",
