@@ -53,7 +53,7 @@ export const URLAdminUpload: React.FC<URLAdminUploadProps> = ({
     if (additionalImageURL.trim()) {
       setFormData(prev => ({
         ...prev,
-        imageURLs: [...(prev.imageURLs || []), additionalImageURL.trim()]
+        additionalImageURLs: [...(prev.additionalImageURLs || []), additionalImageURL.trim()]
       }));
       setAdditionalImageURL('');
     }
@@ -62,7 +62,7 @@ export const URLAdminUpload: React.FC<URLAdminUploadProps> = ({
   const removeAdditionalImage = (index: number) => {
     setFormData(prev => ({
       ...prev,
-      imageURLs: prev.imageURLs?.filter((_, i) => i !== index) || []
+      additionalImageURLs: prev.additionalImageURLs?.filter((_, i) => i !== index) || []
     }));
   };
 
