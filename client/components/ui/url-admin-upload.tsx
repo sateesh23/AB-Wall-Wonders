@@ -221,34 +221,64 @@ export const URLAdminUpload: React.FC<URLAdminUploadProps> = ({
             />
           </div>
 
-          {/* Main Image URL */}
+          {/* Before/After Image URLs */}
           <div className="space-y-4">
-            <div>
-              <Label htmlFor="imageURL">Main Project Image URL *</Label>
-              <div className="flex space-x-2">
-                <Input
-                  id="imageURL"
-                  name="imageURL"
-                  value={formData.imageURL}
-                  onChange={handleInputChange}
-                  placeholder="https://example.com/image.jpg"
-                  required
-                  disabled={loading}
-                  className="flex-1"
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => testImageURL(formData.imageURL)}
-                  disabled={!formData.imageURL || loading}
-                  size="sm"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                </Button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="beforeImageURL">Before Image URL *</Label>
+                <div className="flex space-x-2">
+                  <Input
+                    id="beforeImageURL"
+                    name="beforeImageURL"
+                    value={formData.beforeImageURL}
+                    onChange={handleInputChange}
+                    placeholder="https://example.com/before.jpg"
+                    required
+                    disabled={loading}
+                    className="flex-1"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => testImageURL(formData.beforeImageURL)}
+                    disabled={!formData.beforeImageURL || loading}
+                    size="sm"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </Button>
+                </div>
+                <p className="text-sm text-gray-500 mt-1">
+                  Image showing the space before transformation
+                </p>
               </div>
-              <p className="text-sm text-gray-500 mt-1">
-                Enter a direct link to an image (jpg, png, gif, webp, etc.)
-              </p>
+
+              <div>
+                <Label htmlFor="afterImageURL">After Image URL *</Label>
+                <div className="flex space-x-2">
+                  <Input
+                    id="afterImageURL"
+                    name="afterImageURL"
+                    value={formData.afterImageURL}
+                    onChange={handleInputChange}
+                    placeholder="https://example.com/after.jpg"
+                    required
+                    disabled={loading}
+                    className="flex-1"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => testImageURL(formData.afterImageURL)}
+                    disabled={!formData.afterImageURL || loading}
+                    size="sm"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </Button>
+                </div>
+                <p className="text-sm text-gray-500 mt-1">
+                  Image showing the completed transformation
+                </p>
+              </div>
             </div>
 
             {/* Additional Image URLs */}
