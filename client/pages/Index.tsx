@@ -88,7 +88,8 @@ export default function Index() {
         console.log("🔄 Loading recent projects for homepage...");
 
         // Try to load from Firebase first
-        const { getRecentProjects, isFirebaseConfigured } = await import('@/lib/firebase-service');
+        const { getRecentProjects } = await import('@/lib/firebase-service');
+        const { isFirebaseConfigured } = await import('@/lib/firebase');
 
         if (isFirebaseConfigured()) {
           const firebaseProjects = await getRecentProjects(6);
