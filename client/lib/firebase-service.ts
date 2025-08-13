@@ -11,13 +11,7 @@ import {
   orderBy, 
   limit 
 } from 'firebase/firestore';
-import { 
-  ref, 
-  uploadBytes, 
-  getDownloadURL, 
-  deleteObject 
-} from 'firebase/storage';
-import { db, storage, isFirebaseConfigured } from './firebase';
+import { db, isFirebaseConfigured } from './firebase';
 
 // Types for Firebase
 export interface FirebaseProject {
@@ -28,8 +22,8 @@ export interface FirebaseProject {
   service: "wallpapers" | "blinds" | "flooring";
   subcategory?: string;
   description: string;
-  imageURL: string;
-  imageURLs?: string[];
+  imageURL: string; // Main image URL
+  imageURLs?: string[]; // Additional image URLs
   isFeatured: boolean;
   completedDate: string;
   status: "completed" | "in-progress" | "planning";
@@ -40,55 +34,36 @@ export interface FirebaseProject {
 // Collection reference
 const PROJECTS_COLLECTION = 'projects';
 
-// Upload image to Firebase Storage
-export const uploadImage = async (file: File, path: string = 'images'): Promise<string> => {
-  if (!isFirebaseConfigured() || !storage) {
-    throw new Error('Firebase not configured. Please set up Firebase environment variables.');
-  }
-
+// Validate image URL
+export const validateImageURL = (url: string): boolean => {
   try {
-    const timestamp = Date.now();
-    const fileName = `${timestamp}_${file.name}`;
-    const storageRef = ref(storage, `${path}/${fileName}`);
-
-    const snapshot = await uploadBytes(storageRef, file);
-    const downloadURL = await getDownloadURL(snapshot.ref);
-
-    return downloadURL;
-  } catch (error) {
-    console.error('Error uploading image:', error);
-    throw new Error('Failed to upload image');
+    new URL(url);
+    return /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i.test(url);
+  } catch {
+    return false;
   }
 };
 
-// Upload multiple images
-export const uploadMultipleImages = async (files: File[], path: string = 'images'): Promise<string[]> => {
-  try {
-    const uploadPromises = files.map(file => uploadImage(file, path));
-    return await Promise.all(uploadPromises);
-  } catch (error) {
-    console.error('Error uploading multiple images:', error);
-    throw new Error('Failed to upload images');
-  }
-};
-
-// Delete image from Firebase Storage
-export const deleteImage = async (imageURL: string): Promise<void> => {
-  try {
-    const imageRef = ref(storage, imageURL);
-    await deleteObject(imageRef);
-  } catch (error) {
-    console.error('Error deleting image:', error);
-    throw new Error('Failed to delete image');
-  }
-};
-
-// Create a new project
+// Create a new project with image URLs
 export const createProject = async (projectData: Omit<FirebaseProject, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> => {
   if (!isFirebaseConfigured() || !db) {
     throw new Error('Firebase not configured. Please set up Firebase environment variables.');
   }
+  
+  // Validate main image URL
+  if (!validateImageURL(projectData.imageURL)) {
+    throw new Error('Invalid main image URL. Please provide a valid image URL.');
+  }
 
+  // Validate additional image URLs if provided
+  if (projectData.imageURLs) {
+    for (const url of projectData.imageURLs) {
+      if (!validateImageURL(url)) {
+        throw new Error(`Invalid image URL: ${url}`);
+      }
+    }
+  }
+  
   try {
     const now = new Date().toISOString();
     const docRef = await addDoc(collection(db, PROJECTS_COLLECTION), {
@@ -105,6 +80,11 @@ export const createProject = async (projectData: Omit<FirebaseProject, 'id' | 'c
 
 // Get all projects
 export const getAllProjects = async (): Promise<FirebaseProject[]> => {
+  if (!isFirebaseConfigured() || !db) {
+    // Return empty array for demo mode
+    return [];
+  }
+  
   try {
     const querySnapshot = await getDocs(
       query(collection(db, PROJECTS_COLLECTION), orderBy('completedDate', 'desc'))
@@ -122,6 +102,10 @@ export const getAllProjects = async (): Promise<FirebaseProject[]> => {
 
 // Get featured projects
 export const getFeaturedProjects = async (): Promise<FirebaseProject[]> => {
+  if (!isFirebaseConfigured() || !db) {
+    return [];
+  }
+  
   try {
     const querySnapshot = await getDocs(
       query(
@@ -143,6 +127,10 @@ export const getFeaturedProjects = async (): Promise<FirebaseProject[]> => {
 
 // Get recent projects
 export const getRecentProjects = async (limitCount: number = 6): Promise<FirebaseProject[]> => {
+  if (!isFirebaseConfigured() || !db) {
+    return [];
+  }
+  
   try {
     const querySnapshot = await getDocs(
       query(
@@ -164,6 +152,10 @@ export const getRecentProjects = async (limitCount: number = 6): Promise<Firebas
 
 // Get projects by service
 export const getProjectsByService = async (service: string): Promise<FirebaseProject[]> => {
+  if (!isFirebaseConfigured() || !db) {
+    return [];
+  }
+  
   try {
     const querySnapshot = await getDocs(
       query(
@@ -185,6 +177,10 @@ export const getProjectsByService = async (service: string): Promise<FirebasePro
 
 // Get single project
 export const getProject = async (id: string): Promise<FirebaseProject | null> => {
+  if (!isFirebaseConfigured() || !db) {
+    return null;
+  }
+  
   try {
     const docRef = doc(db, PROJECTS_COLLECTION, id);
     const docSnap = await getDoc(docRef);
@@ -201,6 +197,23 @@ export const getProject = async (id: string): Promise<FirebaseProject | null> =>
 
 // Update project
 export const updateProject = async (id: string, updates: Partial<FirebaseProject>): Promise<void> => {
+  if (!isFirebaseConfigured() || !db) {
+    throw new Error('Firebase not configured. Please set up Firebase environment variables.');
+  }
+  
+  // Validate image URLs if being updated
+  if (updates.imageURL && !validateImageURL(updates.imageURL)) {
+    throw new Error('Invalid main image URL. Please provide a valid image URL.');
+  }
+
+  if (updates.imageURLs) {
+    for (const url of updates.imageURLs) {
+      if (!validateImageURL(url)) {
+        throw new Error(`Invalid image URL: ${url}`);
+      }
+    }
+  }
+  
   try {
     const docRef = doc(db, PROJECTS_COLLECTION, id);
     await updateDoc(docRef, {
@@ -215,17 +228,11 @@ export const updateProject = async (id: string, updates: Partial<FirebaseProject
 
 // Delete project
 export const deleteProject = async (id: string): Promise<void> => {
+  if (!isFirebaseConfigured() || !db) {
+    throw new Error('Firebase not configured. Please set up Firebase environment variables.');
+  }
+  
   try {
-    // Get project data to delete associated images
-    const project = await getProject(id);
-    if (project?.imageURL) {
-      await deleteImage(project.imageURL);
-    }
-    if (project?.imageURLs?.length) {
-      await Promise.all(project.imageURLs.map(url => deleteImage(url)));
-    }
-    
-    // Delete the document
     await deleteDoc(doc(db, PROJECTS_COLLECTION, id));
   } catch (error) {
     console.error('Error deleting project:', error);
@@ -257,13 +264,13 @@ export const testFirebaseConnection = async (): Promise<{
       environment: import.meta.env.DEV ? 'development' : 'production',
     };
   }
-
+  
   try {
     // Try to fetch a small amount of data to test connection
     const querySnapshot = await getDocs(
       query(collection(db, PROJECTS_COLLECTION), limit(1))
     );
-
+    
     return {
       success: true,
       projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
@@ -271,7 +278,7 @@ export const testFirebaseConnection = async (): Promise<{
     };
   } catch (error: any) {
     console.warn('Firebase connection issue:', error.message);
-
+    
     return {
       success: false,
       error: error.message || 'Connection failed',
