@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { SanityService } from '@/lib/sanity-service';
 import type { ProjectData } from '@/lib/types';
+import { projectsData, featuredProjects } from '@/data/projects-data';
 import { EmptyState } from '@/components/ui/empty-state';
 
 interface ProjectsSectionProps {
