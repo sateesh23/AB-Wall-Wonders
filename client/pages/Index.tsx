@@ -8,9 +8,8 @@ import ABTestimonials3D from "@/components/ui/ab-testimonials-3d";
 import { ProjectsSection } from "@/components/ui/projects-section";
 import { MinimalFeedbackForm } from "@/components/ui/minimal-feedback-form";
 
-import { SanityService } from "@/lib/sanity-service";
 import type { ProjectData } from "@/lib/types";
-import { SanityStatus } from "@/components/ui/sanity-status";
+import { projectsData } from "@/data/projects-data";
 import {
   Star,
   ArrowRight,
@@ -383,7 +382,7 @@ export default function Index() {
                 {/* Additional Info */}
                 <div className="mt-6 text-sm text-muted-foreground">
                   <p>
-                    ��� Quick Response • 💬 Free Consultation • 🏆 5-Year
+                    ����� Quick Response • 💬 Free Consultation • 🏆 5-Year
                     Warranty
                   </p>
                 </div>
