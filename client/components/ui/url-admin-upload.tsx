@@ -304,10 +304,10 @@ export const URLAdminUpload: React.FC<URLAdminUploadProps> = ({
                   </Button>
                 </div>
                 
-                {formData.imageURLs && formData.imageURLs.length > 0 && (
+                {formData.additionalImageURLs && formData.additionalImageURLs.length > 0 && (
                   <div className="space-y-2">
                     <Label>Added Images:</Label>
-                    {formData.imageURLs.map((url, index) => (
+                    {formData.additionalImageURLs.map((url, index) => (
                       <div key={index} className="flex items-center space-x-2 p-2 bg-gray-50 rounded">
                         <span className="flex-1 text-sm truncate">{url}</span>
                         <Button
