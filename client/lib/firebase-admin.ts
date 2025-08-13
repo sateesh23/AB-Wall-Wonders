@@ -28,17 +28,17 @@ export class FirebaseAdminService {
   // Create a new project with image URLs
   static async createProject(data: CreateProjectData): Promise<string> {
     try {
-      // Use placeholder if no image URLs provided
-      const beforeImageURL = data.beforeImageURL || '/placeholder.svg'
-      const afterImageURL = data.afterImageURL || '/placeholder.svg'
+      // Use placeholder if no image URLs provided or trim empty strings
+      const beforeImageURL = (data.beforeImageURL?.trim() || '/placeholder.svg')
+      const afterImageURL = (data.afterImageURL?.trim() || '/placeholder.svg')
 
-      // Validate before and after image URLs if provided
-      if (data.beforeImageURL && !validateImageURL(data.beforeImageURL)) {
-        throw new Error('Invalid before image URL. Please provide a valid image URL.');
+      // Validate before and after image URLs
+      if (!validateImageURL(beforeImageURL)) {
+        throw new Error('Invalid before image URL. Please provide a valid image URL or leave empty for placeholder.');
       }
 
-      if (data.afterImageURL && !validateImageURL(data.afterImageURL)) {
-        throw new Error('Invalid after image URL. Please provide a valid image URL.');
+      if (!validateImageURL(afterImageURL)) {
+        throw new Error('Invalid after image URL. Please provide a valid image URL or leave empty for placeholder.');
       }
 
       // Validate additional image URLs if provided
