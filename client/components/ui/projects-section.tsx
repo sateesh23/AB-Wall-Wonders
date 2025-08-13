@@ -21,7 +21,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     const loadProjects = async () => {
       try {
         // Try to load from Firebase first
-        const { getAllProjects, getFeaturedProjects, isFirebaseConfigured } = await import('@/lib/firebase-service');
+        const { getAllProjects, getFeaturedProjects } = await import('@/lib/firebase-service');
+        const { isFirebaseConfigured } = await import('@/lib/firebase');
 
         let data: ProjectData[];
 
