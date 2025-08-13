@@ -2,10 +2,10 @@ import {
   createProject, 
   updateProject, 
   deleteProject, 
-  uploadImage,
   getAllProjects,
   getFeaturedProjects,
-  getProjectsByService
+  getProjectsByService,
+  validateImageURL
 } from './firebase-service'
 import type { FirebaseProject } from './firebase-service'
 
@@ -19,26 +19,29 @@ export interface CreateProjectData {
   isFeatured: boolean
   completedDate: string
   status: 'completed' | 'in-progress' | 'planning'
-  imageFile?: File
-  imageFiles?: File[]
+  imageURL?: string // Main image URL
+  imageURLs?: string[] // Additional image URLs
 }
 
 export class FirebaseAdminService {
-  // Create a new project
+  // Create a new project with image URLs
   static async createProject(data: CreateProjectData): Promise<string> {
     try {
-      let imageURL = '/placeholder.svg'
-      let imageURLs: string[] = []
+      // Use placeholder if no image URL provided
+      const imageURL = data.imageURL || '/placeholder.svg'
 
-      // Upload main image if provided
-      if (data.imageFile) {
-        imageURL = await uploadImage(data.imageFile, 'projects')
+      // Validate image URL if provided
+      if (data.imageURL && !validateImageURL(data.imageURL)) {
+        throw new Error('Invalid main image URL. Please provide a valid image URL.');
       }
 
-      // Upload additional images if provided
-      if (data.imageFiles && data.imageFiles.length > 0) {
-        const uploadPromises = data.imageFiles.map(file => uploadImage(file, 'projects'))
-        imageURLs = await Promise.all(uploadPromises)
+      // Validate additional image URLs if provided
+      if (data.imageURLs && data.imageURLs.length > 0) {
+        for (const url of data.imageURLs) {
+          if (!validateImageURL(url)) {
+            throw new Error(`Invalid image URL: ${url}`);
+          }
+        }
       }
 
       const projectData: Omit<FirebaseProject, 'id' | 'createdAt' | 'updatedAt'> = {
@@ -49,7 +52,7 @@ export class FirebaseAdminService {
         subcategory: data.subcategory,
         description: data.description,
         imageURL,
-        imageURLs: imageURLs.length > 0 ? imageURLs : undefined,
+        imageURLs: data.imageURLs && data.imageURLs.length > 0 ? data.imageURLs : undefined,
         isFeatured: data.isFeatured,
         completedDate: data.completedDate,
         status: data.status,
@@ -80,15 +83,26 @@ export class FirebaseAdminService {
       if (data.completedDate !== undefined) updateData.completedDate = data.completedDate
       if (data.status !== undefined) updateData.status = data.status
 
-      // Handle image upload if new image provided
-      if (data.imageFile) {
-        updateData.imageURL = await uploadImage(data.imageFile, 'projects')
+      // Handle image URL updates
+      if (data.imageURL !== undefined) {
+        if (data.imageURL && !validateImageURL(data.imageURL)) {
+          throw new Error('Invalid main image URL. Please provide a valid image URL.');
+        }
+        updateData.imageURL = data.imageURL || '/placeholder.svg'
       }
 
-      // Handle additional images if provided
-      if (data.imageFiles && data.imageFiles.length > 0) {
-        const uploadPromises = data.imageFiles.map(file => uploadImage(file, 'projects'))
-        updateData.imageURLs = await Promise.all(uploadPromises)
+      // Handle additional image URLs
+      if (data.imageURLs !== undefined) {
+        if (data.imageURLs && data.imageURLs.length > 0) {
+          for (const url of data.imageURLs) {
+            if (!validateImageURL(url)) {
+              throw new Error(`Invalid image URL: ${url}`);
+            }
+          }
+          updateData.imageURLs = data.imageURLs
+        } else {
+          updateData.imageURLs = undefined
+        }
       }
 
       await updateProject(id, updateData)
@@ -106,18 +120,6 @@ export class FirebaseAdminService {
       console.log('Project deleted:', id)
     } catch (error) {
       console.error('Error deleting project:', error)
-      throw error
-    }
-  }
-
-  // Upload image to Firebase Storage
-  static async uploadImage(file: File): Promise<string> {
-    try {
-      const downloadURL = await uploadImage(file, 'uploads')
-      console.log('Image uploaded:', downloadURL)
-      return downloadURL
-    } catch (error) {
-      console.error('Error uploading image:', error)
       throw error
     }
   }
