@@ -252,7 +252,7 @@ export const URLAdminUpload: React.FC<URLAdminUploadProps> = ({
               </div>
 
               <div>
-                <Label htmlFor="afterImageURL">After Image URL *</Label>
+                <Label htmlFor="afterImageURL">After Image URL (Optional)</Label>
                 <div className="flex space-x-2">
                   <Input
                     id="afterImageURL"
