@@ -360,7 +360,7 @@ export default function Index() {
             </div>
           ) : recentProjects.length > 0 ? (
             <>
-              <ProjectsSection showFeatured={true} limit={6} className="mb-12" />
+              <HomepageProjects projects={recentProjects} loading={projectsLoading} />
 
               {/* Enhanced CTA Section */}
               <div className="mt-12 text-center">
