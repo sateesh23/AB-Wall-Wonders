@@ -232,8 +232,7 @@ export const URLAdminUpload: React.FC<URLAdminUploadProps> = ({
                     name="beforeImageURL"
                     value={formData.beforeImageURL}
                     onChange={handleInputChange}
-                    placeholder="https://example.com/before.jpg"
-                    required
+                    placeholder="https://example.com/before.jpg (optional - leave empty for placeholder)"
                     disabled={loading}
                     className="flex-1"
                   />
