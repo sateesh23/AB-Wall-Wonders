@@ -85,6 +85,10 @@ export const deleteImage = async (imageURL: string): Promise<void> => {
 
 // Create a new project
 export const createProject = async (projectData: Omit<FirebaseProject, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> => {
+  if (!isFirebaseConfigured() || !db) {
+    throw new Error('Firebase not configured. Please set up Firebase environment variables.');
+  }
+
   try {
     const now = new Date().toISOString();
     const docRef = await addDoc(collection(db, PROJECTS_COLLECTION), {
