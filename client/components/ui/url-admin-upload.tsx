@@ -225,7 +225,7 @@ export const URLAdminUpload: React.FC<URLAdminUploadProps> = ({
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="beforeImageURL">Before Image URL *</Label>
+                <Label htmlFor="beforeImageURL">Before Image URL (Optional)</Label>
                 <div className="flex space-x-2">
                   <Input
                     id="beforeImageURL"
