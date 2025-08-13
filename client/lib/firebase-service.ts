@@ -42,14 +42,18 @@ const PROJECTS_COLLECTION = 'projects';
 
 // Upload image to Firebase Storage
 export const uploadImage = async (file: File, path: string = 'images'): Promise<string> => {
+  if (!isFirebaseConfigured() || !storage) {
+    throw new Error('Firebase not configured. Please set up Firebase environment variables.');
+  }
+
   try {
     const timestamp = Date.now();
     const fileName = `${timestamp}_${file.name}`;
     const storageRef = ref(storage, `${path}/${fileName}`);
-    
+
     const snapshot = await uploadBytes(storageRef, file);
     const downloadURL = await getDownloadURL(snapshot.ref);
-    
+
     return downloadURL;
   } catch (error) {
     console.error('Error uploading image:', error);
