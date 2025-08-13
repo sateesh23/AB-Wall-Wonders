@@ -207,14 +207,18 @@ export const updateProject = async (id: string, updates: Partial<FirebaseProject
   }
   
   // Validate image URLs if being updated
-  if (updates.imageURL && !validateImageURL(updates.imageURL)) {
-    throw new Error('Invalid main image URL. Please provide a valid image URL.');
+  if (updates.beforeImageURL && !validateImageURL(updates.beforeImageURL)) {
+    throw new Error('Invalid before image URL. Please provide a valid image URL.');
   }
 
-  if (updates.imageURLs) {
-    for (const url of updates.imageURLs) {
+  if (updates.afterImageURL && !validateImageURL(updates.afterImageURL)) {
+    throw new Error('Invalid after image URL. Please provide a valid image URL.');
+  }
+
+  if (updates.additionalImageURLs) {
+    for (const url of updates.additionalImageURLs) {
       if (!validateImageURL(url)) {
-        throw new Error(`Invalid image URL: ${url}`);
+        throw new Error(`Invalid additional image URL: ${url}`);
       }
     }
   }
