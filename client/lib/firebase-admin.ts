@@ -65,8 +65,9 @@ export class FirebaseAdminService {
         status: data.status,
       }
 
+      console.log('🚀 Creating project with data:', projectData)
       const projectId = await createProject(projectData)
-      console.log('Project created:', projectId)
+      console.log('✅ Project created successfully with ID:', projectId)
       return projectId
     } catch (error) {
       console.error('Error creating project:', error)
