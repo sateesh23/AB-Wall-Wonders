@@ -14,8 +14,7 @@
     "vercel-build": "npm run build"
   },
   "dependencies": {
-    "@sanity/client": "^6.10.0",
-    "@sanity/image-url": "^1.0.2",
+    "firebase": "^12.1.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

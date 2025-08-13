@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CTACard } from "@/components/ui/cta-card";
-import { ProjectsSection } from "@/components/ui/projects-section";
+import { ProjectCard } from "@/components/ui/project-card";
 
 import {
   Phone,
@@ -13,9 +13,8 @@ import {
   Loader2,
   Database,
 } from "lucide-react";
-import { SanityService } from "@/lib/sanity-service";
 import type { ProjectData } from "@/lib/types";
-import { SanityStatus } from "@/components/ui/sanity-status";
+import { projectsData } from "@/data/projects-data";
 import { EmptyState } from "@/components/ui/empty-state";
 
 export default function Projects() {
@@ -35,15 +34,30 @@ export default function Projects() {
     const loadData = async () => {
       try {
         setLoading(true);
-        const [projectsData, categoriesData] = await Promise.all([
-          SanityService.getAllProjects(),
-          SanityService.getProjectCategories(),
-        ]);
-        setProjects(projectsData);
-        setCategories(categoriesData);
+
+        // Try to load from Firebase first
+        const { getAllProjects } = await import('@/lib/firebase-service');
+        const { isFirebaseConfigured } = await import('@/lib/firebase');
+
+        let allProjects = projectsData; // Default to static data
+
+        if (isFirebaseConfigured()) {
+          const firebaseProjects = await getAllProjects();
+          console.log(`📊 Firebase returned ${firebaseProjects.length} projects for Projects page`);
+          // Always use Firebase data when configured, even if empty
+          allProjects = firebaseProjects;
+        }
+
+        const uniqueCategories = Array.from(new Set(allProjects.map(p => p.service)));
+
+        setProjects(allProjects);
+        setCategories(uniqueCategories);
       } catch (err) {
         setError("Failed to load projects. Please try again later.");
         console.error("Error loading projects:", err);
+        // Fallback to static data on error
+        setProjects(projectsData);
+        setCategories(Array.from(new Set(projectsData.map(p => p.service))));
       } finally {
         setLoading(false);
       }
@@ -55,7 +69,7 @@ export default function Projects() {
   const filteredProjects =
     selectedCategory === "all"
       ? projects
-      : projects.filter((project) => project.category === selectedCategory);
+      : projects.filter((project) => project.service === selectedCategory);
 
   const getCategoryLabel = (category: string) => {
     switch (category) {
@@ -174,7 +188,7 @@ export default function Projects() {
                 disabled={loading}
               >
                 {getCategoryLabel(category)} (
-                {projects.filter((p) => p.category === category).length})
+                {projects.filter((p) => p.service === category).length})
               </Button>
             ))}
           </div>
@@ -200,10 +214,27 @@ export default function Projects() {
 
           {/* Projects Grid */}
           {!loading && !error && (
-            <ProjectsSection
-              showFeatured={false}
-              className="animate-in fade-in-50 duration-500"
-            />
+            <div className="animate-in fade-in-50 duration-500">
+              {filteredProjects.length === 0 ? (
+                <div className="text-center py-12">
+                  <EmptyState
+                    title="No Projects Found"
+                    description={`No ${selectedCategory === "all" ? "" : getCategoryLabel(selectedCategory).toLowerCase()} projects found.`}
+                    showAddButton={true}
+                  />
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredProjects.map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      className="h-full"
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           )}
 
           {/* No Results Message */}

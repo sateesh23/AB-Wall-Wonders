@@ -5,12 +5,11 @@ import { Badge } from "@/components/ui/badge";
 import { NovaHeroScroll } from "@/components/ui/nova-hero-scroll";
 
 import ABTestimonials3D from "@/components/ui/ab-testimonials-3d";
-import { ProjectsSection } from "@/components/ui/projects-section";
+import { HomepageProjects } from "@/components/ui/homepage-projects";
 import { MinimalFeedbackForm } from "@/components/ui/minimal-feedback-form";
 
-import { SanityService } from "@/lib/sanity-service";
 import type { ProjectData } from "@/lib/types";
-import { SanityStatus } from "@/components/ui/sanity-status";
+import { projectsData } from "@/data/projects-data";
 import {
   Star,
   ArrowRight,
@@ -37,6 +36,7 @@ const services = [
     title: "Premium Wallpapers",
     description: "Stunning 3D, Botanical & Geometric styles",
     benefit: "Transform any space with designer collections",
+    image: "/images/wallpaperr.png",
     features: [
       "Designer Collections",
       "Custom Patterns",
@@ -49,6 +49,7 @@ const services = [
     title: "Window Blinds",
     description: "Smart motorized & manual options available",
     benefit: "Perfect light control and privacy solutions",
+    image: "/images/blindss.png",
     features: ["Motorized Options", "Custom Sizing", "Energy Efficient"],
     href: "/services/blinds",
   },
@@ -57,6 +58,7 @@ const services = [
     title: "Luxury Flooring",
     description: "Waterproof, durable & beautiful finishes",
     benefit: "Premium flooring that withstands daily use",
+    image: "/images/flooringg.png",
     features: [
       "Hardwood & Laminate",
       "Waterproof Options",
@@ -84,16 +86,34 @@ export default function Index() {
     const loadRecentProjects = async () => {
       try {
         console.log("🔄 Loading recent projects for homepage...");
-        // Get the 6 most recent projects from Sanity
-        const projects = await SanityService.getRecentProjects(6);
-        console.log(
-          `📊 Loaded ${projects.length} recent projects for homepage`,
-        );
-        setRecentProjects(projects);
+
+        // Try to load from Firebase first
+        const { getRecentProjects } = await import('@/lib/firebase-service');
+        const { isFirebaseConfigured } = await import('@/lib/firebase');
+
+        if (isFirebaseConfigured()) {
+          const firebaseProjects = await getRecentProjects(6);
+          console.log(`📊 Firebase returned ${firebaseProjects.length} projects`);
+          // Always use Firebase data when configured, even if empty
+          setRecentProjects(firebaseProjects);
+          return;
+        }
+
+        // Fallback to static data
+        const { projectsData } = await import('@/data/projects-data');
+        const recentStatic = projectsData.slice(0, 6);
+        console.log(`📊 Using ${recentStatic.length} static projects for homepage`);
+        setRecentProjects(recentStatic);
       } catch (error) {
         console.error("Error loading recent projects:", error);
-        // No fallback - keep empty array to show "no projects" state
-        setRecentProjects([]);
+        // Fallback to static data on error
+        try {
+          const { projectsData } = await import('@/data/projects-data');
+          setRecentProjects(projectsData.slice(0, 6));
+        } catch (staticError) {
+          console.error("Failed to load static data:", staticError);
+          setRecentProjects([]);
+        }
       } finally {
         setProjectsLoading(false);
       }
@@ -221,15 +241,39 @@ export default function Index() {
             {services.map((service, index) => (
               <Card
                 key={index}
-                className="group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 hover:-translate-y-1 relative"
+                className="group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 hover:-translate-y-1 relative overflow-hidden"
               >
-                <CardContent className="p-6 lg:p-8">
-                  <div className="space-y-6">
-                    {/* Service Icon */}
-                    <div className="h-14 w-14 bg-gradient-to-br from-primary/10 to-primary/20 rounded-xl flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/30 transition-all duration-300">
-                      <service.icon className="h-7 w-7 text-primary" />
+                {/* Service Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute top-4 right-4">
+                    <div className="h-10 w-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <service.icon className="h-5 w-5 text-white" />
                     </div>
+                  </div>
+                  {/* Warranty Badge */}
+                  <div className="absolute bottom-4 left-4">
+                    {service.title === "Premium Wallpapers" && (
+                      <Badge className="bg-emerald-500 text-white border-0 px-3 py-1">
+                        5-Year Warranty
+                      </Badge>
+                    )}
+                    {(service.title === "Window Blinds" ||
+                      service.title === "Luxury Flooring") && (
+                      <Badge className="bg-blue-500 text-white border-0 px-3 py-1">
+                        2-Year Warranty
+                      </Badge>
+                    )}
+                  </div>
+                </div>
 
+                <CardContent className="p-6">
+                  <div className="space-y-4">
                     {/* Service Title & Description */}
                     <div>
                       <h3 className="text-xl font-bold text-primary mb-2">
@@ -242,23 +286,6 @@ export default function Index() {
                         {service.benefit}
                       </p>
                     </div>
-
-                    {/* Warranty Badges */}
-                    {service.title === "Premium Wallpapers" && (
-                      <div className="flex justify-center">
-                        <Badge className="bg-emerald-100 text-emerald-800 border-emerald-200 hover:bg-emerald-100 px-3 py-1">
-                          5-Year Warranty
-                        </Badge>
-                      </div>
-                    )}
-                    {(service.title === "Window Blinds" ||
-                      service.title === "Luxury Flooring") && (
-                      <div className="flex justify-center">
-                        <Badge className="bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-100 px-3 py-1">
-                          2-Year Warranty
-                        </Badge>
-                      </div>
-                    )}
 
                     {/* Features */}
                     <div className="space-y-2">
@@ -273,19 +300,20 @@ export default function Index() {
                     </div>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col gap-3 pt-2">
+                    <div className="space-y-3 pt-2">
                       <Button
-                        className="w-full bg-primary hover:bg-primary/90"
+                        className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-xl transition-all duration-300"
                         asChild
                       >
                         <Link to={service.href}>
-                          <Eye className="mr-2 h-4 w-4" />
-                          View Options
+                          <Eye className="mr-2 h-5 w-5" />
+                          Explore Service
                         </Link>
                       </Button>
+
                       <Button
                         variant="outline"
-                        className="w-full border-primary text-primary hover:bg-primary hover:text-white"
+                        className="w-full border-primary/30 text-primary hover:bg-primary/10 font-medium py-3 rounded-xl transition-all duration-300"
                         asChild
                       >
                         <a
@@ -293,7 +321,7 @@ export default function Index() {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <MessageCircle className="mr-2 h-4 w-4" />
+                          <MessageCircle className="mr-2 h-5 w-5" />
                           WhatsApp Now
                         </a>
                       </Button>
@@ -332,7 +360,7 @@ export default function Index() {
             </div>
           ) : recentProjects.length > 0 ? (
             <>
-              <ProjectsSection showFeatured={true} limit={6} className="mb-12" />
+              <HomepageProjects projects={recentProjects} loading={projectsLoading} />
 
               {/* Enhanced CTA Section */}
               <div className="mt-12 text-center">
@@ -383,7 +411,7 @@ export default function Index() {
                 {/* Additional Info */}
                 <div className="mt-6 text-sm text-muted-foreground">
                   <p>
-                    ��� Quick Response • 💬 Free Consultation • 🏆 5-Year
+                    ����� Quick Response • 💬 Free Consultation • 🏆 5-Year
                     Warranty
                   </p>
                 </div>

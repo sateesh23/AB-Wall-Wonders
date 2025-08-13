@@ -24,10 +24,11 @@ import {
   Mail,
   LogOut,
 } from "lucide-react";
-import { SanityService } from "@/lib/sanity-service";
-import { SanityStatus } from "@/components/ui/sanity-status";
+import { FirebaseAdminService } from "@/lib/firebase-admin";
+import { testFirebaseConnection } from "@/lib/firebase-service";
 import { AdminAuth } from "@/components/ui/admin-auth";
-import { ImageUpload } from "@/components/ui/image-upload";
+import { URLAdminUpload } from "@/components/ui/url-admin-upload";
+import { FirebaseDebug } from "@/components/ui/firebase-debug";
 import { SuccessMessage } from "@/components/ui/success-message";
 import type { ProjectData } from "@/lib/types";
 
@@ -47,10 +48,8 @@ interface ProjectForm {
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Get Sanity Studio URL from environment or use default
-  const sanityStudioUrl =
-    import.meta.env.VITE_SANITY_STUDIO_URL ||
-    "https://ab-wall-wonders.sanity.studio/";
+  // Firebase configuration check
+  const [firebaseStatus, setFirebaseStatus] = useState<'loading' | 'connected' | 'error'>('loading');
   const [projects, setProjects] = useState<ProjectData[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<
@@ -82,6 +81,7 @@ export default function Admin() {
 
     if (isAuth) {
       loadProjects();
+      checkFirebaseStatus();
     }
   }, []);
 
@@ -98,12 +98,42 @@ export default function Admin() {
   const loadProjects = async () => {
     try {
       setLoading(true);
-      const data = await SanityService.getAllProjects();
-      setProjects(data);
+
+      // Try to load from Firebase first
+      const { getAllProjects } = await import('@/lib/firebase-service');
+      const { isFirebaseConfigured } = await import('@/lib/firebase');
+
+      if (isFirebaseConfigured()) {
+        const firebaseProjects = await getAllProjects();
+        console.log(`📊 Admin: Firebase returned ${firebaseProjects.length} projects`);
+        // Always use Firebase data when configured, even if empty
+        setProjects(firebaseProjects);
+        return;
+      }
+
+      // Fallback to static data
+      const { projectsData } = await import('@/data/projects-data');
+      setProjects(projectsData);
     } catch (error) {
       console.error("Failed to load projects:", error);
+      // Fallback to static data on error
+      try {
+        const { projectsData } = await import('@/data/projects-data');
+        setProjects(projectsData);
+      } catch (staticError) {
+        console.error("Failed to load static data:", staticError);
+      }
     } finally {
       setLoading(false);
+    }
+  };
+
+  const checkFirebaseStatus = async () => {
+    try {
+      const result = await testFirebaseConnection();
+      setFirebaseStatus(result.success ? 'connected' : 'error');
+    } catch (error) {
+      setFirebaseStatus('error');
     }
   };
 
@@ -140,19 +170,18 @@ export default function Admin() {
 
       if (editingProject) {
         // Update existing project
-        await SanityService.updateProject(
+        await FirebaseAdminService.updateProject(
           String(editingProject.id),
           projectData,
         );
         showSuccessMessage("Project updated successfully! ✨");
       } else {
         // Create new project
-        await SanityService.createProject(projectData);
+        await FirebaseAdminService.createProject(projectData);
         showSuccessMessage("Project created successfully! 🎉");
       }
 
-      // Force refresh and reload projects from Sanity
-      SanityService.forceRefresh();
+      // Reload projects
       await loadProjects();
       resetForm();
     } catch (error) {
@@ -188,12 +217,12 @@ export default function Admin() {
       title: project.title || "",
       customerName: project.customerName || "",
       location: project.location || "",
-      service: (project.category as any) || "",
-      subcategory: project.serviceName?.split(" - ")[1] || "",
+      service: project.service || "",
+      subcategory: project.subcategory || "",
       description: project.description || "",
       isFeatured: project.isFeatured || false,
       completedDate: project.completedDate || "",
-      status: (project.status as any) || "completed",
+      status: project.status || "completed",
       imageFile: undefined,
     });
     setShowForm(true);
@@ -207,10 +236,9 @@ export default function Admin() {
     ) {
       try {
         setLoading(true);
-        await SanityService.deleteProject(projectId);
+        await FirebaseAdminService.deleteProject(projectId);
         showSuccessMessage("Project deleted successfully! 🗑️");
-        // Force refresh and reload projects from Sanity
-        SanityService.forceRefresh();
+        // Reload projects
         await loadProjects();
       } catch (error) {
         console.error("Error deleting project:", error);
@@ -226,10 +254,10 @@ export default function Admin() {
   const stats = {
     totalProjects: projects.length,
     featuredProjects: projects.filter((p) => p.isFeatured).length,
-    wallpaperProjects: projects.filter((p) => p.category === "wallpapers")
+    wallpaperProjects: projects.filter((p) => p.service === "wallpapers")
       .length,
-    blindsProjects: projects.filter((p) => p.category === "blinds").length,
-    flooringProjects: projects.filter((p) => p.category === "flooring").length,
+    blindsProjects: projects.filter((p) => p.service === "blinds").length,
+    flooringProjects: projects.filter((p) => p.service === "flooring").length,
     completedProjects: projects.filter((p) => p.status === "completed").length,
   };
 
@@ -266,7 +294,14 @@ export default function Admin() {
                 </div>
               </div>
               <div className="flex items-center space-x-4">
-                <SanityStatus />
+                <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  firebaseStatus === 'connected' ? 'bg-green-100 text-green-800' :
+                  firebaseStatus === 'error' ? 'bg-red-100 text-red-800' :
+                  'bg-yellow-100 text-yellow-800'
+                }`}>
+                  Firebase: {firebaseStatus === 'connected' ? 'Connected' :
+                           firebaseStatus === 'error' ? 'Not Configured' : 'Checking...'}
+                </div>
                 <Button
                   onClick={() => window.open("/", "_blank")}
                   variant="outline"
@@ -441,11 +476,11 @@ export default function Admin() {
                     </Button>
                     <Button
                       variant="outline"
-                      onClick={() => window.open(sanityStudioUrl, "_blank")}
+                      onClick={() => alert('Firebase Console: Configure your Firebase project in the environment variables')}
                       className="h-20 flex flex-col space-y-2"
                     >
                       <Settings className="w-6 h-6" />
-                      <span>Sanity Studio</span>
+                      <span>Firebase Console</span>
                     </Button>
                     <Button
                       variant="outline"
@@ -481,172 +516,19 @@ export default function Admin() {
 
               {/* Add/Edit Form */}
               {showForm && (
-                <Card>
-                  <CardHeader>
-                    <div className="flex justify-between items-center">
-                      <CardTitle>
-                        {editingProject ? "Edit Project" : "Add New Project"}
-                      </CardTitle>
-                      <Button variant="ghost" size="sm" onClick={resetForm}>
-                        <X className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="title">Project Name *</Label>
-                          <Input
-                            id="title"
-                            name="title"
-                            value={formData.title}
-                            onChange={handleInputChange}
-                            placeholder="e.g., Modern Bedroom Wallpaper"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="customerName">Customer Name *</Label>
-                          <Input
-                            id="customerName"
-                            name="customerName"
-                            value={formData.customerName}
-                            onChange={handleInputChange}
-                            placeholder="e.g., Rajesh Kumar"
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="location">Location *</Label>
-                          <Input
-                            id="location"
-                            name="location"
-                            value={formData.location}
-                            onChange={handleInputChange}
-                            placeholder="e.g., Vijayawada, Benz Circle"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="service">Service Category *</Label>
-                          <select
-                            id="service"
-                            name="service"
-                            value={formData.service}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
-                          >
-                            <option value="">Select service</option>
-                            <option value="wallpapers">Wallpapers</option>
-                            <option value="blinds">Blinds</option>
-                            <option value="flooring">Flooring</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="subcategory">Subcategory</Label>
-                          <Input
-                            id="subcategory"
-                            name="subcategory"
-                            value={formData.subcategory}
-                            onChange={handleInputChange}
-                            placeholder="e.g., 3D Wallpaper, Roman Blinds"
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="completedDate">
-                            Completion Date *
-                          </Label>
-                          <Input
-                            id="completedDate"
-                            name="completedDate"
-                            type="date"
-                            value={formData.completedDate}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <Label htmlFor="description">Description *</Label>
-                        <Textarea
-                          id="description"
-                          name="description"
-                          value={formData.description}
-                          onChange={handleInputChange}
-                          placeholder="Describe the project details, materials used, challenges overcome..."
-                          rows={4}
-                          required
-                        />
-                      </div>
-
-                      <div>
-                        <Label>Project Image *</Label>
-                        <ImageUpload
-                          onImageChange={(file) =>
-                            setFormData((prev) => ({
-                              ...prev,
-                              imageFile: file,
-                            }))
-                          }
-                          currentImage={editingProject?.image}
-                        />
-                      </div>
-
-                      <div className="flex items-center space-x-4">
-                        <div className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            id="isFeatured"
-                            name="isFeatured"
-                            checked={formData.isFeatured}
-                            onChange={handleInputChange}
-                            className="rounded border-gray-300 text-primary focus:ring-primary"
-                          />
-                          <Label htmlFor="isFeatured">
-                            Featured Project (show on homepage)
-                          </Label>
-                        </div>
-                        <div>
-                          <Label htmlFor="status">Status</Label>
-                          <select
-                            id="status"
-                            name="status"
-                            value={formData.status}
-                            onChange={handleInputChange}
-                            className="ml-2 px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
-                          >
-                            <option value="completed">Completed</option>
-                            <option value="in-progress">In Progress</option>
-                            <option value="planning">Planning</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="flex space-x-4">
-                        <Button type="submit">
-                          <Save className="w-4 h-4 mr-2" />
-                          {editingProject ? "Update Project" : "Create Project"}
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={resetForm}
-                        >
-                          Cancel
-                        </Button>
-                      </div>
-                    </form>
-                  </CardContent>
-                </Card>
+                <URLAdminUpload
+                  editingProject={editingProject}
+                  onSuccess={(projectId) => {
+                    showSuccessMessage(
+                      editingProject
+                        ? "Project updated successfully! ✨"
+                        : "Project created successfully! 🎉"
+                    );
+                    resetForm();
+                    loadProjects();
+                  }}
+                  onCancel={resetForm}
+                />
               )}
 
               {/* Projects List */}
@@ -684,7 +566,7 @@ export default function Admin() {
                                 </Badge>
                               )}
                               <Badge variant="outline">
-                                {project.category}
+                                {project.service}
                               </Badge>
                             </div>
                             <p className="text-sm text-gray-600 mt-1">
@@ -729,15 +611,15 @@ export default function Admin() {
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between p-4 border rounded-lg">
                     <div>
-                      <h3 className="font-medium">Sanity Studio</h3>
+                      <h3 className="font-medium">Firebase Console</h3>
                       <p className="text-sm text-gray-600">
-                        Access your content management system
+                        Manage your Firebase project and database
                       </p>
                     </div>
                     <Button
-                      onClick={() => window.open(sanityStudioUrl, "_blank")}
+                      onClick={() => window.open('https://console.firebase.google.com/', '_blank')}
                     >
-                      Open Studio
+                      Open Console
                     </Button>
                   </div>
 
@@ -783,6 +665,9 @@ export default function Admin() {
                   </div>
                 </CardContent>
               </Card>
+
+              {/* Firebase Debug Component */}
+              <FirebaseDebug />
             </div>
           )}
         </div>

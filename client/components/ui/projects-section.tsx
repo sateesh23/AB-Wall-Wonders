@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { SanityService } from '@/lib/sanity-service';
 import type { ProjectData } from '@/lib/types';
+import { projectsData, featuredProjects } from '@/data/projects-data';
 import { EmptyState } from '@/components/ui/empty-state';
 
 interface ProjectsSectionProps {
@@ -20,21 +20,50 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   useEffect(() => {
     const loadProjects = async () => {
       try {
-        let projectsData: ProjectData[];
-        
-        if (showFeatured) {
-          projectsData = await SanityService.getFeaturedProjects();
+        // Try to load from Firebase first
+        const { getAllProjects, getFeaturedProjects } = await import('@/lib/firebase-service');
+        const { isFirebaseConfigured } = await import('@/lib/firebase');
+
+        let data: ProjectData[];
+
+        if (isFirebaseConfigured()) {
+          // Use Firebase data if available
+          if (showFeatured) {
+            const firebaseFeatured = await getFeaturedProjects();
+            data = firebaseFeatured.length > 0 ? firebaseFeatured : featuredProjects;
+          } else {
+            const firebaseProjects = await getAllProjects();
+            data = firebaseProjects.length > 0 ? firebaseProjects : projectsData;
+          }
         } else {
-          projectsData = await SanityService.getAllProjects();
+          // Fallback to static data
+          if (showFeatured) {
+            data = featuredProjects;
+          } else {
+            data = projectsData;
+          }
         }
 
         if (limit) {
-          projectsData = projectsData.slice(0, limit);
+          data = data.slice(0, limit);
         }
 
-        setProjects(projectsData);
+        setProjects(data);
       } catch (error) {
         console.error('Failed to load projects:', error);
+        // Fallback to static data on error
+        let data: ProjectData[];
+        if (showFeatured) {
+          data = featuredProjects;
+        } else {
+          data = projectsData;
+        }
+
+        if (limit) {
+          data = data.slice(0, limit);
+        }
+
+        setProjects(data);
       } finally {
         setLoading(false);
       }
