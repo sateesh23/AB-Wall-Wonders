@@ -173,7 +173,7 @@ export default function Projects() {
                 disabled={loading}
               >
                 {getCategoryLabel(category)} (
-                {projects.filter((p) => p.category === category).length})
+                {projects.filter((p) => p.service === category).length})
               </Button>
             ))}
           </div>
