@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { NovaHeroScroll } from "@/components/ui/nova-hero-scroll";
 
 import ABTestimonials3D from "@/components/ui/ab-testimonials-3d";
-import { ProjectsSection } from "@/components/ui/projects-section";
+import { HomepageProjects } from "@/components/ui/homepage-projects";
 import { MinimalFeedbackForm } from "@/components/ui/minimal-feedback-form";
 
 import type { ProjectData } from "@/lib/types";
