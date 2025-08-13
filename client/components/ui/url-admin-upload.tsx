@@ -261,6 +261,11 @@ export const URLAdminUpload: React.FC<URLAdminUploadProps> = ({
                 <p className="text-sm text-gray-500 mt-1">
                   Image showing the space before transformation
                 </p>
+                {formData.beforeImageURL && !validateURL(formData.beforeImageURL) && (
+                  <p className="text-sm text-red-500 mt-1">
+                    ⚠️ Please enter a valid URL or leave empty
+                  </p>
+                )}
               </div>
 
               <div>
