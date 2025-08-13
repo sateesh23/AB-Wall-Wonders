@@ -109,15 +109,30 @@ export const createProject = async (projectData: Omit<FirebaseProject, 'id' | 'c
   
   try {
     const now = new Date().toISOString();
-    const docRef = await addDoc(collection(db, PROJECTS_COLLECTION), {
+    const dataToSave = {
       ...projectData,
       createdAt: now,
       updatedAt: now,
-    });
+    };
+
+    console.log('💾 Saving to Firebase:', dataToSave);
+    console.log('📁 Collection:', PROJECTS_COLLECTION);
+
+    const docRef = await addDoc(collection(db, PROJECTS_COLLECTION), dataToSave);
+    console.log('✅ Document created with ID:', docRef.id);
     return docRef.id;
-  } catch (error) {
-    console.error('Error creating project:', error);
-    throw new Error('Failed to create project');
+  } catch (error: any) {
+    console.error('❌ Firebase error:', error);
+    console.error('❌ Error code:', error.code);
+    console.error('❌ Error message:', error.message);
+
+    if (error.code === 'permission-denied') {
+      throw new Error('Permission denied. Please check your Firestore security rules.');
+    } else if (error.code === 'not-found') {
+      throw new Error('Firestore database not found. Please ensure Firestore is enabled.');
+    } else {
+      throw new Error(`Failed to create project: ${error.message}`);
+    }
   }
 };
 
