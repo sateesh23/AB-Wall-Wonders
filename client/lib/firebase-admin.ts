@@ -90,25 +90,32 @@ export class FirebaseAdminService {
       if (data.completedDate !== undefined) updateData.completedDate = data.completedDate
       if (data.status !== undefined) updateData.status = data.status
 
-      // Handle image URL updates
-      if (data.imageURL !== undefined) {
-        if (data.imageURL && !validateImageURL(data.imageURL)) {
-          throw new Error('Invalid main image URL. Please provide a valid image URL.');
+      // Handle before/after image URL updates
+      if (data.beforeImageURL !== undefined) {
+        if (data.beforeImageURL && !validateImageURL(data.beforeImageURL)) {
+          throw new Error('Invalid before image URL. Please provide a valid image URL.');
         }
-        updateData.imageURL = data.imageURL || '/placeholder.svg'
+        updateData.beforeImageURL = data.beforeImageURL || '/placeholder.svg'
+      }
+
+      if (data.afterImageURL !== undefined) {
+        if (data.afterImageURL && !validateImageURL(data.afterImageURL)) {
+          throw new Error('Invalid after image URL. Please provide a valid image URL.');
+        }
+        updateData.afterImageURL = data.afterImageURL || '/placeholder.svg'
       }
 
       // Handle additional image URLs
-      if (data.imageURLs !== undefined) {
-        if (data.imageURLs && data.imageURLs.length > 0) {
-          for (const url of data.imageURLs) {
+      if (data.additionalImageURLs !== undefined) {
+        if (data.additionalImageURLs && data.additionalImageURLs.length > 0) {
+          for (const url of data.additionalImageURLs) {
             if (!validateImageURL(url)) {
-              throw new Error(`Invalid image URL: ${url}`);
+              throw new Error(`Invalid additional image URL: ${url}`);
             }
           }
-          updateData.imageURLs = data.imageURLs
+          updateData.additionalImageURLs = data.additionalImageURLs
         } else {
-          updateData.imageURLs = undefined
+          updateData.additionalImageURLs = undefined
         }
       }
 
