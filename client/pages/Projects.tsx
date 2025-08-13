@@ -54,7 +54,7 @@ export default function Projects() {
   const filteredProjects =
     selectedCategory === "all"
       ? projects
-      : projects.filter((project) => project.category === selectedCategory);
+      : projects.filter((project) => project.service === selectedCategory);
 
   const getCategoryLabel = (category: string) => {
     switch (category) {
