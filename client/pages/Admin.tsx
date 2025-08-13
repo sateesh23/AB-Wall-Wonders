@@ -105,10 +105,10 @@ export default function Admin() {
 
       if (isFirebaseConfigured()) {
         const firebaseProjects = await getAllProjects();
-        if (firebaseProjects.length > 0) {
-          setProjects(firebaseProjects);
-          return;
-        }
+        console.log(`📊 Admin: Firebase returned ${firebaseProjects.length} projects`);
+        // Always use Firebase data when configured, even if empty
+        setProjects(firebaseProjects);
+        return;
       }
 
       // Fallback to static data
