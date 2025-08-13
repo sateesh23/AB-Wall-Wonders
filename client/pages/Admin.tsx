@@ -495,172 +495,19 @@ export default function Admin() {
 
               {/* Add/Edit Form */}
               {showForm && (
-                <Card>
-                  <CardHeader>
-                    <div className="flex justify-between items-center">
-                      <CardTitle>
-                        {editingProject ? "Edit Project" : "Add New Project"}
-                      </CardTitle>
-                      <Button variant="ghost" size="sm" onClick={resetForm}>
-                        <X className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="title">Project Name *</Label>
-                          <Input
-                            id="title"
-                            name="title"
-                            value={formData.title}
-                            onChange={handleInputChange}
-                            placeholder="e.g., Modern Bedroom Wallpaper"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="customerName">Customer Name *</Label>
-                          <Input
-                            id="customerName"
-                            name="customerName"
-                            value={formData.customerName}
-                            onChange={handleInputChange}
-                            placeholder="e.g., Rajesh Kumar"
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="location">Location *</Label>
-                          <Input
-                            id="location"
-                            name="location"
-                            value={formData.location}
-                            onChange={handleInputChange}
-                            placeholder="e.g., Vijayawada, Benz Circle"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="service">Service Category *</Label>
-                          <select
-                            id="service"
-                            name="service"
-                            value={formData.service}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
-                          >
-                            <option value="">Select service</option>
-                            <option value="wallpapers">Wallpapers</option>
-                            <option value="blinds">Blinds</option>
-                            <option value="flooring">Flooring</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="subcategory">Subcategory</Label>
-                          <Input
-                            id="subcategory"
-                            name="subcategory"
-                            value={formData.subcategory}
-                            onChange={handleInputChange}
-                            placeholder="e.g., 3D Wallpaper, Roman Blinds"
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="completedDate">
-                            Completion Date *
-                          </Label>
-                          <Input
-                            id="completedDate"
-                            name="completedDate"
-                            type="date"
-                            value={formData.completedDate}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <Label htmlFor="description">Description *</Label>
-                        <Textarea
-                          id="description"
-                          name="description"
-                          value={formData.description}
-                          onChange={handleInputChange}
-                          placeholder="Describe the project details, materials used, challenges overcome..."
-                          rows={4}
-                          required
-                        />
-                      </div>
-
-                      <div>
-                        <Label>Project Image *</Label>
-                        <ImageUpload
-                          onImageChange={(file) =>
-                            setFormData((prev) => ({
-                              ...prev,
-                              imageFile: file,
-                            }))
-                          }
-                          currentImage={editingProject?.imageURL}
-                        />
-                      </div>
-
-                      <div className="flex items-center space-x-4">
-                        <div className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            id="isFeatured"
-                            name="isFeatured"
-                            checked={formData.isFeatured}
-                            onChange={handleInputChange}
-                            className="rounded border-gray-300 text-primary focus:ring-primary"
-                          />
-                          <Label htmlFor="isFeatured">
-                            Featured Project (show on homepage)
-                          </Label>
-                        </div>
-                        <div>
-                          <Label htmlFor="status">Status</Label>
-                          <select
-                            id="status"
-                            name="status"
-                            value={formData.status}
-                            onChange={handleInputChange}
-                            className="ml-2 px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
-                          >
-                            <option value="completed">Completed</option>
-                            <option value="in-progress">In Progress</option>
-                            <option value="planning">Planning</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="flex space-x-4">
-                        <Button type="submit">
-                          <Save className="w-4 h-4 mr-2" />
-                          {editingProject ? "Update Project" : "Create Project"}
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={resetForm}
-                        >
-                          Cancel
-                        </Button>
-                      </div>
-                    </form>
-                  </CardContent>
-                </Card>
+                <URLAdminUpload
+                  editingProject={editingProject}
+                  onSuccess={(projectId) => {
+                    showSuccessMessage(
+                      editingProject
+                        ? "Project updated successfully! ✨"
+                        : "Project created successfully! 🎉"
+                    );
+                    resetForm();
+                    loadProjects();
+                  }}
+                  onCancel={resetForm}
+                />
               )}
 
               {/* Projects List */}
