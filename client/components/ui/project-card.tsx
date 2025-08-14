@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Card } from "./card";
 import { Badge } from "./badge";
 import { MapPin, Calendar, User } from "lucide-react";
-import type { FirebaseProject } from "@/lib/firebase-service";
+import type { SupabaseProject } from "@/lib/supabase";
 
 interface ProjectCardProps {
-  project: FirebaseProject;
+  project: SupabaseProject;
   className?: string;
 }
 
@@ -23,9 +23,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       img.src = src;
     };
 
-    preloadImage(project.beforeImageURL);
-    preloadImage(project.afterImageURL);
-  }, [project.beforeImageURL, project.afterImageURL]);
+    // For Supabase projects, use main image and additional images
+    if (project.image_url) preloadImage(project.image_url);
+    if (project.image_urls && project.image_urls.length > 0) {
+      project.image_urls.forEach(url => preloadImage(url));
+    }
+    // Fallback for legacy Firebase format
+    if ((project as any).beforeImageURL) preloadImage((project as any).beforeImageURL);
+    if ((project as any).afterImageURL) preloadImage((project as any).afterImageURL);
+  }, [project.image_url, project.image_urls]);
 
   const formatDate = (dateString: string) => {
     try {
@@ -58,15 +64,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* Image Section */}
       <div className="relative aspect-[16/10] overflow-hidden bg-gray-50">
         <img
-          src={showAfter ? project.afterImageURL : project.beforeImageURL}
+          src={showAfter ?
+            (project.image_urls && project.image_urls[1] ? project.image_urls[1] : project.image_url) :
+            project.image_url || (project as any).beforeImageURL
+          }
           alt={`${project.title} - ${showAfter ? "After" : "Before"}`}
           className={`w-full h-full object-cover transition-all duration-500 project-image ${imageLoaded ? "loaded" : ""}`}
           loading="eager"
           onLoad={() => setImageLoaded(true)}
           onError={(e) => {
             const imageUrl = showAfter
-              ? project.afterImageURL
-              : project.beforeImageURL;
+              ? (project.image_urls && project.image_urls[1] ? project.image_urls[1] : project.image_url)
+              : project.image_url || (project as any).beforeImageURL;
             console.warn("Image load failed, using placeholder:", imageUrl);
             (e.target as HTMLImageElement).src = "/placeholder.svg";
             setImageLoaded(true);
@@ -111,11 +120,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="flex items-center justify-between mb-2 text-sm">
           <div className="flex items-center space-x-1 text-gray-600">
             <User className="w-3.5 h-3.5 text-primary" />
-            <span className="font-medium">{project.customerName}</span>
+            <span className="font-medium">{project.customer_name || (project as any).customerName}</span>
           </div>
           <div className="flex items-center space-x-1 text-gray-500">
             <Calendar className="w-3.5 h-3.5 text-primary" />
-            <span>{formatDate(project.completedDate)}</span>
+            <span>{formatDate(project.completed_date || (project as any).completedDate)}</span>
           </div>
         </div>
 
