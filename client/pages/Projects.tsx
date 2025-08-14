@@ -36,9 +36,9 @@ export default function Projects() {
         setLoading(true);
         setError(null);
 
-        // Try to load from Firebase first
-        const { getAllProjects } = await import("@/lib/firebase-service");
-        const { isFirebaseConfigured } = await import("@/lib/firebase");
+        // Try to load from Supabase first
+        const { getAllProjects } = await import("@/lib/supabase-service");
+        const { isSupabaseConfigured } = await import("@/lib/supabase");
 
         let allProjects = projectsData; // Default to static data
 
