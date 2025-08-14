@@ -40,30 +40,30 @@ export default function Projects() {
         const { getAllProjects } = await import("@/lib/supabase-service");
         const { isSupabaseConfigured } = await import("@/lib/supabase");
 
-        let allProjects = projectsData; // Default to static data
+        let allProjects = projectsData as any; // Default to static data
 
-        if (isFirebaseConfigured()) {
+        if (isSupabaseConfigured()) {
           try {
-            const firebaseProjects = await getAllProjects();
+            const supabaseProjects = await getAllProjects();
             console.log(
-              `📊 Firebase returned ${firebaseProjects.length} projects for Projects page`,
+              `📊 Supabase returned ${supabaseProjects.length} projects for Projects page`,
             );
 
-            // If Firebase has projects, use them; otherwise use static data for demo
-            if (firebaseProjects.length > 0) {
-              allProjects = firebaseProjects;
+            // If Supabase has projects, use them; otherwise use static data for demo
+            if (supabaseProjects.length > 0) {
+              allProjects = supabaseProjects;
             } else {
               console.log(
-                "📊 Firebase returned empty, using static data for demo",
+                "📊 Supabase returned empty, using static data for demo",
               );
-              allProjects = projectsData;
+              allProjects = projectsData as any;
             }
-          } catch (firebaseError: any) {
+          } catch (supabaseError: any) {
             console.warn(
-              "Firebase error, using static data:",
-              firebaseError.message,
+              "Supabase error, using static data:",
+              supabaseError.message,
             );
-            allProjects = projectsData;
+            allProjects = projectsData as any;
           }
         }
 
