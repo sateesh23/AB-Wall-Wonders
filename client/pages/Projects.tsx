@@ -13,7 +13,7 @@ import {
   Loader2,
   Database,
 } from "lucide-react";
-import type { ProjectData } from "@/lib/types";
+import type { SupabaseProject } from "@/lib/supabase";
 import { projectsData } from "@/data/projects-data";
 import { EmptyState } from "@/components/ui/empty-state";
 
