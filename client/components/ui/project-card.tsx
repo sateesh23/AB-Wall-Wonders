@@ -53,11 +53,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
   return (
     <Card className={`group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden ${className}`}>
       {/* Image Section with Before/After Toggle */}
-      <div className="relative h-48 overflow-hidden bg-gray-100">
+      <div className="relative h-64 overflow-hidden bg-gray-100">
         <img
           src={showAfter ? project.afterImageURL : project.beforeImageURL}
           alt={`${project.title} - ${showAfter ? 'After' : 'Before'}`}
-          className="w-full h-full object-cover transition-all duration-500"
+          className="w-full h-full object-contain transition-all duration-500"
           onError={(e) => {
             (e.target as HTMLImageElement).src = '/placeholder.svg';
           }}
