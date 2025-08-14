@@ -65,6 +65,32 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
             setImageLoaded(true);
           }}
         />
+
+        {/* Before/After Toggle - Bottom Center of Image */}
+        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2">
+          <div className="flex items-center bg-white/95 backdrop-blur-sm rounded-full p-0.5 shadow-lg border border-white/20">
+            <button
+              onClick={() => setShowAfter(false)}
+              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
+                !showAfter
+                  ? 'bg-primary text-white shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Before
+            </button>
+            <button
+              onClick={() => setShowAfter(true)}
+              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
+                showAfter
+                  ? 'bg-primary text-white shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              After
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Content Section */}
