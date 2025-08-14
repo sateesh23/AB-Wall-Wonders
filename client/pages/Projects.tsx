@@ -77,8 +77,8 @@ export default function Projects() {
         console.error("Error loading projects:", err);
         setError("Using demo data due to connection issues.");
         // Fallback to static data on error
-        setProjects(projectsData);
-        setCategories(Array.from(new Set(projectsData.map((p) => p.service))));
+        setProjects(projectsData as any);
+        setCategories(Array.from(new Set(projectsData.map((p: any) => p.service))));
       } finally {
         setLoading(false);
       }
