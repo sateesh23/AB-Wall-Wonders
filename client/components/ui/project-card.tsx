@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
-import { Card } from './card';
-import { Badge } from './badge';
-import { MapPin, Calendar, User } from 'lucide-react';
-import type { FirebaseProject } from '@/lib/firebase-service';
+import React, { useState } from "react";
+import { Card } from "./card";
+import { Badge } from "./badge";
+import { MapPin, Calendar, User } from "lucide-react";
+import type { FirebaseProject } from "@/lib/firebase-service";
 
 interface ProjectCardProps {
   project: FirebaseProject;
   className?: string;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "" }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({
+  project,
+  className = "",
+}) => {
   const [showAfter, setShowAfter] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -26,9 +29,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
 
   const formatDate = (dateString: string) => {
     try {
-      return new Date(dateString).toLocaleDateString('en-US', {
-        month: 'short',
-        year: 'numeric'
+      return new Date(dateString).toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
       });
     } catch {
       return dateString;
@@ -37,31 +40,35 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
 
   const getServiceLabel = (service: string) => {
     switch (service) {
-      case 'wallpapers':
-        return 'Wallpapers';
-      case 'blinds':
-        return 'Window Blinds';
-      case 'flooring':
-        return 'Flooring';
+      case "wallpapers":
+        return "Wallpapers";
+      case "blinds":
+        return "Window Blinds";
+      case "flooring":
+        return "Flooring";
       default:
         return service;
     }
   };
 
   return (
-    <Card className={`group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 ${className}`}>
+    <Card
+      className={`group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 ${className}`}
+    >
       {/* Image Section */}
       <div className="relative aspect-[16/10] overflow-hidden bg-gray-50">
         <img
           src={showAfter ? project.afterImageURL : project.beforeImageURL}
-          alt={`${project.title} - ${showAfter ? 'After' : 'Before'}`}
-          className={`w-full h-full object-cover transition-all duration-500 project-image ${imageLoaded ? 'loaded' : ''}`}
+          alt={`${project.title} - ${showAfter ? "After" : "Before"}`}
+          className={`w-full h-full object-cover transition-all duration-500 project-image ${imageLoaded ? "loaded" : ""}`}
           loading="eager"
           onLoad={() => setImageLoaded(true)}
           onError={(e) => {
-            const imageUrl = showAfter ? project.afterImageURL : project.beforeImageURL;
-            console.warn('Image load failed, using placeholder:', imageUrl);
-            (e.target as HTMLImageElement).src = '/placeholder.svg';
+            const imageUrl = showAfter
+              ? project.afterImageURL
+              : project.beforeImageURL;
+            console.warn("Image load failed, using placeholder:", imageUrl);
+            (e.target as HTMLImageElement).src = "/placeholder.svg";
             setImageLoaded(true);
           }}
         />
@@ -73,8 +80,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
               onClick={() => setShowAfter(false)}
               className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
                 !showAfter
-                  ? 'bg-primary text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? "bg-primary text-white shadow-sm"
+                  : "text-gray-600 hover:text-gray-900"
               }`}
             >
               Before
@@ -83,8 +90,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
               onClick={() => setShowAfter(true)}
               className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
                 showAfter
-                  ? 'bg-primary text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? "bg-primary text-white shadow-sm"
+                  : "text-gray-600 hover:text-gray-900"
               }`}
             >
               After
@@ -119,7 +126,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
             <span>{project.location}</span>
           </div>
           <div className="text-gray-500">
-            <span className="font-medium">Type:</span> {project.subcategory || getServiceLabel(project.service)}
+            <span className="font-medium">Type:</span>{" "}
+            {project.subcategory || getServiceLabel(project.service)}
           </div>
         </div>
 

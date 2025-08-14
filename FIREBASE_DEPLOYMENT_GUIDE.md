@@ -20,6 +20,7 @@ VITE_FIREBASE_APP_ID=your-firebase-app-id
 ## Vercel Deployment Setup
 
 ### Step 1: Get Firebase Configuration
+
 1. Go to [Firebase Console](https://console.firebase.google.com)
 2. Select your project
 3. Go to Project Settings (gear icon)
@@ -27,6 +28,7 @@ VITE_FIREBASE_APP_ID=your-firebase-app-id
 5. Copy the config values from your web app
 
 ### Step 2: Configure Vercel Environment Variables
+
 1. Go to your [Vercel Dashboard](https://vercel.com/dashboard)
 2. Select your project
 3. Go to **Settings** → **Environment Variables**
@@ -53,6 +55,7 @@ Value: your-actual-app-id
 ```
 
 ### Step 3: Remove Old Sanity Configuration
+
 Update your `vercel.json` file to remove the old Sanity environment variables and add Firebase variables:
 
 ```json
@@ -87,6 +90,7 @@ Update your `vercel.json` file to remove the old Sanity environment variables an
 ```
 
 ### Step 4: Redeploy
+
 1. Push your code changes to GitHub
 2. Vercel will automatically redeploy
 3. Or manually trigger a redeploy from Vercel dashboard
@@ -94,16 +98,19 @@ Update your `vercel.json` file to remove the old Sanity environment variables an
 ## GitHub Deployment with Other Platforms
 
 ### Netlify
+
 1. Go to your Netlify site dashboard
 2. Go to **Site Settings** → **Environment Variables**
 3. Add all the Firebase environment variables listed above
 
 ### Railway
+
 1. Go to your Railway project
 2. Go to **Variables** tab
 3. Add all the Firebase environment variables
 
 ### Heroku
+
 1. Go to your Heroku app dashboard
 2. Go to **Settings** → **Config Vars**
 3. Add all the Firebase environment variables
@@ -141,9 +148,9 @@ To check if Firebase is properly configured, you can add this to your browser co
 
 ```javascript
 // Check if Firebase environment variables are loaded
-console.log('Firebase Config:', {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY ? 'Set' : 'Missing',
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID ? 'Set' : 'Missing',
+console.log("Firebase Config:", {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY ? "Set" : "Missing",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID ? "Set" : "Missing",
   // ... other variables
 });
 ```

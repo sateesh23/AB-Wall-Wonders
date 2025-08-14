@@ -88,13 +88,15 @@ export default function Index() {
         console.log("🔄 Loading recent projects for homepage...");
 
         // Try to load from Firebase first
-        const { getRecentProjects } = await import('@/lib/firebase-service');
-        const { isFirebaseConfigured } = await import('@/lib/firebase');
+        const { getRecentProjects } = await import("@/lib/firebase-service");
+        const { isFirebaseConfigured } = await import("@/lib/firebase");
 
         if (isFirebaseConfigured()) {
           try {
             const firebaseProjects = await getRecentProjects(6);
-            console.log(`📊 Firebase returned ${firebaseProjects.length} projects`);
+            console.log(
+              `📊 Firebase returned ${firebaseProjects.length} projects`,
+            );
 
             // If Firebase returns projects, use them
             if (firebaseProjects.length > 0) {
@@ -103,22 +105,29 @@ export default function Index() {
             }
 
             // If Firebase returns empty array (no projects uploaded), use static data for demo
-            console.log("📊 Firebase returned empty, using static data for demo");
+            console.log(
+              "📊 Firebase returned empty, using static data for demo",
+            );
           } catch (firebaseError: any) {
-            console.warn("Firebase error, falling back to static data:", firebaseError.message);
+            console.warn(
+              "Firebase error, falling back to static data:",
+              firebaseError.message,
+            );
           }
         }
 
         // Fallback to static data
-        const { projectsData } = await import('@/data/projects-data');
+        const { projectsData } = await import("@/data/projects-data");
         const recentStatic = projectsData.slice(0, 6);
-        console.log(`📊 Using ${recentStatic.length} static projects for homepage`);
+        console.log(
+          `📊 Using ${recentStatic.length} static projects for homepage`,
+        );
         setRecentProjects(recentStatic);
       } catch (error) {
         console.error("Error loading recent projects:", error);
         // Final fallback to static data on any error
         try {
-          const { projectsData } = await import('@/data/projects-data');
+          const { projectsData } = await import("@/data/projects-data");
           setRecentProjects(projectsData.slice(0, 6));
         } catch (staticError) {
           console.error("Failed to load static data:", staticError);
@@ -347,9 +356,6 @@ export default function Index() {
       {/* Featured Projects Section */}
       <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
-
-
-
           {projectsLoading ? (
             <div className="flex justify-center items-center py-12">
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -357,8 +363,10 @@ export default function Index() {
             </div>
           ) : recentProjects.length > 0 ? (
             <>
-              <HomepageProjects projects={recentProjects} loading={projectsLoading} />
-
+              <HomepageProjects
+                projects={recentProjects}
+                loading={projectsLoading}
+              />
             </>
           ) : (
             <div className="text-center py-12">
@@ -370,7 +378,9 @@ export default function Index() {
                   Add Your First Project!
                 </h3>
                 <p className="text-xl text-primary/70 mb-6">
-                  We're constantly working on new projects! Check back soon to see our latest transformations and get inspired for your own space.
+                  We're constantly working on new projects! Check back soon to
+                  see our latest transformations and get inspired for your own
+                  space.
                 </p>
               </div>
 

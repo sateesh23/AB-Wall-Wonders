@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Button } from './button';
-import { ProjectCard } from './project-card';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import type { FirebaseProject } from '@/lib/firebase-service';
+import React, { useState, useEffect, useRef } from "react";
+import { Button } from "./button";
+import { ProjectCard } from "./project-card";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import type { FirebaseProject } from "@/lib/firebase-service";
 
 interface HomepageProjectsProps {
   projects: FirebaseProject[];
   loading?: boolean;
 }
 
-export const HomepageProjects: React.FC<HomepageProjectsProps> = ({ 
-  projects, 
-  loading = false 
+export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
+  projects,
+  loading = false,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -25,7 +25,8 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
   // Update scroll state
   const updateScrollState = () => {
     if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      const { scrollLeft, scrollWidth, clientWidth } =
+        scrollContainerRef.current;
       setCanScrollLeft(scrollLeft > 0);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
     }
@@ -34,26 +35,28 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
   useEffect(() => {
     updateScrollState();
     const handleResize = () => updateScrollState();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [latestProjects]);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      const cardWidth = scrollContainerRef.current.children[0]?.clientWidth || 300;
+      const cardWidth =
+        scrollContainerRef.current.children[0]?.clientWidth || 300;
       scrollContainerRef.current.scrollBy({
         left: -cardWidth - 24, // card width + gap
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      const cardWidth = scrollContainerRef.current.children[0]?.clientWidth || 300;
+      const cardWidth =
+        scrollContainerRef.current.children[0]?.clientWidth || 300;
       scrollContainerRef.current.scrollBy({
         left: cardWidth + 24, // card width + gap
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
@@ -70,7 +73,7 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
               Discover our most recent transformations
             </p>
           </div>
-          
+
           {/* Loading Skeleton */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
@@ -101,9 +104,7 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
               No projects found. Check back soon for our latest work!
             </p>
             <Button asChild>
-              <Link to="/admin">
-                Add First Project
-              </Link>
+              <Link to="/admin">Add First Project</Link>
             </Button>
           </div>
         </div>
@@ -124,7 +125,8 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
             Our Recent Projects
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover our most recent transformations showcasing premium wallpapers, window blinds, and luxury flooring installations
+            Discover our most recent transformations showcasing premium
+            wallpapers, window blinds, and luxury flooring installations
           </p>
         </div>
 
@@ -141,8 +143,8 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
 
         {/* View All Projects Button */}
         <div className="text-center mt-12">
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-xl"
             asChild
           >

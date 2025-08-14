@@ -182,9 +182,9 @@ export const getAllProjects = async (): Promise<FirebaseProject[]> => {
     console.error("Error fetching projects:", error);
 
     // Handle specific Firebase errors
-    if (error.code === 'unavailable' || error.code === 'failed-precondition') {
+    if (error.code === "unavailable" || error.code === "failed-precondition") {
       console.warn("Firebase temporarily unavailable, returning empty array");
-    } else if (error.message?.includes('Failed to fetch')) {
+    } else if (error.message?.includes("Failed to fetch")) {
       console.warn("Network error, Firebase may be offline");
     }
 
@@ -243,8 +243,13 @@ export const getRecentProjects = async (
     console.error("Error fetching recent projects:", error);
 
     // Handle network errors gracefully
-    if (error.message?.includes('Failed to fetch') || error.code === 'unavailable') {
-      console.warn("Network error or Firebase unavailable, falling back to empty array");
+    if (
+      error.message?.includes("Failed to fetch") ||
+      error.code === "unavailable"
+    ) {
+      console.warn(
+        "Network error or Firebase unavailable, falling back to empty array",
+      );
     }
 
     return [];

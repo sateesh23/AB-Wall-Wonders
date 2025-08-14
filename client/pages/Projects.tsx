@@ -37,30 +37,39 @@ export default function Projects() {
         setError(null);
 
         // Try to load from Firebase first
-        const { getAllProjects } = await import('@/lib/firebase-service');
-        const { isFirebaseConfigured } = await import('@/lib/firebase');
+        const { getAllProjects } = await import("@/lib/firebase-service");
+        const { isFirebaseConfigured } = await import("@/lib/firebase");
 
         let allProjects = projectsData; // Default to static data
 
         if (isFirebaseConfigured()) {
           try {
             const firebaseProjects = await getAllProjects();
-            console.log(`📊 Firebase returned ${firebaseProjects.length} projects for Projects page`);
+            console.log(
+              `📊 Firebase returned ${firebaseProjects.length} projects for Projects page`,
+            );
 
             // If Firebase has projects, use them; otherwise use static data for demo
             if (firebaseProjects.length > 0) {
               allProjects = firebaseProjects;
             } else {
-              console.log("📊 Firebase returned empty, using static data for demo");
+              console.log(
+                "📊 Firebase returned empty, using static data for demo",
+              );
               allProjects = projectsData;
             }
           } catch (firebaseError: any) {
-            console.warn("Firebase error, using static data:", firebaseError.message);
+            console.warn(
+              "Firebase error, using static data:",
+              firebaseError.message,
+            );
             allProjects = projectsData;
           }
         }
 
-        const uniqueCategories = Array.from(new Set(allProjects.map(p => p.service)));
+        const uniqueCategories = Array.from(
+          new Set(allProjects.map((p) => p.service)),
+        );
 
         setProjects(allProjects);
         setCategories(uniqueCategories);
@@ -69,7 +78,7 @@ export default function Projects() {
         setError("Using demo data due to connection issues.");
         // Fallback to static data on error
         setProjects(projectsData);
-        setCategories(Array.from(new Set(projectsData.map(p => p.service))));
+        setCategories(Array.from(new Set(projectsData.map((p) => p.service))));
       } finally {
         setLoading(false);
       }
