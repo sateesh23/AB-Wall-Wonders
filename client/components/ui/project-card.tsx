@@ -49,7 +49,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
   };
 
   return (
-    <Card className={`group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 ${className}`}>
+    <Card className={`group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 ${className}`}>
       {/* Image Section */}
       <div className="relative aspect-[16/10] overflow-hidden bg-gray-50">
         <img
@@ -63,49 +63,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
             setImageLoaded(true);
           }}
         />
-
-        {/* Before/After Toggle - Modern Design */}
-        <div className="absolute bottom-3 left-3">
-          <div className="flex items-center bg-white/95 backdrop-blur-sm rounded-full p-1 shadow-lg border border-white/20">
-            <button
-              onClick={() => setShowAfter(false)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
-                !showAfter
-                  ? 'bg-primary text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              Before
-            </button>
-            <button
-              onClick={() => setShowAfter(true)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
-                showAfter
-                  ? 'bg-primary text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              After
-            </button>
-          </div>
-        </div>
-
-        {/* Status Badge */}
-        <div className="absolute top-3 right-3">
-          <Badge
-            className={
-              project.status === 'completed'
-                ? 'bg-green-500 text-white border-0 shadow-sm'
-                : project.status === 'in-progress'
-                ? 'bg-yellow-500 text-white border-0 shadow-sm'
-                : 'bg-gray-500 text-white border-0 shadow-sm'
-            }
-          >
-            {project.status === 'completed' ? '✓ Completed' :
-             project.status === 'in-progress' ? '⏳ In Progress' :
-             '📋 Planning'}
-          </Badge>
-        </div>
       </div>
 
       {/* Content Section */}
@@ -115,6 +72,35 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
           {project.title}
         </h3>
 
+        {/* Before/After Toggle - In Description */}
+        <div className="mb-3">
+          <div className="flex items-center space-x-2">
+            <span className="text-xs text-gray-500 font-medium">View:</span>
+            <div className="flex items-center bg-gray-100 rounded-full p-0.5">
+              <button
+                onClick={() => setShowAfter(false)}
+                className={`px-2 py-1 text-xs font-medium rounded-full transition-all duration-200 ${
+                  !showAfter
+                    ? 'bg-primary text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Before
+              </button>
+              <button
+                onClick={() => setShowAfter(true)}
+                className={`px-2 py-1 text-xs font-medium rounded-full transition-all duration-200 ${
+                  showAfter
+                    ? 'bg-primary text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                After
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Top Row: Customer & Location | Date & Type */}
         <div className="flex items-center justify-between mb-2 text-sm">
           <div className="flex items-center space-x-1 text-gray-600">
@@ -122,7 +108,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
             <span className="font-medium">{project.customerName}</span>
           </div>
           <div className="flex items-center space-x-1 text-gray-500">
-            <Calendar className="w-3.5 h-3.5" />
+            <Calendar className="w-3.5 h-3.5 text-primary" />
             <span>{formatDate(project.completedDate)}</span>
           </div>
         </div>
