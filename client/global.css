@@ -295,4 +295,32 @@
       grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     }
   }
+
+  /* Image optimization utilities */
+  .project-image {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  .project-card {
+    contain: layout style paint;
+  }
+
+  /* Preload critical images */
+  img[loading="eager"] {
+    content-visibility: auto;
+  }
+
+  /* Smooth image transitions */
+  .image-fade-in {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .image-fade-in.loaded {
+    opacity: 1;
+  }
 }

@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Button } from './button';
-import { ProjectCard } from './project-card';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import type { FirebaseProject } from '@/lib/firebase-service';
+import React, { useState, useEffect, useRef } from "react";
+import { Button } from "./button";
+import { ProjectCard } from "./project-card";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import type { FirebaseProject } from "@/lib/firebase-service";
 
 interface HomepageProjectsProps {
   projects: FirebaseProject[];
   loading?: boolean;
 }
 
-export const HomepageProjects: React.FC<HomepageProjectsProps> = ({ 
-  projects, 
-  loading = false 
+export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
+  projects,
+  loading = false,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -25,7 +25,8 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
   // Update scroll state
   const updateScrollState = () => {
     if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      const { scrollLeft, scrollWidth, clientWidth } =
+        scrollContainerRef.current;
       setCanScrollLeft(scrollLeft > 0);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
     }
@@ -34,26 +35,28 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
   useEffect(() => {
     updateScrollState();
     const handleResize = () => updateScrollState();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [latestProjects]);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      const cardWidth = scrollContainerRef.current.children[0]?.clientWidth || 300;
+      const cardWidth =
+        scrollContainerRef.current.children[0]?.clientWidth || 300;
       scrollContainerRef.current.scrollBy({
         left: -cardWidth - 24, // card width + gap
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      const cardWidth = scrollContainerRef.current.children[0]?.clientWidth || 300;
+      const cardWidth =
+        scrollContainerRef.current.children[0]?.clientWidth || 300;
       scrollContainerRef.current.scrollBy({
         left: cardWidth + 24, // card width + gap
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
@@ -70,7 +73,7 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
               Discover our most recent transformations
             </p>
           </div>
-          
+
           {/* Loading Skeleton */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
@@ -101,9 +104,7 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
               No projects found. Check back soon for our latest work!
             </p>
             <Button asChild>
-              <Link to="/admin">
-                Add First Project
-              </Link>
+              <Link to="/admin">Add First Project</Link>
             </Button>
           </div>
         </div>
@@ -124,88 +125,26 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
             Our Recent Projects
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover our most recent transformations showcasing premium wallpapers, window blinds, and luxury flooring installations
+            Discover our most recent transformations showcasing premium
+            wallpapers, window blinds, and luxury flooring installations
           </p>
         </div>
 
-        {/* Desktop Grid (3x2) */}
-        <div className="hidden lg:block">
-          <div className="grid grid-cols-3 gap-6 mb-8">
-            {latestProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                className="h-full"
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Tablet Grid (2x3) */}
-        <div className="hidden md:block lg:hidden">
-          <div className="grid grid-cols-2 gap-6 mb-8">
-            {latestProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                className="h-full"
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Mobile Horizontal Scroll */}
-        <div className="md:hidden">
-          <div className="relative">
-            {/* Scroll Container */}
-            <div
-              ref={scrollContainerRef}
-              className="flex gap-6 overflow-x-auto scrollbar-hide pb-4"
-              onScroll={updateScrollState}
-              style={{
-                scrollSnapType: 'x mandatory',
-                WebkitOverflowScrolling: 'touch'
-              }}
-            >
-              {latestProjects.map((project) => (
-                <div
-                  key={project.id}
-                  className="flex-none w-80"
-                  style={{ scrollSnapAlign: 'start' }}
-                >
-                  <ProjectCard project={project} />
-                </div>
-              ))}
-            </div>
-
-            {/* Navigation Arrows */}
-            <div className="flex justify-center space-x-4 mt-6">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={scrollLeft}
-                disabled={!canScrollLeft}
-                className="h-10 w-10 rounded-full p-0"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={scrollRight}
-                disabled={!canScrollRight}
-                className="h-10 w-10 rounded-full p-0"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+        {/* Responsive Grid - 3 columns on desktop, 2 on tablet, 1 on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {latestProjects.map((project) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              className="w-full"
+            />
+          ))}
         </div>
 
         {/* View All Projects Button */}
         <div className="text-center mt-12">
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-xl"
             asChild
           >
