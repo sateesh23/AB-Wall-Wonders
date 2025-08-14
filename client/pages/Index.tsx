@@ -349,60 +349,6 @@ export default function Index() {
             <>
               <HomepageProjects projects={recentProjects} loading={projectsLoading} />
 
-              {/* Enhanced CTA Section */}
-              <div className="mt-12 text-center">
-                {/* Call to Action Message */}
-                <div className="mb-8">
-                  <h3 className="text-2xl font-bold text-primary mb-2">
-                    Loved What You See?
-                  </h3>
-                  <p className="text-lg text-primary/70">
-                    Explore our complete portfolio or get in touch to start your
-                    project
-                  </p>
-                </div>
-
-                {/* Buttons Grid */}
-                {/* Simplified 2-Button CTA */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-lg mx-auto">
-                  {/* View All Projects Button */}
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="w-full sm:w-auto border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-full font-semibold text-lg px-8 py-4 shadow-md hover:shadow-lg transition-all duration-300"
-                    asChild
-                  >
-                    <Link to="/projects">
-                      <Eye className="mr-2 h-5 w-5" />
-                      View All Projects
-                    </Link>
-                  </Button>
-
-                  {/* WhatsApp Button */}
-                  <Button
-                    size="lg"
-                    className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white rounded-full font-semibold text-lg px-8 py-4 shadow-lg hover:shadow-xl transition-all duration-300"
-                    asChild
-                  >
-                    <a
-                      href="https://wa.me/918688723648"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <MessageCircle className="mr-2 h-5 w-5" />
-                      WhatsApp Us
-                    </a>
-                  </Button>
-                </div>
-
-                {/* Additional Info */}
-                <div className="mt-6 text-sm text-muted-foreground">
-                  <p>
-                    ����� Quick Response • 💬 Free Consultation • 🏆 5-Year
-                    Warranty
-                  </p>
-                </div>
-              </div>
             </>
           ) : (
             <div className="text-center py-12">
