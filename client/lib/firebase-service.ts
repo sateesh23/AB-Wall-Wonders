@@ -162,7 +162,7 @@ export const createProject = async (
 // Get all projects
 export const getAllProjects = async (): Promise<FirebaseProject[]> => {
   if (!isFirebaseConfigured() || !db) {
-    // Return empty array for demo mode
+    console.warn("Firebase not configured, returning empty array");
     return [];
   }
 
@@ -178,8 +178,16 @@ export const getAllProjects = async (): Promise<FirebaseProject[]> => {
       id: doc.id,
       ...doc.data(),
     })) as FirebaseProject[];
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching projects:", error);
+
+    // Handle specific Firebase errors
+    if (error.code === 'unavailable' || error.code === 'failed-precondition') {
+      console.warn("Firebase temporarily unavailable, returning empty array");
+    } else if (error.message?.includes('Failed to fetch')) {
+      console.warn("Network error, Firebase may be offline");
+    }
+
     return [];
   }
 };
