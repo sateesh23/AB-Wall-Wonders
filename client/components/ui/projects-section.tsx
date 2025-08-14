@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import type { ProjectData } from '@/lib/types';
+import type { SupabaseProject } from '@/lib/supabase';
 import { projectsData, featuredProjects } from '@/data/projects-data';
 import { EmptyState } from '@/components/ui/empty-state';
 
@@ -14,33 +14,33 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   limit,
   className = "" 
 }) => {
-  const [projects, setProjects] = useState<ProjectData[]>([]);
+  const [projects, setProjects] = useState<SupabaseProject[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadProjects = async () => {
       try {
-        // Try to load from Firebase first
-        const { getAllProjects, getFeaturedProjects } = await import('@/lib/firebase-service');
-        const { isFirebaseConfigured } = await import('@/lib/firebase');
+        // Try to load from Supabase first
+        const { getAllProjects, getFeaturedProjects } = await import('@/lib/supabase-service');
+        const { isSupabaseConfigured } = await import('@/lib/supabase');
 
-        let data: ProjectData[];
+        let data: SupabaseProject[];
 
-        if (isFirebaseConfigured()) {
-          // Use Firebase data if available
+        if (isSupabaseConfigured()) {
+          // Use Supabase data if available
           if (showFeatured) {
-            const firebaseFeatured = await getFeaturedProjects();
-            data = firebaseFeatured.length > 0 ? firebaseFeatured : featuredProjects;
+            const supabaseFeatured = await getFeaturedProjects();
+            data = supabaseFeatured.length > 0 ? supabaseFeatured : (featuredProjects as any);
           } else {
-            const firebaseProjects = await getAllProjects();
-            data = firebaseProjects.length > 0 ? firebaseProjects : projectsData;
+            const supabaseProjects = await getAllProjects();
+            data = supabaseProjects.length > 0 ? supabaseProjects : (projectsData as any);
           }
         } else {
           // Fallback to static data
           if (showFeatured) {
-            data = featuredProjects;
+            data = featuredProjects as any;
           } else {
-            data = projectsData;
+            data = projectsData as any;
           }
         }
 
@@ -52,11 +52,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       } catch (error) {
         console.error('Failed to load projects:', error);
         // Fallback to static data on error
-        let data: ProjectData[];
+        let data: SupabaseProject[];
         if (showFeatured) {
-          data = featuredProjects;
+          data = featuredProjects as any;
         } else {
-          data = projectsData;
+          data = projectsData as any;
         }
 
         if (limit) {
@@ -102,7 +102,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         <div key={proj.id || index} className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden">
           <div className="relative w-full aspect-square overflow-hidden">
             <img
-              src={proj.thumbnailUrl || proj.images?.[0] || '/placeholder.svg'}
+              src={proj.image_url || (proj as any).thumbnailUrl || (proj as any).images?.[0] || '/placeholder.svg'}
               alt={proj.title}
               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
               onError={(e) => {
@@ -119,7 +119,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             <div className="space-y-2 md:space-y-3 mb-4 md:mb-6">
               <div className="flex items-center text-sm">
                 <span className="font-semibold text-foreground w-20">Customer:</span>
-                <span className="ml-2 flex-1 text-muted-foreground">{proj.customerName}</span>
+                <span className="ml-2 flex-1 text-muted-foreground">{proj.customer_name || (proj as any).customerName}</span>
               </div>
               <div className="flex items-center text-sm">
                 <span className="font-semibold text-foreground w-20">Location:</span>
@@ -127,20 +127,20 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               </div>
               <div className="flex items-center text-sm">
                 <span className="font-semibold text-foreground w-20">Service:</span>
-                <span className="ml-2 flex-1 text-muted-foreground">{proj.serviceName}</span>
+                <span className="ml-2 flex-1 text-muted-foreground">{proj.subcategory || (proj as any).serviceName}</span>
               </div>
             </div>
 
             {/* Category Badge */}
             <div className="flex items-center justify-between">
               <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                {proj.category === 'wallpapers' ? '🎨 Wallpapers' :
-                 proj.category === 'blinds' ? '🏠 Blinds' :
-                 proj.category === 'flooring' ? '🪑 Flooring' :
+                {proj.service === 'wallpapers' || (proj as any).category === 'wallpapers' ? '🎨 Wallpapers' :
+                 proj.service === 'blinds' || (proj as any).category === 'blinds' ? '🏠 Blinds' :
+                 proj.service === 'flooring' || (proj as any).category === 'flooring' ? '🪑 Flooring' :
                  '⭐ Mixed'}
               </span>
               
-              {proj.featured && (
+              {(proj.is_featured || (proj as any).featured) && (
                 <span className="inline-block px-2 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-medium">
                   ⭐ Featured
                 </span>
