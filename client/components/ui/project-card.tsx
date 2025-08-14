@@ -11,6 +11,18 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "" }) => {
   const [showAfter, setShowAfter] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Preload both images for faster switching
+  React.useEffect(() => {
+    const preloadImage = (src: string) => {
+      const img = new Image();
+      img.src = src;
+    };
+
+    preloadImage(project.beforeImageURL);
+    preloadImage(project.afterImageURL);
+  }, [project.beforeImageURL, project.afterImageURL]);
 
   const formatDate = (dateString: string) => {
     try {
