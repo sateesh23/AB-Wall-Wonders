@@ -55,10 +55,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
         <img
           src={showAfter ? project.afterImageURL : project.beforeImageURL}
           alt={`${project.title} - ${showAfter ? 'After' : 'Before'}`}
-          className="w-full h-full object-cover transition-all duration-500"
+          className={`w-full h-full object-cover transition-all duration-500 project-image ${imageLoaded ? 'loaded' : ''}`}
           loading="eager"
+          onLoad={() => setImageLoaded(true)}
           onError={(e) => {
             (e.target as HTMLImageElement).src = '/placeholder.svg';
+            setImageLoaded(true);
           }}
         />
 
