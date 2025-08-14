@@ -1,4 +1,4 @@
-// Firebase Project types
+// Project types for AB Wall Wonders
 export interface Project {
   id?: string;
   title: string;
