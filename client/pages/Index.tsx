@@ -92,11 +92,21 @@ export default function Index() {
         const { isFirebaseConfigured } = await import('@/lib/firebase');
 
         if (isFirebaseConfigured()) {
-          const firebaseProjects = await getRecentProjects(6);
-          console.log(`📊 Firebase returned ${firebaseProjects.length} projects`);
-          // Always use Firebase data when configured, even if empty
-          setRecentProjects(firebaseProjects);
-          return;
+          try {
+            const firebaseProjects = await getRecentProjects(6);
+            console.log(`📊 Firebase returned ${firebaseProjects.length} projects`);
+
+            // If Firebase returns projects, use them
+            if (firebaseProjects.length > 0) {
+              setRecentProjects(firebaseProjects);
+              return;
+            }
+
+            // If Firebase returns empty array (no projects uploaded), use static data for demo
+            console.log("📊 Firebase returned empty, using static data for demo");
+          } catch (firebaseError: any) {
+            console.warn("Firebase error, falling back to static data:", firebaseError.message);
+          }
         }
 
         // Fallback to static data
@@ -106,7 +116,7 @@ export default function Index() {
         setRecentProjects(recentStatic);
       } catch (error) {
         console.error("Error loading recent projects:", error);
-        // Fallback to static data on error
+        // Final fallback to static data on any error
         try {
           const { projectsData } = await import('@/data/projects-data');
           setRecentProjects(projectsData.slice(0, 6));
