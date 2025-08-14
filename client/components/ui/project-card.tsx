@@ -59,7 +59,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
           loading="eager"
           onLoad={() => setImageLoaded(true)}
           onError={(e) => {
-            console.error('Failed to load image:', showAfter ? project.afterImageURL : project.beforeImageURL);
+            const imageUrl = showAfter ? project.afterImageURL : project.beforeImageURL;
+            console.warn('Image load failed, using placeholder:', imageUrl);
             (e.target as HTMLImageElement).src = '/placeholder.svg';
             setImageLoaded(true);
           }}
