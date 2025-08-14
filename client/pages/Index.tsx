@@ -8,7 +8,7 @@ import ABTestimonials3D from "@/components/ui/ab-testimonials-3d";
 import { HomepageProjects } from "@/components/ui/homepage-projects";
 import { MinimalFeedbackForm } from "@/components/ui/minimal-feedback-form";
 
-import type { ProjectData } from "@/lib/types";
+import type { SupabaseProject } from "@/lib/supabase";
 import { projectsData } from "@/data/projects-data";
 import {
   Star,
@@ -78,7 +78,7 @@ const stats = [
 ];
 
 export default function Index() {
-  const [recentProjects, setRecentProjects] = useState<ProjectData[]>([]);
+  const [recentProjects, setRecentProjects] = useState<SupabaseProject[]>([]);
   const [projectsLoading, setProjectsLoading] = useState(true);
 
   // Load recent projects for homepage
@@ -87,31 +87,31 @@ export default function Index() {
       try {
         console.log("🔄 Loading recent projects for homepage...");
 
-        // Try to load from Firebase first
-        const { getRecentProjects } = await import("@/lib/firebase-service");
-        const { isFirebaseConfigured } = await import("@/lib/firebase");
+        // Try to load from Supabase first
+        const { getRecentProjects } = await import("@/lib/supabase-service");
+        const { isSupabaseConfigured } = await import("@/lib/supabase");
 
-        if (isFirebaseConfigured()) {
+        if (isSupabaseConfigured()) {
           try {
-            const firebaseProjects = await getRecentProjects(6);
+            const supabaseProjects = await getRecentProjects(6);
             console.log(
-              `📊 Firebase returned ${firebaseProjects.length} projects`,
+              `📊 Supabase returned ${supabaseProjects.length} projects`,
             );
 
-            // If Firebase returns projects, use them
-            if (firebaseProjects.length > 0) {
-              setRecentProjects(firebaseProjects);
+            // If Supabase returns projects, use them
+            if (supabaseProjects.length > 0) {
+              setRecentProjects(supabaseProjects);
               return;
             }
 
-            // If Firebase returns empty array (no projects uploaded), use static data for demo
+            // If Supabase returns empty array (no projects uploaded), use static data for demo
             console.log(
-              "📊 Firebase returned empty, using static data for demo",
+              "📊 Supabase returned empty, using static data for demo",
             );
-          } catch (firebaseError: any) {
+          } catch (supabaseError: any) {
             console.warn(
-              "Firebase error, falling back to static data:",
-              firebaseError.message,
+              "Supabase error, falling back to static data:",
+              supabaseError.message,
             );
           }
         }
@@ -122,7 +122,7 @@ export default function Index() {
         console.log(
           `📊 Using ${recentStatic.length} static projects for homepage`,
         );
-        setRecentProjects(recentStatic);
+        setRecentProjects(recentStatic as any);
       } catch (error) {
         console.error("Error loading recent projects:", error);
         // Final fallback to static data on any error
