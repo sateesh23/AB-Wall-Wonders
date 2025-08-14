@@ -128,78 +128,15 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
           </p>
         </div>
 
-        {/* Desktop Grid (3x2) */}
-        <div className="hidden lg:block">
-          <div className="grid grid-cols-3 gap-6 mb-8">
-            {latestProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                className="h-full"
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Tablet Grid (2x3) */}
-        <div className="hidden md:block lg:hidden">
-          <div className="grid grid-cols-2 gap-6 mb-8">
-            {latestProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                className="h-full"
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Mobile Horizontal Scroll */}
-        <div className="md:hidden">
-          <div className="relative">
-            {/* Scroll Container */}
-            <div
-              ref={scrollContainerRef}
-              className="flex gap-6 overflow-x-auto scrollbar-hide pb-4"
-              onScroll={updateScrollState}
-              style={{
-                scrollSnapType: 'x mandatory',
-                WebkitOverflowScrolling: 'touch'
-              }}
-            >
-              {latestProjects.map((project) => (
-                <div
-                  key={project.id}
-                  className="flex-none w-80"
-                  style={{ scrollSnapAlign: 'start' }}
-                >
-                  <ProjectCard project={project} />
-                </div>
-              ))}
-            </div>
-
-            {/* Navigation Arrows */}
-            <div className="flex justify-center space-x-4 mt-6">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={scrollLeft}
-                disabled={!canScrollLeft}
-                className="h-10 w-10 rounded-full p-0"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={scrollRight}
-                disabled={!canScrollRight}
-                className="h-10 w-10 rounded-full p-0"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+        {/* Responsive Grid - 3 columns on desktop, 2 on tablet, 1 on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {latestProjects.map((project) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              className="w-full"
+            />
+          ))}
         </div>
 
         {/* View All Projects Button */}
