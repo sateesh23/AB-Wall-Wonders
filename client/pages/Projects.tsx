@@ -19,7 +19,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [projects, setProjects] = useState<ProjectData[]>([]);
+  const [projects, setProjects] = useState<SupabaseProject[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
