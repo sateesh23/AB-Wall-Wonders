@@ -222,6 +222,7 @@ export const getRecentProjects = async (
   limitCount: number = 6,
 ): Promise<FirebaseProject[]> => {
   if (!isFirebaseConfigured() || !db) {
+    console.warn("Firebase not configured for recent projects");
     return [];
   }
 
@@ -238,8 +239,14 @@ export const getRecentProjects = async (
       id: doc.id,
       ...doc.data(),
     })) as FirebaseProject[];
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching recent projects:", error);
+
+    // Handle network errors gracefully
+    if (error.message?.includes('Failed to fetch') || error.code === 'unavailable') {
+      console.warn("Network error or Firebase unavailable, falling back to empty array");
+    }
+
     return [];
   }
 };
