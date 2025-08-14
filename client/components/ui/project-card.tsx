@@ -63,32 +63,40 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
           }}
         />
         
-        {/* Before/After Toggle Button */}
-        <Button
-          size="sm"
-          variant="secondary"
-          className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 border-0 shadow-lg"
-          onClick={() => setShowAfter(!showAfter)}
-        >
-          <RotateCcw className="w-3 h-3 mr-1" />
-          {showAfter ? 'Before' : 'After'}
-        </Button>
-
-        {/* Service Badge */}
-        <div className="absolute top-3 left-3">
-          <Badge className={`${getServiceColor(project.service)} border font-medium`}>
-            {getServiceLabel(project.service)}
-          </Badge>
+        {/* Navigation Buttons - Center Left/Right */}
+        <div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <Button
+            size="sm"
+            variant="secondary"
+            className="bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 border-0 shadow-lg rounded-full h-10 w-10 p-0"
+            onClick={() => setShowAfter(!showAfter)}
+            disabled={showAfter}
+          >
+            ←
+          </Button>
+          <Button
+            size="sm"
+            variant="secondary"
+            className="bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 border-0 shadow-lg rounded-full h-10 w-10 p-0"
+            onClick={() => setShowAfter(!showAfter)}
+            disabled={!showAfter}
+          >
+            →
+          </Button>
         </div>
 
-        {/* Featured Badge */}
-        {project.isFeatured && (
-          <div className="absolute bottom-3 left-3">
-            <Badge className="bg-yellow-500 text-white border-0">
-              ⭐ Featured
-            </Badge>
-          </div>
-        )}
+        {/* Before/After Toggle Button - Bottom Center */}
+        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2">
+          <Button
+            size="sm"
+            variant="secondary"
+            className="bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 border-0 shadow-lg text-xs px-3 py-1"
+            onClick={() => setShowAfter(!showAfter)}
+          >
+            <RotateCcw className="w-3 h-3 mr-1" />
+            {showAfter ? 'Before' : 'After'}
+          </Button>
+        </div>
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
