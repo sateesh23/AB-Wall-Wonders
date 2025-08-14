@@ -337,19 +337,6 @@ export default function Index() {
       {/* Featured Projects Section */}
       <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 md:mb-16">
-            <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              Recent Completed Work
-            </div>
-            <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-primary mb-4">
-              Our Latest Projects
-            </h2>
-            <p className="text-lg md:text-xl text-primary/70 max-w-2xl mx-auto">
-              See our most recent work - each project showcases our commitment
-              to quality, innovation, and customer satisfaction
-            </p>
-          </div>
 
 
 
