@@ -100,35 +100,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
           {project.title}
         </h3>
 
-        {/* Before/After Toggle - In Description */}
-        <div className="mb-3">
-          <div className="flex items-center space-x-2">
-            <span className="text-xs text-gray-500 font-medium">View:</span>
-            <div className="flex items-center bg-gray-100 rounded-full p-0.5">
-              <button
-                onClick={() => setShowAfter(false)}
-                className={`px-2 py-1 text-xs font-medium rounded-full transition-all duration-200 ${
-                  !showAfter
-                    ? 'bg-primary text-white shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                Before
-              </button>
-              <button
-                onClick={() => setShowAfter(true)}
-                className={`px-2 py-1 text-xs font-medium rounded-full transition-all duration-200 ${
-                  showAfter
-                    ? 'bg-primary text-white shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                After
-              </button>
-            </div>
-          </div>
-        </div>
-
         {/* Top Row: Customer & Location | Date & Type */}
         <div className="flex items-center justify-between mb-2 text-sm">
           <div className="flex items-center space-x-1 text-gray-600">
