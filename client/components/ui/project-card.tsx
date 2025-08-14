@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Card, CardContent } from './card';
+import { Card } from './card';
 import { Badge } from './badge';
-import { Button } from './button';
-import { MapPin, Calendar, User, RotateCcw } from 'lucide-react';
+import { MapPin, Calendar, User } from 'lucide-react';
 import type { FirebaseProject } from '@/lib/firebase-service';
 
 interface ProjectCardProps {
@@ -24,19 +23,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
     }
   };
 
-  const getServiceColor = (service: string) => {
-    switch (service) {
-      case 'wallpapers':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'blinds':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'flooring':
-        return 'bg-orange-100 text-orange-800 border-orange-200';
-      default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
-  };
-
   const getServiceLabel = (service: string) => {
     switch (service) {
       case 'wallpapers':
@@ -51,112 +37,98 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
   };
 
   return (
-    <Card className={`group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden ${className}`}>
-      {/* Image Section with Before/After Toggle */}
-      <div className="relative h-64 overflow-hidden bg-gray-100">
+    <Card className={`group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 ${className}`}>
+      {/* Image Section */}
+      <div className="relative aspect-[16/10] overflow-hidden bg-gray-50">
         <img
           src={showAfter ? project.afterImageURL : project.beforeImageURL}
           alt={`${project.title} - ${showAfter ? 'After' : 'Before'}`}
-          className="w-full h-full object-contain transition-all duration-500"
+          className="w-full h-full object-cover transition-all duration-500"
+          loading="eager"
           onError={(e) => {
             (e.target as HTMLImageElement).src = '/placeholder.svg';
           }}
         />
-        
-        {/* Navigation Buttons - Center Left/Right */}
-        <div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button
-            size="sm"
-            variant="secondary"
-            className="bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 border-0 shadow-lg rounded-full h-10 w-10 p-0"
-            onClick={() => setShowAfter(!showAfter)}
-            disabled={showAfter}
-          >
-            ←
-          </Button>
-          <Button
-            size="sm"
-            variant="secondary"
-            className="bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 border-0 shadow-lg rounded-full h-10 w-10 p-0"
-            onClick={() => setShowAfter(!showAfter)}
-            disabled={!showAfter}
-          >
-            →
-          </Button>
+
+        {/* Before/After Toggle - Modern Design */}
+        <div className="absolute bottom-3 left-3">
+          <div className="flex items-center bg-white/95 backdrop-blur-sm rounded-full p-1 shadow-lg border border-white/20">
+            <button
+              onClick={() => setShowAfter(false)}
+              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
+                !showAfter
+                  ? 'bg-primary text-white shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Before
+            </button>
+            <button
+              onClick={() => setShowAfter(true)}
+              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
+                showAfter
+                  ? 'bg-primary text-white shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              After
+            </button>
+          </div>
         </div>
 
-        {/* Before/After Toggle Button - Bottom Center */}
-        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2">
-          <Button
-            size="sm"
-            variant="secondary"
-            className="bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 border-0 shadow-lg text-xs px-3 py-1"
-            onClick={() => setShowAfter(!showAfter)}
+        {/* Status Badge */}
+        <div className="absolute top-3 right-3">
+          <Badge
+            className={
+              project.status === 'completed'
+                ? 'bg-green-500 text-white border-0 shadow-sm'
+                : project.status === 'in-progress'
+                ? 'bg-yellow-500 text-white border-0 shadow-sm'
+                : 'bg-gray-500 text-white border-0 shadow-sm'
+            }
           >
-            <RotateCcw className="w-3 h-3 mr-1" />
-            {showAfter ? 'Before' : 'After'}
-          </Button>
+            {project.status === 'completed' ? '✓ Completed' :
+             project.status === 'in-progress' ? '⏳ In Progress' :
+             '📋 Planning'}
+          </Badge>
         </div>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
       </div>
 
       {/* Content Section */}
-      <CardContent className="p-4">
-        <div className="space-y-3">
-          {/* Title */}
-          <h3 className="font-bold text-lg text-gray-900 line-clamp-2 group-hover:text-primary transition-colors">
-            {project.title}
-          </h3>
+      <div className="p-4">
+        {/* Title */}
+        <h3 className="font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+          {project.title}
+        </h3>
 
-          {/* Project Details */}
-          <div className="space-y-2 text-sm text-gray-600">
-            <div className="flex items-center space-x-2">
-              <User className="w-4 h-4 text-primary" />
-              <span>{project.customerName}</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <MapPin className="w-4 h-4 text-primary" />
-              <span>{project.location}</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Calendar className="w-4 h-4 text-primary" />
-              <span>{formatDate(project.completedDate)}</span>
-            </div>
+        {/* Top Row: Customer & Location | Date & Type */}
+        <div className="flex items-center justify-between mb-2 text-sm">
+          <div className="flex items-center space-x-1 text-gray-600">
+            <User className="w-3.5 h-3.5 text-primary" />
+            <span className="font-medium">{project.customerName}</span>
           </div>
-
-          {/* Subcategory */}
-          {project.subcategory && (
-            <div className="text-sm text-gray-500">
-              <span className="font-medium">Type:</span> {project.subcategory}
-            </div>
-          )}
-
-          {/* Description */}
-          <p className="text-sm text-gray-600 line-clamp-2">
-            {project.description}
-          </p>
-
-          {/* Status */}
-          <div className="flex items-center justify-between pt-2">
-            <Badge 
-              variant={project.status === 'completed' ? 'default' : 'outline'}
-              className={
-                project.status === 'completed' 
-                  ? 'bg-green-100 text-green-800 border-green-200' 
-                  : project.status === 'in-progress'
-                  ? 'bg-yellow-100 text-yellow-800 border-yellow-200'
-                  : 'bg-gray-100 text-gray-800 border-gray-200'
-              }
-            >
-              {project.status === 'completed' ? '✓ Completed' : 
-               project.status === 'in-progress' ? '⏳ In Progress' : 
-               '📋 Planning'}
-            </Badge>
+          <div className="flex items-center space-x-1 text-gray-500">
+            <Calendar className="w-3.5 h-3.5" />
+            <span>{formatDate(project.completedDate)}</span>
           </div>
         </div>
-      </CardContent>
+
+        {/* Bottom Row: Location & Type */}
+        <div className="flex items-center justify-between mb-3 text-sm">
+          <div className="flex items-center space-x-1 text-gray-600">
+            <MapPin className="w-3.5 h-3.5 text-primary" />
+            <span>{project.location}</span>
+          </div>
+          <div className="text-gray-500">
+            <span className="font-medium">Type:</span> {project.subcategory || getServiceLabel(project.service)}
+          </div>
+        </div>
+
+        {/* Description */}
+        <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+          {project.description}
+        </p>
+      </div>
     </Card>
   );
 };
