@@ -31,7 +31,7 @@ export const getAllProjects = async (): Promise<SupabaseProject[]> => {
 
 // Get featured projects
 export const getFeaturedProjects = async (): Promise<SupabaseProject[]> => {
-  if (!isSupabaseConfigured()) {
+  if (!isSupabaseConfigured() || !supabase) {
     return [];
   }
 
@@ -58,7 +58,7 @@ export const getFeaturedProjects = async (): Promise<SupabaseProject[]> => {
 export const getRecentProjects = async (
   limitCount: number = 6,
 ): Promise<SupabaseProject[]> => {
-  if (!isSupabaseConfigured()) {
+  if (!isSupabaseConfigured() || !supabase) {
     return [];
   }
 
@@ -85,7 +85,7 @@ export const getRecentProjects = async (
 export const getProjectsByService = async (
   service: string,
 ): Promise<SupabaseProject[]> => {
-  if (!isSupabaseConfigured()) {
+  if (!isSupabaseConfigured() || !supabase) {
     return [];
   }
 
@@ -112,7 +112,7 @@ export const getProjectsByService = async (
 export const getProjectById = async (
   id: number,
 ): Promise<SupabaseProject | null> => {
-  if (!isSupabaseConfigured()) {
+  if (!isSupabaseConfigured() || !supabase) {
     return null;
   }
 
@@ -139,7 +139,7 @@ export const getProjectById = async (
 export const createProject = async (
   projectData: Omit<SupabaseProject, "id" | "created_at" | "updated_at">,
 ): Promise<number> => {
-  if (!isSupabaseConfigured()) {
+  if (!isSupabaseConfigured() || !supabase) {
     throw new Error(
       "Supabase not configured. Please set up Supabase environment variables.",
     );
@@ -169,7 +169,7 @@ export const updateProject = async (
   id: number,
   updates: Partial<SupabaseProject>,
 ): Promise<void> => {
-  if (!isSupabaseConfigured()) {
+  if (!isSupabaseConfigured() || !supabase) {
     throw new Error(
       "Supabase not configured. Please set up Supabase environment variables.",
     );
@@ -193,7 +193,7 @@ export const updateProject = async (
 
 // Delete project
 export const deleteProject = async (id: number): Promise<void> => {
-  if (!isSupabaseConfigured()) {
+  if (!isSupabaseConfigured() || !supabase) {
     throw new Error(
       "Supabase not configured. Please set up Supabase environment variables.",
     );
@@ -214,7 +214,7 @@ export const deleteProject = async (id: number): Promise<void> => {
 
 // Test Supabase connection
 export const testSupabaseConnection = async () => {
-  if (!isSupabaseConfigured()) {
+  if (!isSupabaseConfigured() || !supabase) {
     return {
       success: false,
       error: "Supabase not configured",
