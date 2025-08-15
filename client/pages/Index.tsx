@@ -10,8 +10,6 @@ import { MinimalFeedbackForm } from "@/components/ui/minimal-feedback-form";
 
 import type { SupabaseProject } from "@/lib/supabase";
 import {
-  Star,
-  ArrowRight,
   Phone,
   CheckCircle,
   Users,
@@ -21,11 +19,9 @@ import {
   Palette,
   Home,
   Layers,
-  MapPin,
   Eye,
   Building,
   Loader2,
-  Calendar,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
