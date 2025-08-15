@@ -26,18 +26,6 @@ import { SupabaseDebug } from "@/components/ui/supabase-debug";
 import { SuccessMessage } from "@/components/ui/success-message";
 import type { SupabaseProject } from "@/lib/supabase";
 
-interface ProjectForm {
-  title: string;
-  customerName: string;
-  location: string;
-  service: "wallpapers" | "blinds" | "flooring" | "";
-  subcategory: string;
-  description: string;
-  isFeatured: boolean;
-  completedDate: string;
-  status: "completed" | "in-progress" | "planned";
-  imageFile: File | undefined;
-}
 
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -112,36 +100,12 @@ export default function Admin() {
 
 
   const resetForm = () => {
-    setFormData({
-      title: "",
-      customerName: "",
-      location: "",
-      service: "",
-      subcategory: "",
-      description: "",
-      isFeatured: false,
-      completedDate: "",
-      status: "completed",
-      imageFile: undefined,
-    });
     setShowForm(false);
     setEditingProject(null);
   };
 
   const handleEdit = (project: SupabaseProject) => {
     setEditingProject(project);
-    setFormData({
-      title: project.title || "",
-      customerName: project.customer_name || "",
-      location: project.location || "",
-      service: project.service || "",
-      subcategory: project.subcategory || "",
-      description: project.description || "",
-      isFeatured: project.is_featured || false,
-      completedDate: project.completed_date || "",
-      status: (project.status || "completed") as "completed" | "in-progress" | "planned",
-      imageFile: undefined,
-    });
     setShowForm(true);
   };
 
