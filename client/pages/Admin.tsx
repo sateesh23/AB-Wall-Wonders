@@ -150,6 +150,7 @@ export default function Admin() {
         isFeatured: formData.isFeatured,
         completedDate: formData.completedDate,
         status: formData.status,
+        imageURL: "", // Will be set by upload service
         imageFile: formData.imageFile,
       };
 
