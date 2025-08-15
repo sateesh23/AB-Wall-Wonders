@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { Button } from "./button";
 import { ProjectCard } from "./project-card";
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { SupabaseProject } from "@/lib/supabase";
 
@@ -14,52 +14,8 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
   projects,
   loading = false,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
   // Get latest 6 projects
   const latestProjects = projects.slice(0, 6);
-
-  // Update scroll state
-  const updateScrollState = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } =
-        scrollContainerRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
-    }
-  };
-
-  useEffect(() => {
-    updateScrollState();
-    const handleResize = () => updateScrollState();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [latestProjects]);
-
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      const cardWidth =
-        scrollContainerRef.current.children[0]?.clientWidth || 300;
-      scrollContainerRef.current.scrollBy({
-        left: -cardWidth - 24, // card width + gap
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      const cardWidth =
-        scrollContainerRef.current.children[0]?.clientWidth || 300;
-      scrollContainerRef.current.scrollBy({
-        left: cardWidth + 24, // card width + gap
-        behavior: "smooth",
-      });
-    }
-  };
 
   if (loading) {
     return (

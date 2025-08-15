@@ -10,22 +10,15 @@ import { MinimalFeedbackForm } from "@/components/ui/minimal-feedback-form";
 
 import type { SupabaseProject } from "@/lib/supabase";
 import {
-  Star,
-  ArrowRight,
   Phone,
   CheckCircle,
-  Users,
-  Award,
-  Clock,
   MessageCircle,
   Palette,
   Home,
   Layers,
-  MapPin,
   Eye,
   Building,
   Loader2,
-  Calendar,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -69,13 +62,6 @@ const services = [
 
 // Static portfolio items removed - now using dynamic data from Neon database
 
-const stats = [
-  { icon: Users, value: "100+", label: "Happy Customers" },
-  { icon: Award, value: "2+", label: "Years Experience" },
-  { icon: CheckCircle, value: "20+", label: "Projects Completed" },
-  { icon: Clock, value: "24/7", label: "Customer Support" },
-];
-
 export default function Index() {
   const [recentProjects, setRecentProjects] = useState<SupabaseProject[]>([]);
   const [projectsLoading, setProjectsLoading] = useState(true);
@@ -114,36 +100,6 @@ export default function Index() {
 
     loadRecentProjects();
   }, []);
-
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case "wallpapers":
-        return "bg-blue-100 text-blue-800 border-blue-200";
-      case "blinds":
-        return "bg-green-100 text-green-800 border-green-200";
-      case "flooring":
-        return "bg-purple-100 text-purple-800 border-purple-200";
-      case "mixed":
-        return "bg-orange-100 text-orange-800 border-orange-200";
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
-    }
-  };
-
-  const getCategoryLabel = (category: string) => {
-    switch (category) {
-      case "wallpapers":
-        return "Wallpapers";
-      case "blinds":
-        return "Window Blinds";
-      case "flooring":
-        return "Flooring";
-      case "mixed":
-        return "Mixed Services";
-      default:
-        return category;
-    }
-  };
 
   return (
     <div

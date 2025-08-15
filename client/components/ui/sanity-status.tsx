@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { AlertCircle, CheckCircle, Database, Loader2, Wifi, WifiOff } from 'lucide-react';
-import { SanityService } from '@/lib/sanity-service';
+import { useState, useEffect } from "react";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle, Database, Loader2 } from "lucide-react";
 
 export function SanityStatus() {
   const [status, setStatus] = useState<{
@@ -13,32 +12,37 @@ export function SanityStatus() {
 
   useEffect(() => {
     const checkConnection = async () => {
-      setStatus(prev => ({ ...prev, loading: true }));
-      
+      setStatus((prev) => ({ ...prev, loading: true }));
+
       try {
-        const result = await SanityService.testConnection();
+        // Sanity service not implemented
+        const result = {
+          connected: false,
+          error: "Sanity not configured",
+          projectCount: 0,
+        };
         setStatus({
           connected: result.connected,
           projectCount: result.projectCount,
           error: result.error,
-          loading: false
+          loading: false,
         });
       } catch (error) {
         setStatus({
           connected: false,
-          error: 'Failed to connect',
+          error: "Failed to connect",
           loading: false,
-          projectCount: 0
+          projectCount: 0,
         });
       }
     };
 
     // Initial check
     checkConnection();
-    
+
     // Refresh status every 30 seconds
     const interval = setInterval(checkConnection, 30000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -62,7 +66,10 @@ export function SanityStatus() {
 
   if (status.projectCount === 0) {
     return (
-      <Badge variant="outline" className="gap-2 border-orange-500 text-orange-600">
+      <Badge
+        variant="outline"
+        className="gap-2 border-orange-500 text-orange-600"
+      >
         <Database className="h-3 w-3" />
         Ready - No Projects
       </Badge>

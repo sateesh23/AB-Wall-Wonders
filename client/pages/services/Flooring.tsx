@@ -1,24 +1,21 @@
-import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 
 import {
-  Layers,
   Phone,
   MessageCircle,
   CheckCircle,
   Shield,
   Droplets,
   Leaf,
-  Zap,
   ArrowRight,
   Users,
   Eye,
   Wrench,
   Clock,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
 
 const flooringTypes = [
@@ -70,8 +67,6 @@ const flooringTypes = [
 ];
 
 export default function Flooring() {
-  const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
-
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { CheckCircle, X } from 'lucide-react';
+import { useEffect } from "react";
+import { CheckCircle, X } from "lucide-react";
 
 interface SuccessMessageProps {
   message: string;
@@ -8,7 +8,12 @@ interface SuccessMessageProps {
   duration?: number;
 }
 
-export function SuccessMessage({ message, show, onClose, duration = 3000 }: SuccessMessageProps) {
+export function SuccessMessage({
+  message,
+  show,
+  onClose,
+  duration = 3000,
+}: SuccessMessageProps) {
   useEffect(() => {
     if (show) {
       const timer = setTimeout(() => {

@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import {
   Plus,
   Edit,
   Trash2,
-  Save,
-  X,
-  Upload,
   Eye,
   Settings,
   BarChart3,
@@ -19,7 +13,6 @@ import {
   FolderOpen,
   Calendar,
   Star,
-  MapPin,
   Phone,
   Mail,
   LogOut,
@@ -32,19 +25,6 @@ import { SupabaseAdminUpload } from "@/components/ui/supabase-admin-upload";
 import { SupabaseDebug } from "@/components/ui/supabase-debug";
 import { SuccessMessage } from "@/components/ui/success-message";
 import type { SupabaseProject } from "@/lib/supabase";
-
-interface ProjectForm {
-  title: string;
-  customerName: string;
-  location: string;
-  service: "wallpapers" | "blinds" | "flooring" | "";
-  subcategory: string;
-  description: string;
-  isFeatured: boolean;
-  completedDate: string;
-  status: "completed" | "in-progress" | "planning";
-  imageFile: File | undefined;
-}
 
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -64,18 +44,6 @@ export default function Admin() {
   );
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [showSuccess, setShowSuccess] = useState(false);
-  const [formData, setFormData] = useState<ProjectForm>({
-    title: "",
-    customerName: "",
-    location: "",
-    service: "",
-    subcategory: "",
-    description: "",
-    isFeatured: false,
-    completedDate: "",
-    status: "completed",
-    imageFile: undefined,
-  });
 
   useEffect(() => {
     // Check if user is already authenticated
@@ -129,94 +97,13 @@ export default function Admin() {
     }
   };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    const { name, value, type } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]:
-        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const projectData = {
-        title: formData.title,
-        customerName: formData.customerName,
-        location: formData.location,
-        service: formData.service,
-        subcategory: formData.subcategory,
-        description: formData.description,
-        isFeatured: formData.isFeatured,
-        completedDate: formData.completedDate,
-        status: formData.status,
-        imageFile: formData.imageFile,
-      };
-
-      if (editingProject) {
-        // Update existing project
-        await SupabaseAdminService.updateProject(
-          editingProject.id!,
-          projectData,
-        );
-        showSuccessMessage("Project updated successfully! ✨");
-      } else {
-        // Create new project
-        await SupabaseAdminService.createProject(projectData);
-        showSuccessMessage("Project created successfully! 🎉");
-      }
-
-      // Reload projects
-      await loadProjects();
-      resetForm();
-    } catch (error) {
-      console.error("Error saving project:", error);
-      alert(
-        `Failed to save project: ${error instanceof Error ? error.message : "Unknown error"}`,
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const resetForm = () => {
-    setFormData({
-      title: "",
-      customerName: "",
-      location: "",
-      service: "",
-      subcategory: "",
-      description: "",
-      isFeatured: false,
-      completedDate: "",
-      status: "completed",
-      imageFile: undefined,
-    });
     setShowForm(false);
     setEditingProject(null);
   };
 
   const handleEdit = (project: SupabaseProject) => {
     setEditingProject(project);
-    setFormData({
-      title: project.title || "",
-      customerName: project.customer_name || "",
-      location: project.location || "",
-      service: project.service || "",
-      subcategory: project.subcategory || "",
-      description: project.description || "",
-      isFeatured: project.is_featured || false,
-      completedDate: project.completed_date || "",
-      status: project.status || "completed",
-      imageFile: undefined,
-    });
     setShowForm(true);
   };
 
@@ -269,25 +156,25 @@ export default function Admin() {
         {/* Header */}
         <div className="bg-white shadow-sm border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center py-6">
-              <div className="flex items-center space-x-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 sm:py-6 space-y-4 sm:space-y-0">
+              <div className="flex items-center space-x-3 sm:space-x-4">
                 <img
                   src="/ABWWW.png"
                   alt="AB Wall Wonders"
-                  className="h-12 w-auto"
+                  className="h-10 sm:h-12 w-auto"
                 />
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900">
+                  <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
                     Admin Portal
                   </h1>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-xs sm:text-sm text-gray-500">
                     Manage your projects and content
                   </p>
                 </div>
               </div>
-              <div className="flex items-center space-x-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
                 <div
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  className={`px-2 sm:px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
                     supabaseStatus === "connected"
                       ? "bg-green-100 text-green-800"
                       : supabaseStatus === "error"
@@ -295,30 +182,35 @@ export default function Admin() {
                         : "bg-yellow-100 text-yellow-800"
                   }`}
                 >
-                  Supabase:{" "}
+                  <span className="hidden sm:inline">Supabase: </span>
                   {supabaseStatus === "connected"
                     ? "Connected"
                     : supabaseStatus === "error"
                       ? "Not Configured"
                       : "Checking..."}
                 </div>
-                <Button
-                  onClick={() => window.open("/", "_blank")}
-                  variant="outline"
-                  size="sm"
-                >
-                  <Eye className="w-4 h-4 mr-2" />
-                  View Website
-                </Button>
-                <Button
-                  onClick={handleLogout}
-                  variant="outline"
-                  size="sm"
-                  className="text-red-600 hover:text-red-700 hover:border-red-300"
-                >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Logout
-                </Button>
+                <div className="flex space-x-2 w-full sm:w-auto">
+                  <Button
+                    onClick={() => window.open("/", "_blank")}
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 sm:flex-none"
+                  >
+                    <Eye className="w-4 h-4 sm:mr-2" />
+                    <span className="hidden sm:inline">View Website</span>
+                    <span className="sm:hidden">View</span>
+                  </Button>
+                  <Button
+                    onClick={handleLogout}
+                    variant="outline"
+                    size="sm"
+                    className="text-red-600 hover:text-red-700 hover:border-red-300 flex-1 sm:flex-none"
+                  >
+                    <LogOut className="w-4 h-4 sm:mr-2" />
+                    <span className="hidden sm:inline">Logout</span>
+                    <span className="sm:hidden">Exit</span>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
@@ -327,7 +219,7 @@ export default function Admin() {
         {/* Navigation Tabs */}
         <div className="bg-white border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex space-x-8">
+            <nav className="flex space-x-2 sm:space-x-8 overflow-x-auto scrollbar-hide">
               {[
                 { id: "overview", label: "Overview", icon: BarChart3 },
                 { id: "projects", label: "Projects", icon: FolderOpen },
@@ -336,14 +228,14 @@ export default function Admin() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center px-1 py-4 border-b-2 font-medium text-sm ${
+                  className={`flex items-center px-3 sm:px-1 py-3 sm:py-4 border-b-2 font-medium text-sm whitespace-nowrap ${
                     activeTab === tab.id
                       ? "border-primary text-primary"
                       : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                   }`}
                 >
-                  <tab.icon className="w-4 h-4 mr-2" />
-                  {tab.label}
+                  <tab.icon className="w-4 h-4 mr-1 sm:mr-2" />
+                  <span className="text-xs sm:text-sm">{tab.label}</span>
                 </button>
               ))}
             </nav>
@@ -351,69 +243,71 @@ export default function Admin() {
         </div>
 
         {/* Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
           {activeTab === "overview" && (
             <div className="space-y-6">
               {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
                 <Card>
-                  <CardContent className="p-6">
+                  <CardContent className="p-3 sm:p-6">
                     <div className="flex items-center">
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-600">
+                        <p className="text-xs sm:text-sm font-medium text-gray-600">
                           Total Projects
                         </p>
-                        <p className="text-2xl font-bold text-gray-900">
+                        <p className="text-xl sm:text-2xl font-bold text-gray-900">
                           {stats.totalProjects}
                         </p>
                       </div>
-                      <FolderOpen className="h-8 w-8 text-blue-500" />
+                      <FolderOpen className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500" />
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card>
-                  <CardContent className="p-6">
+                  <CardContent className="p-3 sm:p-6">
                     <div className="flex items-center">
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-600">
+                        <p className="text-xs sm:text-sm font-medium text-gray-600">
                           Featured Projects
                         </p>
-                        <p className="text-2xl font-bold text-gray-900">
+                        <p className="text-xl sm:text-2xl font-bold text-gray-900">
                           {stats.featuredProjects}
                         </p>
                       </div>
-                      <Star className="h-8 w-8 text-yellow-500" />
+                      <Star className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-500" />
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card>
-                  <CardContent className="p-6">
+                  <CardContent className="p-3 sm:p-6">
                     <div className="flex items-center">
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-600">
+                        <p className="text-xs sm:text-sm font-medium text-gray-600">
                           Completed
                         </p>
-                        <p className="text-2xl font-bold text-gray-900">
+                        <p className="text-xl sm:text-2xl font-bold text-gray-900">
                           {stats.completedProjects}
                         </p>
                       </div>
-                      <Calendar className="h-8 w-8 text-green-500" />
+                      <Calendar className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card>
-                  <CardContent className="p-6">
+                  <CardContent className="p-3 sm:p-6">
                     <div className="flex items-center">
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-600">
+                        <p className="text-xs sm:text-sm font-medium text-gray-600">
                           Happy Customers
                         </p>
-                        <p className="text-2xl font-bold text-gray-900">100+</p>
+                        <p className="text-xl sm:text-2xl font-bold text-gray-900">
+                          100+
+                        </p>
                       </div>
-                      <Users className="h-8 w-8 text-purple-500" />
+                      <Users className="h-6 w-6 sm:h-8 sm:w-8 text-purple-500" />
                     </div>
                   </CardContent>
                 </Card>
@@ -425,26 +319,28 @@ export default function Admin() {
                   <CardTitle>Service Breakdown</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="text-center p-4 bg-blue-50 rounded-lg">
-                      <p className="text-2xl font-bold text-blue-600">
+                  <div className="grid grid-cols-3 sm:grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+                    <div className="text-center p-3 sm:p-4 bg-blue-50 rounded-lg">
+                      <p className="text-lg sm:text-2xl font-bold text-blue-600">
                         {stats.wallpaperProjects}
                       </p>
-                      <p className="text-sm text-blue-800">
+                      <p className="text-xs sm:text-sm text-blue-800">
                         Wallpaper Projects
                       </p>
                     </div>
-                    <div className="text-center p-4 bg-green-50 rounded-lg">
-                      <p className="text-2xl font-bold text-green-600">
+                    <div className="text-center p-3 sm:p-4 bg-green-50 rounded-lg">
+                      <p className="text-lg sm:text-2xl font-bold text-green-600">
                         {stats.blindsProjects}
                       </p>
-                      <p className="text-sm text-green-800">Blinds Projects</p>
+                      <p className="text-xs sm:text-sm text-green-800">
+                        Blinds Projects
+                      </p>
                     </div>
-                    <div className="text-center p-4 bg-orange-50 rounded-lg">
-                      <p className="text-2xl font-bold text-orange-600">
+                    <div className="text-center p-3 sm:p-4 bg-orange-50 rounded-lg">
+                      <p className="text-lg sm:text-2xl font-bold text-orange-600">
                         {stats.flooringProjects}
                       </p>
-                      <p className="text-sm text-orange-800">
+                      <p className="text-xs sm:text-sm text-orange-800">
                         Flooring Projects
                       </p>
                     </div>
@@ -458,39 +354,41 @@ export default function Admin() {
                   <CardTitle>Quick Actions</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                     <Button
                       onClick={() => setActiveTab("projects")}
-                      className="h-20 flex flex-col space-y-2"
+                      className="h-16 sm:h-20 flex flex-col space-y-1 sm:space-y-2"
                     >
-                      <Plus className="w-6 h-6" />
-                      <span>Add Project</span>
+                      <Plus className="w-5 h-5 sm:w-6 sm:h-6" />
+                      <span className="text-xs sm:text-sm">Add Project</span>
                     </Button>
                     <Button
                       variant="outline"
                       onClick={() => window.open("/", "_blank")}
-                      className="h-20 flex flex-col space-y-2"
+                      className="h-16 sm:h-20 flex flex-col space-y-1 sm:space-y-2"
                     >
-                      <Eye className="w-6 h-6" />
-                      <span>View Website</span>
+                      <Eye className="w-5 h-5 sm:w-6 sm:h-6" />
+                      <span className="text-xs sm:text-sm">View Website</span>
                     </Button>
                     <Button
                       variant="outline"
                       onClick={() =>
                         window.open("https://supabase.com/dashboard", "_blank")
                       }
-                      className="h-20 flex flex-col space-y-2"
+                      className="h-16 sm:h-20 flex flex-col space-y-1 sm:space-y-2"
                     >
-                      <Settings className="w-6 h-6" />
-                      <span>Supabase Console</span>
+                      <Settings className="w-5 h-5 sm:w-6 sm:h-6" />
+                      <span className="text-xs sm:text-sm">
+                        Supabase Console
+                      </span>
                     </Button>
                     <Button
                       variant="outline"
                       onClick={() => setActiveTab("settings")}
-                      className="h-20 flex flex-col space-y-2"
+                      className="h-16 sm:h-20 flex flex-col space-y-1 sm:space-y-2"
                     >
-                      <Settings className="w-6 h-6" />
-                      <span>Settings</span>
+                      <Settings className="w-5 h-5 sm:w-6 sm:h-6" />
+                      <span className="text-xs sm:text-sm">Settings</span>
                     </Button>
                   </div>
                 </CardContent>
@@ -501,16 +399,19 @@ export default function Admin() {
           {activeTab === "projects" && (
             <div className="space-y-6">
               {/* Projects Header */}
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                     Projects Management
                   </h2>
-                  <p className="text-gray-600">
+                  <p className="text-sm sm:text-base text-gray-600">
                     Manage your portfolio projects
                   </p>
                 </div>
-                <Button onClick={() => setShowForm(true)}>
+                <Button
+                  onClick={() => setShowForm(true)}
+                  className="w-full sm:w-auto"
+                >
                   <Plus className="w-4 h-4 mr-2" />
                   Add New Project
                 </Button>
@@ -519,8 +420,8 @@ export default function Admin() {
               {/* Add/Edit Form */}
               {showForm && (
                 <SupabaseAdminUpload
-                  editingProject={editingProject}
-                  onSuccess={(projectId) => {
+                  editingProject={editingProject || undefined}
+                  onSuccess={() => {
                     showSuccessMessage(
                       editingProject
                         ? "Project updated successfully! ✨"
@@ -554,43 +455,50 @@ export default function Admin() {
                       {projects.map((project) => (
                         <div
                           key={project.id}
-                          className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50"
+                          className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 border rounded-lg hover:bg-gray-50 space-y-3 sm:space-y-0"
                         >
-                          <div className="flex-1">
-                            <div className="flex items-center space-x-3">
-                              <h3 className="font-medium text-gray-900">
+                          <div className="flex-1 w-full sm:w-auto">
+                            <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
+                              <h3 className="font-medium text-gray-900 text-sm sm:text-base">
                                 {project.title}
                               </h3>
-                              {project.is_featured && (
-                                <Badge className="bg-yellow-100 text-yellow-800">
-                                  <Star className="w-3 h-3 mr-1" />
-                                  Featured
+                              <div className="flex flex-wrap gap-2">
+                                {project.is_featured && (
+                                  <Badge className="bg-yellow-100 text-yellow-800 text-xs">
+                                    <Star className="w-3 h-3 mr-1" />
+                                    Featured
+                                  </Badge>
+                                )}
+                                <Badge variant="outline" className="text-xs">
+                                  {project.service}
                                 </Badge>
-                              )}
-                              <Badge variant="outline">{project.service}</Badge>
+                              </div>
                             </div>
-                            <p className="text-sm text-gray-600 mt-1">
+                            <p className="text-xs sm:text-sm text-gray-600 mt-1">
                               {project.customer_name} • {project.location}
                             </p>
-                            <p className="text-xs text-gray-500 mt-1">
+                            <p className="text-xs text-gray-500 mt-1 line-clamp-2">
                               {project.description?.substring(0, 100)}...
                             </p>
                           </div>
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center space-x-2 w-full sm:w-auto justify-end">
                             <Button
                               size="sm"
                               variant="outline"
                               onClick={() => handleEdit(project)}
+                              className="flex-1 sm:flex-none"
                             >
-                              <Edit className="w-4 h-4" />
+                              <Edit className="w-4 h-4 sm:mr-1" />
+                              <span className="hidden sm:inline">Edit</span>
                             </Button>
                             <Button
                               size="sm"
                               variant="outline"
                               onClick={() => handleDelete(project.id!)}
-                              className="text-red-600 hover:text-red-700"
+                              className="text-red-600 hover:text-red-700 flex-1 sm:flex-none"
                             >
-                              <Trash2 className="w-4 h-4" />
+                              <Trash2 className="w-4 h-4 sm:mr-1" />
+                              <span className="hidden sm:inline">Delete</span>
                             </Button>
                           </div>
                         </div>
@@ -609,8 +517,8 @@ export default function Admin() {
                   <CardTitle>CMS Settings</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between p-4 border rounded-lg">
-                    <div>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 border rounded-lg space-y-3 sm:space-y-0">
+                    <div className="flex-1">
                       <h3 className="font-medium">Supabase Console</h3>
                       <p className="text-sm text-gray-600">
                         Manage your Supabase project and database
@@ -620,13 +528,14 @@ export default function Admin() {
                       onClick={() =>
                         window.open("https://supabase.com/dashboard", "_blank")
                       }
+                      className="w-full sm:w-auto"
                     >
                       Open Console
                     </Button>
                   </div>
 
-                  <div className="flex items-center justify-between p-4 border rounded-lg">
-                    <div>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 border rounded-lg space-y-3 sm:space-y-0">
+                    <div className="flex-1">
                       <h3 className="font-medium">Website Preview</h3>
                       <p className="text-sm text-gray-600">
                         View your live website
@@ -635,6 +544,7 @@ export default function Admin() {
                     <Button
                       onClick={() => window.open("/", "_blank")}
                       variant="outline"
+                      className="w-full sm:w-auto"
                     >
                       View Website
                     </Button>
@@ -647,19 +557,25 @@ export default function Admin() {
                   <CardTitle>Contact Information</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                      <Phone className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-medium">Phone</p>
-                        <p className="text-sm text-gray-600">+91 86887 23648</p>
+                      <Phone className="w-5 h-5 text-primary flex-shrink-0" />
+                      <div className="min-w-0">
+                        <p className="font-medium text-sm sm:text-base">
+                          Phone
+                        </p>
+                        <p className="text-xs sm:text-sm text-gray-600 break-all">
+                          +91 86887 23648
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                      <Mail className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-medium">Email</p>
-                        <p className="text-sm text-gray-600">
+                      <Mail className="w-5 h-5 text-primary flex-shrink-0" />
+                      <div className="min-w-0">
+                        <p className="font-medium text-sm sm:text-base">
+                          Email
+                        </p>
+                        <p className="text-xs sm:text-sm text-gray-600 break-all">
                           abwallwonders@gmail.com
                         </p>
                       </div>

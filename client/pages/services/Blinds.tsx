@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
@@ -8,8 +7,6 @@ import {
   Phone,
   MessageCircle,
   CheckCircle,
-  Shield,
-  Settings,
   Sun,
   Zap,
   ArrowRight,
@@ -20,7 +17,7 @@ import {
   Wrench,
   Scissors,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
 
 const blindTypes = [
@@ -140,8 +137,6 @@ const blindTypes = [
 ];
 
 export default function Blinds() {
-  const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
-
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
