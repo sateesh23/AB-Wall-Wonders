@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Calendar, Wrench } from "lucide-react";
-import type { ProjectData } from "@/data/projects-data";
+import type { ProjectData } from "@/lib/types";
 
 interface DynamicProjectsGridProps {
   projects: ProjectData[];
