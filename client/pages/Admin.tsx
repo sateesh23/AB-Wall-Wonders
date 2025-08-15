@@ -35,7 +35,7 @@ interface ProjectForm {
   description: string;
   isFeatured: boolean;
   completedDate: string;
-  status: "completed" | "in-progress" | "planning";
+  status: "completed" | "in-progress" | "planned";
   imageFile: File | undefined;
 }
 
@@ -214,7 +214,7 @@ export default function Admin() {
       description: project.description || "",
       isFeatured: project.is_featured || false,
       completedDate: project.completed_date || "",
-      status: (project.status || "completed") as "completed" | "in-progress" | "planning",
+      status: (project.status || "completed") as "completed" | "in-progress" | "planned",
       imageFile: undefined,
     });
     setShowForm(true);
