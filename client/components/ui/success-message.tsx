@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { CheckCircle, X } from 'lucide-react';
 
 interface SuccessMessageProps {

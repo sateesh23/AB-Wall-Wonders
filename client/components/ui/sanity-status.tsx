@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
-import { AlertCircle, CheckCircle, Database, Loader2, Wifi, WifiOff } from 'lucide-react';
-import { SanityService } from '@/lib/sanity-service';
+import { CheckCircle, Database, Loader2 } from 'lucide-react';
+import sanityService from '@/lib/sanity-service';
 
 export function SanityStatus() {
   const [status, setStatus] = useState<{

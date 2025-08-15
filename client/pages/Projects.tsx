@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CTACard } from "@/components/ui/cta-card";
@@ -11,7 +11,6 @@ import {
   Building,
   Filter,
   Loader2,
-  Database,
 } from "lucide-react";
 import type { SupabaseProject } from "@/lib/supabase";
 import { EmptyState } from "@/components/ui/empty-state";
