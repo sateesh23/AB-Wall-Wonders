@@ -89,10 +89,10 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
             {/* Category Badge Overlay */}
             <div className="absolute top-3 left-3">
               <Badge
-                className={`${getCategoryColor(project.category || project.service || "mixed")} font-medium text-xs`}
+                className={`${getCategoryColor(project.category || "mixed")} font-medium text-xs`}
               >
                 {getCategoryLabel(
-                  project.category || project.service || "mixed",
+                  project.category || "mixed",
                 )}
               </Badge>
             </div>
@@ -139,7 +139,7 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
               <div className="flex items-center text-sm text-muted-foreground">
                 <Wrench className="w-4 h-4 mr-1 flex-shrink-0" />
                 <span className="line-clamp-1">
-                  {project.serviceName || project.service || "Service"}
+                  {project.serviceName || project.service_name || "Service"}
                 </span>
               </div>
 
