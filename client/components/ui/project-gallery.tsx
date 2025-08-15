@@ -32,10 +32,10 @@ const ProjectCard = memo(function ProjectCard({ project }: { project: ProjectDat
   return (
     <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-0 bg-white">
       <div className="relative">
-        <div className={cn("overflow-hidden", aspectRatioClasses[project.aspectRatio])}>
+        <div className={cn("overflow-hidden", aspectRatioClasses[project.aspectRatio || "landscape"])}>
           <img
             src={project.thumbnail || project.thumbnailUrl || project.thumbnail_url || project.image || '/placeholder.svg'}
-            alt={project.title}
+            alt={project.title || 'Project'}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             loading="lazy"
             onError={(e) => {
