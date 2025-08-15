@@ -56,9 +56,40 @@ export interface CreateProjectInput {
   notes?: string;
 }
 
+export interface CreateProjectData {
+  title: string;
+  customerName: string;
+  location: string;
+  service: "" | "blinds" | "flooring" | "wallpapers";
+  subcategory: string;
+  description: string;
+  isFeatured: boolean;
+  completedDate: string;
+  status: "completed" | "in-progress" | "planning";
+  imageURL: string;
+  imageFile?: File;
+}
+
+export interface SupabaseProject {
+  id: string;
+  title: string;
+  customerName: string;
+  location: string;
+  service: string;
+  subcategory: string;
+  description: string;
+  imageURL: string;
+  isFeatured: boolean;
+  completedDate: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // Legacy interface for backwards compatibility - supports both formats
 export interface ProjectData {
   id: number | string;
+  _id?: string;
   title?: string;
 
   // Customer info (both formats supported)
@@ -83,6 +114,10 @@ export interface ProjectData {
   thumbnail?: string;
   image?: string;
   images?: string[];
+  beforeImage?: string;
+  executionImage?: string;
+  afterImage?: string;
+  projectImages?: string[];
 
   description?: string;
 

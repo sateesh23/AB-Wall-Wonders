@@ -1,5 +1,13 @@
 // Static testimonials data for AB Wall Wonders
-export const simpleTestimonials = [
+export interface TestimonialData {
+  name: string;
+  location: string;
+  text: string;
+  rating: number;
+  avatar: string;
+}
+
+export const simpleTestimonials: TestimonialData[] = [
   {
     name: "Narendra (Dental Clinic)",
     location: "Bobbili - Opp Sai Ganapathi Theatre",
@@ -43,3 +51,9 @@ export const simpleTestimonials = [
     avatar: "",
   },
 ];
+
+// Marquee testimonials (same as simple for now)
+export const marqueeTestimonials = simpleTestimonials;
+
+// Services testimonials (same as simple for now)
+export const servicesTestimonials = simpleTestimonials;
