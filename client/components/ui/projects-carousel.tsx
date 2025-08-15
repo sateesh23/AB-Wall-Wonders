@@ -3,9 +3,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProjectImageNavigator } from "@/components/ui/project-image-navigator";
-import { ChevronLeft, ChevronRight, Eye, Phone, MessageCircle, MapPin, Building } from "lucide-react";
-import { Link } from "react-router-dom";
-import type { ProjectData } from "@/data/projects-data";
+import { MapPin, Building } from "lucide-react";
+import type { ProjectData } from "@/lib/types";
 
 interface ProjectsCarouselProps {
   projects: ProjectData[];
@@ -63,7 +62,7 @@ export function ProjectsCarousel({ projects, className = "" }: ProjectsCarouselP
                   executionImage={project.executionImage}
                   afterImage={project.afterImage}
                   projectImages={project.projectImages}
-                  fallbackImage={project.thumbnail || project.image || '/images/placeholder.jpg'}
+                  fallbackImage={project.thumbnail || project.thumbnailUrl || project.thumbnail_url || project.image || '/images/placeholder.jpg'}
                   alt={project.title || project.customerName}
                   className="overflow-hidden"
                 />
@@ -71,7 +70,7 @@ export function ProjectsCarousel({ projects, className = "" }: ProjectsCarouselP
                 {/* Service Badge */}
                 <div className="absolute top-3 right-3">
                   <Badge className="bg-primary/90 text-white text-xs">
-                    {project.serviceName || project.category}
+                    {project.serviceName || project.service_name || project.category}
                   </Badge>
                 </div>
               </div>
@@ -80,18 +79,18 @@ export function ProjectsCarousel({ projects, className = "" }: ProjectsCarouselP
               <div className="p-4 md:p-6">
                 <div className="space-y-3">
                   {/* Category Badge */}
-                  <Badge className={`${getCategoryColor(project.category)} font-medium text-xs`}>
-                    {getCategoryLabel(project.category)}
+                  <Badge className={`${getCategoryColor(project.category || 'mixed')} font-medium text-xs`}>
+                    {getCategoryLabel(project.category || 'mixed')}
                   </Badge>
 
                   {/* Customer Info */}
                   <div>
                     <h3 className="text-lg md:text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-2">
-                      {project.title || project.businessName || project.customerName}
+                      {project.title || project.businessName || project.business_name || project.customerName || project.customer_name}
                     </h3>
-                    {project.businessName && project.title !== project.businessName && (
+                    {(project.businessName || project.business_name) && project.title !== (project.businessName || project.business_name) && (
                       <p className="text-sm text-muted-foreground">
-                        Client: {project.customerName}
+                        Client: {project.customerName || project.customer_name}
                       </p>
                     )}
                   </div>
@@ -119,7 +118,7 @@ export function ProjectsCarousel({ projects, className = "" }: ProjectsCarouselP
                   {/* Service */}
                   <div className="flex items-start gap-2 text-sm pt-2 border-t border-gray-100">
                     <Building className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary" />
-                    <p className="font-medium text-foreground">{project.serviceName}</p>
+                    <p className="font-medium text-foreground">{project.serviceName || project.service_name || 'Service'}</p>
                   </div>
                 </div>
               </div>
