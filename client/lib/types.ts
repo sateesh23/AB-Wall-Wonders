@@ -11,7 +11,7 @@ export interface Project {
   imageURLs?: string[];
   isFeatured: boolean;
   completedDate: string;
-  status: "completed" | "in-progress" | "planning";
+  status: "completed" | "in-progress" | "planned";
   createdAt: string;
   updatedAt: string;
 }
@@ -65,7 +65,7 @@ export interface CreateProjectData {
   description: string;
   isFeatured: boolean;
   completedDate: string;
-  status: "completed" | "in-progress" | "planning";
+  status: "completed" | "in-progress" | "planned";
   imageURL: string;
   imageFile?: File;
 }
