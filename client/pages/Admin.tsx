@@ -519,8 +519,8 @@ export default function Admin() {
               {/* Add/Edit Form */}
               {showForm && (
                 <SupabaseAdminUpload
-                  editingProject={editingProject}
-                  onSuccess={(projectId) => {
+                  editingProject={editingProject || undefined}
+                  onSuccess={() => {
                     showSuccessMessage(
                       editingProject
                         ? "Project updated successfully! ✨"
