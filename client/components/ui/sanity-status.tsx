@@ -16,7 +16,8 @@ export function SanityStatus() {
       setStatus(prev => ({ ...prev, loading: true }));
       
       try {
-        const result = await SanityService.testConnection();
+        // Sanity service not implemented
+        const result = { connected: false, error: "Sanity not configured", projectCount: 0 };
         setStatus({
           connected: result.connected,
           projectCount: result.projectCount,
