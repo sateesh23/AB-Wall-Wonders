@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import type { SupabaseProject } from '@/lib/supabase';
-import { projectsData, featuredProjects } from '@/data/projects-data';
 import { EmptyState } from '@/components/ui/empty-state';
 
 interface ProjectsSectionProps {
@@ -27,21 +26,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         let data: SupabaseProject[];
 
         if (isSupabaseConfigured()) {
-          // Use Supabase data if available
+          // Use only Supabase data
           if (showFeatured) {
-            const supabaseFeatured = await getFeaturedProjects();
-            data = supabaseFeatured.length > 0 ? supabaseFeatured : (featuredProjects as any);
+            data = await getFeaturedProjects();
           } else {
-            const supabaseProjects = await getAllProjects();
-            data = supabaseProjects.length > 0 ? supabaseProjects : (projectsData as any);
+            data = await getAllProjects();
           }
         } else {
-          // Fallback to static data
-          if (showFeatured) {
-            data = featuredProjects as any;
-          } else {
-            data = projectsData as any;
-          }
+          // No data if Supabase not configured
+          data = [];
         }
 
         if (limit) {
@@ -51,19 +44,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         setProjects(data);
       } catch (error) {
         console.error('Failed to load projects:', error);
-        // Fallback to static data on error
-        let data: SupabaseProject[];
-        if (showFeatured) {
-          data = featuredProjects as any;
-        } else {
-          data = projectsData as any;
-        }
-
-        if (limit) {
-          data = data.slice(0, limit);
-        }
-
-        setProjects(data);
+        setProjects([]);
       } finally {
         setLoading(false);
       }
