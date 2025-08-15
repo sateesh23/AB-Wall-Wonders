@@ -2,16 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import {
   Plus,
   Edit,
   Trash2,
-  Save,
-  X,
-  Upload,
   Eye,
   Settings,
   BarChart3,
@@ -19,7 +13,6 @@ import {
   FolderOpen,
   Calendar,
   Star,
-  MapPin,
   Phone,
   Mail,
   LogOut,
@@ -214,7 +207,7 @@ export default function Admin() {
       description: project.description || "",
       isFeatured: project.is_featured || false,
       completedDate: project.completed_date || "",
-      status: project.status || "completed",
+      status: (project.status || "completed") as "completed" | "in-progress" | "planning",
       imageFile: undefined,
     });
     setShowForm(true);
