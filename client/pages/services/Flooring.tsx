@@ -15,7 +15,7 @@ import {
   Wrench,
   Clock,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import MobileFloatingCTAs from "@/components/MobileFloatingCTAs";
 
 const flooringTypes = [

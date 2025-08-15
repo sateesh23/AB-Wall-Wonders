@@ -12,9 +12,6 @@ import type { SupabaseProject } from "@/lib/supabase";
 import {
   Phone,
   CheckCircle,
-  Users,
-  Award,
-  Clock,
   MessageCircle,
   Palette,
   Home,

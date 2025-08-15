@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -57,18 +57,6 @@ export default function Admin() {
   );
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [showSuccess, setShowSuccess] = useState(false);
-  const [formData, setFormData] = useState<ProjectForm>({
-    title: "",
-    customerName: "",
-    location: "",
-    service: "",
-    subcategory: "",
-    description: "",
-    isFeatured: false,
-    completedDate: "",
-    status: "completed",
-    imageFile: undefined,
-  });
 
   useEffect(() => {
     // Check if user is already authenticated
