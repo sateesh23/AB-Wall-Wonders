@@ -14,7 +14,6 @@ import {
   Database,
 } from "lucide-react";
 import type { SupabaseProject } from "@/lib/supabase";
-import { projectsData } from "@/data/projects-data";
 import { EmptyState } from "@/components/ui/empty-state";
 
 export default function Projects() {
@@ -29,18 +28,15 @@ export default function Projects() {
     window.scrollTo(0, 0);
   }, []);
 
-  // Load projects and categories
+  // Load projects and categories - ONLY from Supabase
   useEffect(() => {
     const loadData = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        // Try to load from Supabase first
         const { getAllProjects } = await import("@/lib/supabase-service");
         const { isSupabaseConfigured } = await import("@/lib/supabase");
-
-        let allProjects = projectsData as any; // Default to static data
 
         if (isSupabaseConfigured()) {
           try {
@@ -49,36 +45,32 @@ export default function Projects() {
               `📊 Supabase returned ${supabaseProjects.length} projects for Projects page`,
             );
 
-            // If Supabase has projects, use them; otherwise use static data for demo
-            if (supabaseProjects.length > 0) {
-              allProjects = supabaseProjects;
-            } else {
-              console.log(
-                "📊 Supabase returned empty, using static data for demo",
-              );
-              allProjects = projectsData as any;
-            }
+            const uniqueCategories = Array.from(
+              new Set(supabaseProjects.map((p) => p.service)),
+            );
+
+            setProjects(supabaseProjects);
+            setCategories(uniqueCategories);
           } catch (supabaseError: any) {
             console.warn(
-              "Supabase error, using static data:",
+              "Supabase error:",
               supabaseError.message,
             );
-            allProjects = projectsData as any;
+            setProjects([]);
+            setCategories([]);
+            setError("Failed to load projects. Please check your connection.");
           }
+        } else {
+          console.log("📊 Supabase not configured");
+          setProjects([]);
+          setCategories([]);
+          setError("Database not configured. Please set up Supabase.");
         }
-
-        const uniqueCategories = Array.from(
-          new Set(allProjects.map((p) => p.service)),
-        );
-
-        setProjects(allProjects);
-        setCategories(uniqueCategories);
       } catch (err: any) {
         console.error("Error loading projects:", err);
-        setError("Using demo data due to connection issues.");
-        // Fallback to static data on error
-        setProjects(projectsData as any);
-        setCategories(Array.from(new Set(projectsData.map((p: any) => p.service))));
+        setError("Failed to load projects. Please try again later.");
+        setProjects([]);
+        setCategories([]);
       } finally {
         setLoading(false);
       }
@@ -226,8 +218,8 @@ export default function Projects() {
           {error && (
             <div className="text-center py-12">
               <EmptyState
-                title="Failed to Load Projects"
-                description={error}
+                title="No Projects Yet"
+                description="Add your first project through the admin panel to get started!"
                 showAddButton={true}
               />
             </div>
