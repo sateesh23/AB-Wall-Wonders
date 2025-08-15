@@ -60,7 +60,7 @@ export interface CreateProjectData {
   title: string;
   customerName: string;
   location: string;
-  service: "" | "blinds" | "flooring" | "wallpapers";
+  service: "blinds" | "flooring" | "wallpapers";
   subcategory: string;
   description: string;
   isFeatured: boolean;
