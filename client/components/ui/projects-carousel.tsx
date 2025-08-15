@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { ProjectImageNavigator } from "@/components/ui/project-image-navigator";
 import { MapPin, Building } from "lucide-react";
 import type { ProjectData } from "@/lib/types";
@@ -49,7 +47,7 @@ export function ProjectsCarousel({ projects, className = "" }: ProjectsCarouselP
 
       {/* Projects Grid - 6 projects: 3 columns on desktop, 2 on tablet, 1 on mobile */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-        {visibleProjects.map((project, index) => (
+        {visibleProjects.map((project) => (
           <Card
             key={project.id}
             className="group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 overflow-hidden border-primary/10 hover:border-primary/20 transform hover:-translate-y-1 cursor-pointer"

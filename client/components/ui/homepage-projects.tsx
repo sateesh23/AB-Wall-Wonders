@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Button } from "./button";
 import { ProjectCard } from "./project-card";
 import { ArrowRight } from "lucide-react";
@@ -14,7 +14,6 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
   projects,
   loading = false,
 }) => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Get latest 6 projects
   const latestProjects = projects.slice(0, 6);
