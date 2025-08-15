@@ -40,7 +40,7 @@ const ProjectCard = memo(function ProjectCard({ project }: { project: ProjectDat
       <div className="relative">
         <div className={cn("overflow-hidden", aspectRatioClasses[project.aspectRatio])}>
           <img
-            src={project.thumbnail || project.image || '/placeholder.svg'}
+            src={project.thumbnail || project.thumbnailUrl || project.thumbnail_url || project.image || '/placeholder.svg'}
             alt={project.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             loading="lazy"
@@ -52,7 +52,7 @@ const ProjectCard = memo(function ProjectCard({ project }: { project: ProjectDat
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
         
-        {project.featured && (
+        {(project.featured || project.isFeatured) && (
           <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground">
             Featured
           </Badge>
