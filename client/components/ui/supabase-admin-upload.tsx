@@ -1,16 +1,35 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Upload, Save, X, AlertCircle, ImageIcon, FileImage } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
-import { createProject, updateProject } from '@/lib/supabase-service';
-import type { SupabaseProject } from '@/lib/supabase';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import {
+  Upload,
+  Save,
+  X,
+  AlertCircle,
+  ImageIcon,
+  FileImage,
+} from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import { createProject, updateProject } from "@/lib/supabase-service";
+import type { SupabaseProject } from "@/lib/supabase";
 
 interface SupabaseAdminUploadProps {
   onSuccess?: (projectId: number) => void;
@@ -22,12 +41,12 @@ interface FormData {
   title: string;
   customerName: string;
   location: string;
-  service: 'wallpapers' | 'flooring' | 'blinds';
+  service: "wallpapers" | "flooring" | "blinds";
   subcategory: string;
   description: string;
   isFeatured: boolean;
   completedDate: string;
-  status: 'completed' | 'in-progress' | 'planned';
+  status: "completed" | "in-progress" | "planned";
   beforeImage: File | null;
   afterImage: File | null;
 }
@@ -35,18 +54,19 @@ interface FormData {
 export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
   onSuccess,
   editingProject,
-  onCancel
+  onCancel,
 }) => {
   const [formData, setFormData] = useState<FormData>({
-    title: editingProject?.title || '',
-    customerName: editingProject?.customer_name || '',
-    location: editingProject?.location || '',
-    service: editingProject?.service || 'wallpapers',
-    subcategory: editingProject?.subcategory || '',
-    description: editingProject?.description || '',
+    title: editingProject?.title || "",
+    customerName: editingProject?.customer_name || "",
+    location: editingProject?.location || "",
+    service: editingProject?.service || "wallpapers",
+    subcategory: editingProject?.subcategory || "",
+    description: editingProject?.description || "",
     isFeatured: editingProject?.is_featured || false,
-    completedDate: editingProject?.completed_date || new Date().toISOString().split('T')[0],
-    status: editingProject?.status || 'completed',
+    completedDate:
+      editingProject?.completed_date || new Date().toISOString().split("T")[0],
+    status: editingProject?.status || "completed",
     beforeImage: null,
     afterImage: null,
   });
@@ -55,36 +75,39 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [beforeImagePreview, setBeforeImagePreview] = useState<string | null>(
-    editingProject?.image_url || null
+    editingProject?.image_url || null,
   );
   const [afterImagePreview, setAfterImagePreview] = useState<string | null>(
-    editingProject?.image_urls?.[0] || null
+    editingProject?.image_urls?.[0] || null,
   );
 
   const handleInputChange = (field: keyof FormData, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (error) setError(null);
   };
 
-  const handleFileChange = (field: 'beforeImage' | 'afterImage', file: File | null) => {
+  const handleFileChange = (
+    field: "beforeImage" | "afterImage",
+    file: File | null,
+  ) => {
     if (file) {
       // Validate file type
-      const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+      const validTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
       if (!validTypes.includes(file.type)) {
-        setError('Please select a valid image file (PNG, JPG, JPEG, or WebP)');
+        setError("Please select a valid image file (PNG, JPG, JPEG, or WebP)");
         return;
       }
-      
+
       // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
-        setError('Image file size must be less than 5MB');
+        setError("Image file size must be less than 5MB");
         return;
       }
-      
+
       // Create preview
       const reader = new FileReader();
       reader.onload = (e) => {
-        if (field === 'beforeImage') {
+        if (field === "beforeImage") {
           setBeforeImagePreview(e.target?.result as string);
         } else {
           setAfterImagePreview(e.target?.result as string);
@@ -92,55 +115,58 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
       };
       reader.readAsDataURL(file);
     } else {
-      if (field === 'beforeImage') {
+      if (field === "beforeImage") {
         setBeforeImagePreview(null);
       } else {
         setAfterImagePreview(null);
       }
     }
-    
-    setFormData(prev => ({ ...prev, [field]: file }));
+
+    setFormData((prev) => ({ ...prev, [field]: file }));
     if (error) setError(null);
   };
 
-  const uploadImageToSupabase = async (file: File, fileName: string): Promise<string> => {
+  const uploadImageToSupabase = async (
+    file: File,
+    fileName: string,
+  ): Promise<string> => {
     try {
       // Upload file to Supabase storage
       const { data, error } = await supabase.storage
-        .from('project-images')
+        .from("project-images")
         .upload(fileName, file, {
-          cacheControl: '3600',
-          upsert: true
+          cacheControl: "3600",
+          upsert: true,
         });
 
       if (error) {
-        console.error('Supabase storage error:', error);
+        console.error("Supabase storage error:", error);
         throw new Error(`Upload failed: ${error.message}`);
       }
 
       // Get public URL
       const { data: urlData } = supabase.storage
-        .from('project-images')
+        .from("project-images")
         .getPublicUrl(data.path);
 
       return urlData.publicUrl;
     } catch (err: any) {
-      console.error('Image upload error:', err);
+      console.error("Image upload error:", err);
       throw new Error(`Failed to upload image: ${err.message}`);
     }
   };
 
   const validateForm = (): string | null => {
-    if (!formData.title.trim()) return 'Title is required';
-    if (!formData.customerName.trim()) return 'Customer name is required';
-    if (!formData.location.trim()) return 'Location is required';
-    if (!formData.subcategory.trim()) return 'Subcategory is required';
-    if (!formData.completedDate) return 'Completed date is required';
-    
+    if (!formData.title.trim()) return "Title is required";
+    if (!formData.customerName.trim()) return "Customer name is required";
+    if (!formData.location.trim()) return "Location is required";
+    if (!formData.subcategory.trim()) return "Subcategory is required";
+    if (!formData.completedDate) return "Completed date is required";
+
     // For new projects, require both images
     if (!editingProject) {
-      if (!formData.beforeImage) return 'Before image is required';
-      if (!formData.afterImage) return 'After image is required';
+      if (!formData.beforeImage) return "Before image is required";
+      if (!formData.afterImage) return "After image is required";
     }
 
     return null;
@@ -148,7 +174,7 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const validationError = validateForm();
     if (validationError) {
       setError(validationError);
@@ -160,14 +186,17 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
     setError(null);
 
     try {
-      let beforeImageUrl = editingProject?.image_url || '';
-      let afterImageUrl = editingProject?.image_urls?.[0] || '';
+      let beforeImageUrl = editingProject?.image_url || "";
+      let afterImageUrl = editingProject?.image_urls?.[0] || "";
 
       // Upload before image if provided
       if (formData.beforeImage) {
         setProgress(20);
         const beforeFileName = `before_${Date.now()}_${formData.beforeImage.name}`;
-        beforeImageUrl = await uploadImageToSupabase(formData.beforeImage, beforeFileName);
+        beforeImageUrl = await uploadImageToSupabase(
+          formData.beforeImage,
+          beforeFileName,
+        );
         setProgress(40);
       }
 
@@ -175,12 +204,18 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
       if (formData.afterImage) {
         setProgress(60);
         const afterFileName = `after_${Date.now()}_${formData.afterImage.name}`;
-        afterImageUrl = await uploadImageToSupabase(formData.afterImage, afterFileName);
+        afterImageUrl = await uploadImageToSupabase(
+          formData.afterImage,
+          afterFileName,
+        );
         setProgress(80);
       }
 
       // Prepare project data
-      const projectData: Omit<SupabaseProject, 'id' | 'created_at' | 'updated_at'> = {
+      const projectData: Omit<
+        SupabaseProject,
+        "id" | "created_at" | "updated_at"
+      > = {
         title: formData.title,
         customer_name: formData.customerName,
         location: formData.location,
@@ -195,7 +230,7 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
       };
 
       setProgress(90);
-      
+
       let result: number;
       if (editingProject) {
         await updateProject(editingProject.id!, projectData);
@@ -205,21 +240,21 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
       }
 
       setProgress(100);
-      
+
       setTimeout(() => {
         onSuccess?.(result);
         if (!editingProject) {
           // Reset form for new projects
           setFormData({
-            title: '',
-            customerName: '',
-            location: '',
-            service: 'wallpapers',
-            subcategory: '',
-            description: '',
+            title: "",
+            customerName: "",
+            location: "",
+            service: "wallpapers",
+            subcategory: "",
+            description: "",
             isFeatured: false,
-            completedDate: new Date().toISOString().split('T')[0],
-            status: 'completed',
+            completedDate: new Date().toISOString().split("T")[0],
+            status: "completed",
             beforeImage: null,
             afterImage: null,
           });
@@ -227,10 +262,9 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
           setAfterImagePreview(null);
         }
       }, 500);
-
     } catch (err: any) {
-      console.error('Upload error:', err);
-      setError(err.message || 'Failed to save project');
+      console.error("Upload error:", err);
+      setError(err.message || "Failed to save project");
       setProgress(0);
     } finally {
       setUploading(false);
@@ -242,13 +276,15 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Upload className="h-5 w-5" />
-          {editingProject ? 'Edit Project' : 'Add New Project'}
+          {editingProject ? "Edit Project" : "Add New Project"}
         </CardTitle>
         <CardDescription>
-          {editingProject ? 'Update project details and images' : 'Add a new project with before/after images'}
+          {editingProject
+            ? "Update project details and images"
+            : "Add a new project with before/after images"}
         </CardDescription>
       </CardHeader>
-      
+
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Basic Info */}
@@ -258,18 +294,20 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
               <Input
                 id="title"
                 value={formData.title}
-                onChange={(e) => handleInputChange('title', e.target.value)}
+                onChange={(e) => handleInputChange("title", e.target.value)}
                 placeholder="Modern Office Wallpaper"
                 disabled={uploading}
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="customerName">Customer Name *</Label>
               <Input
                 id="customerName"
                 value={formData.customerName}
-                onChange={(e) => handleInputChange('customerName', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("customerName", e.target.value)
+                }
                 placeholder="John Doe"
                 disabled={uploading}
               />
@@ -282,19 +320,21 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
               <Input
                 id="location"
                 value={formData.location}
-                onChange={(e) => handleInputChange('location', e.target.value)}
+                onChange={(e) => handleInputChange("location", e.target.value)}
                 placeholder="Downtown Office"
                 disabled={uploading}
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="completedDate">Completed Date *</Label>
               <Input
                 id="completedDate"
                 type="date"
                 value={formData.completedDate}
-                onChange={(e) => handleInputChange('completedDate', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("completedDate", e.target.value)
+                }
                 disabled={uploading}
               />
             </div>
@@ -304,7 +344,11 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="service">Service *</Label>
-              <Select value={formData.service} onValueChange={(value) => handleInputChange('service', value)} disabled={uploading}>
+              <Select
+                value={formData.service}
+                onValueChange={(value) => handleInputChange("service", value)}
+                disabled={uploading}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select service" />
                 </SelectTrigger>
@@ -315,13 +359,15 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="subcategory">Subcategory *</Label>
               <Input
                 id="subcategory"
                 value={formData.subcategory}
-                onChange={(e) => handleInputChange('subcategory', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("subcategory", e.target.value)
+                }
                 placeholder="e.g., 3D Wallpaper, Vinyl Flooring, Motorized Blinds"
                 disabled={uploading}
               />
@@ -334,7 +380,11 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
           {/* Status */}
           <div className="space-y-2">
             <Label htmlFor="status">Project Status</Label>
-            <Select value={formData.status} onValueChange={(value) => handleInputChange('status', value)} disabled={uploading}>
+            <Select
+              value={formData.status}
+              onValueChange={(value) => handleInputChange("status", value)}
+              disabled={uploading}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Select status" />
               </SelectTrigger>
@@ -352,7 +402,7 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => handleInputChange('description', e.target.value)}
+              onChange={(e) => handleInputChange("description", e.target.value)}
               placeholder="Brief description of the project..."
               rows={3}
               disabled={uploading}
@@ -367,16 +417,16 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
               <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-4">
                 {beforeImagePreview ? (
                   <div className="space-y-2">
-                    <img 
-                      src={beforeImagePreview} 
-                      alt="Before preview" 
+                    <img
+                      src={beforeImagePreview}
+                      alt="Before preview"
                       className="w-full h-32 object-cover rounded-md"
                     />
                     <Button
                       type="button"
                       variant="outline"
                       size="sm"
-                      onClick={() => handleFileChange('beforeImage', null)}
+                      onClick={() => handleFileChange("beforeImage", null)}
                       disabled={uploading}
                     >
                       <X className="h-4 w-4 mr-2" />
@@ -387,14 +437,23 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
                   <label htmlFor="beforeImage" className="cursor-pointer block">
                     <div className="flex flex-col items-center py-4">
                       <FileImage className="h-8 w-8 text-muted-foreground mb-2" />
-                      <span className="text-sm text-muted-foreground">Upload Before Image</span>
-                      <span className="text-xs text-muted-foreground">PNG, JPG up to 5MB</span>
+                      <span className="text-sm text-muted-foreground">
+                        Upload Before Image
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        PNG, JPG up to 5MB
+                      </span>
                     </div>
                     <Input
                       id="beforeImage"
                       type="file"
                       accept="image/png,image/jpeg,image/jpg,image/webp"
-                      onChange={(e) => handleFileChange('beforeImage', e.target.files?.[0] || null)}
+                      onChange={(e) =>
+                        handleFileChange(
+                          "beforeImage",
+                          e.target.files?.[0] || null,
+                        )
+                      }
                       disabled={uploading}
                       className="hidden"
                     />
@@ -409,16 +468,16 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
               <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-4">
                 {afterImagePreview ? (
                   <div className="space-y-2">
-                    <img 
-                      src={afterImagePreview} 
-                      alt="After preview" 
+                    <img
+                      src={afterImagePreview}
+                      alt="After preview"
                       className="w-full h-32 object-cover rounded-md"
                     />
                     <Button
                       type="button"
                       variant="outline"
                       size="sm"
-                      onClick={() => handleFileChange('afterImage', null)}
+                      onClick={() => handleFileChange("afterImage", null)}
                       disabled={uploading}
                     >
                       <X className="h-4 w-4 mr-2" />
@@ -429,14 +488,23 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
                   <label htmlFor="afterImage" className="cursor-pointer block">
                     <div className="flex flex-col items-center py-4">
                       <FileImage className="h-8 w-8 text-muted-foreground mb-2" />
-                      <span className="text-sm text-muted-foreground">Upload After Image</span>
-                      <span className="text-xs text-muted-foreground">PNG, JPG up to 5MB</span>
+                      <span className="text-sm text-muted-foreground">
+                        Upload After Image
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        PNG, JPG up to 5MB
+                      </span>
                     </div>
                     <Input
                       id="afterImage"
                       type="file"
                       accept="image/png,image/jpeg,image/jpg,image/webp"
-                      onChange={(e) => handleFileChange('afterImage', e.target.files?.[0] || null)}
+                      onChange={(e) =>
+                        handleFileChange(
+                          "afterImage",
+                          e.target.files?.[0] || null,
+                        )
+                      }
                       disabled={uploading}
                       className="hidden"
                     />
@@ -451,7 +519,9 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
             <Checkbox
               id="featured"
               checked={formData.isFeatured}
-              onCheckedChange={(checked) => handleInputChange('isFeatured', checked)}
+              onCheckedChange={(checked) =>
+                handleInputChange("isFeatured", checked)
+              }
               disabled={uploading}
             />
             <Label htmlFor="featured">Feature this project on homepage</Label>
@@ -462,11 +532,15 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
             <div className="space-y-2">
               <Progress value={progress} className="w-full" />
               <p className="text-sm text-center text-muted-foreground">
-                {progress < 20 ? 'Validating...' : 
-                 progress < 40 ? 'Uploading before image...' : 
-                 progress < 60 ? 'Uploading after image...' :
-                 progress < 90 ? 'Saving project...' : 
-                 'Almost done...'}
+                {progress < 20
+                  ? "Validating..."
+                  : progress < 40
+                    ? "Uploading before image..."
+                    : progress < 60
+                      ? "Uploading after image..."
+                      : progress < 90
+                        ? "Saving project..."
+                        : "Almost done..."}
               </p>
             </div>
           )}
@@ -481,19 +555,23 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
 
           {/* Action Buttons */}
           <div className="flex gap-3">
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={uploading}
               className="flex items-center gap-2"
             >
               <Save className="h-4 w-4" />
-              {uploading ? 'Saving...' : editingProject ? 'Update Project' : 'Save Project'}
+              {uploading
+                ? "Saving..."
+                : editingProject
+                  ? "Update Project"
+                  : "Save Project"}
             </Button>
-            
+
             {onCancel && (
-              <Button 
-                type="button" 
-                variant="outline" 
+              <Button
+                type="button"
+                variant="outline"
                 onClick={onCancel}
                 disabled={uploading}
               >

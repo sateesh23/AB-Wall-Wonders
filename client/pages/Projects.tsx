@@ -52,10 +52,7 @@ export default function Projects() {
             setProjects(supabaseProjects);
             setCategories(uniqueCategories);
           } catch (supabaseError: any) {
-            console.warn(
-              "Supabase error:",
-              supabaseError.message,
-            );
+            console.warn("Supabase error:", supabaseError.message);
             setProjects([]);
             setCategories([]);
             setError("Failed to load projects. Please check your connection.");

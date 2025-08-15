@@ -18,9 +18,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
   // Get before and after images
   const beforeImage = project.image_url; // Main image is "before"
-  const afterImage = project.image_urls && project.image_urls.length > 0 
-    ? project.image_urls[0] // First additional image is "after"
-    : null;
+  const afterImage =
+    project.image_urls && project.image_urls.length > 0
+      ? project.image_urls[0] // First additional image is "after"
+      : null;
 
   // Preload both images for faster switching
   React.useEffect(() => {

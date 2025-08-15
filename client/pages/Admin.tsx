@@ -50,7 +50,9 @@ export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Supabase configuration check
-  const [supabaseStatus, setSupabaseStatus] = useState<'loading' | 'connected' | 'error'>('loading');
+  const [supabaseStatus, setSupabaseStatus] = useState<
+    "loading" | "connected" | "error"
+  >("loading");
   const [projects, setProjects] = useState<SupabaseProject[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<
@@ -102,7 +104,9 @@ export default function Admin() {
 
       if (isSupabaseConfigured()) {
         const supabaseProjects = await getAllProjects();
-        console.log(`📊 Admin: Supabase returned ${supabaseProjects.length} projects`);
+        console.log(
+          `📊 Admin: Supabase returned ${supabaseProjects.length} projects`,
+        );
         setProjects(supabaseProjects);
       } else {
         console.log("📊 Supabase not configured in admin");
@@ -119,9 +123,9 @@ export default function Admin() {
   const checkSupabaseStatus = async () => {
     try {
       const result = await testSupabaseConnection();
-      setSupabaseStatus(result.success ? 'connected' : 'error');
+      setSupabaseStatus(result.success ? "connected" : "error");
     } catch (error) {
-      setSupabaseStatus('error');
+      setSupabaseStatus("error");
     }
   };
 
@@ -282,13 +286,21 @@ export default function Admin() {
                 </div>
               </div>
               <div className="flex items-center space-x-4">
-                <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                  supabaseStatus === 'connected' ? 'bg-green-100 text-green-800' :
-                  supabaseStatus === 'error' ? 'bg-red-100 text-red-800' :
-                  'bg-yellow-100 text-yellow-800'
-                }`}>
-                  Supabase: {supabaseStatus === 'connected' ? 'Connected' :
-                           supabaseStatus === 'error' ? 'Not Configured' : 'Checking...'}
+                <div
+                  className={`px-3 py-1 rounded-full text-xs font-medium ${
+                    supabaseStatus === "connected"
+                      ? "bg-green-100 text-green-800"
+                      : supabaseStatus === "error"
+                        ? "bg-red-100 text-red-800"
+                        : "bg-yellow-100 text-yellow-800"
+                  }`}
+                >
+                  Supabase:{" "}
+                  {supabaseStatus === "connected"
+                    ? "Connected"
+                    : supabaseStatus === "error"
+                      ? "Not Configured"
+                      : "Checking..."}
                 </div>
                 <Button
                   onClick={() => window.open("/", "_blank")}
@@ -464,7 +476,9 @@ export default function Admin() {
                     </Button>
                     <Button
                       variant="outline"
-                      onClick={() => window.open('https://supabase.com/dashboard', '_blank')}
+                      onClick={() =>
+                        window.open("https://supabase.com/dashboard", "_blank")
+                      }
                       className="h-20 flex flex-col space-y-2"
                     >
                       <Settings className="w-6 h-6" />
@@ -510,7 +524,7 @@ export default function Admin() {
                     showSuccessMessage(
                       editingProject
                         ? "Project updated successfully! ✨"
-                        : "Project created successfully! 🎉"
+                        : "Project created successfully! 🎉",
                     );
                     resetForm();
                     loadProjects();
@@ -553,9 +567,7 @@ export default function Admin() {
                                   Featured
                                 </Badge>
                               )}
-                              <Badge variant="outline">
-                                {project.service}
-                              </Badge>
+                              <Badge variant="outline">{project.service}</Badge>
                             </div>
                             <p className="text-sm text-gray-600 mt-1">
                               {project.customer_name} • {project.location}
@@ -605,7 +617,9 @@ export default function Admin() {
                       </p>
                     </div>
                     <Button
-                      onClick={() => window.open('https://supabase.com/dashboard', '_blank')}
+                      onClick={() =>
+                        window.open("https://supabase.com/dashboard", "_blank")
+                      }
                     >
                       Open Console
                     </Button>

@@ -97,10 +97,7 @@ export default function Index() {
             );
             setRecentProjects(supabaseProjects);
           } catch (supabaseError: any) {
-            console.warn(
-              "Supabase error:",
-              supabaseError.message,
-            );
+            console.warn("Supabase error:", supabaseError.message);
             setRecentProjects([]);
           }
         } else {
@@ -147,7 +144,6 @@ export default function Index() {
         return category;
     }
   };
-
 
   return (
     <div

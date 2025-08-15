@@ -34,6 +34,7 @@ git push -u origin main
 ### 2. Deploy to Vercel
 
 **Option A: Using Vercel CLI (Recommended)**
+
 ```bash
 # Install Vercel CLI
 npm i -g vercel
@@ -49,6 +50,7 @@ vercel
 ```
 
 **Option B: Using Vercel Dashboard**
+
 1. Go to [vercel.com](https://vercel.com)
 2. Click "New Project"
 3. Import your GitHub repository
@@ -74,7 +76,7 @@ Run this SQL in your **Supabase SQL Editor**:
 INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 VALUES (
   'project-images',
-  'project-images', 
+  'project-images',
   true,
   5242880,
   '{"image/*"}'
@@ -135,6 +137,7 @@ Visit your Vercel URL (e.g., `https://ab-wall-wonders.vercel.app`) and test:
 ### 3. Custom Domain (Optional)
 
 In **Vercel Dashboard** → **Domains**:
+
 1. Add your custom domain
 2. Configure DNS records as shown
 3. SSL certificate will be auto-generated
@@ -142,15 +145,19 @@ In **Vercel Dashboard** → **Domains**:
 ## 🚨 Common Issues & Solutions
 
 ### Issue: "Environment variables not working"
+
 **Solution**: Make sure to redeploy after adding environment variables
 
 ### Issue: "Images not uploading"
+
 **Solution**: Check Supabase storage policies are correctly set
 
 ### Issue: "Build fails with TypeScript errors"
+
 **Solution**: Fix TypeScript errors and redeploy
 
 ### Issue: "404 on page refresh"
+
 **Solution**: The `vercel.json` file handles this automatically
 
 ## 📱 Production URLs
@@ -187,6 +194,7 @@ Your AB Wall Wonders website is now live and production-ready with:
 - ✅ **Automatic deployments**
 
 **Next Steps:**
+
 1. Add your first project through admin panel
 2. Share the website with customers
 3. Monitor performance and usage
