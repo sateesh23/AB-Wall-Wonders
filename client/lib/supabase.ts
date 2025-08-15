@@ -8,8 +8,10 @@ export const isSupabaseConfigured = () => {
   return !!(supabaseUrl && supabaseAnonKey && supabaseAnonKey !== '')
 }
 
-// Create Supabase client
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Create Supabase client only if properly configured
+export const supabase = isSupabaseConfigured()
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null
 
 // Database types
 export interface SupabaseProject {
