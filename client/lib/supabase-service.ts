@@ -6,7 +6,7 @@ import {
 
 // Get all projects
 export const getAllProjects = async (): Promise<SupabaseProject[]> => {
-  if (!isSupabaseConfigured()) {
+  if (!isSupabaseConfigured() || !supabase) {
     console.warn("Supabase not configured, returning empty array");
     return [];
   }
