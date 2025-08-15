@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { FolderOpen, User } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { FolderOpen, User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface EmptyStateProps {
   title?: string;
@@ -9,10 +9,10 @@ interface EmptyStateProps {
   showAddButton?: boolean;
 }
 
-export function EmptyState({ 
+export function EmptyState({
   title = "No Projects Found",
   description = "Start by adding your first project through the admin panel.",
-  showAddButton = true
+  showAddButton = true,
 }: EmptyStateProps) {
   return (
     <Card className="border-dashed border-2 border-gray-300">
@@ -20,15 +20,11 @@ export function EmptyState({
         <div className="mb-6">
           <FolderOpen className="w-16 h-16 text-gray-400" />
         </div>
-        
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          {title}
-        </h3>
-        
-        <p className="text-gray-600 mb-8 max-w-sm">
-          {description}
-        </p>
-        
+
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">{title}</h3>
+
+        <p className="text-gray-600 mb-8 max-w-sm">{description}</p>
+
         {showAddButton && (
           <div className="flex flex-col sm:flex-row gap-4">
             <Button asChild className="bg-primary hover:bg-primary/90">
@@ -39,9 +35,11 @@ export function EmptyState({
             </Button>
           </div>
         )}
-        
+
         <div className="mt-8 text-sm text-gray-500 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <p className="font-medium mb-2 text-blue-800">🎯 How to Add Projects:</p>
+          <p className="font-medium mb-2 text-blue-800">
+            🎯 How to Add Projects:
+          </p>
           <ol className="text-left space-y-2 text-blue-700">
             <li className="flex items-start gap-2">
               <span className="font-bold">1.</span>

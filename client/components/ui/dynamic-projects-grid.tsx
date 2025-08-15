@@ -91,9 +91,7 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
               <Badge
                 className={`${getCategoryColor(project.category || "mixed")} font-medium text-xs`}
               >
-                {getCategoryLabel(
-                  project.category || "mixed",
-                )}
+                {getCategoryLabel(project.category || "mixed")}
               </Badge>
             </div>
 

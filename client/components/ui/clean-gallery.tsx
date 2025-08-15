@@ -1,32 +1,32 @@
-import { cn } from "@/lib/utils"
-import { GalleryProject } from "@/data/projects-data"
+import { cn } from "@/lib/utils";
+import { GalleryProject } from "@/data/projects-data";
 
 interface CleanGalleryProps {
-  title: string
-  description: string
-  projects: GalleryProject[]
-  className?: string
+  title: string;
+  description: string;
+  projects: GalleryProject[];
+  className?: string;
 }
 
 export function CleanGallery({
   title,
   description,
   projects,
-  className
+  className,
 }: CleanGalleryProps) {
   const getAspectRatioClass = (aspectRatio: string = "landscape") => {
     switch (aspectRatio) {
       case "square":
-        return "aspect-square"
+        return "aspect-square";
       case "portrait":
-        return "aspect-[3/4]"
+        return "aspect-[3/4]";
       case "wide":
-        return "aspect-[16/9]"
+        return "aspect-[16/9]";
       case "landscape":
       default:
-        return "aspect-[4/3]"
+        return "aspect-[4/3]";
     }
-  }
+  };
 
   return (
     <section className={cn("py-20 bg-gray-50", className)}>
@@ -46,18 +46,26 @@ export function CleanGallery({
               key={project.id}
               className="group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
             >
-              <div className={cn(
-                "relative overflow-hidden",
-                getAspectRatioClass(project.aspectRatio)
-              )}>
+              <div
+                className={cn(
+                  "relative overflow-hidden",
+                  getAspectRatioClass(project.aspectRatio),
+                )}
+              >
                 <img
-                  src={project.thumbnail || project.image || project.thumbnailUrl || project.thumbnail_url || '/placeholder.svg'}
+                  src={
+                    project.thumbnail ||
+                    project.image ||
+                    project.thumbnailUrl ||
+                    project.thumbnail_url ||
+                    "/placeholder.svg"
+                  }
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   loading="lazy"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.src = '/placeholder.svg';
+                    target.src = "/placeholder.svg";
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -70,5 +78,5 @@ export function CleanGallery({
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 interface ProjectImageNavigatorProps {
   beforeImage?: string;
@@ -17,31 +17,34 @@ interface ProjectImageNavigatorProps {
   className?: string;
 }
 
-type ImagePhase = 'before' | 'execution' | 'after';
+type ImagePhase = "before" | "execution" | "after";
 
 export function ProjectImageNavigator({
   beforeImage,
   executionImage,
   afterImage,
   projectImages,
-  fallbackImage = '/placeholder.svg',
+  fallbackImage = "/placeholder.svg",
   alt,
-  className = ''
+  className = "",
 }: ProjectImageNavigatorProps) {
-  const [currentPhase, setCurrentPhase] = useState<ImagePhase>('before');
+  const [currentPhase, setCurrentPhase] = useState<ImagePhase>("before");
 
   // Get images from either direct props or projectImages object
   const images = {
     before: beforeImage || projectImages?.before || fallbackImage,
     execution: executionImage || projectImages?.execution || fallbackImage,
-    after: afterImage || projectImages?.after || fallbackImage
+    after: afterImage || projectImages?.after || fallbackImage,
   };
 
   // Check which images are available
   const availablePhases: ImagePhase[] = [];
-  if (images.before && images.before !== fallbackImage) availablePhases.push('before');
-  if (images.execution && images.execution !== fallbackImage) availablePhases.push('execution');
-  if (images.after && images.after !== fallbackImage) availablePhases.push('after');
+  if (images.before && images.before !== fallbackImage)
+    availablePhases.push("before");
+  if (images.execution && images.execution !== fallbackImage)
+    availablePhases.push("execution");
+  if (images.after && images.after !== fallbackImage)
+    availablePhases.push("after");
 
   // If no specific phase images, show fallback
   if (availablePhases.length === 0) {
@@ -53,7 +56,7 @@ export function ProjectImageNavigator({
           className="w-full h-full object-cover"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            target.src = '/placeholder.svg';
+            target.src = "/placeholder.svg";
           }}
         />
       </div>
@@ -103,19 +106,27 @@ export function ProjectImageNavigator({
 
   const getPhaseLabel = (phase: ImagePhase) => {
     switch (phase) {
-      case 'before': return 'Before';
-      case 'execution': return 'Execution';
-      case 'after': return 'After';
-      default: return phase;
+      case "before":
+        return "Before";
+      case "execution":
+        return "Execution";
+      case "after":
+        return "After";
+      default:
+        return phase;
     }
   };
 
   const getPhaseColor = (phase: ImagePhase) => {
     switch (phase) {
-      case 'before': return 'bg-red-500/90';
-      case 'execution': return 'bg-yellow-500/90';
-      case 'after': return 'bg-green-500/90';
-      default: return 'bg-primary/90';
+      case "before":
+        return "bg-red-500/90";
+      case "execution":
+        return "bg-yellow-500/90";
+      case "after":
+        return "bg-green-500/90";
+      default:
+        return "bg-primary/90";
     }
   };
 
@@ -134,7 +145,9 @@ export function ProjectImageNavigator({
 
       {/* Phase Badge */}
       <div className="absolute top-2 left-2">
-        <Badge className={`${getPhaseColor(currentPhase)} text-white text-xs font-medium`}>
+        <Badge
+          className={`${getPhaseColor(currentPhase)} text-white text-xs font-medium`}
+        >
           {getPhaseLabel(currentPhase)}
         </Badge>
       </div>
@@ -169,7 +182,7 @@ export function ProjectImageNavigator({
               key={phase}
               onClick={() => setCurrentPhase(phase)}
               className={`w-2 h-2 rounded-full transition-colors ${
-                phase === currentPhase ? 'bg-white' : 'bg-white/50'
+                phase === currentPhase ? "bg-white" : "bg-white/50"
               }`}
             />
           ))}

@@ -67,7 +67,6 @@ const flooringTypes = [
 ];
 
 export default function Flooring() {
-
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);

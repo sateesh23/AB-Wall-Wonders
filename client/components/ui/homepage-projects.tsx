@@ -14,10 +14,8 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
   projects,
   loading = false,
 }) => {
-
   // Get latest 6 projects
   const latestProjects = projects.slice(0, 6);
-
 
   if (loading) {
     return (

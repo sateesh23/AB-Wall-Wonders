@@ -44,7 +44,7 @@ export interface CreateProjectInput {
   businessName?: string;
   location: string;
   area: string;
-  category: 'wallpapers' | 'blinds' | 'flooring' | 'mixed';
+  category: "wallpapers" | "blinds" | "flooring" | "mixed";
   serviceName: string;
   serviceTypes?: string[];
   thumbnailUrl?: string;
@@ -100,7 +100,7 @@ export interface ProjectData {
 
   location: string;
   area: string;
-  category: 'wallpapers' | 'blinds' | 'flooring' | 'mixed';
+  category: "wallpapers" | "blinds" | "flooring" | "mixed";
 
   // Service info (both formats supported)
   service_name?: string;

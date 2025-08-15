@@ -26,7 +26,6 @@ import { SupabaseDebug } from "@/components/ui/supabase-debug";
 import { SuccessMessage } from "@/components/ui/success-message";
 import type { SupabaseProject } from "@/lib/supabase";
 
-
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -97,7 +96,6 @@ export default function Admin() {
       setSupabaseStatus("error");
     }
   };
-
 
   const resetForm = () => {
     setShowForm(false);
@@ -305,7 +303,9 @@ export default function Admin() {
                         <p className="text-xs sm:text-sm font-medium text-gray-600">
                           Happy Customers
                         </p>
-                        <p className="text-xl sm:text-2xl font-bold text-gray-900">100+</p>
+                        <p className="text-xl sm:text-2xl font-bold text-gray-900">
+                          100+
+                        </p>
                       </div>
                       <Users className="h-6 w-6 sm:h-8 sm:w-8 text-purple-500" />
                     </div>
@@ -332,7 +332,9 @@ export default function Admin() {
                       <p className="text-lg sm:text-2xl font-bold text-green-600">
                         {stats.blindsProjects}
                       </p>
-                      <p className="text-xs sm:text-sm text-green-800">Blinds Projects</p>
+                      <p className="text-xs sm:text-sm text-green-800">
+                        Blinds Projects
+                      </p>
                     </div>
                     <div className="text-center p-3 sm:p-4 bg-orange-50 rounded-lg">
                       <p className="text-lg sm:text-2xl font-bold text-orange-600">
@@ -376,7 +378,9 @@ export default function Admin() {
                       className="h-16 sm:h-20 flex flex-col space-y-1 sm:space-y-2"
                     >
                       <Settings className="w-5 h-5 sm:w-6 sm:h-6" />
-                      <span className="text-xs sm:text-sm">Supabase Console</span>
+                      <span className="text-xs sm:text-sm">
+                        Supabase Console
+                      </span>
                     </Button>
                     <Button
                       variant="outline"
@@ -404,7 +408,10 @@ export default function Admin() {
                     Manage your portfolio projects
                   </p>
                 </div>
-                <Button onClick={() => setShowForm(true)} className="w-full sm:w-auto">
+                <Button
+                  onClick={() => setShowForm(true)}
+                  className="w-full sm:w-auto"
+                >
                   <Plus className="w-4 h-4 mr-2" />
                   Add New Project
                 </Button>
@@ -462,7 +469,9 @@ export default function Admin() {
                                     Featured
                                   </Badge>
                                 )}
-                                <Badge variant="outline" className="text-xs">{project.service}</Badge>
+                                <Badge variant="outline" className="text-xs">
+                                  {project.service}
+                                </Badge>
                               </div>
                             </div>
                             <p className="text-xs sm:text-sm text-gray-600 mt-1">
@@ -552,14 +561,20 @@ export default function Admin() {
                     <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
                       <Phone className="w-5 h-5 text-primary flex-shrink-0" />
                       <div className="min-w-0">
-                        <p className="font-medium text-sm sm:text-base">Phone</p>
-                        <p className="text-xs sm:text-sm text-gray-600 break-all">+91 86887 23648</p>
+                        <p className="font-medium text-sm sm:text-base">
+                          Phone
+                        </p>
+                        <p className="text-xs sm:text-sm text-gray-600 break-all">
+                          +91 86887 23648
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
                       <Mail className="w-5 h-5 text-primary flex-shrink-0" />
                       <div className="min-w-0">
-                        <p className="font-medium text-sm sm:text-base">Email</p>
+                        <p className="font-medium text-sm sm:text-base">
+                          Email
+                        </p>
                         <p className="text-xs sm:text-sm text-gray-600 break-all">
                           abwallwonders@gmail.com
                         </p>

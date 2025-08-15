@@ -9,24 +9,37 @@ interface ProjectsCarouselProps {
   className?: string;
 }
 
-export function ProjectsCarousel({ projects, className = "" }: ProjectsCarouselProps) {
+export function ProjectsCarousel({
+  projects,
+  className = "",
+}: ProjectsCarouselProps) {
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'wallpapers': return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'blinds': return 'bg-green-100 text-green-800 border-green-200';
-      case 'flooring': return 'bg-purple-100 text-purple-800 border-purple-200';
-      case 'mixed': return 'bg-orange-100 text-orange-800 border-orange-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      case "wallpapers":
+        return "bg-blue-100 text-blue-800 border-blue-200";
+      case "blinds":
+        return "bg-green-100 text-green-800 border-green-200";
+      case "flooring":
+        return "bg-purple-100 text-purple-800 border-purple-200";
+      case "mixed":
+        return "bg-orange-100 text-orange-800 border-orange-200";
+      default:
+        return "bg-gray-100 text-gray-800 border-gray-200";
     }
   };
 
   const getCategoryLabel = (category: string) => {
     switch (category) {
-      case 'wallpapers': return 'Wallpapers';
-      case 'blinds': return 'Window Blinds';
-      case 'flooring': return 'Flooring';
-      case 'mixed': return 'Mixed Services';
-      default: return category;
+      case "wallpapers":
+        return "Wallpapers";
+      case "blinds":
+        return "Window Blinds";
+      case "flooring":
+        return "Flooring";
+      case "mixed":
+        return "Mixed Services";
+      default:
+        return category;
     }
   };
 
@@ -59,26 +72,39 @@ export function ProjectsCarousel({ projects, className = "" }: ProjectsCarouselP
                   beforeImage={project.beforeImage}
                   executionImage={project.executionImage}
                   afterImage={project.afterImage}
-                  projectImages={project.projectImages ? (
-                    Array.isArray(project.projectImages) ? {
-                      before: project.projectImages[0],
-                      execution: project.projectImages[1],
-                      after: project.projectImages[2],
-                    } : {
-                      before: (project.projectImages as any)?.before,
-                      execution: (project.projectImages as any)?.execution,
-                      after: (project.projectImages as any)?.after,
-                    }
-                  ) : undefined}
-                  fallbackImage={project.thumbnail || project.thumbnailUrl || project.thumbnail_url || project.image || '/images/placeholder.jpg'}
-                  alt={project.title || project.customerName || 'Project'}
+                  projectImages={
+                    project.projectImages
+                      ? Array.isArray(project.projectImages)
+                        ? {
+                            before: project.projectImages[0],
+                            execution: project.projectImages[1],
+                            after: project.projectImages[2],
+                          }
+                        : {
+                            before: (project.projectImages as any)?.before,
+                            execution: (project.projectImages as any)
+                              ?.execution,
+                            after: (project.projectImages as any)?.after,
+                          }
+                      : undefined
+                  }
+                  fallbackImage={
+                    project.thumbnail ||
+                    project.thumbnailUrl ||
+                    project.thumbnail_url ||
+                    project.image ||
+                    "/images/placeholder.jpg"
+                  }
+                  alt={project.title || project.customerName || "Project"}
                   className="overflow-hidden"
                 />
 
                 {/* Service Badge */}
                 <div className="absolute top-3 right-3">
                   <Badge className="bg-primary/90 text-white text-xs">
-                    {project.serviceName || project.service_name || project.category}
+                    {project.serviceName ||
+                      project.service_name ||
+                      project.category}
                   </Badge>
                 </div>
               </div>
@@ -87,20 +113,29 @@ export function ProjectsCarousel({ projects, className = "" }: ProjectsCarouselP
               <div className="p-4 md:p-6">
                 <div className="space-y-3">
                   {/* Category Badge */}
-                  <Badge className={`${getCategoryColor(project.category || 'mixed')} font-medium text-xs`}>
-                    {getCategoryLabel(project.category || 'mixed')}
+                  <Badge
+                    className={`${getCategoryColor(project.category || "mixed")} font-medium text-xs`}
+                  >
+                    {getCategoryLabel(project.category || "mixed")}
                   </Badge>
 
                   {/* Customer Info */}
                   <div>
                     <h3 className="text-lg md:text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-2">
-                      {project.title || project.businessName || project.business_name || project.customerName || project.customer_name}
+                      {project.title ||
+                        project.businessName ||
+                        project.business_name ||
+                        project.customerName ||
+                        project.customer_name}
                     </h3>
-                    {(project.businessName || project.business_name) && project.title !== (project.businessName || project.business_name) && (
-                      <p className="text-sm text-muted-foreground">
-                        Client: {project.customerName || project.customer_name}
-                      </p>
-                    )}
+                    {(project.businessName || project.business_name) &&
+                      project.title !==
+                        (project.businessName || project.business_name) && (
+                        <p className="text-sm text-muted-foreground">
+                          Client:{" "}
+                          {project.customerName || project.customer_name}
+                        </p>
+                      )}
                   </div>
 
                   {/* Location - Single display */}
@@ -126,7 +161,9 @@ export function ProjectsCarousel({ projects, className = "" }: ProjectsCarouselP
                   {/* Service */}
                   <div className="flex items-start gap-2 text-sm pt-2 border-t border-gray-100">
                     <Building className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary" />
-                    <p className="font-medium text-foreground">{project.serviceName || project.service_name || 'Service'}</p>
+                    <p className="font-medium text-foreground">
+                      {project.serviceName || project.service_name || "Service"}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -134,8 +171,6 @@ export function ProjectsCarousel({ projects, className = "" }: ProjectsCarouselP
           </Card>
         ))}
       </div>
-
-
     </div>
   );
 }

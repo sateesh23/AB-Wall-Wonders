@@ -19,13 +19,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import {
-  Upload,
-  Save,
-  X,
-  AlertCircle,
-  FileImage,
-} from "lucide-react";
+import { Upload, Save, X, AlertCircle, FileImage } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { createProject, updateProject } from "@/lib/supabase-service";
 import type { SupabaseProject } from "@/lib/supabase";

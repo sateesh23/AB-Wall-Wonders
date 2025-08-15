@@ -62,7 +62,6 @@ const services = [
 
 // Static portfolio items removed - now using dynamic data from Neon database
 
-
 export default function Index() {
   const [recentProjects, setRecentProjects] = useState<SupabaseProject[]>([]);
   const [projectsLoading, setProjectsLoading] = useState(true);
@@ -101,7 +100,6 @@ export default function Index() {
 
     loadRecentProjects();
   }, []);
-
 
   return (
     <div

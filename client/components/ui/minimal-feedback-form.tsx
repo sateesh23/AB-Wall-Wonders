@@ -25,9 +25,13 @@ export function MinimalFeedbackForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const sendToWhatsApp = () => {
@@ -38,25 +42,25 @@ I'm interested in your services. Here are my details:
 📋 *Quote Request*
 👤 *Name:* ${formData.name}
 📞 *Phone:* ${formData.phone}
-${formData.email ? `📧 *Email:* ${formData.email}` : ''}
+${formData.email ? `📧 *Email:* ${formData.email}` : ""}
 🏠 *Service:* ${formData.service}
 
 💬 *Project Details:*
-${formData.message || 'No additional details provided'}
+${formData.message || "No additional details provided"}
 
 Please provide me with a quote and more information about your services.
 
 Thank you! 🙏`;
 
     const whatsappUrl = `https://wa.me/918688723648?text=${encodeURIComponent(message)}`;
-    
+
     // Open WhatsApp in a new tab/window, but don't redirect current page
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.phone || !formData.service) {
       alert("Please fill in all required fields");
       return;
@@ -67,10 +71,10 @@ Thank you! 🙏`;
     try {
       // Send to WhatsApp immediately
       sendToWhatsApp();
-      
+
       // Show success message
       setIsSubmitted(true);
-      
+
       // Reset form after a delay
       setTimeout(() => {
         setIsSubmitted(false);
@@ -82,7 +86,6 @@ Thank you! 🙏`;
           message: "",
         });
       }, 5000);
-      
     } catch (error) {
       console.error("Form submission error:", error);
       alert("Failed to send message. Please try again.");
@@ -96,9 +99,12 @@ Thank you! 🙏`;
       <Card className="w-full max-w-2xl mx-auto bg-green-50 border-green-200">
         <CardContent className="p-8 text-center">
           <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
-          <h3 className="text-2xl font-bold text-primary mb-2">Message Sent to WhatsApp!</h3>
+          <h3 className="text-2xl font-bold text-primary mb-2">
+            Message Sent to WhatsApp!
+          </h3>
           <p className="text-green-700 mb-4">
-            Your quote request has been sent via WhatsApp. We'll respond within 2 hours during business hours.
+            Your quote request has been sent via WhatsApp. We'll respond within
+            2 hours during business hours.
           </p>
           <div className="flex justify-center space-x-4">
             <Button
@@ -123,14 +129,18 @@ Thank you! 🙏`;
           Get Your Free Quote
         </CardTitle>
         <p className="text-muted-foreground">
-          Tell us about your project and we'll send details to WhatsApp instantly
+          Tell us about your project and we'll send details to WhatsApp
+          instantly
         </p>
-        <Badge variant="secondary" className="mx-auto w-fit bg-primary/10 text-primary">
+        <Badge
+          variant="secondary"
+          className="mx-auto w-fit bg-primary/10 text-primary"
+        >
           <Phone className="w-3 h-3 mr-1" />
           Instant WhatsApp Response
         </Badge>
       </CardHeader>
-      
+
       <CardContent className="p-6">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -148,7 +158,7 @@ Thank you! 🙏`;
                 className="w-full focus:ring-primary focus:border-primary"
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-foreground mb-1">
                 Phone Number *
@@ -194,7 +204,9 @@ Thank you! 🙏`;
               <option value="Wallpapers">Wallpapers</option>
               <option value="Window Blinds">Window Blinds</option>
               <option value="Flooring">Flooring</option>
-              <option value="Complete Interior">Complete Interior Package</option>
+              <option value="Complete Interior">
+                Complete Interior Package
+              </option>
             </select>
           </div>
 
@@ -230,11 +242,11 @@ Thank you! 🙏`;
                 </>
               )}
             </Button>
-            
+
             <Button
               type="button"
               variant="outline"
-              onClick={() => window.open('tel:+918688723648')}
+              onClick={() => window.open("tel:+918688723648")}
               className="flex-1 border-primary text-primary hover:bg-primary/10 py-3 h-auto"
             >
               <Phone className="w-4 h-4 mr-2" />
@@ -242,10 +254,11 @@ Thank you! 🙏`;
             </Button>
           </div>
         </form>
-        
+
         <div className="mt-6 text-center">
           <p className="text-xs text-muted-foreground">
-            Your message will be sent directly to our WhatsApp for instant response.
+            Your message will be sent directly to our WhatsApp for instant
+            response.
           </p>
         </div>
       </CardContent>
