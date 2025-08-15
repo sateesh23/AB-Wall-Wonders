@@ -7,14 +7,29 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Upload, Save, X, AlertCircle } from 'lucide-react';
-import { SupabaseAdminService } from '@/lib/supabase-admin';
-import type { CreateProjectData } from '@/lib/supabase-admin';
+import { Upload, Save, X, AlertCircle, ImageIcon, FileImage } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+import { createProject, updateProject } from '@/lib/supabase-service';
+import type { SupabaseProject } from '@/lib/supabase';
 
 interface SupabaseAdminUploadProps {
   onSuccess?: (projectId: number) => void;
-  editingProject?: any;
+  editingProject?: SupabaseProject;
   onCancel?: () => void;
+}
+
+interface FormData {
+  title: string;
+  customerName: string;
+  location: string;
+  service: 'wallpapers' | 'flooring' | 'blinds';
+  subcategory: string;
+  description: string;
+  isFeatured: boolean;
+  completedDate: string;
+  status: 'completed' | 'in-progress' | 'planned';
+  beforeImage: File | null;
+  afterImage: File | null;
 }
 
 export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
@@ -22,46 +37,97 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
   editingProject,
   onCancel
 }) => {
-  const [formData, setFormData] = useState<CreateProjectData>({
+  const [formData, setFormData] = useState<FormData>({
     title: editingProject?.title || '',
     customerName: editingProject?.customer_name || '',
     location: editingProject?.location || '',
     service: editingProject?.service || 'wallpapers',
     subcategory: editingProject?.subcategory || '',
     description: editingProject?.description || '',
-    imageURL: editingProject?.image_url || '',
-    imageURLs: editingProject?.image_urls || [''],
     isFeatured: editingProject?.is_featured || false,
     completedDate: editingProject?.completed_date || new Date().toISOString().split('T')[0],
     status: editingProject?.status || 'completed',
+    beforeImage: null,
+    afterImage: null,
   });
 
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [beforeImagePreview, setBeforeImagePreview] = useState<string | null>(
+    editingProject?.image_url || null
+  );
+  const [afterImagePreview, setAfterImagePreview] = useState<string | null>(
+    editingProject?.image_urls?.[0] || null
+  );
 
-  const handleInputChange = (field: keyof CreateProjectData, value: any) => {
+  const handleInputChange = (field: keyof FormData, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (error) setError(null);
   };
 
-  const handleImageURLChange = (index: number, value: string) => {
-    const newImageURLs = [...(formData.imageURLs || [])];
-    newImageURLs[index] = value;
-    setFormData(prev => ({ ...prev, imageURLs: newImageURLs }));
+  const handleFileChange = (field: 'beforeImage' | 'afterImage', file: File | null) => {
+    if (file) {
+      // Validate file type
+      const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+      if (!validTypes.includes(file.type)) {
+        setError('Please select a valid image file (PNG, JPG, JPEG, or WebP)');
+        return;
+      }
+      
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setError('Image file size must be less than 5MB');
+        return;
+      }
+      
+      // Create preview
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (field === 'beforeImage') {
+          setBeforeImagePreview(e.target?.result as string);
+        } else {
+          setAfterImagePreview(e.target?.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    } else {
+      if (field === 'beforeImage') {
+        setBeforeImagePreview(null);
+      } else {
+        setAfterImagePreview(null);
+      }
+    }
+    
+    setFormData(prev => ({ ...prev, [field]: file }));
+    if (error) setError(null);
   };
 
-  const addImageURL = () => {
-    setFormData(prev => ({
-      ...prev,
-      imageURLs: [...(prev.imageURLs || []), '']
-    }));
-  };
+  const uploadImageToSupabase = async (file: File, fileName: string): Promise<string> => {
+    try {
+      // Upload file to Supabase storage
+      const { data, error } = await supabase.storage
+        .from('project-images')
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: true
+        });
 
-  const removeImageURL = (index: number) => {
-    const newImageURLs = [...(formData.imageURLs || [])];
-    newImageURLs.splice(index, 1);
-    setFormData(prev => ({ ...prev, imageURLs: newImageURLs }));
+      if (error) {
+        console.error('Supabase storage error:', error);
+        throw new Error(`Upload failed: ${error.message}`);
+      }
+
+      // Get public URL
+      const { data: urlData } = supabase.storage
+        .from('project-images')
+        .getPublicUrl(data.path);
+
+      return urlData.publicUrl;
+    } catch (err: any) {
+      console.error('Image upload error:', err);
+      throw new Error(`Failed to upload image: ${err.message}`);
+    }
   };
 
   const validateForm = (): string | null => {
@@ -69,14 +135,12 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
     if (!formData.customerName.trim()) return 'Customer name is required';
     if (!formData.location.trim()) return 'Location is required';
     if (!formData.subcategory.trim()) return 'Subcategory is required';
-    if (!formData.imageURL.trim()) return 'Main image URL is required';
     if (!formData.completedDate) return 'Completed date is required';
     
-    // Validate image URL format
-    try {
-      new URL(formData.imageURL);
-    } catch {
-      return 'Invalid main image URL format';
+    // For new projects, require both images
+    if (!editingProject) {
+      if (!formData.beforeImage) return 'Before image is required';
+      if (!formData.afterImage) return 'After image is required';
     }
 
     return null;
@@ -92,19 +156,52 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
     }
 
     setUploading(true);
-    setProgress(10);
+    setProgress(5);
     setError(null);
 
     try {
-      setProgress(30);
+      let beforeImageUrl = editingProject?.image_url || '';
+      let afterImageUrl = editingProject?.image_urls?.[0] || '';
+
+      // Upload before image if provided
+      if (formData.beforeImage) {
+        setProgress(20);
+        const beforeFileName = `before_${Date.now()}_${formData.beforeImage.name}`;
+        beforeImageUrl = await uploadImageToSupabase(formData.beforeImage, beforeFileName);
+        setProgress(40);
+      }
+
+      // Upload after image if provided
+      if (formData.afterImage) {
+        setProgress(60);
+        const afterFileName = `after_${Date.now()}_${formData.afterImage.name}`;
+        afterImageUrl = await uploadImageToSupabase(formData.afterImage, afterFileName);
+        setProgress(80);
+      }
+
+      // Prepare project data
+      const projectData: Omit<SupabaseProject, 'id' | 'created_at' | 'updated_at'> = {
+        title: formData.title,
+        customer_name: formData.customerName,
+        location: formData.location,
+        service: formData.service,
+        subcategory: formData.subcategory,
+        description: formData.description,
+        image_url: beforeImageUrl, // Before image as main image
+        image_urls: afterImageUrl ? [afterImageUrl] : [], // After image in array
+        is_featured: formData.isFeatured,
+        completed_date: formData.completedDate,
+        status: formData.status,
+      };
+
+      setProgress(90);
       
       let result: number;
       if (editingProject) {
-        await SupabaseAdminService.updateProject(editingProject.id, formData);
-        result = editingProject.id;
+        await updateProject(editingProject.id!, projectData);
+        result = editingProject.id!;
       } else {
-        result = await SupabaseAdminService.createProject(formData);
-        setProgress(90);
+        result = await createProject(projectData);
       }
 
       setProgress(100);
@@ -120,12 +217,14 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
             service: 'wallpapers',
             subcategory: '',
             description: '',
-            imageURL: '',
-            imageURLs: [''],
             isFeatured: false,
             completedDate: new Date().toISOString().split('T')[0],
             status: 'completed',
+            beforeImage: null,
+            afterImage: null,
           });
+          setBeforeImagePreview(null);
+          setAfterImagePreview(null);
         }
       }, 500);
 
@@ -138,8 +237,6 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
     }
   };
 
-  const subcategories = SupabaseAdminService.getSubcategories(formData.service);
-
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
@@ -148,7 +245,7 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
           {editingProject ? 'Edit Project' : 'Add New Project'}
         </CardTitle>
         <CardDescription>
-          {editingProject ? 'Update project details' : 'Add a new project to your portfolio using image URLs'}
+          {editingProject ? 'Update project details and images' : 'Add a new project with before/after images'}
         </CardDescription>
       </CardHeader>
       
@@ -221,20 +318,16 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
             
             <div className="space-y-2">
               <Label htmlFor="subcategory">Subcategory *</Label>
-              <Select 
-                value={formData.subcategory} 
-                onValueChange={(value) => handleInputChange('subcategory', value)}
+              <Input
+                id="subcategory"
+                value={formData.subcategory}
+                onChange={(e) => handleInputChange('subcategory', e.target.value)}
+                placeholder="e.g., 3D Wallpaper, Vinyl Flooring, Motorized Blinds"
                 disabled={uploading}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select subcategory" />
-                </SelectTrigger>
-                <SelectContent>
-                  {subcategories.map((sub) => (
-                    <SelectItem key={sub} value={sub}>{sub}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              />
+              <p className="text-xs text-muted-foreground">
+                Enter the specific type or style of your service
+              </p>
             </div>
           </div>
 
@@ -266,52 +359,91 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
             />
           </div>
 
-          {/* Main Image URL */}
-          <div className="space-y-2">
-            <Label htmlFor="imageURL">Main Image URL *</Label>
-            <Input
-              id="imageURL"
-              value={formData.imageURL}
-              onChange={(e) => handleInputChange('imageURL', e.target.value)}
-              placeholder="https://example.com/image.jpg"
-              disabled={uploading}
-            />
-            <p className="text-sm text-muted-foreground">
-              Direct link to your main project image
-            </p>
-          </div>
-
-          {/* Additional Image URLs */}
-          <div className="space-y-2">
-            <Label>Additional Images (Optional)</Label>
-            {formData.imageURLs?.map((url, index) => (
-              <div key={index} className="flex gap-2">
-                <Input
-                  value={url}
-                  onChange={(e) => handleImageURLChange(index, e.target.value)}
-                  placeholder="https://example.com/additional-image.jpg"
-                  disabled={uploading}
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => removeImageURL(index)}
-                  disabled={uploading}
-                >
-                  <X className="h-4 w-4" />
-                </Button>
+          {/* Image Uploads */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Before Image */}
+            <div className="space-y-2">
+              <Label htmlFor="beforeImage">Before Image *</Label>
+              <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-4">
+                {beforeImagePreview ? (
+                  <div className="space-y-2">
+                    <img 
+                      src={beforeImagePreview} 
+                      alt="Before preview" 
+                      className="w-full h-32 object-cover rounded-md"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleFileChange('beforeImage', null)}
+                      disabled={uploading}
+                    >
+                      <X className="h-4 w-4 mr-2" />
+                      Remove
+                    </Button>
+                  </div>
+                ) : (
+                  <label htmlFor="beforeImage" className="cursor-pointer block">
+                    <div className="flex flex-col items-center py-4">
+                      <FileImage className="h-8 w-8 text-muted-foreground mb-2" />
+                      <span className="text-sm text-muted-foreground">Upload Before Image</span>
+                      <span className="text-xs text-muted-foreground">PNG, JPG up to 5MB</span>
+                    </div>
+                    <Input
+                      id="beforeImage"
+                      type="file"
+                      accept="image/png,image/jpeg,image/jpg,image/webp"
+                      onChange={(e) => handleFileChange('beforeImage', e.target.files?.[0] || null)}
+                      disabled={uploading}
+                      className="hidden"
+                    />
+                  </label>
+                )}
               </div>
-            ))}
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={addImageURL}
-              disabled={uploading}
-            >
-              Add Image URL
-            </Button>
+            </div>
+
+            {/* After Image */}
+            <div className="space-y-2">
+              <Label htmlFor="afterImage">After Image *</Label>
+              <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-4">
+                {afterImagePreview ? (
+                  <div className="space-y-2">
+                    <img 
+                      src={afterImagePreview} 
+                      alt="After preview" 
+                      className="w-full h-32 object-cover rounded-md"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleFileChange('afterImage', null)}
+                      disabled={uploading}
+                    >
+                      <X className="h-4 w-4 mr-2" />
+                      Remove
+                    </Button>
+                  </div>
+                ) : (
+                  <label htmlFor="afterImage" className="cursor-pointer block">
+                    <div className="flex flex-col items-center py-4">
+                      <FileImage className="h-8 w-8 text-muted-foreground mb-2" />
+                      <span className="text-sm text-muted-foreground">Upload After Image</span>
+                      <span className="text-xs text-muted-foreground">PNG, JPG up to 5MB</span>
+                    </div>
+                    <Input
+                      id="afterImage"
+                      type="file"
+                      accept="image/png,image/jpeg,image/jpg,image/webp"
+                      onChange={(e) => handleFileChange('afterImage', e.target.files?.[0] || null)}
+                      disabled={uploading}
+                      className="hidden"
+                    />
+                  </label>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Featured Toggle */}
@@ -330,7 +462,9 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
             <div className="space-y-2">
               <Progress value={progress} className="w-full" />
               <p className="text-sm text-center text-muted-foreground">
-                {progress < 30 ? 'Validating...' : 
+                {progress < 20 ? 'Validating...' : 
+                 progress < 40 ? 'Uploading before image...' : 
+                 progress < 60 ? 'Uploading after image...' :
                  progress < 90 ? 'Saving project...' : 
                  'Almost done...'}
               </p>
