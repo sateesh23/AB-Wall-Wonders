@@ -1,7 +1,7 @@
 import React from "react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { Phone, MessageCircle, Star } from "lucide-react"
+import { Star } from "lucide-react"
 
 interface CTABarProps {
   title: string

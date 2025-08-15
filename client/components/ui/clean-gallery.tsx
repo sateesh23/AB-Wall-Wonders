@@ -1,11 +1,5 @@
 import { cn } from "@/lib/utils"
-
-interface GalleryProject {
-  id: number
-  title: string
-  image: string
-  aspectRatio?: "square" | "landscape" | "portrait" | "wide"
-}
+import { GalleryProject } from "@/data/projects-data"
 
 interface CleanGalleryProps {
   title: string
@@ -57,7 +51,7 @@ export function CleanGallery({
                 getAspectRatioClass(project.aspectRatio)
               )}>
                 <img
-                  src={project.thumbnail || project.image || '/placeholder.svg'}
+                  src={project.thumbnail || project.image || project.thumbnailUrl || project.thumbnail_url || '/placeholder.svg'}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   loading="lazy"
