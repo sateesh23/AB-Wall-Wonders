@@ -6,6 +6,7 @@ export interface ProjectData extends Project {
 
 export interface GalleryProject extends BaseProjectData {
   thumbnail?: string;
+  aspectRatio?: "square" | "landscape" | "portrait" | "wide";
 }
 
 // Empty arrays - all data comes from Supabase
