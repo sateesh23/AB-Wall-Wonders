@@ -65,12 +65,6 @@ const services = [
 
 // Static portfolio items removed - now using dynamic data from Neon database
 
-const stats = [
-  { icon: Users, value: "100+", label: "Happy Customers" },
-  { icon: Award, value: "2+", label: "Years Experience" },
-  { icon: CheckCircle, value: "20+", label: "Projects Completed" },
-  { icon: Clock, value: "24/7", label: "Customer Support" },
-];
 
 export default function Index() {
   const [recentProjects, setRecentProjects] = useState<SupabaseProject[]>([]);
