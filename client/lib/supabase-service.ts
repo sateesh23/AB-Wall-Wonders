@@ -224,7 +224,7 @@ export const testSupabaseConnection = async () => {
   }
 
   try {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("projects")
       .select("count")
       .limit(1);
