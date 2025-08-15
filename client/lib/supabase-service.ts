@@ -243,14 +243,46 @@ export const testSupabaseConnection = async () => {
 // Image URL validation helper
 export const validateImageURL = (url: string): boolean => {
   if (!url) return false
-  
+
   try {
     new URL(url)
-    return /\.(jpg|jpeg|png|gif|webp|svg)(\?|$)/i.test(url) || 
-           url.includes('unsplash.com') || 
-           url.includes('images.') ||
-           url.startsWith('/images/') ||
-           url.startsWith('./images/')
+
+    // Check for file extensions
+    if (/\.(jpg|jpeg|png|gif|webp|svg)(\?|$)/i.test(url)) {
+      return true
+    }
+
+    // Check for known image hosting domains
+    const imageHosts = [
+      'unsplash.com',
+      'images.unsplash.com',
+      'gstatic.com',           // Google Images
+      'googleusercontent.com', // Google Images
+      'imgur.com',
+      'cloudinary.com',
+      'amazonaws.com',         // AWS S3
+      'supabase.co',          // Supabase storage
+      'images.',              // Generic images subdomain
+      'cdn.',                 // Generic CDN
+      'static.'               // Generic static content
+    ]
+
+    // Check if URL contains any known image hosting domain
+    if (imageHosts.some(host => url.includes(host))) {
+      return true
+    }
+
+    // Check for local images
+    if (url.startsWith('/images/') || url.startsWith('./images/')) {
+      return true
+    }
+
+    // If URL has 'image' in path or query params, likely an image
+    if (url.includes('image') || url.includes('img') || url.includes('photo')) {
+      return true
+    }
+
+    return false
   } catch {
     return false
   }
