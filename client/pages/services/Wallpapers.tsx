@@ -202,18 +202,18 @@ export default function Wallpapers() {
               </div>
             </div>
 
-            {/* CTA Buttons - side by side on mobile */}
-            <div className="flex flex-row gap-4 justify-center">
+            {/* CTA Buttons - responsive layout */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-lg mx-auto">
               <a
                 href="https://wa.me/44123456789"
-                className="inline-flex items-center justify-center rounded-full bg-green-700 text-white px-6 py-3 text-base font-semibold shadow-lg hover:bg-green-800 transition-all duration-300 transform hover:scale-105"
+                className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-green-700 text-white px-8 py-4 text-base font-semibold shadow-lg hover:bg-green-800 transition-all duration-300 transform hover:scale-105 min-w-[160px]"
               >
                 <MessageCircle className="mr-2 h-4 w-4" />
                 WhatsApp Us
               </a>
               <Link
                 to="/projects"
-                className="inline-flex items-center justify-center rounded-full border-2 border-green-700 bg-white text-green-700 px-6 py-3 text-base font-semibold hover:bg-green-50 transition-all duration-300"
+                className="w-full sm:w-auto inline-flex items-center justify-center rounded-full border-2 border-green-700 bg-white text-green-700 px-8 py-4 text-base font-semibold hover:bg-green-50 transition-all duration-300 min-w-[160px]"
               >
                 <Eye className="mr-2 h-4 w-4" />
                 Explore All Services
