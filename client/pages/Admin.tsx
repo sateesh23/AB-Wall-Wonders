@@ -122,69 +122,6 @@ export default function Admin() {
     }
   };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    const { name, value, type } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]:
-        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      if (!formData.service) {
-        alert("Please select a service type");
-        setLoading(false);
-        return;
-      }
-
-      const projectData = {
-        title: formData.title,
-        customerName: formData.customerName,
-        location: formData.location,
-        service: formData.service as "blinds" | "flooring" | "wallpapers",
-        subcategory: formData.subcategory,
-        description: formData.description,
-        isFeatured: formData.isFeatured,
-        completedDate: formData.completedDate,
-        status: formData.status,
-        imageURL: "", // Will be set by upload service
-        imageFile: formData.imageFile,
-      };
-
-      if (editingProject) {
-        // Update existing project
-        await SupabaseAdminService.updateProject(
-          editingProject.id!,
-          projectData,
-        );
-        showSuccessMessage("Project updated successfully! ✨");
-      } else {
-        // Create new project
-        await SupabaseAdminService.createProject(projectData);
-        showSuccessMessage("Project created successfully! 🎉");
-      }
-
-      // Reload projects
-      await loadProjects();
-      resetForm();
-    } catch (error) {
-      console.error("Error saving project:", error);
-      alert(
-        `Failed to save project: ${error instanceof Error ? error.message : "Unknown error"}`,
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const resetForm = () => {
     setFormData({
