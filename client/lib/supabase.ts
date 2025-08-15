@@ -1,32 +1,36 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://gbtotyrhqbcxbvcyfygg.supabase.co'
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+const supabaseUrl =
+  import.meta.env.VITE_SUPABASE_URL ||
+  "https://gbtotyrhqbcxbvcyfygg.supabase.co";
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || "";
 
 // Check if Supabase is properly configured
 export const isSupabaseConfigured = () => {
-  return !!(supabaseUrl && supabaseAnonKey && supabaseAnonKey !== '')
-}
+  return !!(supabaseUrl && supabaseAnonKey && supabaseAnonKey !== "");
+};
 
-// Create Supabase client
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Create Supabase client only if properly configured
+export const supabase = isSupabaseConfigured()
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 // Database types
 export interface SupabaseProject {
-  id?: number
-  title: string
-  customer_name: string
-  location: string
-  service: 'wallpapers' | 'flooring' | 'blinds'
-  subcategory: string
-  description: string
-  image_url: string
-  image_urls?: string[]
-  is_featured: boolean
-  completed_date: string
-  status: 'completed' | 'in-progress' | 'planned'
-  created_at?: string
-  updated_at?: string
+  id?: number;
+  title: string;
+  customer_name: string;
+  location: string;
+  service: "wallpapers" | "flooring" | "blinds";
+  subcategory: string;
+  description: string;
+  image_url: string;
+  image_urls?: string[];
+  is_featured: boolean;
+  completed_date: string;
+  status: "completed" | "in-progress" | "planned";
+  created_at?: string;
+  updated_at?: string;
 }
 
-export default supabase
+export default supabase;

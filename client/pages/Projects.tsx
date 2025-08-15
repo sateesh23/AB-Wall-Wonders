@@ -109,10 +109,10 @@ export default function Projects() {
         height: "100%",
       }}
     >
-      {/* Hero Section - 100vh with navbar background */}
-      <section className="min-h-screen flex items-center justify-center bg-transparent relative overflow-hidden pt-20">
+      {/* Hero Section - Reduced top padding to bring content closer to navbar */}
+      <section className="min-h-screen flex items-center justify-center bg-transparent relative overflow-hidden pt-8">
         <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="max-w-4xl mx-auto space-y-8">
+          <div className="max-w-4xl mx-auto space-y-6">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-primary">
               Our Project Portfolio
             </h1>
@@ -121,8 +121,130 @@ export default function Projects() {
               Pradesh
             </p>
 
+            {/* Testimonials Marquee with Service Icons */}
+            <div className="py-6 overflow-hidden">
+              <div
+                className="flex animate-marquee space-x-8"
+                style={
+                  {
+                    "--duration": "25s",
+                    "--gap": "2rem",
+                  } as any
+                }
+              >
+                <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
+                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span className="text-blue-600 font-bold text-xs">W</span>
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">
+                    Appala Naidu - Customized Wallpaper
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
+                  <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                    <span className="text-green-600 font-bold text-xs">B</span>
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">
+                    Narendra - Dental Clinic Blinds
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
+                  <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
+                    <span className="text-purple-600 font-bold text-xs">F</span>
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">
+                    U Bangar Raju - Complete Home
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
+                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span className="text-blue-600 font-bold text-xs">W</span>
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">
+                    A Gopinath - Hospital Wallpaper
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
+                  <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                    <span className="text-green-600 font-bold text-xs">B</span>
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">
+                    G Simhachalam - Window Blinds
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
+                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span className="text-blue-600 font-bold text-xs">W</span>
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">
+                    P Ramu - Buddha Wallpaper
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust Building Labels */}
+            <div className="flex flex-wrap justify-center gap-3 py-4">
+              <div className="flex items-center space-x-1 bg-green-50 text-green-700 px-3 py-1.5 rounded-full text-xs font-medium">
+                <svg
+                  className="w-3 h-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>15+ Years Experience</span>
+              </div>
+              <div className="flex items-center space-x-1 bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full text-xs font-medium">
+                <svg
+                  className="w-3 h-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>1000+ Projects Completed</span>
+              </div>
+              <div className="flex items-center space-x-1 bg-purple-50 text-purple-700 px-3 py-1.5 rounded-full text-xs font-medium">
+                <svg
+                  className="w-3 h-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>Premium Quality Materials</span>
+              </div>
+              <div className="flex items-center space-x-1 bg-orange-50 text-orange-700 px-3 py-1.5 rounded-full text-xs font-medium">
+                <svg
+                  className="w-3 h-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>100% Customer Satisfaction</span>
+              </div>
+            </div>
+
             {/* Trust Badges */}
-            <div className="flex flex-wrap justify-center gap-4 py-6">
+            <div className="flex flex-wrap justify-center gap-4 py-4">
               <Badge className="bg-primary/10 text-primary border-primary/20 px-4 py-2 text-sm font-medium">
                 <MapPin className="mr-2 h-4 w-4" />
                 Andhra Pradesh
@@ -133,8 +255,8 @@ export default function Projects() {
               </Badge>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+            {/* CTA Buttons - Highlighted */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
               <Button
                 size="lg"
                 className="bg-primary text-white hover:bg-primary/90 font-bold px-8 py-4 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
