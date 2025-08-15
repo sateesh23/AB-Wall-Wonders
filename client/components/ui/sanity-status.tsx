@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Database, Loader2 } from 'lucide-react';
-import sanityService from '@/lib/sanity-service';
 
 export function SanityStatus() {
   const [status, setStatus] = useState<{
