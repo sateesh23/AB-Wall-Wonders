@@ -73,10 +73,12 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
             <img
               src={
                 project.thumbnail ||
+                project.thumbnailUrl ||
+                project.thumbnail_url ||
                 project.image ||
                 "/images/services/wallpapers-hero.svg"
               }
-              alt={`${project.serviceName || project.service || project.title} at ${project.location}`}
+              alt={`${project.serviceName || project.service_name || project.title} at ${project.location}`}
               className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
