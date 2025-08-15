@@ -65,7 +65,7 @@ export function DynamicProjectsGrid({ projects }: DynamicProjectsGridProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       {projects.slice(0, 6).map((project) => (
         <Card
-          key={project.id || project._id || Math.random()}
+          key={project.id || `project-${Math.random()}`}
           className="group hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border-primary/10 hover:border-primary/20"
         >
           {/* Project Image */}
