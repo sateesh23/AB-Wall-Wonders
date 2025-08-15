@@ -123,7 +123,13 @@ export default function Projects() {
 
             {/* Testimonials Marquee with Service Icons */}
             <div className="py-6 overflow-hidden">
-              <div className="flex animate-marquee space-x-8" style={{"--duration": "25s", "--gap": "2rem"} as React.CSSProperties}>
+              <div
+                className="flex animate-marquee space-x-8"
+                style={{
+                  "--duration": "25s",
+                  "--gap": "2rem"
+                } as any}
+              >
                 <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
                   <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
                     <span className="text-blue-600 font-bold text-xs">W</span>
