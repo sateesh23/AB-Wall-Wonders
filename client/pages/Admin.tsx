@@ -104,21 +104,13 @@ export default function Admin() {
         const supabaseProjects = await getAllProjects();
         console.log(`📊 Admin: Supabase returned ${supabaseProjects.length} projects`);
         setProjects(supabaseProjects);
-        return;
+      } else {
+        console.log("📊 Supabase not configured in admin");
+        setProjects([]);
       }
-
-      // Fallback to static data if Supabase not configured
-      const { projectsData } = await import('@/data/projects-data');
-      setProjects(projectsData as any);
     } catch (error) {
       console.error("Failed to load projects:", error);
-      // Fallback to static data on error
-      try {
-        const { projectsData } = await import('@/data/projects-data');
-        setProjects(projectsData as any);
-      } catch (staticError) {
-        console.error("Failed to load static data:", staticError);
-      }
+      setProjects([]);
     } finally {
       setLoading(false);
     }
