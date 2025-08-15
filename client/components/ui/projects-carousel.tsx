@@ -59,9 +59,13 @@ export function ProjectsCarousel({ projects, className = "" }: ProjectsCarouselP
                   beforeImage={project.beforeImage}
                   executionImage={project.executionImage}
                   afterImage={project.afterImage}
-                  projectImages={project.projectImages}
+                  projectImages={project.projectImages ? {
+                    before: Array.isArray(project.projectImages) ? project.projectImages[0] : project.projectImages.before,
+                    execution: Array.isArray(project.projectImages) ? project.projectImages[1] : project.projectImages.execution,
+                    after: Array.isArray(project.projectImages) ? project.projectImages[2] : project.projectImages.after,
+                  } : undefined}
                   fallbackImage={project.thumbnail || project.thumbnailUrl || project.thumbnail_url || project.image || '/images/placeholder.jpg'}
-                  alt={project.title || project.customerName}
+                  alt={project.title || project.customerName || 'Project'}
                   className="overflow-hidden"
                 />
 
