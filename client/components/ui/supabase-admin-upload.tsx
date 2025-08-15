@@ -27,7 +27,7 @@ import {
   ImageIcon,
   FileImage,
 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 import { createProject, updateProject } from "@/lib/supabase-service";
 import type { SupabaseProject } from "@/lib/supabase";
 
