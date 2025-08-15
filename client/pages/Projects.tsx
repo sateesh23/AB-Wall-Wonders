@@ -125,46 +125,60 @@ export default function Projects() {
             <div className="py-6 overflow-hidden">
               <div
                 className="flex animate-marquee space-x-8"
-                style={{
-                  "--duration": "25s",
-                  "--gap": "2rem"
-                } as any}
+                style={
+                  {
+                    "--duration": "25s",
+                    "--gap": "2rem",
+                  } as any
+                }
               >
                 <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
                   <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
                     <span className="text-blue-600 font-bold text-xs">W</span>
                   </div>
-                  <span className="text-sm font-medium text-gray-700">Appala Naidu - Customized Wallpaper</span>
+                  <span className="text-sm font-medium text-gray-700">
+                    Appala Naidu - Customized Wallpaper
+                  </span>
                 </div>
                 <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
                   <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
                     <span className="text-green-600 font-bold text-xs">B</span>
                   </div>
-                  <span className="text-sm font-medium text-gray-700">Narendra - Dental Clinic Blinds</span>
+                  <span className="text-sm font-medium text-gray-700">
+                    Narendra - Dental Clinic Blinds
+                  </span>
                 </div>
                 <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
                   <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
                     <span className="text-purple-600 font-bold text-xs">F</span>
                   </div>
-                  <span className="text-sm font-medium text-gray-700">U Bangar Raju - Complete Home</span>
+                  <span className="text-sm font-medium text-gray-700">
+                    U Bangar Raju - Complete Home
+                  </span>
                 </div>
                 <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
                   <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
                     <span className="text-blue-600 font-bold text-xs">W</span>
                   </div>
-                  <span className="text-sm font-medium text-gray-700">A Gopinath - Hospital Wallpaper</span>
+                  <span className="text-sm font-medium text-gray-700">
+                    A Gopinath - Hospital Wallpaper
+                  </span>
                 </div>
                 <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
                   <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
                     <span className="text-green-600 font-bold text-xs">B</span>
                   </div>
-                  <span className="text-sm font-medium text-gray-700">G Simhachalam - Window Blinds</span>
+                  <span className="text-sm font-medium text-gray-700">
+                    G Simhachalam - Window Blinds
+                  </span>
                 </div>
                 <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-primary/10 shrink-0">
                   <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
                     <span className="text-blue-600 font-bold text-xs">W</span>
                   </div>
-                  <span className="text-sm font-medium text-gray-700">P Ramu - Buddha Wallpaper</span>
+                  <span className="text-sm font-medium text-gray-700">
+                    P Ramu - Buddha Wallpaper
+                  </span>
                 </div>
               </div>
             </div>
@@ -172,26 +186,58 @@ export default function Projects() {
             {/* Trust Building Labels */}
             <div className="flex flex-wrap justify-center gap-3 py-4">
               <div className="flex items-center space-x-1 bg-green-50 text-green-700 px-3 py-1.5 rounded-full text-xs font-medium">
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                <svg
+                  className="w-3 h-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span>15+ Years Experience</span>
               </div>
               <div className="flex items-center space-x-1 bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full text-xs font-medium">
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                <svg
+                  className="w-3 h-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span>1000+ Projects Completed</span>
               </div>
               <div className="flex items-center space-x-1 bg-purple-50 text-purple-700 px-3 py-1.5 rounded-full text-xs font-medium">
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                <svg
+                  className="w-3 h-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span>Premium Quality Materials</span>
               </div>
               <div className="flex items-center space-x-1 bg-orange-50 text-orange-700 px-3 py-1.5 rounded-full text-xs font-medium">
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                <svg
+                  className="w-3 h-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span>100% Customer Satisfaction</span>
               </div>

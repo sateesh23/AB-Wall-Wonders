@@ -130,8 +130,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <User className="w-4 h-4 text-primary" />
           </div>
           <div>
-            <span className="text-xs text-gray-500 uppercase tracking-wide font-medium">Customer</span>
-            <p className="font-semibold text-gray-900">{project.customer_name}</p>
+            <span className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+              Customer
+            </span>
+            <p className="font-semibold text-gray-900">
+              {project.customer_name}
+            </p>
           </div>
         </div>
 
@@ -141,7 +145,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <MapPin className="w-4 h-4 text-primary" />
           </div>
           <div>
-            <span className="text-xs text-gray-500 uppercase tracking-wide font-medium">Location</span>
+            <span className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+              Location
+            </span>
             <p className="font-semibold text-gray-900">{project.location}</p>
           </div>
         </div>
@@ -152,14 +158,21 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <Calendar className="w-4 h-4 text-primary" />
           </div>
           <div>
-            <span className="text-xs text-gray-500 uppercase tracking-wide font-medium">Completed</span>
-            <p className="font-semibold text-gray-900">{formatDate(project.completed_date)}</p>
+            <span className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+              Completed
+            </span>
+            <p className="font-semibold text-gray-900">
+              {formatDate(project.completed_date)}
+            </p>
           </div>
         </div>
 
         {/* Service Type Badge */}
         <div className="mb-4">
-          <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+          <Badge
+            variant="secondary"
+            className="bg-primary/10 text-primary border-primary/20"
+          >
             {project.subcategory || getServiceLabel(project.service)}
           </Badge>
         </div>

@@ -131,7 +131,9 @@ export const SupabaseAdminUpload: React.FC<SupabaseAdminUploadProps> = ({
     fileName: string,
   ): Promise<string> => {
     if (!supabase) {
-      throw new Error("Supabase not configured. Please set up Supabase environment variables.");
+      throw new Error(
+        "Supabase not configured. Please set up Supabase environment variables.",
+      );
     }
 
     try {
