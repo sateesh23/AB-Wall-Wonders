@@ -57,7 +57,7 @@ export default function Admin() {
     "overview" | "projects" | "settings"
   >("overview");
   const [showForm, setShowForm] = useState(false);
-  const [editingProject, setEditingProject] = useState<ProjectData | null>(
+  const [editingProject, setEditingProject] = useState<SupabaseProject | null>(
     null,
   );
   const [successMessage, setSuccessMessage] = useState<string>("");
