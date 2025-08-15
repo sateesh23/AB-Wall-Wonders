@@ -1,10 +1,12 @@
-import { Project } from "@/lib/types";
+import { Project, ProjectData as BaseProjectData } from "@/lib/types";
 
 export interface ProjectData extends Project {
   thumbnail?: string;
 }
 
-export type GalleryProject = ProjectData;
+export interface GalleryProject extends BaseProjectData {
+  thumbnail?: string;
+}
 
 // Empty arrays - all data comes from Supabase
 export const projectsData: ProjectData[] = [];
