@@ -19,44 +19,6 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
   // Get latest 6 projects
   const latestProjects = projects.slice(0, 6);
 
-  // Update scroll state
-  const updateScrollState = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } =
-        scrollContainerRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
-    }
-  };
-
-  useEffect(() => {
-    updateScrollState();
-    const handleResize = () => updateScrollState();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [latestProjects]);
-
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      const cardWidth =
-        scrollContainerRef.current.children[0]?.clientWidth || 300;
-      scrollContainerRef.current.scrollBy({
-        left: -cardWidth - 24, // card width + gap
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      const cardWidth =
-        scrollContainerRef.current.children[0]?.clientWidth || 300;
-      scrollContainerRef.current.scrollBy({
-        left: cardWidth + 24, // card width + gap
-        behavior: "smooth",
-      });
-    }
-  };
 
   if (loading) {
     return (
