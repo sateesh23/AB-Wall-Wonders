@@ -5,16 +5,10 @@ import { cn } from "@/lib/utils"
 import { MapPin, Calendar, Eye, ArrowRight } from "lucide-react"
 import { memo } from "react"
 
-export interface ProjectData {
-  id: string
-  title: string
-  category: string
-  location: string
-  date: string
-  image: string
-  aspectRatio: "landscape" | "portrait" | "square" | "wide"
-  description: string
-  featured?: boolean
+import { ProjectData as BaseProjectData } from "@/lib/types"
+
+export interface ProjectData extends BaseProjectData {
+  aspectRatio?: "landscape" | "portrait" | "square" | "wide"
 }
 
 interface ProjectGalleryProps {
