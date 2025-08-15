@@ -13,13 +13,13 @@ import {
   Loader2,
   Database,
 } from "lucide-react";
-import type { ProjectData } from "@/lib/types";
+import type { SupabaseProject } from "@/lib/supabase";
 import { projectsData } from "@/data/projects-data";
 import { EmptyState } from "@/components/ui/empty-state";
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [projects, setProjects] = useState<ProjectData[]>([]);
+  const [projects, setProjects] = useState<SupabaseProject[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -36,34 +36,34 @@ export default function Projects() {
         setLoading(true);
         setError(null);
 
-        // Try to load from Firebase first
-        const { getAllProjects } = await import("@/lib/firebase-service");
-        const { isFirebaseConfigured } = await import("@/lib/firebase");
+        // Try to load from Supabase first
+        const { getAllProjects } = await import("@/lib/supabase-service");
+        const { isSupabaseConfigured } = await import("@/lib/supabase");
 
-        let allProjects = projectsData; // Default to static data
+        let allProjects = projectsData as any; // Default to static data
 
-        if (isFirebaseConfigured()) {
+        if (isSupabaseConfigured()) {
           try {
-            const firebaseProjects = await getAllProjects();
+            const supabaseProjects = await getAllProjects();
             console.log(
-              `📊 Firebase returned ${firebaseProjects.length} projects for Projects page`,
+              `📊 Supabase returned ${supabaseProjects.length} projects for Projects page`,
             );
 
-            // If Firebase has projects, use them; otherwise use static data for demo
-            if (firebaseProjects.length > 0) {
-              allProjects = firebaseProjects;
+            // If Supabase has projects, use them; otherwise use static data for demo
+            if (supabaseProjects.length > 0) {
+              allProjects = supabaseProjects;
             } else {
               console.log(
-                "📊 Firebase returned empty, using static data for demo",
+                "📊 Supabase returned empty, using static data for demo",
               );
-              allProjects = projectsData;
+              allProjects = projectsData as any;
             }
-          } catch (firebaseError: any) {
+          } catch (supabaseError: any) {
             console.warn(
-              "Firebase error, using static data:",
-              firebaseError.message,
+              "Supabase error, using static data:",
+              supabaseError.message,
             );
-            allProjects = projectsData;
+            allProjects = projectsData as any;
           }
         }
 
@@ -77,8 +77,8 @@ export default function Projects() {
         console.error("Error loading projects:", err);
         setError("Using demo data due to connection issues.");
         // Fallback to static data on error
-        setProjects(projectsData);
-        setCategories(Array.from(new Set(projectsData.map((p) => p.service))));
+        setProjects(projectsData as any);
+        setCategories(Array.from(new Set(projectsData.map((p: any) => p.service))));
       } finally {
         setLoading(false);
       }

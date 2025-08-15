@@ -24,13 +24,14 @@ import {
   Mail,
   LogOut,
 } from "lucide-react";
-import { FirebaseAdminService } from "@/lib/firebase-admin";
-import { testFirebaseConnection } from "@/lib/firebase-service";
+import { SupabaseAdminService } from "@/lib/supabase-admin";
+import { testSupabaseConnection, getAllProjects } from "@/lib/supabase-service";
+import { isSupabaseConfigured } from "@/lib/supabase";
 import { AdminAuth } from "@/components/ui/admin-auth";
-import { URLAdminUpload } from "@/components/ui/url-admin-upload";
-import { FirebaseDebug } from "@/components/ui/firebase-debug";
+import { SupabaseAdminUpload } from "@/components/ui/supabase-admin-upload";
+import { SupabaseDebug } from "@/components/ui/supabase-debug";
 import { SuccessMessage } from "@/components/ui/success-message";
-import type { ProjectData } from "@/lib/types";
+import type { SupabaseProject } from "@/lib/supabase";
 
 interface ProjectForm {
   title: string;
@@ -48,9 +49,9 @@ interface ProjectForm {
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Firebase configuration check
-  const [firebaseStatus, setFirebaseStatus] = useState<'loading' | 'connected' | 'error'>('loading');
-  const [projects, setProjects] = useState<ProjectData[]>([]);
+  // Supabase configuration check
+  const [supabaseStatus, setSupabaseStatus] = useState<'loading' | 'connected' | 'error'>('loading');
+  const [projects, setProjects] = useState<SupabaseProject[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<
     "overview" | "projects" | "settings"
@@ -81,7 +82,7 @@ export default function Admin() {
 
     if (isAuth) {
       loadProjects();
-      checkFirebaseStatus();
+      checkSupabaseStatus();
     }
   }, []);
 
@@ -99,27 +100,22 @@ export default function Admin() {
     try {
       setLoading(true);
 
-      // Try to load from Firebase first
-      const { getAllProjects } = await import('@/lib/firebase-service');
-      const { isFirebaseConfigured } = await import('@/lib/firebase');
-
-      if (isFirebaseConfigured()) {
-        const firebaseProjects = await getAllProjects();
-        console.log(`📊 Admin: Firebase returned ${firebaseProjects.length} projects`);
-        // Always use Firebase data when configured, even if empty
-        setProjects(firebaseProjects);
+      if (isSupabaseConfigured()) {
+        const supabaseProjects = await getAllProjects();
+        console.log(`📊 Admin: Supabase returned ${supabaseProjects.length} projects`);
+        setProjects(supabaseProjects);
         return;
       }
 
-      // Fallback to static data
+      // Fallback to static data if Supabase not configured
       const { projectsData } = await import('@/data/projects-data');
-      setProjects(projectsData);
+      setProjects(projectsData as any);
     } catch (error) {
       console.error("Failed to load projects:", error);
       // Fallback to static data on error
       try {
         const { projectsData } = await import('@/data/projects-data');
-        setProjects(projectsData);
+        setProjects(projectsData as any);
       } catch (staticError) {
         console.error("Failed to load static data:", staticError);
       }
@@ -128,12 +124,12 @@ export default function Admin() {
     }
   };
 
-  const checkFirebaseStatus = async () => {
+  const checkSupabaseStatus = async () => {
     try {
-      const result = await testFirebaseConnection();
-      setFirebaseStatus(result.success ? 'connected' : 'error');
+      const result = await testSupabaseConnection();
+      setSupabaseStatus(result.success ? 'connected' : 'error');
     } catch (error) {
-      setFirebaseStatus('error');
+      setSupabaseStatus('error');
     }
   };
 
@@ -170,14 +166,14 @@ export default function Admin() {
 
       if (editingProject) {
         // Update existing project
-        await FirebaseAdminService.updateProject(
-          String(editingProject.id),
+        await SupabaseAdminService.updateProject(
+          editingProject.id!,
           projectData,
         );
         showSuccessMessage("Project updated successfully! ✨");
       } else {
         // Create new project
-        await FirebaseAdminService.createProject(projectData);
+        await SupabaseAdminService.createProject(projectData);
         showSuccessMessage("Project created successfully! 🎉");
       }
 
@@ -211,24 +207,24 @@ export default function Admin() {
     setEditingProject(null);
   };
 
-  const handleEdit = (project: ProjectData) => {
+  const handleEdit = (project: SupabaseProject) => {
     setEditingProject(project);
     setFormData({
       title: project.title || "",
-      customerName: project.customerName || "",
+      customerName: project.customer_name || "",
       location: project.location || "",
       service: project.service || "",
       subcategory: project.subcategory || "",
       description: project.description || "",
-      isFeatured: project.isFeatured || false,
-      completedDate: project.completedDate || "",
+      isFeatured: project.is_featured || false,
+      completedDate: project.completed_date || "",
       status: project.status || "completed",
       imageFile: undefined,
     });
     setShowForm(true);
   };
 
-  const handleDelete = async (projectId: string) => {
+  const handleDelete = async (projectId: number) => {
     if (
       confirm(
         "Are you sure you want to delete this project? This action cannot be undone.",
@@ -236,7 +232,7 @@ export default function Admin() {
     ) {
       try {
         setLoading(true);
-        await FirebaseAdminService.deleteProject(projectId);
+        await SupabaseAdminService.deleteProject(projectId);
         showSuccessMessage("Project deleted successfully! 🗑️");
         // Reload projects
         await loadProjects();
@@ -253,7 +249,7 @@ export default function Admin() {
 
   const stats = {
     totalProjects: projects.length,
-    featuredProjects: projects.filter((p) => p.isFeatured).length,
+    featuredProjects: projects.filter((p) => p.is_featured).length,
     wallpaperProjects: projects.filter((p) => p.service === "wallpapers")
       .length,
     blindsProjects: projects.filter((p) => p.service === "blinds").length,
@@ -295,12 +291,12 @@ export default function Admin() {
               </div>
               <div className="flex items-center space-x-4">
                 <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                  firebaseStatus === 'connected' ? 'bg-green-100 text-green-800' :
-                  firebaseStatus === 'error' ? 'bg-red-100 text-red-800' :
+                  supabaseStatus === 'connected' ? 'bg-green-100 text-green-800' :
+                  supabaseStatus === 'error' ? 'bg-red-100 text-red-800' :
                   'bg-yellow-100 text-yellow-800'
                 }`}>
-                  Firebase: {firebaseStatus === 'connected' ? 'Connected' :
-                           firebaseStatus === 'error' ? 'Not Configured' : 'Checking...'}
+                  Supabase: {supabaseStatus === 'connected' ? 'Connected' :
+                           supabaseStatus === 'error' ? 'Not Configured' : 'Checking...'}
                 </div>
                 <Button
                   onClick={() => window.open("/", "_blank")}
@@ -476,11 +472,11 @@ export default function Admin() {
                     </Button>
                     <Button
                       variant="outline"
-                      onClick={() => alert('Firebase Console: Configure your Firebase project in the environment variables')}
+                      onClick={() => window.open('https://supabase.com/dashboard', '_blank')}
                       className="h-20 flex flex-col space-y-2"
                     >
                       <Settings className="w-6 h-6" />
-                      <span>Firebase Console</span>
+                      <span>Supabase Console</span>
                     </Button>
                     <Button
                       variant="outline"
@@ -516,7 +512,7 @@ export default function Admin() {
 
               {/* Add/Edit Form */}
               {showForm && (
-                <URLAdminUpload
+                <SupabaseAdminUpload
                   editingProject={editingProject}
                   onSuccess={(projectId) => {
                     showSuccessMessage(
@@ -559,7 +555,7 @@ export default function Admin() {
                               <h3 className="font-medium text-gray-900">
                                 {project.title}
                               </h3>
-                              {project.isFeatured && (
+                              {project.is_featured && (
                                 <Badge className="bg-yellow-100 text-yellow-800">
                                   <Star className="w-3 h-3 mr-1" />
                                   Featured
@@ -570,7 +566,7 @@ export default function Admin() {
                               </Badge>
                             </div>
                             <p className="text-sm text-gray-600 mt-1">
-                              {project.customerName} • {project.location}
+                              {project.customer_name} • {project.location}
                             </p>
                             <p className="text-xs text-gray-500 mt-1">
                               {project.description?.substring(0, 100)}...
@@ -587,7 +583,7 @@ export default function Admin() {
                             <Button
                               size="sm"
                               variant="outline"
-                              onClick={() => handleDelete(String(project.id))}
+                              onClick={() => handleDelete(project.id!)}
                               className="text-red-600 hover:text-red-700"
                             >
                               <Trash2 className="w-4 h-4" />
@@ -611,13 +607,13 @@ export default function Admin() {
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between p-4 border rounded-lg">
                     <div>
-                      <h3 className="font-medium">Firebase Console</h3>
+                      <h3 className="font-medium">Supabase Console</h3>
                       <p className="text-sm text-gray-600">
-                        Manage your Firebase project and database
+                        Manage your Supabase project and database
                       </p>
                     </div>
                     <Button
-                      onClick={() => window.open('https://console.firebase.google.com/', '_blank')}
+                      onClick={() => window.open('https://supabase.com/dashboard', '_blank')}
                     >
                       Open Console
                     </Button>
@@ -666,8 +662,8 @@ export default function Admin() {
                 </CardContent>
               </Card>
 
-              {/* Firebase Debug Component */}
-              <FirebaseDebug />
+              {/* Supabase Debug Component */}
+              <SupabaseDebug />
             </div>
           )}
         </div>

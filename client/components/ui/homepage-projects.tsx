@@ -3,10 +3,10 @@ import { Button } from "./button";
 import { ProjectCard } from "./project-card";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import type { FirebaseProject } from "@/lib/firebase-service";
+import type { SupabaseProject } from "@/lib/supabase";
 
 interface HomepageProjectsProps {
-  projects: FirebaseProject[];
+  projects: SupabaseProject[];
   loading?: boolean;
 }
 
