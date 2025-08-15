@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Phone, Mail, MessageCircle, CheckCircle, Loader2 } from "lucide-react";
+import { Phone, MessageCircle, CheckCircle, Loader2 } from "lucide-react";
 
 interface FormData {
   name: string;

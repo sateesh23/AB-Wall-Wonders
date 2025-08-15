@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Button } from "./button";
 import { ProjectCard } from "./project-card";
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { SupabaseProject } from "@/lib/supabase";
 
@@ -14,10 +14,7 @@ export const HomepageProjects: React.FC<HomepageProjectsProps> = ({
   projects,
   loading = false,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
 
   // Get latest 6 projects
   const latestProjects = projects.slice(0, 6);

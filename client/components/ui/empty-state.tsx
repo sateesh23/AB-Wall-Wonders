@@ -1,7 +1,6 @@
-import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { FolderOpen, Plus, Settings, User } from 'lucide-react';
+import { FolderOpen, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface EmptyStateProps {
