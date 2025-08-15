@@ -140,11 +140,17 @@ export default function Admin() {
     setLoading(true);
 
     try {
+      if (!formData.service) {
+        alert("Please select a service type");
+        setLoading(false);
+        return;
+      }
+
       const projectData = {
         title: formData.title,
         customerName: formData.customerName,
         location: formData.location,
-        service: formData.service,
+        service: formData.service as "blinds" | "flooring" | "wallpapers",
         subcategory: formData.subcategory,
         description: formData.description,
         isFeatured: formData.isFeatured,
