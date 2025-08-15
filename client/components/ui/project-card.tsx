@@ -16,6 +16,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const [showAfter, setShowAfter] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  // Get before and after images
+  const beforeImage = project.image_url; // Main image is "before"
+  const afterImage =
+    project.image_urls && project.image_urls.length > 0
+      ? project.image_urls[0] // First additional image is "after"
+      : null;
+
   // Preload both images for faster switching
   React.useEffect(() => {
     const preloadImage = (src: string) => {
@@ -23,15 +30,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       img.src = src;
     };
 
-    // For Supabase projects, use main image and additional images
-    if (project.image_url) preloadImage(project.image_url);
-    if (project.image_urls && project.image_urls.length > 0) {
-      project.image_urls.forEach(url => preloadImage(url));
-    }
-    // Fallback for legacy Firebase format
-    if ((project as any).beforeImageURL) preloadImage((project as any).beforeImageURL);
-    if ((project as any).afterImageURL) preloadImage((project as any).afterImageURL);
-  }, [project.image_url, project.image_urls]);
+    if (beforeImage) preloadImage(beforeImage);
+    if (afterImage) preloadImage(afterImage);
+  }, [beforeImage, afterImage]);
 
   const formatDate = (dateString: string) => {
     try {
@@ -57,6 +58,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     }
   };
 
+  // Get current image to display
+  const getCurrentImage = () => {
+    if (showAfter && afterImage) {
+      return afterImage;
+    }
+    return beforeImage || "/placeholder.svg";
+  };
+
+  // Check if we have both before and after images
+  const hasBeforeAfter = beforeImage && afterImage;
+
   return (
     <Card
       className={`group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 ${className}`}
@@ -64,49 +76,45 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* Image Section */}
       <div className="relative aspect-[16/10] overflow-hidden bg-gray-50">
         <img
-          src={showAfter ?
-            (project.image_urls && project.image_urls[1] ? project.image_urls[1] : project.image_url) :
-            project.image_url || (project as any).beforeImageURL
-          }
+          src={getCurrentImage()}
           alt={`${project.title} - ${showAfter ? "After" : "Before"}`}
           className={`w-full h-full object-cover transition-all duration-500 project-image ${imageLoaded ? "loaded" : ""}`}
           loading="eager"
           onLoad={() => setImageLoaded(true)}
           onError={(e) => {
-            const imageUrl = showAfter
-              ? (project.image_urls && project.image_urls[1] ? project.image_urls[1] : project.image_url)
-              : project.image_url || (project as any).beforeImageURL;
-            console.warn("Image load failed, using placeholder:", imageUrl);
+            console.warn("Image load failed, using placeholder");
             (e.target as HTMLImageElement).src = "/placeholder.svg";
             setImageLoaded(true);
           }}
         />
 
-        {/* Before/After Toggle - Bottom Center of Image */}
-        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2">
-          <div className="flex items-center bg-white/95 backdrop-blur-sm rounded-full p-0.5 shadow-lg border border-white/20">
-            <button
-              onClick={() => setShowAfter(false)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
-                !showAfter
-                  ? "bg-primary text-white shadow-sm"
-                  : "text-gray-600 hover:text-gray-900"
-              }`}
-            >
-              Before
-            </button>
-            <button
-              onClick={() => setShowAfter(true)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
-                showAfter
-                  ? "bg-primary text-white shadow-sm"
-                  : "text-gray-600 hover:text-gray-900"
-              }`}
-            >
-              After
-            </button>
+        {/* Before/After Toggle - Only show if we have both images */}
+        {hasBeforeAfter && (
+          <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2">
+            <div className="flex items-center bg-white/95 backdrop-blur-sm rounded-full p-0.5 shadow-lg border border-white/20">
+              <button
+                onClick={() => setShowAfter(false)}
+                className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
+                  !showAfter
+                    ? "bg-primary text-white shadow-sm"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                Before
+              </button>
+              <button
+                onClick={() => setShowAfter(true)}
+                className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
+                  showAfter
+                    ? "bg-primary text-white shadow-sm"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                After
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Content Section */}
@@ -116,15 +124,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           {project.title}
         </h3>
 
-        {/* Top Row: Customer & Location | Date & Type */}
+        {/* Top Row: Customer & Date */}
         <div className="flex items-center justify-between mb-2 text-sm">
           <div className="flex items-center space-x-1 text-gray-600">
             <User className="w-3.5 h-3.5 text-primary" />
-            <span className="font-medium">{project.customer_name || (project as any).customerName}</span>
+            <span className="font-medium">{project.customer_name}</span>
           </div>
           <div className="flex items-center space-x-1 text-gray-500">
             <Calendar className="w-3.5 h-3.5 text-primary" />
-            <span>{formatDate(project.completed_date || (project as any).completedDate)}</span>
+            <span>{formatDate(project.completed_date)}</span>
           </div>
         </div>
 
@@ -141,9 +149,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         {/* Description */}
-        <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
-          {project.description}
-        </p>
+        {project.description && (
+          <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+            {project.description}
+          </p>
+        )}
       </div>
     </Card>
   );

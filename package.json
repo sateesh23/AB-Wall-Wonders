@@ -8,10 +8,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest --run",
-    "format.fix": "prettier --write .",
-    "typecheck": "tsc",
-    "vercel-build": "npm run build"
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "vercel-build": "npm run typecheck && npm run build"
   },
   "dependencies": {
     "@sanity/client": "^7.8.2",

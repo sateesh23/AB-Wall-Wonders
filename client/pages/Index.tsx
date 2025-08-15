@@ -9,7 +9,6 @@ import { HomepageProjects } from "@/components/ui/homepage-projects";
 import { MinimalFeedbackForm } from "@/components/ui/minimal-feedback-form";
 
 import type { SupabaseProject } from "@/lib/supabase";
-import { projectsData } from "@/data/projects-data";
 import {
   Star,
   ArrowRight,
@@ -81,13 +80,12 @@ export default function Index() {
   const [recentProjects, setRecentProjects] = useState<SupabaseProject[]>([]);
   const [projectsLoading, setProjectsLoading] = useState(true);
 
-  // Load recent projects for homepage
+  // Load recent projects for homepage - ONLY from Supabase
   useEffect(() => {
     const loadRecentProjects = async () => {
       try {
         console.log("🔄 Loading recent projects for homepage...");
 
-        // Try to load from Supabase first
         const { getRecentProjects } = await import("@/lib/supabase-service");
         const { isSupabaseConfigured } = await import("@/lib/supabase");
 
@@ -97,42 +95,18 @@ export default function Index() {
             console.log(
               `📊 Supabase returned ${supabaseProjects.length} projects`,
             );
-
-            // If Supabase returns projects, use them
-            if (supabaseProjects.length > 0) {
-              setRecentProjects(supabaseProjects);
-              return;
-            }
-
-            // If Supabase returns empty array (no projects uploaded), use static data for demo
-            console.log(
-              "📊 Supabase returned empty, using static data for demo",
-            );
+            setRecentProjects(supabaseProjects);
           } catch (supabaseError: any) {
-            console.warn(
-              "Supabase error, falling back to static data:",
-              supabaseError.message,
-            );
+            console.warn("Supabase error:", supabaseError.message);
+            setRecentProjects([]);
           }
-        }
-
-        // Fallback to static data
-        const { projectsData } = await import("@/data/projects-data");
-        const recentStatic = projectsData.slice(0, 6);
-        console.log(
-          `📊 Using ${recentStatic.length} static projects for homepage`,
-        );
-        setRecentProjects(recentStatic as any);
-      } catch (error) {
-        console.error("Error loading recent projects:", error);
-        // Final fallback to static data on any error
-        try {
-          const { projectsData } = await import("@/data/projects-data");
-          setRecentProjects(projectsData.slice(0, 6));
-        } catch (staticError) {
-          console.error("Failed to load static data:", staticError);
+        } else {
+          console.log("📊 Supabase not configured");
           setRecentProjects([]);
         }
+      } catch (error) {
+        console.error("Error loading recent projects:", error);
+        setRecentProjects([]);
       } finally {
         setProjectsLoading(false);
       }
@@ -169,14 +143,6 @@ export default function Index() {
       default:
         return category;
     }
-  };
-
-  const isRecentProject = (project: ProjectData) => {
-    if (!project.date) return false;
-    const projectDate = new Date(project.date);
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-    return projectDate >= thirtyDaysAgo;
   };
 
   return (
