@@ -120,32 +120,48 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* Content Section */}
       <div className="p-4">
         {/* Title */}
-        <h3 className="font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+        <h3 className="font-semibold text-gray-900 mb-4 line-clamp-2 group-hover:text-primary transition-colors">
           {project.title}
         </h3>
 
-        {/* Top Row: Customer & Date */}
-        <div className="flex items-center justify-between mb-2 text-sm">
-          <div className="flex items-center space-x-1 text-gray-600">
-            <User className="w-3.5 h-3.5 text-primary" />
-            <span className="font-medium">{project.customer_name}</span>
+        {/* Stack Layout: Customer Name */}
+        <div className="flex items-center space-x-2 mb-3">
+          <div className="flex items-center justify-center w-8 h-8 bg-primary/10 rounded-full">
+            <User className="w-4 h-4 text-primary" />
           </div>
-          <div className="flex items-center space-x-1 text-gray-500">
-            <Calendar className="w-3.5 h-3.5 text-primary" />
-            <span>{formatDate(project.completed_date)}</span>
+          <div>
+            <span className="text-xs text-gray-500 uppercase tracking-wide font-medium">Customer</span>
+            <p className="font-semibold text-gray-900">{project.customer_name}</p>
           </div>
         </div>
 
-        {/* Bottom Row: Location & Type */}
-        <div className="flex items-center justify-between mb-3 text-sm">
-          <div className="flex items-center space-x-1 text-gray-600">
-            <MapPin className="w-3.5 h-3.5 text-primary" />
-            <span>{project.location}</span>
+        {/* Stack Layout: Location */}
+        <div className="flex items-center space-x-2 mb-3">
+          <div className="flex items-center justify-center w-8 h-8 bg-primary/10 rounded-full">
+            <MapPin className="w-4 h-4 text-primary" />
           </div>
-          <div className="text-gray-500">
-            <span className="font-medium">Type:</span>{" "}
+          <div>
+            <span className="text-xs text-gray-500 uppercase tracking-wide font-medium">Location</span>
+            <p className="font-semibold text-gray-900">{project.location}</p>
+          </div>
+        </div>
+
+        {/* Stack Layout: Date */}
+        <div className="flex items-center space-x-2 mb-4">
+          <div className="flex items-center justify-center w-8 h-8 bg-primary/10 rounded-full">
+            <Calendar className="w-4 h-4 text-primary" />
+          </div>
+          <div>
+            <span className="text-xs text-gray-500 uppercase tracking-wide font-medium">Completed</span>
+            <p className="font-semibold text-gray-900">{formatDate(project.completed_date)}</p>
+          </div>
+        </div>
+
+        {/* Service Type Badge */}
+        <div className="mb-4">
+          <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
             {project.subcategory || getServiceLabel(project.service)}
-          </div>
+          </Badge>
         </div>
 
         {/* Description */}
