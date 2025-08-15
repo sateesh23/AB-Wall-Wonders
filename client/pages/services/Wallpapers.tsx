@@ -144,7 +144,6 @@ const wallpaperTypes = [
 ];
 
 export default function Wallpapers() {
-  const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
 
   // Scroll to top when component mounts
   useEffect(() => {

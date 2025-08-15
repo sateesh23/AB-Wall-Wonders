@@ -137,7 +137,6 @@ const blindTypes = [
 ];
 
 export default function Blinds() {
-  const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
 
   // Scroll to top when component mounts
   useEffect(() => {

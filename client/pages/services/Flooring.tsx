@@ -67,7 +67,6 @@ const flooringTypes = [
 ];
 
 export default function Flooring() {
-  const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
 
   // Scroll to top when component mounts
   useEffect(() => {
