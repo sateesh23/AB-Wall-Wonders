@@ -5,11 +5,14 @@ export const validateSupabaseConfig = () => {
   const url = import.meta.env.VITE_SUPABASE_URL;
   const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-  console.log("🔧 Validating Supabase config:", {
-    url: url || "NOT SET",
-    keySet: key ? "SET" : "NOT SET",
-    keyLength: key?.length || 0
-  });
+  // Only log in development
+  if (import.meta.env.DEV) {
+    console.log("🔧 Validating Supabase config:", {
+      url: url || "NOT SET",
+      keySet: key ? "SET" : "NOT SET",
+      keyLength: key?.length || 0
+    });
+  }
 
   const errors: string[] = [];
 
