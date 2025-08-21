@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { testSupabaseConnection } from '@/lib/supabase-service';
+import { testSupabaseConnection } from '@/lib/supabase';
 
 export const SupabaseDebug: React.FC = () => {
   const [status, setStatus] = useState<any>(null);
