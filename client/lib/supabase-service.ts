@@ -213,7 +213,8 @@ export const deleteProject = async (id: number): Promise<void> => {
   }
 };
 
-// testSupabaseConnection is now imported from ./supabase
+// Re-export testSupabaseConnection for backward compatibility
+export { testSupabaseConnection };
 
 // Image URL validation helper
 export const validateImageURL = (url: string): boolean => {
