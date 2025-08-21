@@ -65,10 +65,14 @@ export const createSupabaseClient = () => {
   
   try {
     const client = createClient(validation.config.url, validation.config.key);
-    console.log("✅ Supabase client created successfully");
+    if (import.meta.env.DEV) {
+      console.log("✅ Supabase client created successfully");
+    }
     return client;
   } catch (error) {
-    console.error("❌ Failed to create Supabase client:", error);
+    if (import.meta.env.DEV) {
+      console.error("❌ Failed to create Supabase client:", error);
+    }
     return null;
   }
 };
