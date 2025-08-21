@@ -2,6 +2,7 @@ import {
   supabase,
   type SupabaseProject,
   isSupabaseConfigured,
+  testSupabaseConnection,
 } from "./supabase";
 
 // Get all projects
