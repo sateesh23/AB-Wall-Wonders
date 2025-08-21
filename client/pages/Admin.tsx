@@ -123,7 +123,9 @@ export default function Admin() {
 
       setSupabaseStatus(result.success ? "connected" : "error");
     } catch (error) {
-      console.error("❌ Admin: Error during Supabase status check:", error);
+      if (import.meta.env.DEV) {
+        console.error("❌ Admin: Error during Supabase status check:", error);
+      }
       setSupabaseStatus("error");
     }
   };
