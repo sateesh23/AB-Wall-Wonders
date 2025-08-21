@@ -1,19 +1,10 @@
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseUrl =
-  import.meta.env.VITE_SUPABASE_URL ||
-  "https://gbtotyrhqbcxbvcyfygg.supabase.co";
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || "";
-
-// Check if Supabase is properly configured
-export const isSupabaseConfigured = () => {
-  return !!(supabaseUrl && supabaseAnonKey && supabaseAnonKey !== "");
-};
-
-// Create Supabase client only if properly configured
-export const supabase = isSupabaseConfigured()
-  ? createClient(supabaseUrl, supabaseAnonKey)
-  : null;
+// Re-export from the improved configuration module
+export {
+  supabase,
+  isSupabaseConfigured,
+  testSupabaseConnection,
+  getSupabaseStatus
+} from "./supabase-config";
 
 // Database types
 export interface SupabaseProject {
