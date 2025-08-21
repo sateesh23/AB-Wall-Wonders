@@ -213,43 +213,7 @@ export const deleteProject = async (id: number): Promise<void> => {
   }
 };
 
-// Test Supabase connection
-export const testSupabaseConnection = async () => {
-  if (!isSupabaseConfigured() || !supabase) {
-    return {
-      success: false,
-      error: "Supabase not configured",
-      url: "not-set",
-      environment: import.meta.env.DEV ? "development" : "production",
-    };
-  }
-
-  try {
-    const { error } = await supabase.from("projects").select("count").limit(1);
-
-    if (error) {
-      return {
-        success: false,
-        error: error.message,
-        url: import.meta.env.VITE_SUPABASE_URL,
-        environment: import.meta.env.DEV ? "development" : "production",
-      };
-    }
-
-    return {
-      success: true,
-      url: import.meta.env.VITE_SUPABASE_URL,
-      environment: import.meta.env.DEV ? "development" : "production",
-    };
-  } catch (error: any) {
-    return {
-      success: false,
-      error: error.message || "Connection failed",
-      url: import.meta.env.VITE_SUPABASE_URL,
-      environment: import.meta.env.DEV ? "development" : "production",
-    };
-  }
-};
+// testSupabaseConnection is now imported from ./supabase
 
 // Image URL validation helper
 export const validateImageURL = (url: string): boolean => {
