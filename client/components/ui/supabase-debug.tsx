@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { testSupabaseConnection } from '@/lib/supabase';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { testSupabaseConnection } from "@/lib/supabase";
 
 export const SupabaseDebug: React.FC = () => {
   const [status, setStatus] = useState<any>(null);
@@ -11,30 +11,34 @@ export const SupabaseDebug: React.FC = () => {
   const testConnection = async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
-      console.log('🔍 Testing Supabase connection...');
-      
+      console.log("🔍 Testing Supabase connection...");
+
       // Get environment variables
       const envVars = {
         VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
-        VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY ? 'Set' : 'Missing',
+        VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY
+          ? "Set"
+          : "Missing",
       };
 
-      console.log('🔧 Environment variables:', envVars);
-      
+      console.log("🔧 Environment variables:", envVars);
+
       // Test Supabase connection
       const connectionTest = await testSupabaseConnection();
-      console.log('🔗 Connection test result:', connectionTest);
-      
+      console.log("🔗 Connection test result:", connectionTest);
+
       setStatus({
         envVars,
-        isConfigured: !!(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY),
+        isConfigured: !!(
+          import.meta.env.VITE_SUPABASE_URL &&
+          import.meta.env.VITE_SUPABASE_ANON_KEY
+        ),
         connectionTest,
       });
-      
     } catch (err: any) {
-      console.error('❌ Supabase test error:', err);
+      console.error("❌ Supabase test error:", err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -49,7 +53,7 @@ export const SupabaseDebug: React.FC = () => {
       <CardContent className="space-y-4">
         <div className="space-y-4">
           <Button onClick={testConnection} disabled={loading}>
-            {loading ? 'Testing...' : 'Test Supabase Connection'}
+            {loading ? "Testing..." : "Test Supabase Connection"}
           </Button>
 
           {error && (
@@ -64,8 +68,12 @@ export const SupabaseDebug: React.FC = () => {
               {/* Configuration Status */}
               <div className="p-4 bg-gray-50 border rounded-md">
                 <h3 className="font-medium mb-2">Configuration Status:</h3>
-                <p className={`font-mono text-sm ${status.isConfigured ? 'text-green-600' : 'text-red-600'}`}>
-                  {status.isConfigured ? '✓ Supabase is configured' : '❌ Supabase not configured'}
+                <p
+                  className={`font-mono text-sm ${status.isConfigured ? "text-green-600" : "text-red-600"}`}
+                >
+                  {status.isConfigured
+                    ? "✓ Supabase is configured"
+                    : "❌ Supabase not configured"}
                 </p>
               </div>
 
@@ -76,8 +84,18 @@ export const SupabaseDebug: React.FC = () => {
                   {Object.entries(status.envVars).map(([key, value]) => (
                     <div key={key} className="flex justify-between">
                       <span className="text-gray-600">{key}:</span>
-                      <span className={typeof value === 'string' && value.includes('Missing') ? 'text-red-600' : 'text-green-600'}>
-                        {typeof value === 'string' ? value : value ? 'Set' : 'Missing'}
+                      <span
+                        className={
+                          typeof value === "string" && value.includes("Missing")
+                            ? "text-red-600"
+                            : "text-green-600"
+                        }
+                      >
+                        {typeof value === "string"
+                          ? value
+                          : value
+                            ? "Set"
+                            : "Missing"}
                       </span>
                     </div>
                   ))}
@@ -90,27 +108,41 @@ export const SupabaseDebug: React.FC = () => {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span>Status:</span>
-                    <span className={status.connectionTest.success ? 'text-green-600' : 'text-red-600'}>
-                      {status.connectionTest.success ? '✓ Connected' : '❌ Failed'}
+                    <span
+                      className={
+                        status.connectionTest.success
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }
+                    >
+                      {status.connectionTest.success
+                        ? "✓ Connected"
+                        : "❌ Failed"}
                     </span>
                   </div>
-                  
+
                   {status.connectionTest.url && (
                     <div className="flex justify-between">
                       <span>URL:</span>
-                      <span className="font-mono text-sm">{status.connectionTest.url}</span>
+                      <span className="font-mono text-sm">
+                        {status.connectionTest.url}
+                      </span>
                     </div>
                   )}
-                  
+
                   <div className="flex justify-between">
                     <span>Environment:</span>
-                    <span className="font-mono text-sm">{status.connectionTest.environment}</span>
+                    <span className="font-mono text-sm">
+                      {status.connectionTest.environment}
+                    </span>
                   </div>
-                  
+
                   {status.connectionTest.error && (
                     <div className="mt-2">
                       <span className="text-red-600">Error:</span>
-                      <p className="text-red-600 text-sm font-mono">{status.connectionTest.error}</p>
+                      <p className="text-red-600 text-sm font-mono">
+                        {status.connectionTest.error}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -119,7 +151,9 @@ export const SupabaseDebug: React.FC = () => {
               {/* Setup Instructions */}
               {!status.isConfigured && (
                 <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-md">
-                  <h3 className="font-medium mb-2 text-yellow-800">Setup Required:</h3>
+                  <h3 className="font-medium mb-2 text-yellow-800">
+                    Setup Required:
+                  </h3>
                   <div className="text-yellow-700 text-sm space-y-1">
                     <p>1. Set VITE_SUPABASE_URL environment variable</p>
                     <p>2. Set VITE_SUPABASE_ANON_KEY environment variable</p>

@@ -10,7 +10,7 @@ export const validateSupabaseConfig = () => {
     console.log("🔧 Validating Supabase config:", {
       url: url || "NOT SET",
       keySet: key ? "SET" : "NOT SET",
-      keyLength: key?.length || 0
+      keyLength: key?.length || 0,
     });
   }
 
@@ -31,38 +31,38 @@ export const validateSupabaseConfig = () => {
   return {
     isValid: errors.length === 0,
     errors,
-    config: { url, key }
+    config: { url, key },
   };
 };
 
 // Get configuration status
 export const getSupabaseStatus = () => {
   const validation = validateSupabaseConfig();
-  
+
   if (!validation.isValid) {
     return {
       status: "not-configured" as const,
       message: "Supabase not configured",
-      errors: validation.errors
+      errors: validation.errors,
     };
   }
-  
+
   return {
     status: "configured" as const,
     message: "Supabase configured",
-    config: validation.config
+    config: validation.config,
   };
 };
 
 // Create Supabase client with validation
 export const createSupabaseClient = () => {
   const validation = validateSupabaseConfig();
-  
+
   if (!validation.isValid) {
     console.warn("⚠️ Supabase configuration errors:", validation.errors);
     return null;
   }
-  
+
   try {
     const client = createClient(validation.config.url, validation.config.key);
     if (import.meta.env.DEV) {
@@ -78,7 +78,8 @@ export const createSupabaseClient = () => {
 };
 
 // Check if Supabase is properly configured
-export const isSupabaseConfigured = () => getSupabaseStatus().status === "configured";
+export const isSupabaseConfigured = () =>
+  getSupabaseStatus().status === "configured";
 
 // Create Supabase client instance
 export const supabase = createSupabaseClient();
@@ -103,29 +104,29 @@ export const testSupabaseConnection = async () => {
       error: "Configuration missing",
       details: status.errors,
       url: import.meta.env.VITE_SUPABASE_URL || "not-set",
-      environment: import.meta.env.DEV ? "development" : "production"
+      environment: import.meta.env.DEV ? "development" : "production",
     };
   }
-  
+
   const client = createSupabaseClient();
   if (!client) {
     return {
       success: false,
       error: "Failed to create client",
       url: status.config.url,
-      environment: import.meta.env.DEV ? "development" : "production"
+      environment: import.meta.env.DEV ? "development" : "production",
     };
   }
-  
+
   try {
     console.log("🔍 Testing Supabase connection...");
-    
+
     // Test basic connection
     const { error: connectionError } = await client
       .from("projects")
       .select("count")
       .limit(1);
-    
+
     if (connectionError) {
       console.error("❌ Connection test failed:", connectionError);
       return {
@@ -134,25 +135,24 @@ export const testSupabaseConnection = async () => {
         code: connectionError.code,
         hint: connectionError.hint,
         url: status.config.url,
-        environment: import.meta.env.DEV ? "development" : "production"
+        environment: import.meta.env.DEV ? "development" : "production",
       };
     }
-    
+
     console.log("✅ Supabase connection successful");
     return {
       success: true,
       message: "Connected successfully",
       url: status.config.url,
-      environment: import.meta.env.DEV ? "development" : "production"
+      environment: import.meta.env.DEV ? "development" : "production",
     };
-    
   } catch (error: any) {
     console.error("❌ Connection test error:", error);
     return {
       success: false,
       error: error.message || "Unknown connection error",
       url: status.config.url,
-      environment: import.meta.env.DEV ? "development" : "production"
+      environment: import.meta.env.DEV ? "development" : "production",
     };
   }
 };

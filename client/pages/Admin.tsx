@@ -104,7 +104,7 @@ export default function Admin() {
           hasUrl,
           hasKey,
           url: import.meta.env.VITE_SUPABASE_URL,
-          keySet: hasKey ? "SET" : "NOT SET"
+          keySet: hasKey ? "SET" : "NOT SET",
         });
       }
 
