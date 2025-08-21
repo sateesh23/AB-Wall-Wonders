@@ -4,21 +4,27 @@ import { createClient } from "@supabase/supabase-js";
 export const validateSupabaseConfig = () => {
   const url = import.meta.env.VITE_SUPABASE_URL;
   const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
-  
+
+  console.log("🔧 Validating Supabase config:", {
+    url: url || "NOT SET",
+    keySet: key ? "SET" : "NOT SET",
+    keyLength: key?.length || 0
+  });
+
   const errors: string[] = [];
-  
+
   if (!url) {
     errors.push("VITE_SUPABASE_URL is required");
   } else if (!url.startsWith("https://") || !url.includes(".supabase.co")) {
     errors.push("VITE_SUPABASE_URL must be a valid Supabase URL");
   }
-  
+
   if (!key) {
     errors.push("VITE_SUPABASE_ANON_KEY is required");
   } else if (key.length < 100) {
     errors.push("VITE_SUPABASE_ANON_KEY appears to be invalid (too short)");
   }
-  
+
   return {
     isValid: errors.length === 0,
     errors,
