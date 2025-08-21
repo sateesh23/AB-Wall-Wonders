@@ -1,4 +1,8 @@
 {
+  "env": {
+    "VITE_SUPABASE_URL": "https://gbtotyrhqbcxbvcyfygg.supabase.co",
+    "VITE_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdidG90eXJocWJjeGJ2Y3lmeWdnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMTA0OTEsImV4cCI6MjA3MDc4NjQ5MX0.mu6ImykU6ra7SmTeX79ANCnMM4-uCFjotCQD3AX1dDQ"
+  },
   "rewrites": [
     {
       "source": "/((?!api|_next/static|_next/image|favicon.ico|assets).*)",
