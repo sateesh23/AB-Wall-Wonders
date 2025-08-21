@@ -18,7 +18,8 @@ import {
   LogOut,
 } from "lucide-react";
 import { SupabaseAdminService } from "@/lib/supabase-admin";
-import { testSupabaseConnection, getAllProjects } from "@/lib/supabase-service";
+import { getAllProjects } from "@/lib/supabase-service";
+import { testSupabaseConnection } from "@/lib/supabase";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import { AdminAuth } from "@/components/ui/admin-auth";
 import { SupabaseAdminUpload } from "@/components/ui/supabase-admin-upload";
