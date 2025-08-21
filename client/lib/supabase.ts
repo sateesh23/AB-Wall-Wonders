@@ -78,9 +78,13 @@ export const supabase = createSupabaseClient();
 
 // Test connection with detailed feedback
 export const testSupabaseConnection = async () => {
+  console.log("🔍 testSupabaseConnection: Starting...");
+
   const status = getSupabaseStatus();
-  
+  console.log("📊 testSupabaseConnection: Status check result:", status);
+
   if (status.status === "not-configured") {
+    console.log("❌ testSupabaseConnection: Not configured");
     return {
       success: false,
       error: "Configuration missing",
