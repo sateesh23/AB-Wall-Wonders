@@ -196,21 +196,31 @@ export default function Admin() {
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
-                <div
-                  className={`px-2 sm:px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
-                    supabaseStatus === "connected"
-                      ? "bg-green-100 text-green-800"
+                <div className="flex items-center space-x-2">
+                  <div
+                    className={`px-2 sm:px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
+                      supabaseStatus === "connected"
+                        ? "bg-green-100 text-green-800"
+                        : supabaseStatus === "error"
+                          ? "bg-red-100 text-red-800"
+                          : "bg-yellow-100 text-yellow-800"
+                    }`}
+                  >
+                    <span className="hidden sm:inline">Supabase: </span>
+                    {supabaseStatus === "connected"
+                      ? "Connected"
                       : supabaseStatus === "error"
-                        ? "bg-red-100 text-red-800"
-                        : "bg-yellow-100 text-yellow-800"
-                  }`}
-                >
-                  <span className="hidden sm:inline">Supabase: </span>
-                  {supabaseStatus === "connected"
-                    ? "Connected"
-                    : supabaseStatus === "error"
-                      ? "Not Configured"
-                      : "Checking..."}
+                        ? "Not Configured"
+                        : "Checking..."}
+                  </div>
+                  <Button
+                    onClick={checkSupabaseStatus}
+                    variant="outline"
+                    size="sm"
+                    className="text-xs px-2 py-1"
+                  >
+                    Test
+                  </Button>
                 </div>
                 <div className="flex space-x-2 w-full sm:w-auto">
                   <Button
