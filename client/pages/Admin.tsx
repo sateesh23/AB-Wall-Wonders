@@ -18,7 +18,8 @@ import {
   LogOut,
 } from "lucide-react";
 import { SupabaseAdminService } from "@/lib/supabase-admin";
-import { testSupabaseConnection, getAllProjects } from "@/lib/supabase-service";
+import { getAllProjects } from "@/lib/supabase-service";
+import { testSupabaseConnection } from "@/lib/supabase";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import { AdminAuth } from "@/components/ui/admin-auth";
 import { SupabaseAdminUpload } from "@/components/ui/supabase-admin-upload";
@@ -90,9 +91,41 @@ export default function Admin() {
 
   const checkSupabaseStatus = async () => {
     try {
+      if (import.meta.env.DEV) {
+        console.log("🔍 Admin: Starting Supabase connection test...");
+      }
+
+      // Check environment variables first
+      const hasUrl = !!import.meta.env.VITE_SUPABASE_URL;
+      const hasKey = !!import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+      if (import.meta.env.DEV) {
+        console.log("🔧 Admin: Environment check:", {
+          hasUrl,
+          hasKey,
+          url: import.meta.env.VITE_SUPABASE_URL,
+          keySet: hasKey ? "SET" : "NOT SET",
+        });
+      }
+
+      if (!hasUrl || !hasKey) {
+        if (import.meta.env.DEV) {
+          console.error("❌ Admin: Missing environment variables");
+        }
+        setSupabaseStatus("error");
+        return;
+      }
+
       const result = await testSupabaseConnection();
+      if (import.meta.env.DEV) {
+        console.log("📊 Admin: Connection test result:", result);
+      }
+
       setSupabaseStatus(result.success ? "connected" : "error");
     } catch (error) {
+      if (import.meta.env.DEV) {
+        console.error("❌ Admin: Error during Supabase status check:", error);
+      }
       setSupabaseStatus("error");
     }
   };
@@ -173,21 +206,31 @@ export default function Admin() {
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
-                <div
-                  className={`px-2 sm:px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
-                    supabaseStatus === "connected"
-                      ? "bg-green-100 text-green-800"
+                <div className="flex items-center space-x-2">
+                  <div
+                    className={`px-2 sm:px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
+                      supabaseStatus === "connected"
+                        ? "bg-green-100 text-green-800"
+                        : supabaseStatus === "error"
+                          ? "bg-red-100 text-red-800"
+                          : "bg-yellow-100 text-yellow-800"
+                    }`}
+                  >
+                    <span className="hidden sm:inline">Supabase: </span>
+                    {supabaseStatus === "connected"
+                      ? "Connected"
                       : supabaseStatus === "error"
-                        ? "bg-red-100 text-red-800"
-                        : "bg-yellow-100 text-yellow-800"
-                  }`}
-                >
-                  <span className="hidden sm:inline">Supabase: </span>
-                  {supabaseStatus === "connected"
-                    ? "Connected"
-                    : supabaseStatus === "error"
-                      ? "Not Configured"
-                      : "Checking..."}
+                        ? "Not Configured"
+                        : "Checking..."}
+                  </div>
+                  <Button
+                    onClick={checkSupabaseStatus}
+                    variant="outline"
+                    size="sm"
+                    className="text-xs px-2 py-1"
+                  >
+                    Test
+                  </Button>
                 </div>
                 <div className="flex space-x-2 w-full sm:w-auto">
                   <Button
