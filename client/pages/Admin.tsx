@@ -91,9 +91,31 @@ export default function Admin() {
 
   const checkSupabaseStatus = async () => {
     try {
+      console.log("🔍 Admin: Starting Supabase connection test...");
+
+      // Check environment variables first
+      const hasUrl = !!import.meta.env.VITE_SUPABASE_URL;
+      const hasKey = !!import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+      console.log("🔧 Admin: Environment check:", {
+        hasUrl,
+        hasKey,
+        url: import.meta.env.VITE_SUPABASE_URL,
+        keySet: hasKey ? "SET" : "NOT SET"
+      });
+
+      if (!hasUrl || !hasKey) {
+        console.error("❌ Admin: Missing environment variables");
+        setSupabaseStatus("error");
+        return;
+      }
+
       const result = await testSupabaseConnection();
+      console.log("📊 Admin: Connection test result:", result);
+
       setSupabaseStatus(result.success ? "connected" : "error");
     } catch (error) {
+      console.error("❌ Admin: Error during Supabase status check:", error);
       setSupabaseStatus("error");
     }
   };
