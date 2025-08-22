@@ -37,6 +37,9 @@ export default function SEO({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
 
+      {/* Google Search Console Verification */}
+      <meta name="google-site-verification" content="googled241a3bbe2a3e7fa" />
+
       {/* Canonical URL */}
       <link rel="canonical" href={currentUrl} />
 
