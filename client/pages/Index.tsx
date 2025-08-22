@@ -136,6 +136,12 @@ export default function Index() {
         url="https://yourdomain.com"
         type="website"
         structuredData={combinedStructuredData}
+        preloadImages={[
+          "/herooo.png",
+          "/images/wallpaperr.png",
+          "/images/blindss.png",
+          "/images/flooringg.png"
+        ]}
       />
       <div
       className="min-h-screen pb-16 md:pb-0"
