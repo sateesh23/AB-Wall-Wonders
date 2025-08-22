@@ -50,16 +50,20 @@ const Layout = () => {
   );
 };
 
-const App = () => (
-  <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>
-    </QueryClientProvider>
-  </HelmetProvider>
-);
+const App = () => {
+  const helmetContext = {};
+
+  return (
+    <HelmetProvider context={helmetContext}>
+      <QueryClientProvider client={queryClient}>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Layout />
+        </BrowserRouter>
+      </QueryClientProvider>
+    </HelmetProvider>
+  );
+};
 
 createRoot(document.getElementById("root")!).render(<App />);
