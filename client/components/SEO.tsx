@@ -16,7 +16,7 @@ interface SEOProps {
 export default function SEO({
   title = "AB Wall Wonders - Premium Wallpapers, Flooring & Blinds in Andhra Pradesh",
   description = "Transform your space with AB Wall Wonders! Premium wallpapers, luxury flooring, and custom blinds with expert installation across Andhra Pradesh. 15+ years experience, 5-year warranty. Get your free quote today!",
-  keywords = "wallpapers Andhra Pradesh, 3D wallpaper, interior flooring, vinyl flooring, window blinds, custom wallpaper, interior design Andhra Pradesh, home renovation, premium wallpapers, luxury flooring",
+  keywords = "AB Wall Wonders, ABwallwonders, AB wall wonders, abwallwonders, A B Wall Wonders, wallpapers Andhra Pradesh, 3D wallpaper, interior flooring, vinyl flooring, window blinds, custom wallpaper, interior design Andhra Pradesh, home renovation, premium wallpapers, luxury flooring, wall wonders, ab wall, wall wonder, abhay wall wonders, ab wonders",
   image = "/images/og-default.jpg",
   url = "https://ab-wall-wonders.vercel.app",
   type = "website",
@@ -123,12 +123,26 @@ export default function SEO({
       <meta name="MobileOptimized" content="320" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
+      {/* Brand Name Variations Meta Tags */}
+      <meta name="alternate-name" content="ABwallwonders" />
+      <meta name="alternate-name" content="AB wall wonders" />
+      <meta name="alternate-name" content="abwallwonders" />
+      <meta name="alternate-name" content="A B Wall Wonders" />
+      <meta name="alternate-name" content="Wall Wonders" />
+      <meta name="alternate-name" content="AB Wonders" />
+
       {/* Local Business Meta Tags */}
       <meta name="geo.placename" content="Andhra Pradesh, India" />
       <meta name="geo.region" content="IN-AP" />
+      <meta name="ICBM" content="15.9129, 79.7400" />
+      <meta name="geo.position" content="15.9129;79.7400" />
       <meta name="DC.title" content={fullTitle} />
       <meta name="DC.subject" content={keywords} />
       <meta name="DC.description" content={description} />
+
+      {/* Voice Search Optimization */}
+      <meta name="speakable" content="true" />
+      <meta name="voice-search-keywords" content="AB Wall Wonders near me, wallpaper installation Andhra Pradesh, best interior design company" />
 
       {/* Preload critical images */}
       {preloadImages.map((imageUrl, index) => (
