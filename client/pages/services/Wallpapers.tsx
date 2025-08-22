@@ -176,11 +176,6 @@ export default function Wallpapers() {
     "https://yourdomain.com/images/wallpaperr.png"
   );
 
-  const combinedStructuredData = [
-    wallpaperServiceSchema,
-    generateFAQSchema(wallpaperFAQs)
-  ];
-
   return (
     <>
       <SEO
