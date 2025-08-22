@@ -4,114 +4,114 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://abwallwonders.com/</loc>
+    <loc>https://ab-wall-wonders.vercel.app/</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://abwallwonders.com/herooo.png</image:loc>
+      <image:loc>https://ab-wall-wonders.vercel.app/herooo.png</image:loc>
       <image:title>AB Wall Wonders - Premium Wallpapers, Flooring & Blinds in Andhra Pradesh</image:title>
     </image:image>
   </url>
 
   <!-- Services Pages -->
   <url>
-    <loc>https://abwallwonders.com/services/wallpapers</loc>
+    <loc>https://ab-wall-wonders.vercel.app/services/wallpapers</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://abwallwonders.com/images/wallpaperr.png</image:loc>
+      <image:loc>https://ab-wall-wonders.vercel.app/images/wallpaperr.png</image:loc>
       <image:title>Custom & 3D Wallpapers in Andhra Pradesh | AB Wall Wonders</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://abwallwonders.com/services/flooring</loc>
+    <loc>https://ab-wall-wonders.vercel.app/services/flooring</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://abwallwonders.com/images/flooringg.png</image:loc>
+      <image:loc>https://ab-wall-wonders.vercel.app/images/flooringg.png</image:loc>
       <image:title>Luxury Vinyl Flooring & Artificial Grass in Andhra Pradesh</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://abwallwonders.com/services/blinds</loc>
+    <loc>https://ab-wall-wonders.vercel.app/services/blinds</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://abwallwonders.com/images/blindss.png</image:loc>
+      <image:loc>https://ab-wall-wonders.vercel.app/images/blindss.png</image:loc>
       <image:title>Custom Window Blinds & Motorized Blinds in Andhra Pradesh</image:title>
     </image:image>
   </url>
 
   <!-- Projects Page -->
   <url>
-    <loc>https://abwallwonders.com/projects</loc>
+    <loc>https://ab-wall-wonders.vercel.app/projects</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://abwallwonders.com/herooo.png</image:loc>
+      <image:loc>https://ab-wall-wonders.vercel.app/herooo.png</image:loc>
       <image:title>Our Projects Gallery - Wallpapers, Flooring & Blinds Portfolio</image:title>
     </image:image>
   </url>
 
   <!-- Service Category URLs for enhanced SEO -->
   <url>
-    <loc>https://abwallwonders.com/services/3d-wallpapers</loc>
+    <loc>https://ab-wall-wonders.vercel.app/services/3d-wallpapers</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://abwallwonders.com/services/botanical-wallpapers</loc>
+    <loc>https://ab-wall-wonders.vercel.app/services/botanical-wallpapers</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://abwallwonders.com/services/geometric-wallpapers</loc>
+    <loc>https://ab-wall-wonders.vercel.app/services/geometric-wallpapers</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://abwallwonders.com/services/vinyl-flooring</loc>
+    <loc>https://ab-wall-wonders.vercel.app/services/vinyl-flooring</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://abwallwonders.com/services/artificial-grass</loc>
+    <loc>https://ab-wall-wonders.vercel.app/services/artificial-grass</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://abwallwonders.com/services/motorized-blinds</loc>
+    <loc>https://ab-wall-wonders.vercel.app/services/motorized-blinds</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://abwallwonders.com/services/bamboo-blinds</loc>
+    <loc>https://ab-wall-wonders.vercel.app/services/bamboo-blinds</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://abwallwonders.com/services/roller-blinds</loc>
+    <loc>https://ab-wall-wonders.vercel.app/services/roller-blinds</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
