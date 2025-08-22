@@ -17,8 +17,8 @@ export default function SEO({
   title = "AB Wall Wonders - Premium Wallpapers, Flooring & Blinds in Andhra Pradesh",
   description = "Transform your space with AB Wall Wonders! Premium wallpapers, luxury flooring, and custom blinds with expert installation across Andhra Pradesh. 15+ years experience, 5-year warranty. Get your free quote today!",
   keywords = "wallpapers Andhra Pradesh, 3D wallpaper, interior flooring, vinyl flooring, window blinds, custom wallpaper, interior design Andhra Pradesh, home renovation, premium wallpapers, luxury flooring",
-  image = "https://yourdomain.com/images/og-image.jpg",
-  url = "https://yourdomain.com",
+  image = "/images/og-default.jpg",
+  url = "https://abwallwonders.com",
   type = "website",
   structuredData,
   noIndex = false,
@@ -89,7 +89,7 @@ export default function SEO({
       />
       <meta
         name="business:contact_data:website"
-        content="https://yourdomain.com"
+        content="https://abwallwonders.com"
       />
 
       {/* Additional SEO Meta Tags */}
@@ -98,6 +98,22 @@ export default function SEO({
       <meta name="application-name" content="AB Wall Wonders" />
       <meta name="theme-color" content="#16a34a" />
       <meta name="msapplication-TileColor" content="#16a34a" />
+
+      {/* Enhanced SEO Meta Tags */}
+      <meta name="language" content="English" />
+      <meta name="distribution" content="global" />
+      <meta name="rating" content="general" />
+      <meta name="revisit-after" content="7 days" />
+      <meta name="HandheldFriendly" content="True" />
+      <meta name="MobileOptimized" content="320" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+      {/* Local Business Meta Tags */}
+      <meta name="geo.placename" content="Andhra Pradesh, India" />
+      <meta name="geo.region" content="IN-AP" />
+      <meta name="DC.title" content={fullTitle} />
+      <meta name="DC.subject" content={keywords} />
+      <meta name="DC.description" content={description} />
 
       {/* Preload critical images */}
       {preloadImages.map((imageUrl, index) => (
@@ -132,24 +148,24 @@ export const generateLocalBusinessSchema = () => {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://yourdomain.com/#localbusiness",
+    "@id": "https://abwallwonders.com/#localbusiness",
     name: "AB Wall Wonders",
     alternateName: "AB Wall Wonders - Premium Wallpapers & Flooring",
     description:
       "Premium wallpapers, luxury flooring, and custom blinds installation across Andhra Pradesh. Expert craftsmanship with 15+ years experience and 5-year warranty.",
     image: {
       "@type": "ImageObject",
-      url: "https://yourdomain.com/images/ab-wall-wonders-logo.jpg",
+      url: "https://abwallwonders.com/images/ab-wall-wonders-logo.jpg",
       width: 800,
       height: 600,
     },
     logo: {
       "@type": "ImageObject",
-      url: "https://yourdomain.com/images/ab-wall-wonders-logo.jpg",
+      url: "https://abwallwonders.com/images/ab-wall-wonders-logo.jpg",
       width: 300,
       height: 300,
     },
-    url: "https://yourdomain.com",
+    url: "https://abwallwonders.com",
     telephone: "+91-8500900827",
     priceRange: "₹₹-₹₹₹",
     address: {
