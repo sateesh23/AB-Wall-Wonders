@@ -3,9 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { NovaHeroScroll } from "@/components/ui/nova-hero-scroll";
-import SEO, {
-  generateComprehensiveSchemas,
-} from "@/components/SEO";
+import SEO, { generateComprehensiveSchemas } from "@/components/SEO";
 import VoiceSearchSEO from "@/components/VoiceSearchSEO";
 import BrandMetaTags from "@/components/BrandMetaTags";
 import SearchEngineDiscovery from "@/components/SearchEngineDiscovery";
