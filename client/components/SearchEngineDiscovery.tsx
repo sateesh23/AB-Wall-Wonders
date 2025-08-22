@@ -7,60 +7,64 @@ interface SearchEngineDiscoveryProps {
 
 export default function SearchEngineDiscovery({
   pageName = "Homepage",
-  isHomepage = false
+  isHomepage = false,
 }: SearchEngineDiscoveryProps) {
-
   // Generate comprehensive discovery hints for search engines
   const generateDiscoveryHints = () => {
     const brandEntities = [
       "AB Wall Wonders",
-      "ABwallwonders", 
+      "ABwallwonders",
       "AB wall wonders",
       "abwallwonders",
       "A B Wall Wonders",
       "Wall Wonders",
-      "AB Wonders"
+      "AB Wonders",
     ];
 
     const businessCategories = [
       "Interior Design Company",
-      "Wallpaper Installation Service", 
+      "Wallpaper Installation Service",
       "Flooring Contractor",
       "Window Blinds Specialist",
       "Home Renovation Service",
       "Premium Interior Solutions",
       "Custom Wallpaper Installer",
       "Luxury Flooring Provider",
-      "Motorized Blinds Installation"
+      "Motorized Blinds Installation",
     ];
 
     const locationEntities = [
       "Andhra Pradesh",
       "AP India",
       "South India",
-      "Telugu States"
+      "Telugu States",
     ];
 
     const serviceEntities = [
       "3D Wallpapers",
-      "Botanical Wallpapers", 
+      "Botanical Wallpapers",
       "Geometric Wallpapers",
       "Vinyl Flooring",
       "Artificial Grass",
       "Motorized Blinds",
       "Roman Blinds",
-      "Roller Blinds"
+      "Roller Blinds",
     ];
 
     return {
       brandEntities,
       businessCategories,
       locationEntities,
-      serviceEntities
+      serviceEntities,
     };
   };
 
-  const { brandEntities, businessCategories, locationEntities, serviceEntities } = generateDiscoveryHints();
+  const {
+    brandEntities,
+    businessCategories,
+    locationEntities,
+    serviceEntities,
+  } = generateDiscoveryHints();
 
   // Generate entity relationship schema
   const generateEntityRelationships = () => {
@@ -74,8 +78,8 @@ export default function SearchEngineDiscovery({
           alternateName: brandEntities,
           sameAs: [
             "https://ab-wall-wonders.vercel.app",
-            "https://wa.me/8688723648"
-          ]
+            "https://wa.me/8688723648",
+          ],
         },
         {
           "@type": "Place",
@@ -83,18 +87,18 @@ export default function SearchEngineDiscovery({
           name: "Andhra Pradesh",
           containedInPlace: {
             "@type": "Country",
-            name: "India"
-          }
+            name: "India",
+          },
         },
         {
           "@type": "Service",
           "@id": "https://ab-wall-wonders.vercel.app/#services",
           name: "Interior Design Services",
           provider: {
-            "@id": "https://ab-wall-wonders.vercel.app/#organization"
+            "@id": "https://ab-wall-wonders.vercel.app/#organization",
           },
           areaServed: {
-            "@id": "https://ab-wall-wonders.vercel.app/#place"
+            "@id": "https://ab-wall-wonders.vercel.app/#place",
           },
           hasOfferCatalog: {
             "@type": "OfferCatalog",
@@ -105,12 +109,12 @@ export default function SearchEngineDiscovery({
               itemOffered: {
                 "@type": "Service",
                 name: service,
-                description: `Professional ${service} installation by AB Wall Wonders`
-              }
-            }))
-          }
-        }
-      ]
+                description: `Professional ${service} installation by AB Wall Wonders`,
+              },
+            })),
+          },
+        },
+      ],
     };
   };
 
@@ -122,45 +126,47 @@ export default function SearchEngineDiscovery({
       "@id": "https://ab-wall-wonders.vercel.app/#business-identity",
       name: "AB Wall Wonders",
       alternateName: brandEntities,
-      description: "Premier interior design company specializing in wallpapers, flooring, and blinds across Andhra Pradesh",
+      description:
+        "Premier interior design company specializing in wallpapers, flooring, and blinds across Andhra Pradesh",
       identifier: [
         {
           "@type": "PropertyValue",
           name: "Brand Name",
-          value: "AB Wall Wonders"
-        },
-        {
-          "@type": "PropertyValue", 
-          name: "Common Name",
-          value: "ABwallwonders"
+          value: "AB Wall Wonders",
         },
         {
           "@type": "PropertyValue",
-          name: "Short Name", 
-          value: "Wall Wonders"
+          name: "Common Name",
+          value: "ABwallwonders",
+        },
+        {
+          "@type": "PropertyValue",
+          name: "Short Name",
+          value: "Wall Wonders",
         },
         {
           "@type": "PropertyValue",
           name: "Business Category",
-          value: businessCategories.join(", ")
-        }
+          value: businessCategories.join(", "),
+        },
       ],
       knowsAbout: [
         ...serviceEntities,
         "Interior Design",
-        "Home Renovation", 
+        "Home Renovation",
         "Premium Installation Services",
-        "Custom Design Solutions"
+        "Custom Design Solutions",
       ],
       memberOf: {
         "@type": "Organization",
         name: "Interior Design Industry",
-        description: "Professional interior design and home improvement services"
+        description:
+          "Professional interior design and home improvement services",
       },
-      owns: serviceEntities.map(service => ({
+      owns: serviceEntities.map((service) => ({
         "@type": "Service",
         name: service,
-        description: `${service} installation and design services`
+        description: `${service} installation and design services`,
       })),
       foundingDate: "2020",
       slogan: "Transform Your Space with AB Wall Wonders",
@@ -168,8 +174,8 @@ export default function SearchEngineDiscovery({
         "15+ Years Experience",
         "100+ Satisfied Customers",
         "5-Year Warranty Coverage",
-        "Expert Installation Team"
-      ]
+        "Expert Installation Team",
+      ],
     };
   };
 
@@ -177,42 +183,60 @@ export default function SearchEngineDiscovery({
     <Helmet>
       {/* Advanced Search Engine Discovery Meta Tags */}
       <meta name="entity-recognition" content={brandEntities.join(", ")} />
-      <meta name="business-categories" content={businessCategories.join(", ")} />
+      <meta
+        name="business-categories"
+        content={businessCategories.join(", ")}
+      />
       <meta name="service-entities" content={serviceEntities.join(", ")} />
       <meta name="location-entities" content={locationEntities.join(", ")} />
-      
+
       {/* Search Engine Crawling Directives */}
-      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1, max-preview:-1" />
-      <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-      <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-      
+      <meta
+        name="robots"
+        content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1, max-preview:-1"
+      />
+      <meta
+        name="googlebot"
+        content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+      />
+      <meta
+        name="bingbot"
+        content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+      />
+
       {/* Content Discovery Hints */}
       <meta name="content-type" content="business-website" />
       <meta name="content-category" content="interior-design-services" />
       <meta name="primary-topic" content="wallpapers-flooring-blinds" />
-      <meta name="semantic-topics" content="interior design, home renovation, wallpaper installation, flooring services, window treatments" />
-      
+      <meta
+        name="semantic-topics"
+        content="interior design, home renovation, wallpaper installation, flooring services, window treatments"
+      />
+
       {/* Brand Authority Signals */}
       <meta name="brand-authority" content="established-2020" />
       <meta name="business-credibility" content="15-years-experience" />
       <meta name="service-coverage" content="andhra-pradesh-wide" />
-      <meta name="warranty-coverage" content="5-year-wallpapers-2-year-blinds" />
-      
+      <meta
+        name="warranty-coverage"
+        content="5-year-wallpapers-2-year-blinds"
+      />
+
       {/* Local Business Discovery */}
       <meta name="local-business-type" content="InteriorDesignCompany" />
       <meta name="service-radius" content="Andhra Pradesh, India" />
       <meta name="business-hours" content="Monday-Saturday 9AM-6PM" />
       <meta name="contact-method" content="phone-whatsapp-website" />
-      
+
       {/* Structured Data for Entity Recognition */}
       <script type="application/ld+json">
         {JSON.stringify(generateEntityRelationships())}
       </script>
-      
+
       <script type="application/ld+json">
         {JSON.stringify(generateBusinessIdentitySchema())}
       </script>
-      
+
       {/* Comprehensive BreadcrumbList for Homepage */}
       {isHomepage && (
         <script type="application/ld+json">
@@ -224,25 +248,25 @@ export default function SearchEngineDiscovery({
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ab-wall-wonders.vercel.app/"
+                item: "https://ab-wall-wonders.vercel.app/",
               },
               {
-                "@type": "ListItem", 
+                "@type": "ListItem",
                 position: 2,
                 name: "Services",
-                item: "https://ab-wall-wonders.vercel.app/#services"
+                item: "https://ab-wall-wonders.vercel.app/#services",
               },
               {
                 "@type": "ListItem",
                 position: 3,
                 name: "Projects",
-                item: "https://ab-wall-wonders.vercel.app/projects"
-              }
-            ]
+                item: "https://ab-wall-wonders.vercel.app/projects",
+              },
+            ],
           })}
         </script>
       )}
-      
+
       {/* Knowledge Graph Enhancement */}
       <script type="application/ld+json">
         {JSON.stringify({
@@ -252,13 +276,14 @@ export default function SearchEngineDiscovery({
             "@type": "LocalBusiness",
             name: "AB Wall Wonders",
             alternateName: brandEntities,
-            description: "AB Wall Wonders (ABwallwonders) is the leading interior design company in Andhra Pradesh, specializing in premium wallpapers, luxury flooring, and custom blinds. Known locally as Wall Wonders, we provide expert installation services with 15+ years of experience.",
+            description:
+              "AB Wall Wonders (ABwallwonders) is the leading interior design company in Andhra Pradesh, specializing in premium wallpapers, luxury flooring, and custom blinds. Known locally as Wall Wonders, we provide expert installation services with 15+ years of experience.",
             subjectOf: {
               "@type": "WebPage",
               url: "https://ab-wall-wonders.vercel.app",
-              name: "AB Wall Wonders - Premium Interior Design Services"
-            }
-          }
+              name: "AB Wall Wonders - Premium Interior Design Services",
+            },
+          },
         })}
       </script>
 
@@ -275,24 +300,25 @@ export default function SearchEngineDiscovery({
             {
               "@type": "SearchAction",
               target: {
-                "@type": "EntryPoint", 
-                urlTemplate: "https://ab-wall-wonders.vercel.app/search?q={search_term_string}"
+                "@type": "EntryPoint",
+                urlTemplate:
+                  "https://ab-wall-wonders.vercel.app/search?q={search_term_string}",
               },
-              "query-input": "required name=search_term_string"
+              "query-input": "required name=search_term_string",
             },
             {
               "@type": "ContactAction",
               target: {
                 "@type": "EntryPoint",
-                urlTemplate: "https://wa.me/8688723648"
-              }
-            }
+                urlTemplate: "https://wa.me/8688723648",
+              },
+            },
           ],
           publisher: {
             "@type": "Organization",
             name: "AB Wall Wonders",
-            alternateName: brandEntities
-          }
+            alternateName: brandEntities,
+          },
         })}
       </script>
     </Helmet>
@@ -300,13 +326,18 @@ export default function SearchEngineDiscovery({
 }
 
 // Helper function to generate page-specific discovery meta tags
-export const generatePageDiscoveryTags = (pageName: string, service?: string) => {
+export const generatePageDiscoveryTags = (
+  pageName: string,
+  service?: string,
+) => {
   const tags = {
-    "entity-focus": service ? `${service} by AB Wall Wonders` : "AB Wall Wonders services",
-    "page-purpose": `Information about ${service || 'interior design'} services`,
+    "entity-focus": service
+      ? `${service} by AB Wall Wonders`
+      : "AB Wall Wonders services",
+    "page-purpose": `Information about ${service || "interior design"} services`,
     "content-intent": "commercial-service-information",
-    "user-intent": "service-discovery-contact"
+    "user-intent": "service-discovery-contact",
   };
-  
+
   return tags;
 };

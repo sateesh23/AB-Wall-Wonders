@@ -131,10 +131,7 @@ export default function Index() {
         service="interior design"
         brandFocus="general"
       />
-      <SearchEngineDiscovery
-        pageName="Homepage"
-        isHomepage={true}
-      />
+      <SearchEngineDiscovery pageName="Homepage" isHomepage={true} />
       <div
         className="min-h-screen pb-16 md:pb-0"
         style={{

@@ -53,7 +53,7 @@ export default function OptimizedImage({
       },
       {
         rootMargin: "50px", // Start loading 50px before the image comes into view
-      }
+      },
     );
 
     if (imgRef.current) {
@@ -68,17 +68,17 @@ export default function OptimizedImage({
   // Generate srcSet for responsive images
   const generateSrcSet = (baseSrc: string) => {
     if (!width) return undefined;
-    
+
     const breakpoints = [480, 768, 1024, 1280, 1536];
     const srcSet = breakpoints
-      .filter(bp => bp <= width * 2) // Don't generate larger than 2x the target size
-      .map(bp => {
+      .filter((bp) => bp <= width * 2) // Don't generate larger than 2x the target size
+      .map((bp) => {
         // In a real implementation, you'd use a service like Cloudinary or similar
         // For now, we'll use the original image
         return `${baseSrc} ${bp}w`;
       })
       .join(", ");
-    
+
     return srcSet || undefined;
   };
 
@@ -100,7 +100,7 @@ export default function OptimizedImage({
   // Generate blur placeholder
   const getBlurDataURL = () => {
     if (blurDataURL) return blurDataURL;
-    
+
     // Generate a simple blur placeholder
     return "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiNmM2Y0ZjYiIG9mZnNldD0iMCUiLz48c3RvcCBzdG9wLWNvbG9yPSIjZTVlN2ViIiBvZmZzZXQ9IjEwMCUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==";
   };
@@ -110,7 +110,7 @@ export default function OptimizedImage({
       className={cn(
         "relative overflow-hidden",
         !isLoaded && placeholder === "blur" && "bg-gray-200",
-        className
+        className,
       )}
       style={{ width, height }}
     >
@@ -139,7 +139,7 @@ export default function OptimizedImage({
           className={cn(
             "transition-opacity duration-300",
             isLoaded ? "opacity-100" : "opacity-0",
-            "w-full h-full object-cover"
+            "w-full h-full object-cover",
           )}
           onLoad={handleLoad}
           onError={handleError}
@@ -167,7 +167,12 @@ export default function OptimizedImage({
 }
 
 // Helper component for hero images with specific optimizations
-export function HeroImage({ src, alt, className, ...props }: OptimizedImageProps) {
+export function HeroImage({
+  src,
+  alt,
+  className,
+  ...props
+}: OptimizedImageProps) {
   return (
     <OptimizedImage
       src={src}
@@ -184,7 +189,12 @@ export function HeroImage({ src, alt, className, ...props }: OptimizedImageProps
 }
 
 // Helper component for project gallery images
-export function ProjectImage({ src, alt, className, ...props }: OptimizedImageProps) {
+export function ProjectImage({
+  src,
+  alt,
+  className,
+  ...props
+}: OptimizedImageProps) {
   return (
     <OptimizedImage
       src={src}
@@ -200,7 +210,12 @@ export function ProjectImage({ src, alt, className, ...props }: OptimizedImagePr
 }
 
 // Helper component for service thumbnails
-export function ServiceImage({ src, alt, className, ...props }: OptimizedImageProps) {
+export function ServiceImage({
+  src,
+  alt,
+  className,
+  ...props
+}: OptimizedImageProps) {
   return (
     <OptimizedImage
       src={src}

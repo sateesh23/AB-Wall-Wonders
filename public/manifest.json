@@ -66,7 +66,9 @@
       "short_name": "Wallpapers",
       "description": "Browse our premium wallpaper collection",
       "url": "/services/wallpapers",
-      "icons": [{ "src": "/images/icons/wallpaper-96x96.png", "sizes": "96x96" }]
+      "icons": [
+        { "src": "/images/icons/wallpaper-96x96.png", "sizes": "96x96" }
+      ]
     },
     {
       "name": "Flooring",

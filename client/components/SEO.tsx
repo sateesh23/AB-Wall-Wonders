@@ -97,11 +97,35 @@ export default function SEO({
 
       {/* Favicons */}
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png" />
-      <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/icon-192x192.png" />
-      <link rel="icon" type="image/png" sizes="512x512" href="/images/icons/icon-512x512.png" />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/images/icons/favicon-16x16.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/images/icons/favicon-32x32.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/images/icons/apple-touch-icon.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="192x192"
+        href="/images/icons/icon-192x192.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="512x512"
+        href="/images/icons/icon-512x512.png"
+      />
 
       {/* Additional SEO Meta Tags */}
       <meta name="format-detection" content="telephone=yes" />
@@ -121,7 +145,10 @@ export default function SEO({
       <meta name="revisit-after" content="7 days" />
       <meta name="HandheldFriendly" content="True" />
       <meta name="MobileOptimized" content="320" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      />
 
       {/* Brand Name Variations Meta Tags */}
       <meta name="alternate-name" content="ABwallwonders" />
@@ -142,7 +169,10 @@ export default function SEO({
 
       {/* Voice Search Optimization */}
       <meta name="speakable" content="true" />
-      <meta name="voice-search-keywords" content="AB Wall Wonders near me, wallpaper installation Andhra Pradesh, best interior design company" />
+      <meta
+        name="voice-search-keywords"
+        content="AB Wall Wonders near me, wallpaper installation Andhra Pradesh, best interior design company"
+      />
 
       {/* Preload critical images */}
       {preloadImages.map((imageUrl, index) => (
@@ -187,7 +217,7 @@ export const generateLocalBusinessSchema = () => {
       "Wall Wonders",
       "AB Wonders",
       "AB Wall Wonders Andhra Pradesh",
-      "Premium Wallpapers & Flooring by AB Wall Wonders"
+      "Premium Wallpapers & Flooring by AB Wall Wonders",
     ],
     description:
       "AB Wall Wonders (ABwallwonders) - Leading provider of premium wallpapers, luxury flooring, and custom blinds installation across Andhra Pradesh. Expert craftsmanship with 15+ years experience and 5-year warranty. Known as Wall Wonders for exceptional interior design solutions.",
@@ -388,31 +418,38 @@ export const generateOrganizationSchema = () => {
       "abwallwonders",
       "A B Wall Wonders",
       "Wall Wonders",
-      "AB Wonders"
+      "AB Wonders",
     ],
     url: "https://ab-wall-wonders.vercel.app",
     logo: {
       "@type": "ImageObject",
       url: "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg",
       width: 300,
-      height: 300
+      height: 300,
     },
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+91-8500900827",
       contactType: "customer service",
-      availableLanguage: ["English", "Telugu", "Hindi"]
+      availableLanguage: ["English", "Telugu", "Hindi"],
     },
     address: {
       "@type": "PostalAddress",
       addressLocality: "Andhra Pradesh",
       addressRegion: "AP",
-      addressCountry: "IN"
+      addressCountry: "IN",
     },
-    description: "AB Wall Wonders (ABwallwonders) - Premier interior design company specializing in wallpapers, flooring, and blinds across Andhra Pradesh.",
+    description:
+      "AB Wall Wonders (ABwallwonders) - Premier interior design company specializing in wallpapers, flooring, and blinds across Andhra Pradesh.",
     foundingDate: "2020",
-    keywords: "AB Wall Wonders, ABwallwonders, wallpapers, flooring, interior design",
-    knowsAbout: ["Interior Design", "Wallpaper Installation", "Flooring Solutions", "Window Treatments"]
+    keywords:
+      "AB Wall Wonders, ABwallwonders, wallpapers, flooring, interior design",
+    knowsAbout: [
+      "Interior Design",
+      "Wallpaper Installation",
+      "Flooring Solutions",
+      "Window Treatments",
+    ],
   };
 };
 
@@ -429,15 +466,16 @@ export const generateBrandSchema = () => {
       "abwallwonders",
       "A B Wall Wonders",
       "Wall Wonders",
-      "AB Wonders"
+      "AB Wonders",
     ],
     url: "https://ab-wall-wonders.vercel.app",
     logo: {
       "@type": "ImageObject",
-      url: "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg"
+      url: "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg",
     },
-    description: "Premium interior design brand known for wallpapers, flooring, and blinds in Andhra Pradesh",
-    slogan: "Transform Your Space with AB Wall Wonders"
+    description:
+      "Premium interior design brand known for wallpapers, flooring, and blinds in Andhra Pradesh",
+    slogan: "Transform Your Space with AB Wall Wonders",
   };
 };
 
@@ -453,27 +491,29 @@ export const generateWebsiteSchema = () => {
       "AB wall wonders",
       "abwallwonders",
       "A B Wall Wonders",
-      "Wall Wonders"
+      "Wall Wonders",
     ],
     url: "https://ab-wall-wonders.vercel.app",
-    description: "Official website of AB Wall Wonders - Premium wallpapers, flooring & blinds in Andhra Pradesh",
+    description:
+      "Official website of AB Wall Wonders - Premium wallpapers, flooring & blinds in Andhra Pradesh",
     publisher: {
       "@type": "Organization",
-      name: "AB Wall Wonders"
+      name: "AB Wall Wonders",
     },
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: "https://ab-wall-wonders.vercel.app/search?q={search_term_string}"
+        urlTemplate:
+          "https://ab-wall-wonders.vercel.app/search?q={search_term_string}",
       },
-      "query-input": "required name=search_term_string"
+      "query-input": "required name=search_term_string",
     },
     mainEntity: {
       "@type": "Organization",
       name: "AB Wall Wonders",
-      alternateName: ["ABwallwonders", "abwallwonders", "Wall Wonders"]
-    }
+      alternateName: ["ABwallwonders", "abwallwonders", "Wall Wonders"],
+    },
   };
 };
 
@@ -482,24 +522,29 @@ export const generateBrandFAQSchema = () => {
   const brandFAQs = [
     {
       question: "What is AB Wall Wonders?",
-      answer: "AB Wall Wonders (also known as ABwallwonders or Wall Wonders) is a premium interior design company in Andhra Pradesh specializing in wallpapers, flooring, and window blinds with 15+ years of experience."
+      answer:
+        "AB Wall Wonders (also known as ABwallwonders or Wall Wonders) is a premium interior design company in Andhra Pradesh specializing in wallpapers, flooring, and window blinds with 15+ years of experience.",
     },
     {
       question: "How do I contact AB Wall Wonders?",
-      answer: "You can contact AB Wall Wonders at +91-8500900827 or +91-86887-23648. We serve across Andhra Pradesh and provide free consultations."
+      answer:
+        "You can contact AB Wall Wonders at +91-8500900827 or +91-86887-23648. We serve across Andhra Pradesh and provide free consultations.",
     },
     {
       question: "What services does ABwallwonders provide?",
-      answer: "ABwallwonders provides premium wallpaper installation (3D, botanical, geometric), luxury vinyl flooring, artificial grass, and custom window blinds with motorized options."
+      answer:
+        "ABwallwonders provides premium wallpaper installation (3D, botanical, geometric), luxury vinyl flooring, artificial grass, and custom window blinds with motorized options.",
     },
     {
       question: "Where is AB Wall Wonders located?",
-      answer: "AB Wall Wonders is based in Andhra Pradesh, India, and provides services across the entire state with expert installation teams."
+      answer:
+        "AB Wall Wonders is based in Andhra Pradesh, India, and provides services across the entire state with expert installation teams.",
     },
     {
       question: "Does Wall Wonders provide warranty?",
-      answer: "Yes, AB Wall Wonders provides 5-year warranty on wallpapers and 2-year warranty on blinds and flooring installations."
-    }
+      answer:
+        "Yes, AB Wall Wonders provides 5-year warranty on wallpapers and 2-year warranty on blinds and flooring installations.",
+    },
   ];
 
   return generateFAQSchema(brandFAQs);
@@ -512,6 +557,6 @@ export const generateComprehensiveSchemas = () => {
     generateOrganizationSchema(),
     generateBrandSchema(),
     generateWebsiteSchema(),
-    generateBrandFAQSchema()
+    generateBrandFAQSchema(),
   ];
 };

@@ -40,9 +40,15 @@ const App = () => {
             <main>
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/services/wallpapers" element={<WallpapersService />} />
+                <Route
+                  path="/services/wallpapers"
+                  element={<WallpapersService />}
+                />
                 <Route path="/services/blinds" element={<BlindsService />} />
-                <Route path="/services/flooring" element={<FlooringService />} />
+                <Route
+                  path="/services/flooring"
+                  element={<FlooringService />}
+                />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="*" element={<NotFound />} />
