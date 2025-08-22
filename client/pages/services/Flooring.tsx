@@ -99,11 +99,6 @@ export default function Flooring() {
     "https://yourdomain.com/images/flooringg.png"
   );
 
-  const combinedStructuredData = [
-    flooringServiceSchema,
-    generateFAQSchema(flooringFAQs)
-  ];
-
   return (
     <>
       <SEO
