@@ -5,6 +5,8 @@ import SEO, {
   generateServiceSchema,
   generateFAQSchema,
 } from "@/components/SEO";
+import VoiceSearchSEO from "@/components/VoiceSearchSEO";
+import BrandMetaTags from "@/components/BrandMetaTags";
 
 import {
   Palette,
@@ -192,6 +194,14 @@ export default function Wallpapers() {
         url="https://ab-wall-wonders.vercel.app/services/wallpapers"
         type="service"
         structuredData={wallpaperServiceSchema}
+      />
+      <VoiceSearchSEO
+        services={["wallpapers", "3D wallpapers", "custom wallpapers"]}
+      />
+      <BrandMetaTags
+        pageName="Wallpapers"
+        service="wallpapers"
+        brandFocus="wallpapers"
       />
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
