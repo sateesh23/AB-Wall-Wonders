@@ -3,9 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { NovaHeroScroll } from "@/components/ui/nova-hero-scroll";
-import SEO, {
-  generateComprehensiveSchemas,
-} from "@/components/SEO";
+import SEO, { generateComprehensiveSchemas } from "@/components/SEO";
 import VoiceSearchSEO from "@/components/VoiceSearchSEO";
 import BrandMetaTags from "@/components/BrandMetaTags";
 import SearchEngineDiscovery from "@/components/SearchEngineDiscovery";
@@ -127,18 +125,10 @@ export default function Index() {
         isHomepage={true}
         services={["wallpapers", "flooring", "blinds", "interior design"]}
       />
-      <BrandMetaTags
-        service="interior design"
-        brandFocus="general"
-      />
+      <BrandMetaTags service="interior design" brandFocus="general" />
       <SearchEngineDiscovery isHomepage={true} />
-      <LocalSEO
-        service="interior design"
-        area="Andhra Pradesh"
-      />
-      <EnhancedBrandSEO
-        service="interior design"
-      />
+      <LocalSEO service="interior design" area="Andhra Pradesh" />
+      <EnhancedBrandSEO service="interior design" />
       <div
         className="min-h-screen pb-16 md:pb-0"
         style={{
