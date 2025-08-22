@@ -7,7 +7,7 @@ interface SEOProps {
   image?: string;
   url?: string;
   type?: "website" | "article" | "product" | "service";
-  structuredData?: object;
+  structuredData?: object | object[];
   noIndex?: boolean;
   canonicalUrl?: string;
   preloadImages?: string[];
@@ -129,7 +129,7 @@ export const generateLocalBusinessSchema = () => {
     },
     "url": "https://yourdomain.com",
     "telephone": "+91-8500900827",
-    "priceRange": "₹₹-₹₹₹",
+    "priceRange": "₹₹-₹���₹",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Andhra Pradesh",
