@@ -5,6 +5,8 @@ import SEO, {
   generateServiceSchema,
   generateFAQSchema,
 } from "@/components/SEO";
+import VoiceSearchSEO from "@/components/VoiceSearchSEO";
+import BrandMetaTags from "@/components/BrandMetaTags";
 
 import {
   Palette,
@@ -180,7 +182,7 @@ export default function Wallpapers() {
   const wallpaperServiceSchema = generateServiceSchema(
     "Premium Wallpaper Installation",
     "Professional installation of 3D, botanical, geometric, and custom wallpapers across Andhra Pradesh with 5-year warranty coverage",
-    "https://yourdomain.com/images/wallpaperr.png",
+    "https://ab-wall-wonders.vercel.app/images/wallpaperr.png",
   );
 
   return (
@@ -188,10 +190,18 @@ export default function Wallpapers() {
       <SEO
         title="Custom & 3D Wallpapers in Andhra Pradesh | AB Wall Wonders"
         description="Transform your home with custom, 3D, and designer wallpapers. Expert installation with 15+ years of experience across Andhra Pradesh. Get a free quote today!"
-        keywords="wallpapers in Andhra Pradesh, 3D wallpaper, custom wallpaper, interior wallpapers, botanical wallpaper, geometric wallpaper, mural wallpaper, wallpaper installation"
-        url="https://yourdomain.com/services/wallpapers"
+        keywords="AB Wall Wonders wallpapers, ABwallwonders, abwallwonders, Wall Wonders wallpaper, wallpapers in Andhra Pradesh, 3D wallpaper by AB Wall Wonders, custom wallpaper ABwallwonders, interior wallpapers, botanical wallpaper, geometric wallpaper, mural wallpaper, wallpaper installation, AB wall wonders services, premium wallpaper company Andhra Pradesh, best wallpaper installer, designer wallpapers AB Wonders"
+        url="https://ab-wall-wonders.vercel.app/services/wallpapers"
         type="service"
         structuredData={wallpaperServiceSchema}
+      />
+      <VoiceSearchSEO
+        services={["wallpapers", "3D wallpapers", "custom wallpapers"]}
+      />
+      <BrandMetaTags
+        pageName="Wallpapers"
+        service="wallpapers"
+        brandFocus="wallpapers"
       />
       <div className="min-h-screen bg-white">
         {/* Hero Section */}

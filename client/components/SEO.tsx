@@ -16,9 +16,9 @@ interface SEOProps {
 export default function SEO({
   title = "AB Wall Wonders - Premium Wallpapers, Flooring & Blinds in Andhra Pradesh",
   description = "Transform your space with AB Wall Wonders! Premium wallpapers, luxury flooring, and custom blinds with expert installation across Andhra Pradesh. 15+ years experience, 5-year warranty. Get your free quote today!",
-  keywords = "wallpapers Andhra Pradesh, 3D wallpaper, interior flooring, vinyl flooring, window blinds, custom wallpaper, interior design Andhra Pradesh, home renovation, premium wallpapers, luxury flooring",
-  image = "https://yourdomain.com/images/og-image.jpg",
-  url = "https://yourdomain.com",
+  keywords = "AB Wall Wonders, ABwallwonders, AB wall wonders, abwallwonders, A B Wall Wonders, wallpapers Andhra Pradesh, 3D wallpaper, interior flooring, vinyl flooring, window blinds, custom wallpaper, interior design Andhra Pradesh, home renovation, premium wallpapers, luxury flooring, wall wonders, ab wall, wall wonder, abhay wall wonders, ab wonders",
+  image = "/images/og-default.jpg",
+  url = "https://ab-wall-wonders.vercel.app",
   type = "website",
   structuredData,
   noIndex = false,
@@ -89,15 +89,90 @@ export default function SEO({
       />
       <meta
         name="business:contact_data:website"
-        content="https://yourdomain.com"
+        content="https://ab-wall-wonders.vercel.app"
+      />
+
+      {/* PWA Manifest */}
+      <link rel="manifest" href="/manifest.json" />
+
+      {/* Favicons */}
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/images/icons/favicon-16x16.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/images/icons/favicon-32x32.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/images/icons/apple-touch-icon.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="192x192"
+        href="/images/icons/icon-192x192.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="512x512"
+        href="/images/icons/icon-512x512.png"
       />
 
       {/* Additional SEO Meta Tags */}
       <meta name="format-detection" content="telephone=yes" />
       <meta name="apple-mobile-web-app-title" content="AB Wall Wonders" />
       <meta name="application-name" content="AB Wall Wonders" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      <meta name="mobile-web-app-capable" content="yes" />
       <meta name="theme-color" content="#16a34a" />
       <meta name="msapplication-TileColor" content="#16a34a" />
+      <meta name="msapplication-config" content="/browserconfig.xml" />
+
+      {/* Enhanced SEO Meta Tags */}
+      <meta name="language" content="English" />
+      <meta name="distribution" content="global" />
+      <meta name="rating" content="general" />
+      <meta name="revisit-after" content="7 days" />
+      <meta name="HandheldFriendly" content="True" />
+      <meta name="MobileOptimized" content="320" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      />
+
+      {/* Brand Name Variations Meta Tags */}
+      <meta name="alternate-name" content="ABwallwonders" />
+      <meta name="alternate-name" content="AB wall wonders" />
+      <meta name="alternate-name" content="abwallwonders" />
+      <meta name="alternate-name" content="A B Wall Wonders" />
+      <meta name="alternate-name" content="Wall Wonders" />
+      <meta name="alternate-name" content="AB Wonders" />
+
+      {/* Local Business Meta Tags */}
+      <meta name="geo.placename" content="Andhra Pradesh, India" />
+      <meta name="geo.region" content="IN-AP" />
+      <meta name="ICBM" content="15.9129, 79.7400" />
+      <meta name="geo.position" content="15.9129;79.7400" />
+      <meta name="DC.title" content={fullTitle} />
+      <meta name="DC.subject" content={keywords} />
+      <meta name="DC.description" content={description} />
+
+      {/* Voice Search Optimization */}
+      <meta name="speakable" content="true" />
+      <meta
+        name="voice-search-keywords"
+        content="AB Wall Wonders near me, wallpaper installation Andhra Pradesh, best interior design company"
+      />
 
       {/* Preload critical images */}
       {preloadImages.map((imageUrl, index) => (
@@ -132,24 +207,33 @@ export const generateLocalBusinessSchema = () => {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://yourdomain.com/#localbusiness",
+    "@id": "https://ab-wall-wonders.vercel.app/#localbusiness",
     name: "AB Wall Wonders",
-    alternateName: "AB Wall Wonders - Premium Wallpapers & Flooring",
+    alternateName: [
+      "ABwallwonders",
+      "AB wall wonders",
+      "abwallwonders",
+      "A B Wall Wonders",
+      "Wall Wonders",
+      "AB Wonders",
+      "AB Wall Wonders Andhra Pradesh",
+      "Premium Wallpapers & Flooring by AB Wall Wonders",
+    ],
     description:
-      "Premium wallpapers, luxury flooring, and custom blinds installation across Andhra Pradesh. Expert craftsmanship with 15+ years experience and 5-year warranty.",
+      "AB Wall Wonders (ABwallwonders) - Leading provider of premium wallpapers, luxury flooring, and custom blinds installation across Andhra Pradesh. Expert craftsmanship with 15+ years experience and 5-year warranty. Known as Wall Wonders for exceptional interior design solutions.",
     image: {
       "@type": "ImageObject",
-      url: "https://yourdomain.com/images/ab-wall-wonders-logo.jpg",
+      url: "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg",
       width: 800,
       height: 600,
     },
     logo: {
       "@type": "ImageObject",
-      url: "https://yourdomain.com/images/ab-wall-wonders-logo.jpg",
+      url: "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg",
       width: 300,
       height: 300,
     },
-    url: "https://yourdomain.com",
+    url: "https://ab-wall-wonders.vercel.app",
     telephone: "+91-8500900827",
     priceRange: "₹₹-₹₹₹",
     address: {
@@ -319,4 +403,160 @@ export const generateFAQSchema = (
       },
     })),
   };
+};
+
+// Enhanced Organization Schema with brand variations
+export const generateOrganizationSchema = () => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://ab-wall-wonders.vercel.app/#organization",
+    name: "AB Wall Wonders",
+    alternateName: [
+      "ABwallwonders",
+      "AB wall wonders",
+      "abwallwonders",
+      "A B Wall Wonders",
+      "Wall Wonders",
+      "AB Wonders",
+    ],
+    url: "https://ab-wall-wonders.vercel.app",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg",
+      width: 300,
+      height: 300,
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+91-8500900827",
+      contactType: "customer service",
+      availableLanguage: ["English", "Telugu", "Hindi"],
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Andhra Pradesh",
+      addressRegion: "AP",
+      addressCountry: "IN",
+    },
+    description:
+      "AB Wall Wonders (ABwallwonders) - Premier interior design company specializing in wallpapers, flooring, and blinds across Andhra Pradesh.",
+    foundingDate: "2020",
+    keywords:
+      "AB Wall Wonders, ABwallwonders, wallpapers, flooring, interior design",
+    knowsAbout: [
+      "Interior Design",
+      "Wallpaper Installation",
+      "Flooring Solutions",
+      "Window Treatments",
+    ],
+  };
+};
+
+// Brand Search Schema for enhanced brand recognition
+export const generateBrandSchema = () => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Brand",
+    "@id": "https://ab-wall-wonders.vercel.app/#brand",
+    name: "AB Wall Wonders",
+    alternateName: [
+      "ABwallwonders",
+      "AB wall wonders",
+      "abwallwonders",
+      "A B Wall Wonders",
+      "Wall Wonders",
+      "AB Wonders",
+    ],
+    url: "https://ab-wall-wonders.vercel.app",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg",
+    },
+    description:
+      "Premium interior design brand known for wallpapers, flooring, and blinds in Andhra Pradesh",
+    slogan: "Transform Your Space with AB Wall Wonders",
+  };
+};
+
+// Enhanced WebSite Schema with brand search optimization
+export const generateWebsiteSchema = () => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://ab-wall-wonders.vercel.app/#website",
+    name: "AB Wall Wonders",
+    alternateName: [
+      "ABwallwonders",
+      "AB wall wonders",
+      "abwallwonders",
+      "A B Wall Wonders",
+      "Wall Wonders",
+    ],
+    url: "https://ab-wall-wonders.vercel.app",
+    description:
+      "Official website of AB Wall Wonders - Premium wallpapers, flooring & blinds in Andhra Pradesh",
+    publisher: {
+      "@type": "Organization",
+      name: "AB Wall Wonders",
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate:
+          "https://ab-wall-wonders.vercel.app/search?q={search_term_string}",
+      },
+      "query-input": "required name=search_term_string",
+    },
+    mainEntity: {
+      "@type": "Organization",
+      name: "AB Wall Wonders",
+      alternateName: ["ABwallwonders", "abwallwonders", "Wall Wonders"],
+    },
+  };
+};
+
+// Helper function to generate comprehensive brand FAQ
+export const generateBrandFAQSchema = () => {
+  const brandFAQs = [
+    {
+      question: "What is AB Wall Wonders?",
+      answer:
+        "AB Wall Wonders (also known as ABwallwonders or Wall Wonders) is a premium interior design company in Andhra Pradesh specializing in wallpapers, flooring, and window blinds with 15+ years of experience.",
+    },
+    {
+      question: "How do I contact AB Wall Wonders?",
+      answer:
+        "You can contact AB Wall Wonders at +91-8500900827 or +91-86887-23648. We serve across Andhra Pradesh and provide free consultations.",
+    },
+    {
+      question: "What services does ABwallwonders provide?",
+      answer:
+        "ABwallwonders provides premium wallpaper installation (3D, botanical, geometric), luxury vinyl flooring, artificial grass, and custom window blinds with motorized options.",
+    },
+    {
+      question: "Where is AB Wall Wonders located?",
+      answer:
+        "AB Wall Wonders is based in Andhra Pradesh, India, and provides services across the entire state with expert installation teams.",
+    },
+    {
+      question: "Does Wall Wonders provide warranty?",
+      answer:
+        "Yes, AB Wall Wonders provides 5-year warranty on wallpapers and 2-year warranty on blinds and flooring installations.",
+    },
+  ];
+
+  return generateFAQSchema(brandFAQs);
+};
+
+// Comprehensive schema collection for brand optimization
+export const generateComprehensiveSchemas = () => {
+  return [
+    generateLocalBusinessSchema(),
+    generateOrganizationSchema(),
+    generateBrandSchema(),
+    generateWebsiteSchema(),
+    generateBrandFAQSchema(),
+  ];
 };

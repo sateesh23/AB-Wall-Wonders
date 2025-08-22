@@ -17,7 +17,7 @@ const navigation = [
     dropdown: [
       { name: "Home", href: "/" },
       { name: "Projects", href: "/projects" },
-    ]
+    ],
   },
   {
     name: "Services",
@@ -26,7 +26,7 @@ const navigation = [
       { name: "Premium Wallpapers", href: "/services/wallpapers" },
       { name: "Window Blinds", href: "/services/blinds" },
       { name: "Luxury Flooring", href: "/services/flooring" },
-    ]
+    ],
   },
 ];
 
@@ -35,13 +35,16 @@ export default function Header() {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-transparent">
+    <header className="sticky top-0 z-50 w-full bg-transparent" role="banner">
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
-
           {/* LEFT: Desktop Navigation Menu */}
-          <nav className="hidden lg:flex items-center space-x-1">
-            {navigation.map((item) => (
+          <nav
+            className="hidden lg:flex items-center space-x-1"
+            role="navigation"
+            aria-label="Main navigation"
+          >
+            {navigation.map((item) =>
               item.dropdown ? (
                 <DropdownMenu key={item.name}>
                   <DropdownMenuTrigger asChild>
@@ -51,7 +54,10 @@ export default function Header() {
                         "text-sm font-medium transition-colors hover:text-primary hover:bg-primary/10 px-4 py-2 rounded-full",
                         // Special handling for Home dropdown - check if current path is in dropdown items
                         item.name === "Home"
-                          ? (location.pathname === "/" || item.dropdown?.some(subItem => subItem.href === location.pathname))
+                          ? location.pathname === "/" ||
+                            item.dropdown?.some(
+                              (subItem) => subItem.href === location.pathname,
+                            )
                             ? "text-primary"
                             : "text-foreground hover:text-primary"
                           : location.pathname.startsWith(item.href)
@@ -97,8 +103,8 @@ export default function Header() {
                 >
                   {item.name}
                 </Link>
-              )
-            ))}
+              ),
+            )}
           </nav>
 
           {/* CENTER: Logo */}
@@ -117,7 +123,11 @@ export default function Header() {
               className="bg-gradient-to-r from-primary to-brand-sage-600 hover:from-primary/90 hover:to-brand-sage-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
               asChild
             >
-              <a href="https://wa.me/8688723648" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://wa.me/8688723648"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 WhatsApp Me
               </a>
@@ -128,9 +138,16 @@ export default function Header() {
           <button
             className="lg:hidden p-2 rounded-full hover:bg-primary/10 transition-colors"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            aria-label={isOpen ? "Close main menu" : "Open main menu"}
+            type="button"
           >
-            {isOpen ? <X className="h-6 w-6 text-primary" /> : <Menu className="h-6 w-6 text-primary" />}
+            {isOpen ? (
+              <X className="h-6 w-6 text-primary" />
+            ) : (
+              <Menu className="h-6 w-6 text-primary" />
+            )}
           </button>
         </div>
 
@@ -148,7 +165,10 @@ export default function Header() {
                           "block px-4 py-3 text-base font-semibold rounded-xl transition-colors",
                           // Special handling for Home dropdown in mobile
                           item.name === "Home"
-                            ? (location.pathname === "/" || item.dropdown?.some(subItem => subItem.href === location.pathname))
+                            ? location.pathname === "/" ||
+                              item.dropdown?.some(
+                                (subItem) => subItem.href === location.pathname,
+                              )
                               ? "text-primary"
                               : "text-foreground hover:text-primary hover:bg-primary/10"
                             : location.pathname.startsWith(item.href)
@@ -212,7 +232,11 @@ export default function Header() {
                   className="w-full bg-gradient-to-r from-primary to-brand-sage-600 hover:from-primary/90 hover:to-brand-sage-700 text-white font-semibold rounded-lg"
                   asChild
                 >
-                  <a href="https://wa.me/8688723648" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://wa.me/8688723648"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <MessageCircle className="mr-2 h-5 w-5" />
                     WhatsApp Me
                   </a>

@@ -6,7 +6,11 @@ import { NovaHeroScroll } from "@/components/ui/nova-hero-scroll";
 import SEO, {
   generateLocalBusinessSchema,
   generateFAQSchema,
+  generateComprehensiveSchemas,
 } from "@/components/SEO";
+import VoiceSearchSEO from "@/components/VoiceSearchSEO";
+import BrandMetaTags from "@/components/BrandMetaTags";
+import SearchEngineDiscovery from "@/components/SearchEngineDiscovery";
 
 import ABTestimonials3D from "@/components/ui/ab-testimonials-3d";
 import { HomepageProjects } from "@/components/ui/homepage-projects";
@@ -70,8 +74,8 @@ export default function Index() {
   const [recentProjects, setRecentProjects] = useState<SupabaseProject[]>([]);
   const [projectsLoading, setProjectsLoading] = useState(true);
 
-  // Generate structured data for homepage
-  const localBusinessSchema = generateLocalBusinessSchema();
+  // Generate comprehensive structured data for homepage
+  const comprehensiveSchemas = generateComprehensiveSchemas();
 
   // Load recent projects for homepage - ONLY from Supabase
   useEffect(() => {
@@ -86,7 +90,7 @@ export default function Index() {
           try {
             const supabaseProjects = await getRecentProjects(6);
             console.log(
-              `📊 Supabase returned ${supabaseProjects.length} projects`,
+              `���� Supabase returned ${supabaseProjects.length} projects`,
             );
             setRecentProjects(supabaseProjects);
           } catch (supabaseError: any) {
@@ -112,12 +116,22 @@ export default function Index() {
     <>
       <SEO
         title="AB Wall Wonders - Premium Wallpapers, Flooring & Blinds in Andhra Pradesh"
-        description="Transform your space with AB Wall Wonders! Premium wallpapers, luxury flooring, and custom blinds with expert installation across Andhra Pradesh. 15+ years experience, 5-year warranty. Get your free quote today!"
-        keywords="wallpapers Andhra Pradesh, 3D wallpaper, interior flooring, vinyl flooring, window blinds, custom wallpaper, interior design Andhra Pradesh, home renovation, premium wallpapers, luxury flooring, AB Wall Wonders"
-        url="https://yourdomain.com"
+        description="Transform your space with AB Wall Wonders (ABwallwonders)! Premium wallpapers, luxury flooring, and custom blinds with expert installation across Andhra Pradesh. 15+ years experience, 5-year warranty. Get your free quote today!"
+        keywords="AB Wall Wonders, ABwallwonders, AB wall wonders, abwallwonders, A B Wall Wonders, Wall Wonders, AB Wonders, wallpapers Andhra Pradesh, 3D wallpaper, interior flooring, vinyl flooring, window blinds, custom wallpaper, interior design Andhra Pradesh, home renovation, premium wallpapers, luxury flooring, wall decor company, interior designer near me, best wallpaper company Andhra Pradesh, flooring contractor, blinds installation service"
+        url="https://ab-wall-wonders.vercel.app"
         type="website"
-        structuredData={localBusinessSchema}
+        structuredData={comprehensiveSchemas}
       />
+      <VoiceSearchSEO
+        isHomepage={true}
+        services={["wallpapers", "flooring", "blinds", "interior design"]}
+      />
+      <BrandMetaTags
+        pageName="Homepage"
+        service="interior design"
+        brandFocus="general"
+      />
+      <SearchEngineDiscovery pageName="Homepage" isHomepage={true} />
       <div
         className="min-h-screen pb-16 md:pb-0"
         style={{

@@ -173,7 +173,7 @@ export default function Blinds() {
   const blindsServiceSchema = generateServiceSchema(
     "Custom Window Blinds Installation",
     "Professional installation of motorized and manual blinds, custom-sized for perfect fit across Andhra Pradesh with 2-year warranty coverage",
-    "https://yourdomain.com/images/blindss.png",
+    "https://ab-wall-wonders.vercel.app/images/blindss.png",
   );
 
   return (
@@ -181,8 +181,8 @@ export default function Blinds() {
       <SEO
         title="Custom Window Blinds & Motorized Blinds in Andhra Pradesh | AB Wall Wonders"
         description="Premium custom window blinds with motorized options. Perfect light control and privacy solutions. Expert installation across Andhra Pradesh with 2-year warranty!"
-        keywords="window blinds Andhra Pradesh, motorized blinds, custom blinds, Roman shades, vertical blinds, roller shades, Venetian blinds, smart blinds"
-        url="https://yourdomain.com/services/blinds"
+        keywords="AB Wall Wonders blinds, ABwallwonders blinds, abwallwonders window treatments, Wall Wonders blinds, window blinds Andhra Pradesh, motorized blinds by AB Wall Wonders, custom blinds ABwallwonders, Roman shades, vertical blinds, roller shades, Venetian blinds, smart blinds, AB wall wonders blinds installation, premium blinds company, best blinds installer Andhra Pradesh"
+        url="https://ab-wall-wonders.vercel.app/services/blinds"
         type="service"
         structuredData={blindsServiceSchema}
       />
