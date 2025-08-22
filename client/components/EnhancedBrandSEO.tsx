@@ -11,28 +11,27 @@ export default function EnhancedBrandSEO({
   pageName = "Homepage",
   isHomepage = false,
 }: EnhancedBrandSEOProps) {
-  
   // Comprehensive brand variations for better recognition
   const brandVariations = {
     primary: "AB Wall Wonders",
     common: [
       "ABwallwonders",
-      "AB wall wonders", 
+      "AB wall wonders",
       "abwallwonders",
       "A B Wall Wonders",
       "Wall Wonders",
-      "AB Wonders"
+      "AB Wonders",
     ],
     withSpacing: [
       "A B Wall Wonders",
       "A.B. Wall Wonders",
       "A-B Wall Wonders",
       "AB-Wall-Wonders",
-      "AB_Wall_Wonders"
+      "AB_Wall_Wonders",
     ],
     misspellings: [
       "ab wal wonders",
-      "abwal wonders", 
+      "abwal wonders",
       "ab wall wonder",
       "ab wall wander",
       "ab wal wonder",
@@ -42,22 +41,22 @@ export default function EnhancedBrandSEO({
       "ab interior design",
       "ab wallpapers",
       "ab flooring",
-      "ab blinds"
+      "ab blinds",
     ],
     casual: [
       "wall wonders company",
       "AB wall company",
       "wall wonders interior",
       "AB home design",
-      "wall wonders design"
+      "wall wonders design",
     ],
     withLocation: [
       "AB Wall Wonders Andhra Pradesh",
       "ABwallwonders AP",
       "Wall Wonders Andhra Pradesh",
       "AB Wall Wonders India",
-      "ABwallwonders India"
-    ]
+      "ABwallwonders India",
+    ],
   };
 
   // Generate all brand variations as a flat array
@@ -67,7 +66,7 @@ export default function EnhancedBrandSEO({
     ...brandVariations.withSpacing,
     ...brandVariations.misspellings,
     ...brandVariations.casual,
-    ...brandVariations.withLocation
+    ...brandVariations.withLocation,
   ];
 
   // Service-specific brand combinations
@@ -82,13 +81,13 @@ export default function EnhancedBrandSEO({
       `professional ${service}`,
       `best ${service}`,
       `premium ${service}`,
-      `custom ${service}`
+      `custom ${service}`,
     ];
 
     const combinations = [];
-    
-    allBrandVariations.forEach(brand => {
-      serviceTerms.forEach(serviceVar => {
+
+    allBrandVariations.forEach((brand) => {
+      serviceTerms.forEach((serviceVar) => {
         combinations.push(`${brand} ${serviceVar}`);
         combinations.push(`${serviceVar} by ${brand}`);
         combinations.push(`${serviceVar} - ${brand}`);
@@ -110,7 +109,7 @@ export default function EnhancedBrandSEO({
         "ay bee wall wonders",
         "a b wall wonders",
         "ab wal wonders",
-        "wall wonders"
+        "wall wonders",
       ],
       intentMatch: [
         "AB Wall Wonders contact",
@@ -120,8 +119,8 @@ export default function EnhancedBrandSEO({
         "ABwallwonders reviews",
         "Wall Wonders portfolio",
         "AB Wall Wonders projects",
-        "ABwallwonders gallery"
-      ]
+        "ABwallwonders gallery",
+      ],
     };
   };
 
@@ -142,46 +141,44 @@ export default function EnhancedBrandSEO({
             "@type": "ImageObject",
             url: "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg",
             width: 300,
-            height: 300
+            height: 300,
           },
           url: "https://ab-wall-wonders.vercel.app",
-          sameAs: [
-            "https://wa.me/8688723648",
-            "https://wa.me/8500900827"
-          ],
+          sameAs: ["https://wa.me/8688723648", "https://wa.me/8500900827"],
           slogan: "Transform Your Space with AB Wall Wonders",
           foundingDate: "2020",
           keywords: allBrandVariations.join(", "),
           knowsAbout: [
             "Interior Design",
-            "Wallpaper Installation", 
+            "Wallpaper Installation",
             "Flooring Solutions",
             "Window Blinds",
-            "Home Renovation"
-          ]
+            "Home Renovation",
+          ],
         },
         {
           "@type": "Organization",
-          "@id": "https://ab-wall-wonders.vercel.app/#organization-comprehensive",
+          "@id":
+            "https://ab-wall-wonders.vercel.app/#organization-comprehensive",
           name: brandVariations.primary,
           alternateName: allBrandVariations,
           legalName: "AB Wall Wonders",
           brand: {
-            "@id": "https://ab-wall-wonders.vercel.app/#brand-comprehensive"
+            "@id": "https://ab-wall-wonders.vercel.app/#brand-comprehensive",
           },
           description: `Leading ${service} company in Andhra Pradesh known by various names including ABwallwonders, Wall Wonders, and AB Wonders`,
           foundingDate: "2020",
           numberOfEmployees: "10-50",
           memberOf: {
             "@type": "Organization",
-            name: "Interior Design Industry India"
+            name: "Interior Design Industry India",
           },
           hasCredential: [
             "15+ Years Experience",
             "Licensed Interior Design Company",
             "Warranty Coverage Provider",
-            "Professional Installation Team"
-          ]
+            "Professional Installation Team",
+          ],
         },
         {
           "@type": "WebSite",
@@ -190,25 +187,27 @@ export default function EnhancedBrandSEO({
           alternateName: allBrandVariations,
           url: "https://ab-wall-wonders.vercel.app",
           publisher: {
-            "@id": "https://ab-wall-wonders.vercel.app/#organization-comprehensive"
+            "@id":
+              "https://ab-wall-wonders.vercel.app/#organization-comprehensive",
           },
           potentialAction: [
             {
               "@type": "SearchAction",
               target: {
                 "@type": "EntryPoint",
-                urlTemplate: "https://ab-wall-wonders.vercel.app/?search={search_term_string}"
+                urlTemplate:
+                  "https://ab-wall-wonders.vercel.app/?search={search_term_string}",
               },
-              "query-input": "required name=search_term_string"
-            }
+              "query-input": "required name=search_term_string",
+            },
           ],
           mainEntity: {
             "@type": "LocalBusiness",
             name: brandVariations.primary,
-            alternateName: allBrandVariations
-          }
-        }
-      ]
+            alternateName: allBrandVariations,
+          },
+        },
+      ],
     };
   };
 
@@ -230,10 +229,10 @@ export default function EnhancedBrandSEO({
             "@type": "Thing",
             name: variation,
             description: `Search term variation for ${brandVariations.primary}`,
-            url: "https://ab-wall-wonders.vercel.app"
-          }
-        }))
-      }
+            url: "https://ab-wall-wonders.vercel.app",
+          },
+        })),
+      },
     };
   };
 
@@ -246,39 +245,40 @@ export default function EnhancedBrandSEO({
       name: brandVariations.primary,
       alternateName: allBrandVariations,
       description: `${brandVariations.primary} (also known as ${brandVariations.common.join(", ")}) is a premier ${service} company in Andhra Pradesh`,
-      image: "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg",
+      image:
+        "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg",
       url: "https://ab-wall-wonders.vercel.app",
       identifier: [
         {
           "@type": "PropertyValue",
           name: "Primary Brand Name",
-          value: brandVariations.primary
+          value: brandVariations.primary,
         },
         {
-          "@type": "PropertyValue", 
+          "@type": "PropertyValue",
           name: "Common Variations",
-          value: brandVariations.common.join(", ")
+          value: brandVariations.common.join(", "),
         },
         {
           "@type": "PropertyValue",
           name: "Business Type",
-          value: "Interior Design Company"
+          value: "Interior Design Company",
         },
         {
           "@type": "PropertyValue",
           name: "Service Area",
-          value: "Andhra Pradesh, India"
-        }
+          value: "Andhra Pradesh, India",
+        },
       ],
       mainEntityOfPage: {
         "@type": "WebPage",
-        "@id": "https://ab-wall-wonders.vercel.app"
+        "@id": "https://ab-wall-wonders.vercel.app",
       },
       subjectOf: {
         "@type": "WebPage",
         url: "https://ab-wall-wonders.vercel.app",
-        name: `${brandVariations.primary} - Official Website`
-      }
+        name: `${brandVariations.primary} - Official Website`,
+      },
     };
   };
 
@@ -287,44 +287,80 @@ export default function EnhancedBrandSEO({
       {/* Primary Brand Recognition Meta Tags */}
       <meta name="brand-primary" content={brandVariations.primary} />
       <meta name="brand-common" content={brandVariations.common.join(", ")} />
-      <meta name="brand-misspellings" content={brandVariations.misspellings.join(", ")} />
-      <meta name="brand-variations-all" content={allBrandVariations.join(", ")} />
-      
+      <meta
+        name="brand-misspellings"
+        content={brandVariations.misspellings.join(", ")}
+      />
+      <meta
+        name="brand-variations-all"
+        content={allBrandVariations.join(", ")}
+      />
+
       {/* Search Engine Brand Signals */}
-      <meta name="entity-brand-names" content={allBrandVariations.join(" | ")} />
+      <meta
+        name="entity-brand-names"
+        content={allBrandVariations.join(" | ")}
+      />
       <meta name="brand-aliases" content={brandVariations.common.join(" | ")} />
-      <meta name="brand-keywords-comprehensive" content={serviceBrandCombinations.slice(0, 50).join(", ")} />
-      
+      <meta
+        name="brand-keywords-comprehensive"
+        content={serviceBrandCombinations.slice(0, 50).join(", ")}
+      />
+
       {/* Brand Recognition for Different Search Types */}
-      <meta name="exact-brand-matches" content={searchVariations.exactMatch.join(", ")} />
-      <meta name="service-brand-matches" content={searchVariations.serviceMatch.slice(0, 30).join(", ")} />
-      <meta name="location-brand-matches" content={searchVariations.locationMatch.join(", ")} />
-      <meta name="phonetic-brand-matches" content={searchVariations.phoneticMatch.join(", ")} />
-      <meta name="intent-brand-matches" content={searchVariations.intentMatch.join(", ")} />
-      
+      <meta
+        name="exact-brand-matches"
+        content={searchVariations.exactMatch.join(", ")}
+      />
+      <meta
+        name="service-brand-matches"
+        content={searchVariations.serviceMatch.slice(0, 30).join(", ")}
+      />
+      <meta
+        name="location-brand-matches"
+        content={searchVariations.locationMatch.join(", ")}
+      />
+      <meta
+        name="phonetic-brand-matches"
+        content={searchVariations.phoneticMatch.join(", ")}
+      />
+      <meta
+        name="intent-brand-matches"
+        content={searchVariations.intentMatch.join(", ")}
+      />
+
       {/* Brand Authority and Recognition */}
-      <meta name="brand-authority-signals" content="established-2020, 15-years-experience, andhra-pradesh-leader" />
-      <meta name="brand-recognition-terms" content={`${brandVariations.primary}, ${brandVariations.common[0]}, ${brandVariations.common[1]}`} />
-      
+      <meta
+        name="brand-authority-signals"
+        content="established-2020, 15-years-experience, andhra-pradesh-leader"
+      />
+      <meta
+        name="brand-recognition-terms"
+        content={`${brandVariations.primary}, ${brandVariations.common[0]}, ${brandVariations.common[1]}`}
+      />
+
       {/* Social and Business Entity Recognition */}
       <meta property="business:brand" content={brandVariations.primary} />
-      <meta property="business:brand:alternate" content={brandVariations.common.join(", ")} />
+      <meta
+        property="business:brand:alternate"
+        content={brandVariations.common.join(", ")}
+      />
       <meta name="business:entity:type" content="LocalBusiness" />
       <meta name="business:entity:category" content={`${service} Company`} />
-      
+
       {/* Schema.org Rich Snippets for Brand Recognition */}
       <script type="application/ld+json">
         {JSON.stringify(generateComprehensiveBrandSchema())}
       </script>
-      
+
       <script type="application/ld+json">
         {JSON.stringify(generateSearchResultSchema())}
       </script>
-      
+
       <script type="application/ld+json">
         {JSON.stringify(generateKnowledgeGraphSchema())}
       </script>
-      
+
       {/* Enhanced Brand FAQ Schema */}
       <script type="application/ld+json">
         {JSON.stringify({
@@ -337,37 +373,37 @@ export default function EnhancedBrandSEO({
               name: "What is AB Wall Wonders?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: `AB Wall Wonders (also known as ABwallwonders, Wall Wonders, or AB Wonders) is a premier ${service} company in Andhra Pradesh with 15+ years of experience in interior design solutions.`
-              }
+                text: `AB Wall Wonders (also known as ABwallwonders, Wall Wonders, or AB Wonders) is a premier ${service} company in Andhra Pradesh with 15+ years of experience in interior design solutions.`,
+              },
             },
             {
-              "@type": "Question", 
+              "@type": "Question",
               name: "Is ABwallwonders the same as AB Wall Wonders?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Yes, ABwallwonders is the same company as AB Wall Wonders. We're also known as Wall Wonders and AB Wonders - all refer to the same trusted interior design company in Andhra Pradesh."
-              }
+                text: "Yes, ABwallwonders is the same company as AB Wall Wonders. We're also known as Wall Wonders and AB Wonders - all refer to the same trusted interior design company in Andhra Pradesh.",
+              },
             },
             {
               "@type": "Question",
               name: "How do I contact AB Wall Wonders?",
               acceptedAnswer: {
-                "@type": "Answer", 
-                text: "You can contact AB Wall Wonders (ABwallwonders) at +91-8500900827 or +91-8688723648. We provide free consultations across Andhra Pradesh."
-              }
+                "@type": "Answer",
+                text: "You can contact AB Wall Wonders (ABwallwonders) at +91-8500900827 or +91-8688723648. We provide free consultations across Andhra Pradesh.",
+              },
             },
             {
               "@type": "Question",
               name: "Where is Wall Wonders located?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Wall Wonders (AB Wall Wonders) is based in Andhra Pradesh, India. We provide services throughout the state with our expert installation teams."
-              }
-            }
-          ]
+                text: "Wall Wonders (AB Wall Wonders) is based in Andhra Pradesh, India. We provide services throughout the state with our expert installation teams.",
+              },
+            },
+          ],
         })}
       </script>
-      
+
       {/* Business Name Variations Schema */}
       <script type="application/ld+json">
         {JSON.stringify({
@@ -383,13 +419,13 @@ export default function EnhancedBrandSEO({
           address: {
             "@type": "PostalAddress",
             addressLocality: "Andhra Pradesh",
-            addressCountry: "India"
+            addressCountry: "India",
           },
           searchAction: {
             "@type": "SearchAction",
             target: "https://ab-wall-wonders.vercel.app/?q={search_term}",
-            "query-input": "required name=search_term"
-          }
+            "query-input": "required name=search_term",
+          },
         })}
       </script>
     </Helmet>
@@ -400,7 +436,7 @@ export default function EnhancedBrandSEO({
 export const generateBrandOptimizedTitle = (
   service: string,
   pageName: string,
-  includeVariations: boolean = true
+  includeVariations: boolean = true,
 ) => {
   const base = `${service} | AB Wall Wonders`;
   if (includeVariations) {
@@ -412,7 +448,7 @@ export const generateBrandOptimizedTitle = (
 // Helper function to generate brand-optimized descriptions
 export const generateBrandOptimizedDescription = (
   service: string,
-  location: string = "Andhra Pradesh"
+  location: string = "Andhra Pradesh",
 ) => {
   return `Get premium ${service} from AB Wall Wonders (ABwallwonders) in ${location}. Also known as Wall Wonders & AB Wonders. Expert installation, 15+ years experience, warranty coverage. Call +91-8500900827 for free consultation!`;
 };
@@ -422,7 +458,7 @@ export const getAllBrandVariations = () => {
   return [
     "AB Wall Wonders",
     "ABwallwonders",
-    "AB wall wonders", 
+    "AB wall wonders",
     "abwallwonders",
     "A B Wall Wonders",
     "Wall Wonders",
@@ -433,6 +469,6 @@ export const getAllBrandVariations = () => {
     "abwal wonders",
     "wall wonder company",
     "AB Wall Wonders Andhra Pradesh",
-    "ABwallwonders AP"
+    "ABwallwonders AP",
   ];
 };

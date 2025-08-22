@@ -194,11 +194,7 @@ export default function Blinds() {
       <VoiceSearchSEO
         services={["blinds", "window blinds", "motorized blinds"]}
       />
-      <BrandMetaTags
-        pageName="Blinds"
-        service="blinds"
-        brandFocus="blinds"
-      />
+      <BrandMetaTags pageName="Blinds" service="blinds" brandFocus="blinds" />
       <LocalSEO
         service="blinds"
         area="Andhra Pradesh"

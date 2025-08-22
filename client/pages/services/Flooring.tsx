@@ -118,7 +118,10 @@ export default function Flooring() {
         keywords="AB Wall Wonders flooring, ABwallwonders flooring, abwallwonders vinyl flooring, Wall Wonders flooring solutions, vinyl flooring Andhra Pradesh, artificial grass by AB Wall Wonders, waterproof flooring ABwallwonders, luxury flooring, interior flooring, flooring installation, safety mats, AB wall wonders flooring services, premium flooring company, best flooring contractor Andhra Pradesh, flooring near me, interior flooring designers"
         url="https://ab-wall-wonders.vercel.app/services/flooring"
         type="service"
-        structuredData={[flooringServiceSchema, generateFAQSchema(flooringFAQs)]}
+        structuredData={[
+          flooringServiceSchema,
+          generateFAQSchema(flooringFAQs),
+        ]}
         image="https://ab-wall-wonders.vercel.app/images/flooringg.png"
       />
       <VoiceSearchSEO

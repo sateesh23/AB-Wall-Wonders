@@ -195,7 +195,10 @@ export default function Wallpapers() {
         keywords="AB Wall Wonders wallpapers, ABwallwonders, abwallwonders, Wall Wonders wallpaper, wallpapers near me, wallpapers in Andhra Pradesh, 3D wallpaper by AB Wall Wonders, custom wallpaper ABwallwonders, interior wallpapers near me, botanical wallpaper, geometric wallpaper, mural wallpaper, wallpaper installation, AB wall wonders services, premium wallpaper company Andhra Pradesh, best wallpaper installer, designer wallpapers AB Wonders, interior wallpaper designers, best interior designers"
         url="https://ab-wall-wonders.vercel.app/services/wallpapers"
         type="service"
-        structuredData={[wallpaperServiceSchema, generateFAQSchema(wallpaperFAQs)]}
+        structuredData={[
+          wallpaperServiceSchema,
+          generateFAQSchema(wallpaperFAQs),
+        ]}
         image="https://ab-wall-wonders.vercel.app/images/wallpaperr.png"
       />
       <VoiceSearchSEO
