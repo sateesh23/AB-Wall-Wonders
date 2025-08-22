@@ -10,6 +10,7 @@ interface SEOProps {
   structuredData?: object;
   noIndex?: boolean;
   canonicalUrl?: string;
+  preloadImages?: string[];
 }
 
 export default function SEO({
