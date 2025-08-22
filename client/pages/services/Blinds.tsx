@@ -182,7 +182,7 @@ export default function Blinds() {
         title="Custom Window Blinds & Motorized Blinds in Andhra Pradesh | AB Wall Wonders"
         description="Premium custom window blinds with motorized options. Perfect light control and privacy solutions. Expert installation across Andhra Pradesh with 2-year warranty!"
         keywords="window blinds Andhra Pradesh, motorized blinds, custom blinds, Roman shades, vertical blinds, roller shades, Venetian blinds, smart blinds"
-        url="https://abwallwonders.com/services/blinds"
+        url="https://ab-wall-wonders.vercel.app/services/blinds"
         type="service"
         structuredData={blindsServiceSchema}
       />

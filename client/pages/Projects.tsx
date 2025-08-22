@@ -128,7 +128,7 @@ export default function Projects() {
         title="Our Projects Gallery - Wallpapers, Flooring & Blinds | AB Wall Wonders"
         description="Explore our completed wallpaper, flooring, and blinds projects across Andhra Pradesh. See real transformations and get inspired for your home renovation project!"
         keywords="AB Wall Wonders projects, home renovation Andhra Pradesh, wallpaper installation projects, flooring projects, blinds installation, interior design gallery, before after photos"
-        url="https://abwallwonders.com/projects"
+        url="https://ab-wall-wonders.vercel.app/projects"
         type="website"
         structuredData={projectsFAQSchema}
       />

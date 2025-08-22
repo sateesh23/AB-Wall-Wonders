@@ -112,7 +112,7 @@ export default function Flooring() {
         title="Luxury Vinyl Flooring & Artificial Grass in Andhra Pradesh | AB Wall Wonders"
         description="Premium vinyl flooring, artificial grass, and safety mats with waterproof technology. Expert installation across Andhra Pradesh with 2-year warranty. Get your free quote!"
         keywords="vinyl flooring Andhra Pradesh, artificial grass, waterproof flooring, luxury flooring, interior flooring, flooring installation, safety mats"
-        url="https://abwallwonders.com/services/flooring"
+        url="https://ab-wall-wonders.vercel.app/services/flooring"
         type="service"
         structuredData={flooringServiceSchema}
       />
