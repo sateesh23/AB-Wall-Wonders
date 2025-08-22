@@ -26,28 +26,34 @@ initErrorSuppression();
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <Toaster />
-    <Sonner />
-    <BrowserRouter>
-      <div className="relative z-10">
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/services/wallpapers" element={<WallpapersService />} />
-            <Route path="/services/blinds" element={<BlindsService />} />
-            <Route path="/services/flooring" element={<FlooringService />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
-  </QueryClientProvider>
-);
+const App = () => {
+  const helmetContext = {};
+
+  return (
+    <HelmetProvider context={helmetContext}>
+      <QueryClientProvider client={queryClient}>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <div className="relative z-10">
+            <Header />
+            <main>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/services/wallpapers" element={<WallpapersService />} />
+                <Route path="/services/blinds" element={<BlindsService />} />
+                <Route path="/services/flooring" element={<FlooringService />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </HelmetProvider>
+  );
+};
 
 createRoot(document.getElementById("root")!).render(<App />);
