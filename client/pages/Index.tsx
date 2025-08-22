@@ -8,6 +8,7 @@ import SEO, {
   generateFAQSchema,
   generateComprehensiveSchemas,
 } from "@/components/SEO";
+import VoiceSearchSEO from "@/components/VoiceSearchSEO";
 
 import ABTestimonials3D from "@/components/ui/ab-testimonials-3d";
 import { HomepageProjects } from "@/components/ui/homepage-projects";
@@ -118,6 +119,10 @@ export default function Index() {
         url="https://ab-wall-wonders.vercel.app"
         type="website"
         structuredData={comprehensiveSchemas}
+      />
+      <VoiceSearchSEO
+        isHomepage={true}
+        services={["wallpapers", "flooring", "blinds", "interior design"]}
       />
       <div
         className="min-h-screen pb-16 md:pb-0"
