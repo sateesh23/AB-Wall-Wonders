@@ -359,48 +359,6 @@ export default function EnhancedBrandSEO({
         {JSON.stringify(generateKnowledgeGraphSchema())}
       </script>
 
-      {/* Enhanced Brand FAQ Schema */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "@id": "https://ab-wall-wonders.vercel.app/#brand-faq",
-          mainEntity: [
-            {
-              "@type": "Question",
-              name: "What is AB Wall Wonders?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: `AB Wall Wonders (also known as ABwallwonders, Wall Wonders, or AB Wonders) is a premier ${service} company in Andhra Pradesh with 15+ years of experience in interior design solutions.`,
-              },
-            },
-            {
-              "@type": "Question",
-              name: "Is ABwallwonders the same as AB Wall Wonders?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Yes, ABwallwonders is the same company as AB Wall Wonders. We're also known as Wall Wonders and AB Wonders - all refer to the same trusted interior design company in Andhra Pradesh.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "How do I contact AB Wall Wonders?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "You can contact AB Wall Wonders (ABwallwonders) at +91-8500900827 or +91-8688723648. We provide free consultations across Andhra Pradesh.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "Where is Wall Wonders located?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Wall Wonders (AB Wall Wonders) is based in Andhra Pradesh, India. We provide services throughout the state with our expert installation teams.",
-              },
-            },
-          ],
-        })}
-      </script>
 
       {/* Business Name Variations Schema */}
       <script type="application/ld+json">
