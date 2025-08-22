@@ -151,6 +151,11 @@ export default function VoiceSearchSEO({
         {JSON.stringify(generateLocalQASchema())}
       </script>
 
+      {/* FAQ Schema for Voice Search */}
+      <script type="application/ld+json">
+        {JSON.stringify(generateConversationalFAQ())}
+      </script>
+
       {/* Speakable Content Schema */}
       <script type="application/ld+json">
         {JSON.stringify({
