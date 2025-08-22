@@ -359,7 +359,6 @@ export default function EnhancedBrandSEO({
         {JSON.stringify(generateKnowledgeGraphSchema())}
       </script>
 
-
       {/* Business Name Variations Schema */}
       <script type="application/ld+json">
         {JSON.stringify({

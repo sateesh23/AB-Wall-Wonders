@@ -147,7 +147,6 @@ export default function VoiceSearchSEO({
       <meta name="business-phone" content="+91-8500900827" />
       <meta name="business-phone-secondary" content="+91-86887-23648" />
 
-
       <script type="application/ld+json">
         {JSON.stringify(generateLocalQASchema())}
       </script>
