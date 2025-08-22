@@ -8,8 +8,6 @@ interface EnhancedBrandSEOProps {
 
 export default function EnhancedBrandSEO({
   service = "interior design",
-  pageName = "Homepage",
-  isHomepage = false,
 }: EnhancedBrandSEOProps) {
   // Comprehensive brand variations for better recognition
   const brandVariations = {
@@ -84,7 +82,7 @@ export default function EnhancedBrandSEO({
       `custom ${service}`,
     ];
 
-    const combinations = [];
+    const combinations: string[] = [];
 
     allBrandVariations.forEach((brand) => {
       serviceTerms.forEach((serviceVar) => {
