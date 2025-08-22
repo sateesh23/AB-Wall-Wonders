@@ -67,30 +67,8 @@ export default function Index() {
   const [recentProjects, setRecentProjects] = useState<SupabaseProject[]>([]);
   const [projectsLoading, setProjectsLoading] = useState(true);
 
-  // Generate FAQ structured data for homepage
-  // const homepageFAQs = [
-  //   {
-  //     question: "What services does AB Wall Wonders provide?",
-  //     answer: "We provide premium wallpaper installation, luxury flooring (vinyl, artificial grass), and custom window blinds across Andhra Pradesh with expert installation and warranty coverage."
-  //   },
-  //   {
-  //     question: "Do you offer warranty on your installations?",
-  //     answer: "Yes! We offer 5-year warranty on wallpapers and 2-year warranty on flooring and blinds installations."
-  //   },
-  //   {
-  //     question: "Which areas do you serve in Andhra Pradesh?",
-  //     answer: "We serve all major cities and towns across Andhra Pradesh including Tirupati, Vijayawada, Visakhapatnam, Guntur, and surrounding areas."
-  //   },
-  //   {
-  //     question: "How long does installation take?",
-  //     answer: "Installation time varies by project size. Wallpaper installation typically takes 1-2 days, flooring can be completed in 2-3 days, and blinds installation usually takes 1 day."
-  //   }
-  // ];
-
-  // const combinedStructuredData = [
-  //   generateLocalBusinessSchema(),
-  //   generateFAQSchema(homepageFAQs)
-  // ];
+  // Generate structured data for homepage
+  const localBusinessSchema = generateLocalBusinessSchema();
 
   // Load recent projects for homepage - ONLY from Supabase
   useEffect(() => {
@@ -113,7 +91,7 @@ export default function Index() {
             setRecentProjects([]);
           }
         } else {
-          console.log("📊 Supabase not configured");
+          console.log("���� Supabase not configured");
           setRecentProjects([]);
         }
       } catch (error) {
