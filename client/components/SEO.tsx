@@ -23,6 +23,7 @@ export default function SEO({
   structuredData,
   noIndex = false,
   canonicalUrl,
+  preloadImages = [],
 }: SEOProps) {
   const fullTitle = title.includes("AB Wall Wonders") ? title : `${title} | AB Wall Wonders`;
   const currentUrl = canonicalUrl || url;
