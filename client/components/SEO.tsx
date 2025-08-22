@@ -179,9 +179,18 @@ export const generateLocalBusinessSchema = () => {
     "@type": "LocalBusiness",
     "@id": "https://ab-wall-wonders.vercel.app/#localbusiness",
     name: "AB Wall Wonders",
-    alternateName: "AB Wall Wonders - Premium Wallpapers & Flooring",
+    alternateName: [
+      "ABwallwonders",
+      "AB wall wonders",
+      "abwallwonders",
+      "A B Wall Wonders",
+      "Wall Wonders",
+      "AB Wonders",
+      "AB Wall Wonders Andhra Pradesh",
+      "Premium Wallpapers & Flooring by AB Wall Wonders"
+    ],
     description:
-      "Premium wallpapers, luxury flooring, and custom blinds installation across Andhra Pradesh. Expert craftsmanship with 15+ years experience and 5-year warranty.",
+      "AB Wall Wonders (ABwallwonders) - Leading provider of premium wallpapers, luxury flooring, and custom blinds installation across Andhra Pradesh. Expert craftsmanship with 15+ years experience and 5-year warranty. Known as Wall Wonders for exceptional interior design solutions.",
     image: {
       "@type": "ImageObject",
       url: "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg",
