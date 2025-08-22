@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CTACard } from "@/components/ui/cta-card";
 import { ProjectCard } from "@/components/ui/project-card";
+import SEO, { generateFAQSchema } from "@/components/SEO";
 
 import {
   Phone,
@@ -21,6 +22,30 @@ export default function Projects() {
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Generate FAQ structured data for projects
+  const projectsFAQs = [
+    {
+      question: "Can I see examples of your previous work?",
+      answer: "Yes, our projects gallery showcases completed wallpaper, flooring, and blinds installations across Andhra Pradesh with before/after photos and detailed descriptions."
+    },
+    {
+      question: "Do you work on both residential and commercial projects?",
+      answer: "Yes, we handle both residential homes and commercial spaces including offices, restaurants, hotels, and retail establishments."
+    },
+    {
+      question: "How long do your typical projects take?",
+      answer: "Project duration varies by scope: wallpaper installations take 1-2 days, flooring 2-3 days, and blinds installation typically takes 1 day."
+    },
+    {
+      question: "Can you provide references from past clients?",
+      answer: "Absolutely! We can provide references and testimonials from our satisfied clients across Andhra Pradesh upon request."
+    }
+  ];
+
+  const combinedStructuredData = [
+    generateFAQSchema(projectsFAQs)
+  ];
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -96,7 +121,16 @@ export default function Projects() {
   };
 
   return (
-    <div
+    <>
+      <SEO
+        title="Our Projects Gallery - Wallpapers, Flooring & Blinds | AB Wall Wonders"
+        description="Explore our completed wallpaper, flooring, and blinds projects across Andhra Pradesh. See real transformations and get inspired for your home renovation project!"
+        keywords="AB Wall Wonders projects, home renovation Andhra Pradesh, wallpaper installation projects, flooring projects, blinds installation, interior design gallery, before after photos"
+        url="https://yourdomain.com/projects"
+        type="website"
+        structuredData={combinedStructuredData}
+      />
+      <div
       className="min-h-screen"
       style={{
         backgroundImage: "url(/herooo.png)",
@@ -397,6 +431,7 @@ export default function Projects() {
           icon: <MessageCircle className="mr-2 h-4 w-4" />,
         }}
       />
-    </div>
+      </div>
+    </>
   );
 }
