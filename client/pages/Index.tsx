@@ -4,8 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { NovaHeroScroll } from "@/components/ui/nova-hero-scroll";
 import SEO, {
-  generateLocalBusinessSchema,
-  generateFAQSchema,
   generateComprehensiveSchemas,
 } from "@/components/SEO";
 import VoiceSearchSEO from "@/components/VoiceSearchSEO";
@@ -130,20 +128,16 @@ export default function Index() {
         services={["wallpapers", "flooring", "blinds", "interior design"]}
       />
       <BrandMetaTags
-        pageName="Homepage"
         service="interior design"
         brandFocus="general"
       />
-      <SearchEngineDiscovery pageName="Homepage" isHomepage={true} />
+      <SearchEngineDiscovery isHomepage={true} />
       <LocalSEO
         service="interior design"
         area="Andhra Pradesh"
-        pageName="Homepage"
       />
       <EnhancedBrandSEO
         service="interior design"
-        pageName="Homepage"
-        isHomepage={true}
       />
       <div
         className="min-h-screen pb-16 md:pb-0"
