@@ -2,7 +2,7 @@
   "name": "AB Wall Wonders - Premium Wallpapers, Flooring & Blinds",
   "short_name": "AB Wall Wonders",
   "description": "Transform your space with AB Wall Wonders! Premium wallpapers, luxury flooring, and custom blinds with expert installation across Andhra Pradesh.",
-  "start_url": "/",
+  "start_url": "https://ab-wall-wonders.vercel.app/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#16a34a",
