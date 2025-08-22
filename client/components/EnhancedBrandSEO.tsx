@@ -8,8 +8,6 @@ interface EnhancedBrandSEOProps {
 
 export default function EnhancedBrandSEO({
   service = "interior design",
-  pageName = "Homepage",
-  isHomepage = false,
 }: EnhancedBrandSEOProps) {
   // Comprehensive brand variations for better recognition
   const brandVariations = {
@@ -84,7 +82,7 @@ export default function EnhancedBrandSEO({
       `custom ${service}`,
     ];
 
-    const combinations = [];
+    const combinations: string[] = [];
 
     allBrandVariations.forEach((brand) => {
       serviceTerms.forEach((serviceVar) => {
@@ -439,10 +437,11 @@ export const generateBrandOptimizedTitle = (
   includeVariations: boolean = true,
 ) => {
   const base = `${service} | AB Wall Wonders`;
+  const pagePrefix = pageName !== "Homepage" ? `${pageName} - ` : "";
   if (includeVariations) {
-    return `${base} | ABwallwonders | Wall Wonders Andhra Pradesh`;
+    return `${pagePrefix}${base} | ABwallwonders | Wall Wonders Andhra Pradesh`;
   }
-  return base;
+  return `${pagePrefix}${base}`;
 };
 
 // Helper function to generate brand-optimized descriptions

@@ -11,7 +11,6 @@ export default function VoiceSearchSEO({
   businessName = "AB Wall Wonders",
   location = "Andhra Pradesh",
   services = ["wallpapers", "flooring", "blinds"],
-  isHomepage = false,
 }: VoiceSearchSEOProps) {
   // Generate natural language content for voice search
   const generateVoiceSearchContent = () => {

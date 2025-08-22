@@ -7,7 +7,6 @@ interface BrandMetaTagsProps {
 }
 
 export default function BrandMetaTags({
-  pageName = "Homepage",
   service = "interior design",
   brandFocus = "general",
 }: BrandMetaTagsProps) {

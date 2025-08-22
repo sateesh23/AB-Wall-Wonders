@@ -26,7 +26,6 @@ export default function OptimizedImage({
   priority = false,
   placeholder = "empty",
   blurDataURL,
-  quality = 85,
   sizes,
   loading = "lazy",
   onLoad,
