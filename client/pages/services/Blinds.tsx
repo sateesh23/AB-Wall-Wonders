@@ -169,11 +169,6 @@ export default function Blinds() {
     "https://yourdomain.com/images/blindss.png"
   );
 
-  const combinedStructuredData = [
-    blindsServiceSchema,
-    generateFAQSchema(blindsFAQs)
-  ];
-
   return (
     <>
       <SEO
