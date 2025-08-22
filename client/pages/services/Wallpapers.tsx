@@ -7,6 +7,8 @@ import SEO, {
 } from "@/components/SEO";
 import VoiceSearchSEO from "@/components/VoiceSearchSEO";
 import BrandMetaTags from "@/components/BrandMetaTags";
+import LocalSEO from "@/components/LocalSEO";
+import EnhancedBrandSEO from "@/components/EnhancedBrandSEO";
 
 import {
   Palette,
@@ -188,12 +190,13 @@ export default function Wallpapers() {
   return (
     <>
       <SEO
-        title="Custom & 3D Wallpapers in Andhra Pradesh | AB Wall Wonders"
-        description="Transform your home with custom, 3D, and designer wallpapers. Expert installation with 15+ years of experience across Andhra Pradesh. Get a free quote today!"
-        keywords="AB Wall Wonders wallpapers, ABwallwonders, abwallwonders, Wall Wonders wallpaper, wallpapers in Andhra Pradesh, 3D wallpaper by AB Wall Wonders, custom wallpaper ABwallwonders, interior wallpapers, botanical wallpaper, geometric wallpaper, mural wallpaper, wallpaper installation, AB wall wonders services, premium wallpaper company Andhra Pradesh, best wallpaper installer, designer wallpapers AB Wonders"
+        title="Custom & 3D Wallpapers in Andhra Pradesh | AB Wall Wonders | ABwallwonders | Wall Wonders"
+        description="Transform your home with custom, 3D, and designer wallpapers by AB Wall Wonders (ABwallwonders). Expert installation with 15+ years experience across Andhra Pradesh. Also known as Wall Wonders & AB Wonders. Premium wallpapers near me. Call +91-8500900827 for free quote!"
+        keywords="AB Wall Wonders wallpapers, ABwallwonders, abwallwonders, Wall Wonders wallpaper, wallpapers near me, wallpapers in Andhra Pradesh, 3D wallpaper by AB Wall Wonders, custom wallpaper ABwallwonders, interior wallpapers near me, botanical wallpaper, geometric wallpaper, mural wallpaper, wallpaper installation, AB wall wonders services, premium wallpaper company Andhra Pradesh, best wallpaper installer, designer wallpapers AB Wonders, interior wallpaper designers, best interior designers"
         url="https://ab-wall-wonders.vercel.app/services/wallpapers"
         type="service"
-        structuredData={wallpaperServiceSchema}
+        structuredData={[wallpaperServiceSchema, generateFAQSchema(wallpaperFAQs)]}
+        image="https://ab-wall-wonders.vercel.app/images/wallpaperr.png"
       />
       <VoiceSearchSEO
         services={["wallpapers", "3D wallpapers", "custom wallpapers"]}
@@ -202,6 +205,16 @@ export default function Wallpapers() {
         pageName="Wallpapers"
         service="wallpapers"
         brandFocus="wallpapers"
+      />
+      <LocalSEO
+        service="wallpapers"
+        area="Andhra Pradesh"
+        pageName="Wallpapers Service"
+      />
+      <EnhancedBrandSEO
+        service="wallpapers"
+        pageName="Wallpapers Service"
+        isHomepage={false}
       />
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
