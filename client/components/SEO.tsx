@@ -92,12 +92,27 @@ export default function SEO({
         content="https://abwallwonders.com"
       />
 
+      {/* PWA Manifest */}
+      <link rel="manifest" href="/manifest.json" />
+
+      {/* Favicons */}
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png" />
+      <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/icon-192x192.png" />
+      <link rel="icon" type="image/png" sizes="512x512" href="/images/icons/icon-512x512.png" />
+
       {/* Additional SEO Meta Tags */}
       <meta name="format-detection" content="telephone=yes" />
       <meta name="apple-mobile-web-app-title" content="AB Wall Wonders" />
       <meta name="application-name" content="AB Wall Wonders" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      <meta name="mobile-web-app-capable" content="yes" />
       <meta name="theme-color" content="#16a34a" />
       <meta name="msapplication-TileColor" content="#16a34a" />
+      <meta name="msapplication-config" content="/browserconfig.xml" />
 
       {/* Enhanced SEO Meta Tags */}
       <meta name="language" content="English" />
