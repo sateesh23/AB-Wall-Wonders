@@ -127,7 +127,7 @@ export default function Projects() {
       <SEO
         title="Our Projects Gallery - Wallpapers, Flooring & Blinds | AB Wall Wonders"
         description="Explore our completed wallpaper, flooring, and blinds projects across Andhra Pradesh. See real transformations and get inspired for your home renovation project!"
-        keywords="AB Wall Wonders projects, home renovation Andhra Pradesh, wallpaper installation projects, flooring projects, blinds installation, interior design gallery, before after photos"
+        keywords="AB Wall Wonders projects, ABwallwonders portfolio, abwallwonders gallery, Wall Wonders completed projects, AB Wonders work samples, home renovation Andhra Pradesh, wallpaper installation projects, flooring projects, blinds installation, interior design gallery, before after photos, AB wall wonders customer reviews, premium interior design work, best renovation company Andhra Pradesh"
         url="https://ab-wall-wonders.vercel.app/projects"
         type="website"
         structuredData={projectsFAQSchema}

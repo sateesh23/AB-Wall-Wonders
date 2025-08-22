@@ -188,7 +188,7 @@ export default function Wallpapers() {
       <SEO
         title="Custom & 3D Wallpapers in Andhra Pradesh | AB Wall Wonders"
         description="Transform your home with custom, 3D, and designer wallpapers. Expert installation with 15+ years of experience across Andhra Pradesh. Get a free quote today!"
-        keywords="wallpapers in Andhra Pradesh, 3D wallpaper, custom wallpaper, interior wallpapers, botanical wallpaper, geometric wallpaper, mural wallpaper, wallpaper installation"
+        keywords="AB Wall Wonders wallpapers, ABwallwonders, abwallwonders, Wall Wonders wallpaper, wallpapers in Andhra Pradesh, 3D wallpaper by AB Wall Wonders, custom wallpaper ABwallwonders, interior wallpapers, botanical wallpaper, geometric wallpaper, mural wallpaper, wallpaper installation, AB wall wonders services, premium wallpaper company Andhra Pradesh, best wallpaper installer, designer wallpapers AB Wonders"
         url="https://ab-wall-wonders.vercel.app/services/wallpapers"
         type="service"
         structuredData={wallpaperServiceSchema}
