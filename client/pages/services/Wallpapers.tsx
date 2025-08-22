@@ -150,7 +150,47 @@ export default function Wallpapers() {
     window.scrollTo(0, 0);
   }, []);
 
+  // Generate FAQ structured data for wallpapers
+  const wallpaperFAQs = [
+    {
+      question: "What types of wallpapers do you install?",
+      answer: "We install 3D wallpapers, botanical, embossing, geometric, modern, mural, striped, and traditional wallpapers with premium quality materials and expert installation."
+    },
+    {
+      question: "How long does wallpaper last?",
+      answer: "Our premium wallpapers come with a 5-year warranty and are designed to last 10+ years with proper care. They are moisture-resistant and fade-resistant."
+    },
+    {
+      question: "Can wallpapers be removed without damaging walls?",
+      answer: "Yes, our wallpapers feature peel & replace technology that allows easy removal without damaging your walls."
+    },
+    {
+      question: "Do you provide custom wallpaper designs?",
+      answer: "Yes, we offer custom wallpaper patterns and designs tailored to your specific requirements and interior design vision."
+    }
+  ];
+
+  const wallpaperServiceSchema = generateServiceSchema(
+    "Premium Wallpaper Installation",
+    "Professional installation of 3D, botanical, geometric, and custom wallpapers across Andhra Pradesh with 5-year warranty coverage",
+    "https://yourdomain.com/images/wallpaperr.png"
+  );
+
+  const combinedStructuredData = [
+    wallpaperServiceSchema,
+    generateFAQSchema(wallpaperFAQs)
+  ];
+
   return (
+    <>
+      <SEO
+        title="Custom & 3D Wallpapers in Andhra Pradesh | AB Wall Wonders"
+        description="Transform your home with custom, 3D, and designer wallpapers. Expert installation with 15+ years of experience across Andhra Pradesh. Get a free quote today!"
+        keywords="wallpapers in Andhra Pradesh, 3D wallpaper, custom wallpaper, interior wallpapers, botanical wallpaper, geometric wallpaper, mural wallpaper, wallpaper installation"
+        url="https://yourdomain.com/services/wallpapers"
+        type="service"
+        structuredData={combinedStructuredData}
+      />
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-white text-sage-800">
@@ -533,6 +573,7 @@ export default function Wallpapers() {
       </section>
 
       <MobileFloatingCTAs />
-    </div>
+      </div>
+    </>
   );
 }
