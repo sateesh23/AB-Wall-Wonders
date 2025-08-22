@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 interface OptimizedImageProps {
   src: string;
   alt: string;
   className?: string;
-  loading?: 'lazy' | 'eager';
+  loading?: "lazy" | "eager";
   priority?: boolean;
   onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
   onLoad?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
@@ -16,8 +16,8 @@ interface OptimizedImageProps {
 export function OptimizedImage({
   src,
   alt,
-  className = '',
-  loading = 'lazy',
+  className = "",
+  loading = "lazy",
   priority = false,
   onError,
   onLoad,
@@ -48,14 +48,14 @@ export function OptimizedImage({
       {!imageLoaded && !imageError && (
         <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse"></div>
       )}
-      
+
       <img
         src={src}
         alt={alt}
         className={`w-full h-full object-cover transition-opacity duration-300 ${
-          imageLoaded ? 'opacity-100' : 'opacity-0'
+          imageLoaded ? "opacity-100" : "opacity-0"
         } ${className}`}
-        loading={priority ? 'eager' : loading}
+        loading={priority ? "eager" : loading}
         decoding="async"
         onLoad={handleLoad}
         onError={handleError}
@@ -63,7 +63,7 @@ export function OptimizedImage({
         {...(height && { height })}
         {...props}
       />
-      
+
       {/* Preload hint for critical images */}
       {priority && (
         <link
@@ -81,28 +81,28 @@ export function OptimizedImage({
 export function getOptimizedImageSrc(baseSrc: string): string {
   // Check if browser supports WebP
   const supportsWebP = () => {
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
     canvas.width = 1;
     canvas.height = 1;
-    return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+    return canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0;
   };
 
   // In a real app, you'd have WebP versions of your images
   // For now, return the original source
-  if (typeof window !== 'undefined' && supportsWebP()) {
+  if (typeof window !== "undefined" && supportsWebP()) {
     // Return WebP version if available
-    const webpSrc = baseSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+    const webpSrc = baseSrc.replace(/\.(jpg|jpeg|png)$/i, ".webp");
     return webpSrc;
   }
-  
+
   return baseSrc;
 }
 
 // Hook for responsive image sizes
 export function useResponsiveImageSizes() {
   return {
-    mobile: '(max-width: 768px) 100vw',
-    tablet: '(max-width: 1024px) 50vw',
-    desktop: '33vw'
+    mobile: "(max-width: 768px) 100vw",
+    tablet: "(max-width: 1024px) 50vw",
+    desktop: "33vw",
   };
 }

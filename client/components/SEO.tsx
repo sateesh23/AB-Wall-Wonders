@@ -25,7 +25,9 @@ export default function SEO({
   canonicalUrl,
   preloadImages = [],
 }: SEOProps) {
-  const fullTitle = title.includes("AB Wall Wonders") ? title : `${title} | AB Wall Wonders`;
+  const fullTitle = title.includes("AB Wall Wonders")
+    ? title
+    : `${title} | AB Wall Wonders`;
   const currentUrl = canonicalUrl || url;
 
   return (
@@ -34,15 +36,18 @@ export default function SEO({
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
-      
+
       {/* Canonical URL */}
       <link rel="canonical" href={currentUrl} />
-      
+
       {/* Robots */}
       {noIndex ? (
         <meta name="robots" content="noindex, nofollow" />
       ) : (
-        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta
+          name="robots"
+          content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+        />
       )}
 
       {/* Open Graph Tags */}
@@ -70,13 +75,22 @@ export default function SEO({
 
       {/* Business Information */}
       <meta name="author" content="AB Wall Wonders" />
-      <meta name="business:contact_data:street_address" content="Andhra Pradesh" />
+      <meta
+        name="business:contact_data:street_address"
+        content="Andhra Pradesh"
+      />
       <meta name="business:contact_data:locality" content="Andhra Pradesh" />
       <meta name="business:contact_data:region" content="Andhra Pradesh" />
       <meta name="business:contact_data:postal_code" content="516001" />
       <meta name="business:contact_data:country_name" content="India" />
-      <meta name="business:contact_data:phone_number" content="+91-8500900827" />
-      <meta name="business:contact_data:website" content="https://yourdomain.com" />
+      <meta
+        name="business:contact_data:phone_number"
+        content="+91-8500900827"
+      />
+      <meta
+        name="business:contact_data:website"
+        content="https://yourdomain.com"
+      />
 
       {/* Additional SEO Meta Tags */}
       <meta name="format-detection" content="telephone=yes" />
@@ -97,8 +111,8 @@ export default function SEO({
       ))}
 
       {/* Structured Data */}
-      {structuredData && (
-        Array.isArray(structuredData) ? (
+      {structuredData &&
+        (Array.isArray(structuredData) ? (
           structuredData.map((schema, index) => (
             <script key={index} type="application/ld+json">
               {JSON.stringify(schema)}
@@ -108,8 +122,7 @@ export default function SEO({
           <script type="application/ld+json">
             {JSON.stringify(structuredData)}
           </script>
-        )
-      )}
+        ))}
     </Helmet>
   );
 }
@@ -120,179 +133,190 @@ export const generateLocalBusinessSchema = () => {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": "https://yourdomain.com/#localbusiness",
-    "name": "AB Wall Wonders",
-    "alternateName": "AB Wall Wonders - Premium Wallpapers & Flooring",
-    "description": "Premium wallpapers, luxury flooring, and custom blinds installation across Andhra Pradesh. Expert craftsmanship with 15+ years experience and 5-year warranty.",
-    "image": {
+    name: "AB Wall Wonders",
+    alternateName: "AB Wall Wonders - Premium Wallpapers & Flooring",
+    description:
+      "Premium wallpapers, luxury flooring, and custom blinds installation across Andhra Pradesh. Expert craftsmanship with 15+ years experience and 5-year warranty.",
+    image: {
       "@type": "ImageObject",
-      "url": "https://yourdomain.com/images/ab-wall-wonders-logo.jpg",
-      "width": 800,
-      "height": 600
+      url: "https://yourdomain.com/images/ab-wall-wonders-logo.jpg",
+      width: 800,
+      height: 600,
     },
-    "logo": {
+    logo: {
       "@type": "ImageObject",
-      "url": "https://yourdomain.com/images/ab-wall-wonders-logo.jpg",
-      "width": 300,
-      "height": 300
+      url: "https://yourdomain.com/images/ab-wall-wonders-logo.jpg",
+      width: 300,
+      height: 300,
     },
-    "url": "https://yourdomain.com",
-    "telephone": "+91-8500900827",
-    "priceRange": "₹₹-₹₹₹",
-    "address": {
+    url: "https://yourdomain.com",
+    telephone: "+91-8500900827",
+    priceRange: "₹₹-₹₹₹",
+    address: {
       "@type": "PostalAddress",
-      "addressLocality": "Andhra Pradesh",
-      "addressRegion": "AP",
-      "postalCode": "516001",
-      "addressCountry": "IN"
+      addressLocality: "Andhra Pradesh",
+      addressRegion: "AP",
+      postalCode: "516001",
+      addressCountry: "IN",
     },
-    "geo": {
+    geo: {
       "@type": "GeoCoordinates",
-      "latitude": 15.9129,
-      "longitude": 79.7400
+      latitude: 15.9129,
+      longitude: 79.74,
     },
-    "openingHoursSpecification": [
+    openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
+        dayOfWeek: [
           "Monday",
-          "Tuesday", 
+          "Tuesday",
           "Wednesday",
           "Thursday",
           "Friday",
-          "Saturday"
+          "Saturday",
         ],
-        "opens": "09:00",
-        "closes": "18:00"
-      }
+        opens: "09:00",
+        closes: "18:00",
+      },
     ],
-    "contactPoint": {
+    contactPoint: {
       "@type": "ContactPoint",
-      "telephone": "+91-8500900827",
-      "contactType": "customer service",
-      "availableLanguage": ["English", "Telugu", "Hindi"],
-      "areaServed": "IN-AP"
+      telephone: "+91-8500900827",
+      contactType: "customer service",
+      availableLanguage: ["English", "Telugu", "Hindi"],
+      areaServed: "IN-AP",
     },
-    "areaServed": {
+    areaServed: {
       "@type": "State",
-      "name": "Andhra Pradesh"
+      name: "Andhra Pradesh",
     },
-    "hasOfferCatalog": {
+    hasOfferCatalog: {
       "@type": "OfferCatalog",
-      "name": "Interior Design Services",
-      "itemListElement": [
+      name: "Interior Design Services",
+      itemListElement: [
         {
           "@type": "Offer",
-          "itemOffered": {
+          itemOffered: {
             "@type": "Service",
-            "name": "Premium Wallpapers Installation",
-            "description": "3D wallpapers, botanical, geometric, and custom wallpaper installation with 5-year warranty"
-          }
-        },
-        {
-          "@type": "Offer", 
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Luxury Flooring Installation",
-            "description": "Vinyl flooring, artificial grass, and safety mats with expert installation"
-          }
+            name: "Premium Wallpapers Installation",
+            description:
+              "3D wallpapers, botanical, geometric, and custom wallpaper installation with 5-year warranty",
+          },
         },
         {
           "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service", 
-            "name": "Custom Window Blinds",
-            "description": "Motorized and manual blinds, custom sizing with precision installation"
-          }
-        }
-      ]
+          itemOffered: {
+            "@type": "Service",
+            name: "Luxury Flooring Installation",
+            description:
+              "Vinyl flooring, artificial grass, and safety mats with expert installation",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Custom Window Blinds",
+            description:
+              "Motorized and manual blinds, custom sizing with precision installation",
+          },
+        },
+      ],
     },
-    "review": [
+    review: [
       {
         "@type": "Review",
-        "reviewRating": {
+        reviewRating: {
           "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
+          ratingValue: "5",
+          bestRating: "5",
         },
-        "author": {
+        author: {
           "@type": "Person",
-          "name": "Satisfied Customer"
+          name: "Satisfied Customer",
         },
-        "reviewBody": "Excellent service and quality wallpapers. Professional installation and great customer support."
-      }
+        reviewBody:
+          "Excellent service and quality wallpapers. Professional installation and great customer support.",
+      },
     ],
-    "aggregateRating": {
+    aggregateRating: {
       "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "50",
-      "bestRating": "5",
-      "worstRating": "1"
-    }
+      ratingValue: "4.8",
+      reviewCount: "50",
+      bestRating: "5",
+      worstRating: "1",
+    },
   };
 };
 
 // Helper function to generate Service structured data
-export const generateServiceSchema = (serviceName: string, serviceDescription: string, serviceImage?: string) => {
+export const generateServiceSchema = (
+  serviceName: string,
+  serviceDescription: string,
+  serviceImage?: string,
+) => {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": serviceName,
-    "description": serviceDescription,
-    "provider": {
+    name: serviceName,
+    description: serviceDescription,
+    provider: {
       "@type": "LocalBusiness",
-      "name": "AB Wall Wonders",
-      "telephone": "+91-8500900827",
-      "address": {
+      name: "AB Wall Wonders",
+      telephone: "+91-8500900827",
+      address: {
         "@type": "PostalAddress",
-        "addressLocality": "Andhra Pradesh",
-        "addressRegion": "AP",
-        "addressCountry": "IN"
-      }
+        addressLocality: "Andhra Pradesh",
+        addressRegion: "AP",
+        addressCountry: "IN",
+      },
     },
-    "areaServed": {
+    areaServed: {
       "@type": "State",
-      "name": "Andhra Pradesh"
+      name: "Andhra Pradesh",
     },
-    "hasOfferCatalog": {
+    hasOfferCatalog: {
       "@type": "OfferCatalog",
-      "name": serviceName,
-      "itemListElement": [
+      name: serviceName,
+      itemListElement: [
         {
           "@type": "Offer",
-          "itemOffered": {
+          itemOffered: {
             "@type": "Service",
-            "name": serviceName,
-            "description": serviceDescription
+            name: serviceName,
+            description: serviceDescription,
           },
-          "availability": "https://schema.org/InStock",
-          "price": "Contact for Quote",
-          "priceCurrency": "INR"
-        }
-      ]
+          availability: "https://schema.org/InStock",
+          price: "Contact for Quote",
+          priceCurrency: "INR",
+        },
+      ],
     },
     ...(serviceImage && {
-      "image": {
+      image: {
         "@type": "ImageObject",
-        "url": serviceImage,
-        "width": 800,
-        "height": 600
-      }
-    })
+        url: serviceImage,
+        width: 800,
+        height: 600,
+      },
+    }),
   };
 };
 
 // Helper function to generate FAQ structured data
-export const generateFAQSchema = (faqs: { question: string; answer: string }[]) => {
+export const generateFAQSchema = (
+  faqs: { question: string; answer: string }[],
+) => {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
+      name: faq.question,
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
+        text: faq.answer,
+      },
+    })),
   };
 };
