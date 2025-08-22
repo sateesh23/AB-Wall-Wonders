@@ -329,10 +329,11 @@ export const generatePageDiscoveryTags = (
   pageName: string,
   service?: string,
 ) => {
+  const pageContext = pageName !== "Homepage" ? ` - ${pageName}` : "";
   const tags = {
     "entity-focus": service
-      ? `${service} by AB Wall Wonders`
-      : "AB Wall Wonders services",
+      ? `${service} by AB Wall Wonders${pageContext}`
+      : `AB Wall Wonders services${pageContext}`,
     "page-purpose": `Information about ${service || "interior design"} services`,
     "content-intent": "commercial-service-information",
     "user-intent": "service-discovery-contact",

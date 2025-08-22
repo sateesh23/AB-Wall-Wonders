@@ -437,10 +437,11 @@ export const generateBrandOptimizedTitle = (
   includeVariations: boolean = true,
 ) => {
   const base = `${service} | AB Wall Wonders`;
+  const pagePrefix = pageName !== "Homepage" ? `${pageName} - ` : "";
   if (includeVariations) {
-    return `${base} | ABwallwonders | Wall Wonders Andhra Pradesh`;
+    return `${pagePrefix}${base} | ABwallwonders | Wall Wonders Andhra Pradesh`;
   }
-  return base;
+  return `${pagePrefix}${base}`;
 };
 
 // Helper function to generate brand-optimized descriptions
