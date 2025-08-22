@@ -43,9 +43,7 @@ export default function Projects() {
     }
   ];
 
-  const combinedStructuredData = [
-    generateFAQSchema(projectsFAQs)
-  ];
+  const projectsFAQSchema = generateFAQSchema(projectsFAQs);
 
   // Scroll to top when component mounts
   useEffect(() => {
