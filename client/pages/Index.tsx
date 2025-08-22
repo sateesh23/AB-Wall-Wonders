@@ -6,6 +6,7 @@ import { NovaHeroScroll } from "@/components/ui/nova-hero-scroll";
 import SEO, {
   generateLocalBusinessSchema,
   generateFAQSchema,
+  generateComprehensiveSchemas,
 } from "@/components/SEO";
 
 import ABTestimonials3D from "@/components/ui/ab-testimonials-3d";
