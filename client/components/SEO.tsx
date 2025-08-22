@@ -85,6 +85,17 @@ export default function SEO({
       <meta name="theme-color" content="#16a34a" />
       <meta name="msapplication-TileColor" content="#16a34a" />
 
+      {/* Preload critical images */}
+      {preloadImages.map((imageUrl, index) => (
+        <link
+          key={index}
+          rel="preload"
+          as="image"
+          href={imageUrl}
+          type="image/jpeg"
+        />
+      ))}
+
       {/* Structured Data */}
       {structuredData && (
         <script type="application/ld+json">
