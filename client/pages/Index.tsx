@@ -11,6 +11,8 @@ import SEO, {
 import VoiceSearchSEO from "@/components/VoiceSearchSEO";
 import BrandMetaTags from "@/components/BrandMetaTags";
 import SearchEngineDiscovery from "@/components/SearchEngineDiscovery";
+import LocalSEO from "@/components/LocalSEO";
+import EnhancedBrandSEO from "@/components/EnhancedBrandSEO";
 
 import ABTestimonials3D from "@/components/ui/ab-testimonials-3d";
 import { HomepageProjects } from "@/components/ui/homepage-projects";
@@ -115,12 +117,13 @@ export default function Index() {
   return (
     <>
       <SEO
-        title="AB Wall Wonders - Premium Wallpapers, Flooring & Blinds in Andhra Pradesh"
-        description="Transform your space with AB Wall Wonders (ABwallwonders)! Premium wallpapers, luxury flooring, and custom blinds with expert installation across Andhra Pradesh. 15+ years experience, 5-year warranty. Get your free quote today!"
-        keywords="AB Wall Wonders, ABwallwonders, AB wall wonders, abwallwonders, A B Wall Wonders, Wall Wonders, AB Wonders, wallpapers Andhra Pradesh, 3D wallpaper, interior flooring, vinyl flooring, window blinds, custom wallpaper, interior design Andhra Pradesh, home renovation, premium wallpapers, luxury flooring, wall decor company, interior designer near me, best wallpaper company Andhra Pradesh, flooring contractor, blinds installation service"
+        title="AB Wall Wonders - Premium Wallpapers, Flooring & Blinds in Andhra Pradesh | ABwallwonders | Wall Wonders"
+        description="Transform your space with AB Wall Wonders (ABwallwonders)! Premium wallpapers, luxury flooring, and custom blinds with expert installation across Andhra Pradesh. Also known as Wall Wonders & AB Wonders. 15+ years experience, 5-year warranty. Call +91-8500900827 for free quote!"
+        keywords="AB Wall Wonders, ABwallwonders, AB wall wonders, abwallwonders, A B Wall Wonders, Wall Wonders, AB Wonders, wallpapers Andhra Pradesh, wallpapers near me, interior flooring near me, window blinds near me, custom wallpaper, interior design Andhra Pradesh, best interior designers, interior wallpaper designers, interior flooring designers, interior window blinds near me, home renovation, premium wallpapers, luxury flooring, wall decor company, interior designer near me, best wallpaper company Andhra Pradesh, flooring contractor, blinds installation service"
         url="https://ab-wall-wonders.vercel.app"
         type="website"
         structuredData={comprehensiveSchemas}
+        image="https://ab-wall-wonders.vercel.app/herooo.png"
       />
       <VoiceSearchSEO
         isHomepage={true}
@@ -132,6 +135,16 @@ export default function Index() {
         brandFocus="general"
       />
       <SearchEngineDiscovery pageName="Homepage" isHomepage={true} />
+      <LocalSEO
+        service="interior design"
+        area="Andhra Pradesh"
+        pageName="Homepage"
+      />
+      <EnhancedBrandSEO
+        service="interior design"
+        pageName="Homepage"
+        isHomepage={true}
+      />
       <div
         className="min-h-screen pb-16 md:pb-0"
         style={{

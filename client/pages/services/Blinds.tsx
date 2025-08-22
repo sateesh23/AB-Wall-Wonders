@@ -5,6 +5,10 @@ import SEO, {
   generateServiceSchema,
   generateFAQSchema,
 } from "@/components/SEO";
+import VoiceSearchSEO from "@/components/VoiceSearchSEO";
+import BrandMetaTags from "@/components/BrandMetaTags";
+import LocalSEO from "@/components/LocalSEO";
+import EnhancedBrandSEO from "@/components/EnhancedBrandSEO";
 
 import {
   Home,
@@ -179,12 +183,27 @@ export default function Blinds() {
   return (
     <>
       <SEO
-        title="Custom Window Blinds & Motorized Blinds in Andhra Pradesh | AB Wall Wonders"
-        description="Premium custom window blinds with motorized options. Perfect light control and privacy solutions. Expert installation across Andhra Pradesh with 2-year warranty!"
-        keywords="AB Wall Wonders blinds, ABwallwonders blinds, abwallwonders window treatments, Wall Wonders blinds, window blinds Andhra Pradesh, motorized blinds by AB Wall Wonders, custom blinds ABwallwonders, Roman shades, vertical blinds, roller shades, Venetian blinds, smart blinds, AB wall wonders blinds installation, premium blinds company, best blinds installer Andhra Pradesh"
+        title="Custom Window Blinds & Motorized Blinds | AB Wall Wonders | ABwallwonders | Wall Wonders"
+        description="Premium custom window blinds with motorized options by AB Wall Wonders (ABwallwonders). Perfect light control and privacy solutions. Expert installation across Andhra Pradesh with 2-year warranty. Also known as Wall Wonders & AB Wonders. Window blinds near me. Call +91-8500900827!"
+        keywords="AB Wall Wonders blinds, ABwallwonders blinds, abwallwonders window treatments, Wall Wonders blinds, window blinds Andhra Pradesh, motorized blinds by AB Wall Wonders, custom blinds ABwallwonders, Roman shades, vertical blinds, roller shades, Venetian blinds, smart blinds, AB wall wonders blinds installation, premium blinds company, best blinds installer Andhra Pradesh, window blinds near me, interior window blinds near me"
         url="https://ab-wall-wonders.vercel.app/services/blinds"
         type="service"
-        structuredData={blindsServiceSchema}
+        structuredData={[blindsServiceSchema, generateFAQSchema(blindsFAQs)]}
+        image="https://ab-wall-wonders.vercel.app/images/blindss.png"
+      />
+      <VoiceSearchSEO
+        services={["blinds", "window blinds", "motorized blinds"]}
+      />
+      <BrandMetaTags pageName="Blinds" service="blinds" brandFocus="blinds" />
+      <LocalSEO
+        service="blinds"
+        area="Andhra Pradesh"
+        pageName="Blinds Service"
+      />
+      <EnhancedBrandSEO
+        service="blinds"
+        pageName="Blinds Service"
+        isHomepage={false}
       />
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
