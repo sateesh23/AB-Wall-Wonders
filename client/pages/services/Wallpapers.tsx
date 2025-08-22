@@ -184,7 +184,7 @@ export default function Wallpapers() {
         keywords="wallpapers in Andhra Pradesh, 3D wallpaper, custom wallpaper, interior wallpapers, botanical wallpaper, geometric wallpaper, mural wallpaper, wallpaper installation"
         url="https://yourdomain.com/services/wallpapers"
         type="service"
-        structuredData={combinedStructuredData}
+        structuredData={wallpaperServiceSchema}
       />
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
