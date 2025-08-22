@@ -126,7 +126,7 @@ export default function Projects() {
         keywords="AB Wall Wonders projects, home renovation Andhra Pradesh, wallpaper installation projects, flooring projects, blinds installation, interior design gallery, before after photos"
         url="https://yourdomain.com/projects"
         type="website"
-        structuredData={combinedStructuredData}
+        structuredData={projectsFAQSchema}
       />
       <div
       className="min-h-screen"
