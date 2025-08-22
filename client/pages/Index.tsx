@@ -9,6 +9,7 @@ import SEO, {
   generateComprehensiveSchemas,
 } from "@/components/SEO";
 import VoiceSearchSEO from "@/components/VoiceSearchSEO";
+import BrandMetaTags from "@/components/BrandMetaTags";
 
 import ABTestimonials3D from "@/components/ui/ab-testimonials-3d";
 import { HomepageProjects } from "@/components/ui/homepage-projects";
@@ -123,6 +124,11 @@ export default function Index() {
       <VoiceSearchSEO
         isHomepage={true}
         services={["wallpapers", "flooring", "blinds", "interior design"]}
+      />
+      <BrandMetaTags
+        pageName="Homepage"
+        service="interior design"
+        brandFocus="general"
       />
       <div
         className="min-h-screen pb-16 md:pb-0"
