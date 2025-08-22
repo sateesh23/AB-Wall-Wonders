@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import SEO, { generateServiceSchema, generateFAQSchema } from "@/components/SEO";
 
 import {
   Phone,
@@ -72,7 +73,47 @@ export default function Flooring() {
     window.scrollTo(0, 0);
   }, []);
 
+  // Generate FAQ structured data for flooring
+  const flooringFAQs = [
+    {
+      question: "What types of flooring do you install?",
+      answer: "We install vinyl flooring, artificial grass, and cushion & safety mats with waterproof technology and expert installation across Andhra Pradesh."
+    },
+    {
+      question: "Is vinyl flooring completely waterproof?",
+      answer: "Yes, our vinyl flooring is 100% waterproof, making it perfect for kitchens, bathrooms, and high-moisture areas."
+    },
+    {
+      question: "How long does flooring installation take?",
+      answer: "Most flooring installations can be completed within 48 hours, depending on the size and complexity of the project."
+    },
+    {
+      question: "Do you provide warranty on flooring installation?",
+      answer: "Yes, we provide a 2-year warranty on all flooring installations, covering both materials and workmanship."
+    }
+  ];
+
+  const flooringServiceSchema = generateServiceSchema(
+    "Luxury Flooring Installation",
+    "Professional installation of vinyl flooring, artificial grass, and safety mats across Andhra Pradesh with waterproof technology and 2-year warranty",
+    "https://yourdomain.com/images/flooringg.png"
+  );
+
+  const combinedStructuredData = [
+    flooringServiceSchema,
+    generateFAQSchema(flooringFAQs)
+  ];
+
   return (
+    <>
+      <SEO
+        title="Luxury Vinyl Flooring & Artificial Grass in Andhra Pradesh | AB Wall Wonders"
+        description="Premium vinyl flooring, artificial grass, and safety mats with waterproof technology. Expert installation across Andhra Pradesh with 2-year warranty. Get your free quote!"
+        keywords="vinyl flooring Andhra Pradesh, artificial grass, waterproof flooring, luxury flooring, interior flooring, flooring installation, safety mats"
+        url="https://yourdomain.com/services/flooring"
+        type="service"
+        structuredData={combinedStructuredData}
+      />
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-white text-sage-800">
@@ -454,6 +495,7 @@ export default function Flooring() {
       </section>
 
       <MobileFloatingCTAs />
-    </div>
+      </div>
+    </>
   );
 }
