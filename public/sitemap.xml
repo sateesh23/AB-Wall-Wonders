@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://yourdomain.com/</loc>
+    <lastmod>2024-12-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://yourdomain.com/herooo.png</image:loc>
+      <image:title>AB Wall Wonders - Premium Wallpapers, Flooring & Blinds</image:title>
+    </image:image>
+  </url>
+
+  <!-- Services Pages -->
+  <url>
+    <loc>https://yourdomain.com/services/wallpapers</loc>
+    <lastmod>2024-12-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://yourdomain.com/images/wallpaperr.png</image:loc>
+      <image:title>Custom & 3D Wallpapers in Andhra Pradesh</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://yourdomain.com/services/flooring</loc>
+    <lastmod>2024-12-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://yourdomain.com/images/flooringg.png</image:loc>
+      <image:title>Luxury Vinyl Flooring & Artificial Grass</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://yourdomain.com/services/blinds</loc>
+    <lastmod>2024-12-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://yourdomain.com/images/blindss.png</image:loc>
+      <image:title>Custom Window Blinds & Motorized Blinds</image:title>
+    </image:image>
+  </url>
+
+  <!-- Projects Page -->
+  <url>
+    <loc>https://yourdomain.com/projects</loc>
+    <lastmod>2024-12-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://yourdomain.com/herooo.png</image:loc>
+      <image:title>Our Projects Gallery - Wallpapers, Flooring & Blinds</image:title>
+    </image:image>
+  </url>
+
+  <!-- Additional Service Category URLs for better SEO -->
+  <url>
+    <loc>https://yourdomain.com/services/3d-wallpapers</loc>
+    <lastmod>2024-12-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://yourdomain.com/services/vinyl-flooring</loc>
+    <lastmod>2024-12-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://yourdomain.com/services/motorized-blinds</loc>
+    <lastmod>2024-12-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
