@@ -225,6 +225,12 @@ export default function Index() {
                     src={service.image}
                     alt={service.title}
                     className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/placeholder.svg";
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                   <div className="absolute top-4 right-4">
