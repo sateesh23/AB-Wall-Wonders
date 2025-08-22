@@ -177,7 +177,7 @@ export default function Blinds() {
         keywords="window blinds Andhra Pradesh, motorized blinds, custom blinds, Roman shades, vertical blinds, roller shades, Venetian blinds, smart blinds"
         url="https://yourdomain.com/services/blinds"
         type="service"
-        structuredData={combinedStructuredData}
+        structuredData={blindsServiceSchema}
       />
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
