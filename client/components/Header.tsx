@@ -128,7 +128,10 @@ export default function Header() {
           <button
             className="lg:hidden p-2 rounded-full hover:bg-primary/10 transition-colors"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            aria-label={isOpen ? "Close main menu" : "Open main menu"}
+            type="button"
           >
             {isOpen ? <X className="h-6 w-6 text-primary" /> : <Menu className="h-6 w-6 text-primary" />}
           </button>
