@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import SEO, { generateServiceSchema, generateFAQSchema } from "@/components/SEO";
 
 import {
   Home,
@@ -142,7 +143,47 @@ export default function Blinds() {
     window.scrollTo(0, 0);
   }, []);
 
+  // Generate FAQ structured data for blinds
+  const blindsFAQs = [
+    {
+      question: "What types of blinds do you offer?",
+      answer: "We offer bamboo outdoor blinds, cellular shades, Roman shades, vertical blinds, roller shades, and Venetian blinds with both motorized and manual options."
+    },
+    {
+      question: "Do you provide motorized blinds?",
+      answer: "Yes, we offer smart motorized blinds with remote control and automation features for modern homes and offices."
+    },
+    {
+      question: "Are your blinds custom-made?",
+      answer: "Yes, all our blinds are custom-sized and precision-made to fit your specific windows and requirements perfectly."
+    },
+    {
+      question: "What warranty do you provide on blinds?",
+      answer: "We provide a 2-year warranty on all blinds installations, covering both the blinds and installation workmanship."
+    }
+  ];
+
+  const blindsServiceSchema = generateServiceSchema(
+    "Custom Window Blinds Installation",
+    "Professional installation of motorized and manual blinds, custom-sized for perfect fit across Andhra Pradesh with 2-year warranty coverage",
+    "https://yourdomain.com/images/blindss.png"
+  );
+
+  const combinedStructuredData = [
+    blindsServiceSchema,
+    generateFAQSchema(blindsFAQs)
+  ];
+
   return (
+    <>
+      <SEO
+        title="Custom Window Blinds & Motorized Blinds in Andhra Pradesh | AB Wall Wonders"
+        description="Premium custom window blinds with motorized options. Perfect light control and privacy solutions. Expert installation across Andhra Pradesh with 2-year warranty!"
+        keywords="window blinds Andhra Pradesh, motorized blinds, custom blinds, Roman shades, vertical blinds, roller shades, Venetian blinds, smart blinds"
+        url="https://yourdomain.com/services/blinds"
+        type="service"
+        structuredData={combinedStructuredData}
+      />
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-white text-sage-800">
@@ -525,6 +566,7 @@ export default function Blinds() {
       </section>
 
       <MobileFloatingCTAs />
-    </div>
+      </div>
+    </>
   );
 }
