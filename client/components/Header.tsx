@@ -35,12 +35,12 @@ export default function Header() {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-transparent">
+    <header className="sticky top-0 z-50 w-full bg-transparent" role="banner">
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
 
           {/* LEFT: Desktop Navigation Menu */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-1" role="navigation" aria-label="Main navigation">
             {navigation.map((item) => (
               item.dropdown ? (
                 <DropdownMenu key={item.name}>
