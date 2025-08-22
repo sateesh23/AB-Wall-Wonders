@@ -107,7 +107,7 @@ export default function Flooring() {
         keywords="vinyl flooring Andhra Pradesh, artificial grass, waterproof flooring, luxury flooring, interior flooring, flooring installation, safety mats"
         url="https://yourdomain.com/services/flooring"
         type="service"
-        structuredData={combinedStructuredData}
+        structuredData={flooringServiceSchema}
       />
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
