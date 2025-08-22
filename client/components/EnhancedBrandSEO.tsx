@@ -8,8 +8,8 @@ interface EnhancedBrandSEOProps {
 
 export default function EnhancedBrandSEO({
   service = "interior design",
-  pageName = "Homepage",
-  isHomepage = false,
+  pageName: _pageName = "Homepage",
+  isHomepage: _isHomepage = false,
 }: EnhancedBrandSEOProps) {
   // Comprehensive brand variations for better recognition
   const brandVariations = {
@@ -84,7 +84,7 @@ export default function EnhancedBrandSEO({
       `custom ${service}`,
     ];
 
-    const combinations = [];
+    const combinations: string[] = [];
 
     allBrandVariations.forEach((brand) => {
       serviceTerms.forEach((serviceVar) => {
@@ -435,7 +435,7 @@ export default function EnhancedBrandSEO({
 // Helper function to generate brand-optimized page titles
 export const generateBrandOptimizedTitle = (
   service: string,
-  pageName: string,
+  _pageName: string,
   includeVariations: boolean = true,
 ) => {
   const base = `${service} | AB Wall Wonders`;

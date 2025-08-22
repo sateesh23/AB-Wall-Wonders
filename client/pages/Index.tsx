@@ -4,8 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { NovaHeroScroll } from "@/components/ui/nova-hero-scroll";
 import SEO, {
-  generateLocalBusinessSchema,
-  generateFAQSchema,
   generateComprehensiveSchemas,
 } from "@/components/SEO";
 import VoiceSearchSEO from "@/components/VoiceSearchSEO";
