@@ -9,7 +9,7 @@ interface LocalSEOProps {
 export default function LocalSEO({
   service = "interior design",
   area = "Andhra Pradesh",
-  pageName = "Homepage",
+  pageName: _pageName = "Homepage",
 }: LocalSEOProps) {
   // Generate comprehensive local search terms
   const generateLocalSearchTerms = () => {
@@ -88,7 +88,7 @@ export default function LocalSEO({
 
   // Generate comprehensive local search combinations
   const generateLocalSearchCombinations = () => {
-    const combinations = [];
+    const combinations: string[] = [];
 
     // Brand + Service + Location combinations
     brandVariations.forEach((brand) => {
@@ -483,7 +483,7 @@ export const generateLocalSEOKeywords = (
   ];
   const qualityTerms = ["best", "top", "professional", "expert", "quality"];
 
-  const keywords = [];
+  const keywords: string[] = [];
 
   brandTerms.forEach((brand) => {
     locationTerms.forEach((location) => {

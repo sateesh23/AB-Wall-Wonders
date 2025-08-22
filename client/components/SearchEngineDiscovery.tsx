@@ -6,7 +6,7 @@ interface SearchEngineDiscoveryProps {
 }
 
 export default function SearchEngineDiscovery({
-  pageName = "Homepage",
+  pageName: _pageName = "Homepage",
   isHomepage = false,
 }: SearchEngineDiscoveryProps) {
   // Generate comprehensive discovery hints for search engines
@@ -327,7 +327,7 @@ export default function SearchEngineDiscovery({
 
 // Helper function to generate page-specific discovery meta tags
 export const generatePageDiscoveryTags = (
-  pageName: string,
+  _pageName: string,
   service?: string,
 ) => {
   const tags = {
