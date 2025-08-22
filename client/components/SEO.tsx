@@ -18,7 +18,7 @@ export default function SEO({
   description = "Transform your space with AB Wall Wonders! Premium wallpapers, luxury flooring, and custom blinds with expert installation across Andhra Pradesh. 15+ years experience, 5-year warranty. Get your free quote today!",
   keywords = "wallpapers Andhra Pradesh, 3D wallpaper, interior flooring, vinyl flooring, window blinds, custom wallpaper, interior design Andhra Pradesh, home renovation, premium wallpapers, luxury flooring",
   image = "/images/og-default.jpg",
-  url = "https://abwallwonders.com",
+  url = "https://ab-wall-wonders.vercel.app",
   type = "website",
   structuredData,
   noIndex = false,
@@ -89,7 +89,7 @@ export default function SEO({
       />
       <meta
         name="business:contact_data:website"
-        content="https://abwallwonders.com"
+        content="https://ab-wall-wonders.vercel.app"
       />
 
       {/* PWA Manifest */}
@@ -163,24 +163,24 @@ export const generateLocalBusinessSchema = () => {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://abwallwonders.com/#localbusiness",
+    "@id": "https://ab-wall-wonders.vercel.app/#localbusiness",
     name: "AB Wall Wonders",
     alternateName: "AB Wall Wonders - Premium Wallpapers & Flooring",
     description:
       "Premium wallpapers, luxury flooring, and custom blinds installation across Andhra Pradesh. Expert craftsmanship with 15+ years experience and 5-year warranty.",
     image: {
       "@type": "ImageObject",
-      url: "https://abwallwonders.com/images/ab-wall-wonders-logo.jpg",
+      url: "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg",
       width: 800,
       height: 600,
     },
     logo: {
       "@type": "ImageObject",
-      url: "https://abwallwonders.com/images/ab-wall-wonders-logo.jpg",
+      url: "https://ab-wall-wonders.vercel.app/images/ab-wall-wonders-logo.jpg",
       width: 300,
       height: 300,
     },
-    url: "https://abwallwonders.com",
+    url: "https://ab-wall-wonders.vercel.app",
     telephone: "+91-8500900827",
     priceRange: "₹₹-₹₹₹",
     address: {
