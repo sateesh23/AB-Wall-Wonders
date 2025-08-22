@@ -2,24 +2,30 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://abwallwonders.com/sitemap.xml
 
-# Disallow admin areas (if any)
+# Disallow admin and private areas
 Disallow: /admin
+Disallow: /admin/*
+Disallow: /*.json$
+Disallow: /api/
 
-# Allow all search engines to crawl images
+# Allow all search engines to crawl static assets
 User-agent: Googlebot-Image
 Allow: /images/
+Allow: /public/
 
-# Crawl delay (optional - be respectful to smaller servers)
+# Crawl delay (be respectful to servers)
 Crawl-delay: 1
 
-# Popular search engines
+# Major search engines
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Slurp
 Allow: /
@@ -28,4 +34,16 @@ User-agent: DuckDuckBot
 Allow: /
 
 User-agent: Baiduspider
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
 Allow: /
