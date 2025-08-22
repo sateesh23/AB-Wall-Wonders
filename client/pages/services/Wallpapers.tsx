@@ -180,7 +180,7 @@ export default function Wallpapers() {
   const wallpaperServiceSchema = generateServiceSchema(
     "Premium Wallpaper Installation",
     "Professional installation of 3D, botanical, geometric, and custom wallpapers across Andhra Pradesh with 5-year warranty coverage",
-    "https://abwallwonders.com/images/wallpaperr.png",
+    "https://ab-wall-wonders.vercel.app/images/wallpaperr.png",
   );
 
   return (

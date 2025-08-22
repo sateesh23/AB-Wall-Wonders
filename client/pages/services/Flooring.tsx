@@ -103,7 +103,7 @@ export default function Flooring() {
   const flooringServiceSchema = generateServiceSchema(
     "Luxury Flooring Installation",
     "Professional installation of vinyl flooring, artificial grass, and safety mats across Andhra Pradesh with waterproof technology and 2-year warranty",
-    "https://abwallwonders.com/images/flooringg.png",
+    "https://ab-wall-wonders.vercel.app/images/flooringg.png",
   );
 
   return (

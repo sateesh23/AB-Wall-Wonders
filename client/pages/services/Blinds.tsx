@@ -173,7 +173,7 @@ export default function Blinds() {
   const blindsServiceSchema = generateServiceSchema(
     "Custom Window Blinds Installation",
     "Professional installation of motorized and manual blinds, custom-sized for perfect fit across Andhra Pradesh with 2-year warranty coverage",
-    "https://abwallwonders.com/images/blindss.png",
+    "https://ab-wall-wonders.vercel.app/images/blindss.png",
   );
 
   return (
