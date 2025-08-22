@@ -560,6 +560,5 @@ export const generateComprehensiveSchemas = () => {
     generateOrganizationSchema(),
     generateBrandSchema(),
     generateWebsiteSchema(),
-    generateBrandFAQSchema(),
   ];
 };
