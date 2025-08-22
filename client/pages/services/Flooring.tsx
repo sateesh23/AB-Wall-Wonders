@@ -103,7 +103,7 @@ export default function Flooring() {
   const flooringServiceSchema = generateServiceSchema(
     "Luxury Flooring Installation",
     "Professional installation of vinyl flooring, artificial grass, and safety mats across Andhra Pradesh with waterproof technology and 2-year warranty",
-    "https://yourdomain.com/images/flooringg.png",
+    "https://abwallwonders.com/images/flooringg.png",
   );
 
   return (
@@ -112,7 +112,7 @@ export default function Flooring() {
         title="Luxury Vinyl Flooring & Artificial Grass in Andhra Pradesh | AB Wall Wonders"
         description="Premium vinyl flooring, artificial grass, and safety mats with waterproof technology. Expert installation across Andhra Pradesh with 2-year warranty. Get your free quote!"
         keywords="vinyl flooring Andhra Pradesh, artificial grass, waterproof flooring, luxury flooring, interior flooring, flooring installation, safety mats"
-        url="https://yourdomain.com/services/flooring"
+        url="https://abwallwonders.com/services/flooring"
         type="service"
         structuredData={flooringServiceSchema}
       />

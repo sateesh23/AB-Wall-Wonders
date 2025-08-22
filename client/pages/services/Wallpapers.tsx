@@ -189,7 +189,7 @@ export default function Wallpapers() {
         title="Custom & 3D Wallpapers in Andhra Pradesh | AB Wall Wonders"
         description="Transform your home with custom, 3D, and designer wallpapers. Expert installation with 15+ years of experience across Andhra Pradesh. Get a free quote today!"
         keywords="wallpapers in Andhra Pradesh, 3D wallpaper, custom wallpaper, interior wallpapers, botanical wallpaper, geometric wallpaper, mural wallpaper, wallpaper installation"
-        url="https://yourdomain.com/services/wallpapers"
+        url="https://abwallwonders.com/services/wallpapers"
         type="service"
         structuredData={wallpaperServiceSchema}
       />
