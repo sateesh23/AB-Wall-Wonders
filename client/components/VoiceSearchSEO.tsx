@@ -47,55 +47,6 @@ export default function VoiceSearchSEO({
 
   const { voiceQueries } = generateVoiceSearchContent();
 
-  // Generate conversational FAQ content
-  const generateConversationalFAQ = () => {
-    return {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "Where can I find AB Wall Wonders?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "AB Wall Wonders (also known as ABwallwonders or Wall Wonders) is located in Andhra Pradesh, India. We provide services across the entire state with our expert installation teams.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "What does AB Wall Wonders do?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "AB Wall Wonders specializes in premium wallpaper installation, luxury flooring, and custom window blinds. We're known for 3D wallpapers, vinyl flooring, and motorized blinds with 15+ years of experience.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "How do I contact ABwallwonders?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "You can contact AB Wall Wonders at +91-8500900827 or +91-86887-23648. We also offer WhatsApp consultations and provide free quotes for all our services.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Is AB Wall Wonders the best interior design company in Andhra Pradesh?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "AB Wall Wonders is a leading premium interior design company in Andhra Pradesh with 15+ years of experience, 100+ satisfied customers, and 5-year warranty on wallpapers.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "What services does Wall Wonders provide?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Wall Wonders (AB Wall Wonders) provides premium wallpaper installation including 3D and custom designs, luxury vinyl flooring, artificial grass, and motorized window blinds with professional installation.",
-          },
-        },
-      ],
-    };
-  };
 
   // Generate local business Q&A schema
   const generateLocalQASchema = () => {
