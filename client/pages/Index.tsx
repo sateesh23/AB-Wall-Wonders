@@ -10,6 +10,7 @@ import SEO, {
 } from "@/components/SEO";
 import VoiceSearchSEO from "@/components/VoiceSearchSEO";
 import BrandMetaTags from "@/components/BrandMetaTags";
+import SearchEngineDiscovery from "@/components/SearchEngineDiscovery";
 
 import ABTestimonials3D from "@/components/ui/ab-testimonials-3d";
 import { HomepageProjects } from "@/components/ui/homepage-projects";
@@ -89,7 +90,7 @@ export default function Index() {
           try {
             const supabaseProjects = await getRecentProjects(6);
             console.log(
-              `📊 Supabase returned ${supabaseProjects.length} projects`,
+              `���� Supabase returned ${supabaseProjects.length} projects`,
             );
             setRecentProjects(supabaseProjects);
           } catch (supabaseError: any) {
@@ -129,6 +130,10 @@ export default function Index() {
         pageName="Homepage"
         service="interior design"
         brandFocus="general"
+      />
+      <SearchEngineDiscovery
+        pageName="Homepage"
+        isHomepage={true}
       />
       <div
         className="min-h-screen pb-16 md:pb-0"
