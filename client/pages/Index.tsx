@@ -128,7 +128,16 @@ export default function Index() {
   }, []);
 
   return (
-    <div
+    <>
+      <SEO
+        title="AB Wall Wonders - Premium Wallpapers, Flooring & Blinds in Andhra Pradesh"
+        description="Transform your space with AB Wall Wonders! Premium wallpapers, luxury flooring, and custom blinds with expert installation across Andhra Pradesh. 15+ years experience, 5-year warranty. Get your free quote today!"
+        keywords="wallpapers Andhra Pradesh, 3D wallpaper, interior flooring, vinyl flooring, window blinds, custom wallpaper, interior design Andhra Pradesh, home renovation, premium wallpapers, luxury flooring, AB Wall Wonders"
+        url="https://yourdomain.com"
+        type="website"
+        structuredData={combinedStructuredData}
+      />
+      <div
       className="min-h-screen pb-16 md:pb-0"
       style={{
         backgroundImage: "url(/herooo.png)",
@@ -409,6 +418,7 @@ export default function Index() {
           </Link>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
