@@ -47,7 +47,6 @@ export default function VoiceSearchSEO({
 
   const { voiceQueries } = generateVoiceSearchContent();
 
-
   // Generate local business Q&A schema
   const generateLocalQASchema = () => {
     return {
