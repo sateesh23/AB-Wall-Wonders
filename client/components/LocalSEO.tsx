@@ -9,7 +9,6 @@ interface LocalSEOProps {
 export default function LocalSEO({
   service = "interior design",
   area = "Andhra Pradesh",
-  pageName = "Homepage",
 }: LocalSEOProps) {
   // Generate comprehensive local search terms
   const generateLocalSearchTerms = () => {
