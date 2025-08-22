@@ -6,7 +6,6 @@ interface SearchEngineDiscoveryProps {
 }
 
 export default function SearchEngineDiscovery({
-  pageName = "Homepage",
   isHomepage = false,
 }: SearchEngineDiscoveryProps) {
   // Generate comprehensive discovery hints for search engines
